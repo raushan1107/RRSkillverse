@@ -274,6 +274,208 @@ const BLOG_POSTS = [
   },
 
   {
+    id: 'power-bi-sharing-collaboration',
+    title: 'Chapter 3: Sharing and Collaborating — The Power of Power BI Service',
+    category: 'power-platform',
+    topic: 'power-bi',
+    tags: ['Power BI', 'PL-300', 'Power BI Service', 'RLS', 'Sharing', 'Dashboards', 'Roles'],
+    published: '2025-04-18',
+    updated: '2025-04-18',
+    readTime: '7 min',
+    excerpt: 'Raushan had built beautiful reports — but what\'s the point if no one else can see them? That\'s when Ritu introduced him to Power BI Service: where reports live in the cloud, teams collaborate in real time, and you control exactly who sees what.',
+    featured: false,
+    content: `
+<div class="blog-story">
+
+  <p>Raushan had just completed his first interactive report. His bar charts, maps,
+  and slicers were all looking amazing, and he felt pretty proud of himself. But there
+  was one thing missing: he wanted to share this with his team. After all, what\'s the
+  point of building beautiful reports if no one else can see them?</p>
+
+  <p>That\'s when Ritu came to the rescue again.</p>
+
+  <blockquote class="blog-quote">
+    "Raushan, have you tried Power BI Service?" she asked.
+  </blockquote>
+
+  <p>"Power BI Service? What\'s that?" Raushan replied.</p>
+
+  <blockquote class="blog-quote">
+    "It\'s where your reports can live and be accessed by everyone in your team —
+    and beyond. Plus, it lets you control who can see what."
+  </blockquote>
+
+  <p>Raushan wasn\'t sure what that meant yet, but he was about to find out.</p>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🌐 The Power of Power BI Service</h2>
+    <p>Raushan logged into <strong>Power BI Service</strong> — the cloud version of
+    Power BI. What he found was exciting: this was where he could publish his reports
+    online, collaborate with his team, and ensure everyone was working with the same
+    live data.</p>
+    <p>To get his report into the service, Raushan went back to Power BI Desktop. He
+    clicked the <strong>Publish</strong> button on the Home ribbon and selected his
+    team\'s workspace. In moments, his report was live in the cloud.</p>
+    <p>Once published, Raushan was now able to:</p>
+    <ul>
+      <li>Share the report with teammates by sending them a link</li>
+      <li>Let his team comment directly on the report</li>
+      <li>Set permissions — choosing who could view and who could edit</li>
+      <li>Assign roles (Manager, Analyst, Field Rep) and limit access to certain sections</li>
+    </ul>
+    <blockquote class="blog-quote">
+      "This is like handing my team a real-time version of my reports — not just
+      static PDFs." — Raushan
+    </blockquote>
+  </div>
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>🔑 Understanding Roles and Permissions</h2>
+    <p>Raushan was particularly excited about <strong>Roles and Permissions</strong>.
+    In his company, there were managers, analysts, and field reps — each needed
+    different levels of access to data:</p>
+    <ul>
+      <li><strong>Managers</strong> — could see the full dataset: everything from
+      sales figures to regional trends</li>
+      <li><strong>Analysts</strong> — only needed aggregate data and trends to
+      generate reports</li>
+      <li><strong>Field Reps</strong> — needed sales by region, but didn\'t require
+      detailed financial figures</li>
+    </ul>
+    <p>Raushan set up <strong>Row-Level Security (RLS)</strong> to ensure each role
+    only saw the data they were supposed to. With RLS in place, sensitive data was
+    only accessible to the right people — automatically, based on who was logged in.</p>
+
+    <div class="blog-rls-diagram">
+      <div class="blog-rls-title">How RLS Works</div>
+      <div class="blog-rls-row">
+        <div class="blog-rls-node blog-rls-report">📄 Report</div>
+      </div>
+      <div class="blog-rls-arrow">↓</div>
+      <div class="blog-rls-roles">
+        <div class="blog-rls-role blog-rls-manager">
+          <div class="blog-rls-role-icon">👔</div>
+          <div class="blog-rls-role-label">Manager</div>
+          <div class="blog-rls-role-desc">Full dataset</div>
+        </div>
+        <div class="blog-rls-role blog-rls-analyst">
+          <div class="blog-rls-role-icon">📊</div>
+          <div class="blog-rls-role-label">Analyst</div>
+          <div class="blog-rls-role-desc">Summary data</div>
+        </div>
+        <div class="blog-rls-role blog-rls-fieldrep">
+          <div class="blog-rls-role-icon">🗺️</div>
+          <div class="blog-rls-role-label">Field Rep</div>
+          <div class="blog-rls-role-desc">Regional only</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>📲 Sharing Reports and Creating Dashboards</h2>
+    <p>Raushan was ready to take his report further. He clicked on
+    <strong>Pin to Dashboard</strong>, which allowed him to combine multiple reports
+    into one central dashboard — containing KPIs, charts, and visuals from several
+    reports, providing a holistic view of sales performance.</p>
+
+    <figure class="blog-figure">
+      <img
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7-mtFhK7TcPkrhn6w8QL2aEkNe098cxdu9gb7cTJrvgeAi8Z29mWGHtfVpxKsPMdDWU9B_iJ9rcJJkobTjRLa6sJiXcWFudJ-hISJY_9Oosck3ITH4yOu44JIX-bMPms6aaCThhTur41fahSg5yUOvXTK6MdNVfQiVYwjJ5PMj9crfBZqLeKOeclPakE/s1314/power-bi-dashboard.png"
+        alt="Power BI Service Dashboard view"
+        class="blog-img"
+        style="width:480px"/>
+      <figcaption>A Power BI Service dashboard — multiple reports pinned into one view.</figcaption>
+    </figure>
+
+    <p>Now, Raushan\'s manager could check the sales trends from the dashboard, while
+    the field reps could dive deeper into regional performance with just a few clicks.</p>
+    <p>The best part? Anyone with access to Power BI Service could view the reports
+    on <strong>any device</strong> — computer, tablet, or phone. Everything was
+    responsive and ready to share on the go.</p>
+
+    <figure class="blog-figure">
+      <img
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVpshFyqlTGfgS1V0fDXW6o19OBnVz4Fc9USdQiD2qH0KYFsEUH6plx6DK5OYp8XNJjIXxxonydpfx2iGapUzynzhr4FiROFtEppWJPoIlBz1VVKk_xbJGEAljElMV6EH7ZpwPfp3_6We9Zqw4yn2pIimProSqiGfUqukjgKQXc6Fgb6veqMDPF83Ju7w/s1080/Power-BI.png"
+        alt="Power BI responsive on multiple devices"
+        class="blog-img"
+        style="width:480px"/>
+      <figcaption>Power BI Service — accessible on any device, anywhere.</figcaption>
+    </figure>
+  </div>
+
+  <div class="blog-summary">
+    <h2>🚀 Summary — What You Learned in Chapter 3</h2>
+    <ul style="padding-left:18px;margin-top:10px">
+      <li style="margin-bottom:8px">
+        <strong>Publishing Reports:</strong> Upload reports from Power BI Desktop
+        to Power BI Service with one click using the Publish button.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Sharing:</strong> Share your reports with colleagues via a link —
+        accessible on any device, anywhere.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Roles and Permissions:</strong> Control who can view or edit your
+        reports by assigning workspace roles.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Row-Level Security (RLS):</strong> Restrict access to specific data
+        rows based on the user\'s role — managers see everything, field reps see
+        only their region.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Dashboards:</strong> Pin visuals from multiple reports into one
+        central dashboard for a comprehensive at-a-glance view.
+      </li>
+    </ul>
+  </div>
+
+  <div class="blog-exercise">
+    <h2>📝 Try It Yourself — Share Your First Report in Power BI Service</h2>
+    <p>Now that Raushan has shown you how to publish and share, it\'s your turn.
+    Follow these steps:</p>
+    <ol class="blog-exercise-steps">
+      <li>
+        <strong>Publish Your Report</strong><br/>
+        In Power BI Desktop, click <em>Publish</em> and sign into your Power BI
+        Service account. Upload your report to a workspace.
+      </li>
+      <li>
+        <strong>Share Your Report</strong><br/>
+        After publishing, open your report in Power BI Service and click
+        <em>Share</em> to send a link to a colleague. Try sharing with a different
+        user and verify they see data that matches their role.
+      </li>
+      <li>
+        <strong>Create a Dashboard</strong><br/>
+        Pin visuals from your report to a new dashboard in Power BI Service.
+        Arrange the visuals to get a complete view of your data.
+      </li>
+      <li>
+        <strong>Set Up Row-Level Security</strong><br/>
+        In Power BI Desktop, go to <em>Modelling → Manage Roles</em> and define
+        a role with a DAX filter. Publish again, then in Power BI Service go to
+        the dataset settings and assign a user to that role. Verify they only see
+        filtered data.
+      </li>
+    </ol>
+  </div>
+
+  <div class="blog-next-chapter">
+    <span class="blog-next-label">Coming Next</span>
+    <span class="blog-next-title">
+      Chapter 4: "Advanced Features" — Raushan dives into custom visuals,
+      advanced analytics, and the Power BI features that take reports to
+      the next level.
+    </span>
+  </div>
+
+</div>
+    `
+  },
+
+  {
     id: 'blazor-component-lifecycle',
     title: 'Blazor Component Lifecycle — Every Method Explained',
     category: 'dotnet',

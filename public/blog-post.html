@@ -667,6 +667,106 @@
   font-size: 13px;
   color: var(--text-muted);
 }
+
+/* ── RLS Role diagram ── */
+.blog-rls-diagram {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 16px;
+  margin: 20px 0 8px;
+  text-align: center;
+}
+
+.blog-rls-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+
+.blog-rls-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.blog-rls-report {
+  background: rgba(26,86,219,0.1);
+  border: 1px solid rgba(26,86,219,0.25);
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.blog-rls-arrow {
+  font-size: 18px;
+  color: var(--text-dim);
+  margin: 4px 0;
+  line-height: 1;
+}
+
+.blog-rls-roles {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.blog-rls-role {
+  flex: 1;
+  min-width: 100px;
+  max-width: 140px;
+  border-radius: 10px;
+  padding: 14px 10px;
+  border: 1px solid var(--border);
+}
+
+.blog-rls-role-icon {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.blog-rls-role-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.blog-rls-role-desc {
+  font-size: 10.5px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+.blog-rls-manager {
+  background: rgba(26,86,219,0.05);
+  border-color: rgba(26,86,219,0.2);
+}
+.blog-rls-manager .blog-rls-role-label { color: var(--accent); }
+
+.blog-rls-analyst {
+  background: rgba(99,102,241,0.05);
+  border-color: rgba(99,102,241,0.2);
+}
+.blog-rls-analyst .blog-rls-role-label { color: #6366f1; }
+
+.blog-rls-fieldrep {
+  background: rgba(45,122,79,0.05);
+  border-color: rgba(45,122,79,0.2);
+}
+.blog-rls-fieldrep .blog-rls-role-label { color: #2d7a4f; }
+
+@media (max-width: 480px) {
+  .blog-rls-roles { gap: 8px; }
+  .blog-rls-role { min-width: 80px; padding: 10px 8px; }
+}
 </style>
 </head>
 <body>
