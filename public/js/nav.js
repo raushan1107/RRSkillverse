@@ -202,8 +202,8 @@ document.addEventListener('click', () => {
     <span id="navAvatarTxt" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:11px;font-weight:700">RR</span>
   </a>
   </div>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false">
+    ☰
   </button>
 </nav>
 
@@ -258,12 +258,66 @@ buildLearnMegaMenu();
   });
 })();
 
-// Hamburger toggle
-document.addEventListener('DOMContentLoaded', () => {
-  const hb = document.getElementById('navHamburger');
-  const dr = document.getElementById('navDrawer');
-  if (hb && dr) {
-    hb.addEventListener('click', () => dr.classList.toggle('open'));
-    dr.querySelectorAll('a').forEach(a => a.addEventListener('click', () => dr.classList.remove('open')));
+// ── Mobile hamburger ────────────────────────────
+(function initMobileNav() {
+  const hamburger = document.getElementById('navHamburger')
+    || document.querySelector('.nav-hamburger')
+    || document.querySelector('.hamburger-btn')
+    || document.querySelector('[data-nav-toggle]');
+
+  const drawer = document.getElementById('navDrawer')
+    || document.querySelector('.nav-drawer')
+    || document.querySelector('.mobile-drawer');
+
+  if (!hamburger) {
+    console.warn('[nav] hamburger button not found');
+    return;
   }
-});
+  if (!drawer) {
+    console.warn('[nav] nav drawer not found');
+    return;
+  }
+
+  function toggleDrawer(e) {
+    e.stopPropagation();
+    const isOpen = drawer.classList.contains('open');
+    drawer.classList.toggle('open', !isOpen);
+    hamburger.setAttribute('aria-expanded', String(!isOpen));
+    hamburger.textContent = isOpen ? '☰' : '✕';
+  }
+
+  hamburger.addEventListener('click', toggleDrawer);
+  hamburger.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    toggleDrawer(e);
+  }, { passive: false });
+
+  drawer.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('click', () => {
+      drawer.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.textContent = '☰';
+    });
+  });
+
+  document.addEventListener('click', function(e) {
+    if (
+      drawer.classList.contains('open') &&
+      !drawer.contains(e.target) &&
+      !hamburger.contains(e.target)
+    ) {
+      drawer.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.textContent = '☰';
+    }
+  });
+
+  const learnWrap = document.getElementById('learnDropdown');
+  if (learnWrap) {
+    learnWrap.addEventListener('click', () => {
+      drawer.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.textContent = '☰';
+    });
+  }
+})();
