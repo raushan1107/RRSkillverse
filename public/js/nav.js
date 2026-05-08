@@ -3,6 +3,160 @@
    Injects topnav + FAB into every page
 ═══════════════════════════════════════════════════════ */
 
+/* ── Blog category data for Learn mega-menu ─────────── */
+const BLOG_CATEGORIES = [
+  {
+    group: 'Power Platform',
+    icon: '⚡',
+    color: '#0078d4',
+    slug: 'power-platform',
+    items: [
+      { label: 'Copilot Studio',  slug: 'copilot-studio' },
+      { label: 'Power BI',        slug: 'power-bi' },
+      { label: 'Power Apps',      slug: 'power-apps' },
+      { label: 'Power Pages',     slug: 'power-pages' },
+      { label: 'Power Automate',  slug: 'power-automate' },
+      { label: 'Dataverse',       slug: 'dataverse' }
+    ]
+  },
+  {
+    group: 'Microsoft Azure',
+    icon: '☁️',
+    color: '#0ea5e9',
+    slug: 'azure',
+    items: [
+      { label: 'Azure Fundamentals', slug: 'azure-fundamentals' },
+      { label: 'Azure AI Services',  slug: 'azure-ai' },
+      { label: 'Azure Integration',  slug: 'azure-integration' },
+      { label: 'Azure Functions',    slug: 'azure-functions' }
+    ]
+  },
+  {
+    group: 'Programming',
+    icon: '🔷',
+    color: '#7c4b9e',
+    slug: 'programming',
+    items: [
+      { label: 'C# Tutorial',     slug: 'csharp' },
+      { label: 'Python Tutorial', slug: 'python' },
+      { label: 'C++ Tutorial',    slug: 'cpp' },
+      { label: 'C Tutorial',      slug: 'c-lang' }
+    ]
+  },
+  {
+    group: '.NET Ecosystem',
+    icon: '🚀',
+    color: '#6366f1',
+    slug: 'dotnet',
+    items: [
+      { label: '.NET Development',    slug: 'dotnet-dev' },
+      { label: 'Blazor',             slug: 'blazor' },
+      { label: 'Embedding in .NET',  slug: 'embedding-dotnet' },
+      { label: 'ASP.NET Core',       slug: 'aspnet-core' }
+    ]
+  },
+  {
+    group: 'Graphics & Systems',
+    icon: '🎮',
+    color: '#c75c1a',
+    slug: 'graphics',
+    items: [
+      { label: 'OpenGL',      slug: 'opengl' },
+      { label: 'Vulkan',      slug: 'vulkan' },
+      { label: 'Qt and QML',  slug: 'qt-qml' }
+    ]
+  },
+  {
+    group: 'AI & Cloud',
+    icon: '🤖',
+    color: '#2d7a4f',
+    slug: 'ai-cloud',
+    items: [
+      { label: 'AI / ML',            slug: 'ai-ml' },
+      { label: 'Azure AI',           slug: 'azure-ai-studio' },
+      { label: 'Claude & Anthropic', slug: 'claude' },
+      { label: 'GCP',                slug: 'gcp' }
+    ]
+  }
+];
+
+/* ── Mega-menu builder ───────────────────────────────── */
+function buildLearnMegaMenu() {
+  const menu = document.getElementById('learnMegaMenu');
+  if (!menu) return;
+
+  menu.innerHTML = `
+    <div class="mega-menu-inner">
+      <div class="mega-menu-header">
+        <span class="mega-menu-title">Learn by Technology</span>
+        <span class="mega-menu-sub">
+          Real notes, demo guides &amp; learning curves
+          by MCT Raushan Ranjan
+        </span>
+      </div>
+      <div class="mega-menu-grid">
+        ${BLOG_CATEGORIES.map(cat => `
+          <div class="mega-col">
+            <div class="mega-col-header">
+              <span class="mega-col-icon">${cat.icon}</span>
+              <a href="/blog.html?cat=${cat.slug}"
+                 class="mega-col-title"
+                 style="color:${cat.color}">
+                ${cat.group}
+              </a>
+            </div>
+            <ul class="mega-col-list">
+              ${cat.items.map(item => `
+                <li>
+                  <a href="/blog.html?cat=${cat.slug}&topic=${item.slug}"
+                     class="mega-item-link">
+                    ${item.label}
+                  </a>
+                </li>`).join('')}
+            </ul>
+          </div>`).join('')}
+      </div>
+      <div class="mega-menu-footer">
+        <a href="/blog.html" class="mega-footer-link">
+          View all articles →
+        </a>
+        <span class="mega-footer-note">
+          Imported from Google Blogger · Verified by MCT
+        </span>
+      </div>
+    </div>`;
+}
+
+/* ── Dropdown toggle ─────────────────────────────────── */
+function toggleLearnMenu(e) {
+  e.stopPropagation();
+  const wrap    = document.getElementById('learnDropdown');
+  const menu    = document.getElementById('learnMegaMenu');
+  const trigger = wrap.querySelector('.nav-dropdown-trigger');
+  const isOpen  = wrap.classList.contains('open');
+
+  document.querySelectorAll('.nav-dropdown-wrap.open').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+    el.querySelector('.nav-mega-menu')?.setAttribute('aria-hidden', 'true');
+  });
+
+  if (!isOpen) {
+    wrap.classList.add('open');
+    trigger.setAttribute('aria-expanded', 'true');
+    menu.setAttribute('aria-hidden', 'false');
+  }
+}
+
+/* Close on outside click */
+document.addEventListener('click', () => {
+  document.querySelectorAll('.nav-dropdown-wrap.open').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+    el.querySelector('.nav-mega-menu')?.setAttribute('aria-hidden', 'true');
+  });
+});
+
 (function injectNav() {
   const navHTML = `
 <nav class="topnav" id="topnav">
@@ -18,6 +172,21 @@
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6l7-5 7 5v8a1 1 0 01-1 1H2a1 1 0 01-1-1V6z"/><path d="M6 14V9h4v5"/></svg>Home</a></li>
     <li><a href="courses.html" data-page="courses.html">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="11" rx="2"/><path d="M5 15h6M8 13v2"/></svg>Skillverse Library</a></li>
+    <li class="nav-dropdown-wrap" id="learnDropdown">
+      <button class="nav-dropdown-trigger"
+              aria-haspopup="true"
+              aria-expanded="false"
+              onclick="toggleLearnMenu(event)">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a2 2 0 01-2 2H4a2 2 0 01-2-2V3z"/><path d="M2 3l6 5 6-5"/></svg>
+        Learn
+        <svg class="nav-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="nav-mega-menu" id="learnMegaMenu"
+           role="menu" aria-hidden="true">
+      </div>
+    </li>
     <li><a href="labs.html" data-page="labs.html">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v5L2 13h12L10 7V2"/><path d="M5 2h6"/></svg>Hands-on Labs</a></li>
     <li><a href="profile.html" data-page="profile.html">
@@ -41,6 +210,7 @@
 <div class="nav-drawer" id="navDrawer">
   <a href="index.html">🏠 Home</a>
   <a href="courses.html">📚 Skillverse Library</a>
+  <a href="blog.html">📖 Learn</a>
   <a href="labs.html">🧪 Hands-on Labs</a>
   <a href="profile.html">👤 About Us</a>
 </div>`;
@@ -59,6 +229,9 @@
     nav.insertAdjacentHTML('afterend', wrapper.innerHTML);
   }
 })();
+
+/* Populate mega-menu content after nav is in DOM */
+buildLearnMegaMenu();
 
 // Inject FAB (not on ai-agent page)
 (function injectFAB() {
