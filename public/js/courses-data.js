@@ -78,7 +78,83 @@ const COURSE_CATALOG = {
           'Putting It All Together — Intelligent Enterprise App'
         ]
       }
-    ]
+    ],
+    labs: {
+      handson: [
+        {
+          id: 'lab-01', code: 'Lab 01',
+          title: 'Hello Blazor — Your First Component',
+          phase: 'Phase 3 — Blazor with .NET 8',
+          duration: '45 min', difficulty: 'Beginner',
+          objective: 'Create a .NET 8 Blazor project from scratch, build your first component with data binding, and run it in the browser.',
+          prereqs: ['Basic Structure of a C# Program', 'Variables in C#', 'Functions in C#'],
+          deliverable: 'A running Blazor app with a counter component and a greeting form.',
+          tags: ['Blazor', '.NET 8', 'Components', 'Data Binding']
+        },
+        {
+          id: 'lab-02', code: 'Lab 02',
+          title: 'OOP in Action — Classes and Services',
+          phase: 'Phase 2 — OOP, The Blazor Way',
+          duration: '60 min', difficulty: 'Intermediate',
+          objective: 'Build a C# class library with interfaces, inheritance, and DI — then consume it in a Blazor page.',
+          prereqs: ['Classes and Objects in C#', 'Interfaces in C#', 'Dependency Injection in Blazor'],
+          deliverable: 'A Blazor page that displays a list of items served by an injected service class.',
+          tags: ['OOP', 'Interfaces', 'DI', 'Services']
+        },
+        {
+          id: 'lab-03', code: 'Lab 03',
+          title: 'Forms, Validation and API Calls',
+          phase: 'Phase 3 — Blazor with .NET 8',
+          duration: '75 min', difficulty: 'Intermediate',
+          objective: 'Build a Blazor form with full validation, submit to a .NET 8 minimal API, and display the response.',
+          prereqs: ['Forms and Validation in Blazor', 'Calling REST APIs from Blazor', 'Exception Handling in C#'],
+          deliverable: 'A working contact form that posts to a backend and renders the result.',
+          tags: ['Forms', 'Validation', 'HttpClient', 'Minimal API']
+        },
+        {
+          id: 'lab-04', code: 'Lab 04',
+          title: 'Connect Azure OpenAI to Blazor',
+          phase: 'Phase 4 — Azure AI Integration',
+          duration: '90 min', difficulty: 'Advanced',
+          objective: 'Wire Blazor to Azure OpenAI GPT-4o — build a chat interface with streaming responses.',
+          prereqs: ['Azure OpenAI Service — Key Concepts', 'Building an AI Chat UI in Blazor'],
+          deliverable: 'A Blazor chat page that streams real-time responses from your Azure OpenAI deployment.',
+          tags: ['Azure OpenAI', 'GPT-4o', 'Streaming', 'Chat UI']
+        }
+      ],
+      capstone: [
+        {
+          id: 'cap-01', code: 'Capstone 1',
+          title: 'Blazor Task Manager',
+          phase: 'Phases 1–3',
+          duration: '3–4 hours', difficulty: 'Intermediate',
+          objective: 'Build a full-featured task management app in Blazor — CRUD, state management, and component hierarchy.',
+          prereqs: ['Complete Phase 1', 'Complete Phase 2', 'Complete Phase 3 (Labs 1–3)'],
+          deliverable: 'A deployable Blazor WebAssembly app with task lists, filters, and local persistence.',
+          tags: ['Blazor', 'CRUD', 'State', 'Full App']
+        },
+        {
+          id: 'cap-02', code: 'Capstone 2',
+          title: 'AI-Powered Knowledge Base',
+          phase: 'Phases 3–4',
+          duration: '4–5 hours', difficulty: 'Advanced',
+          objective: 'Build a searchable knowledge base with Azure AI Search and GPT-4o RAG.',
+          prereqs: ['Complete Phase 3', 'Complete Lab 04', 'Azure AI Search'],
+          deliverable: 'A Blazor app where documents are indexed and GPT-4o answers questions with citations.',
+          tags: ['RAG', 'Azure AI Search', 'GPT-4o', 'Documents']
+        },
+        {
+          id: 'cap-03', code: 'Capstone 3',
+          title: 'Intelligent Enterprise Application',
+          phase: 'All Phases',
+          duration: '6–8 hours', difficulty: 'Advanced',
+          objective: 'Build and deploy a production-grade Blazor app with Azure OpenAI, authentication, and CI/CD.',
+          prereqs: ['Complete all 4 Phases', 'Complete Capstones 1 and 2'],
+          deliverable: 'A live URL on Azure App Service — a fully deployed AI-powered enterprise Blazor app.',
+          tags: ['Enterprise', 'Auth', 'Azure', 'CI/CD', 'Production']
+        }
+      ]
+    }
   },
 
   // ── AZ-204 ──────────────────────────────────────────────────
@@ -143,7 +219,83 @@ const COURSE_CATALOG = {
           'Practice Scenarios and Review'
         ]
       }
-    ]
+    ],
+    labs: {
+      handson: [
+        {
+          id: 'az204-lab-01', code: 'Lab 01',
+          title: 'Deploy Your First Azure Web App',
+          phase: 'Phase 2 — Compute Solutions',
+          duration: '45 min', difficulty: 'Beginner',
+          objective: 'Create an Azure App Service plan, deploy a simple .NET app, configure deployment slots, and swap production and staging.',
+          prereqs: ['Azure App Service — Web Apps', 'Azure CLI and Azure Portal'],
+          deliverable: 'A live Azure App Service with staging and production slots configured.',
+          tags: ['App Service', 'Azure CLI', 'Deployment']
+        },
+        {
+          id: 'az204-lab-02', code: 'Lab 02',
+          title: 'Build and Deploy an Azure Function',
+          phase: 'Phase 2 — Compute Solutions',
+          duration: '60 min', difficulty: 'Beginner',
+          objective: 'Create an HTTP-triggered Azure Function in C#, test it locally with Azure Functions Core Tools, and deploy to Azure.',
+          prereqs: ['Azure Functions — Serverless Compute', 'Azure CLI'],
+          deliverable: 'A deployed Azure Function responding to HTTP requests with a JSON payload.',
+          tags: ['Azure Functions', 'Serverless', 'C#']
+        },
+        {
+          id: 'az204-lab-03', code: 'Lab 03',
+          title: 'Cosmos DB — Store and Query Data',
+          phase: 'Phase 3 — Storage and Data',
+          duration: '75 min', difficulty: 'Intermediate',
+          objective: 'Create a Cosmos DB account, define containers, insert documents using the SDK, and query with SQL API.',
+          prereqs: ['Azure Cosmos DB', 'Azure Blob Storage'],
+          deliverable: 'A C# console app that creates, reads, updates, and deletes Cosmos DB documents.',
+          tags: ['Cosmos DB', 'NoSQL', 'Azure SDK', 'C#']
+        },
+        {
+          id: 'az204-lab-04', code: 'Lab 04',
+          title: 'Secure Secrets with Azure Key Vault',
+          phase: 'Phase 4 — Security and Integration',
+          duration: '60 min', difficulty: 'Intermediate',
+          objective: 'Store connection strings in Key Vault, retrieve them using Managed Identity from an App Service — zero secrets in code.',
+          prereqs: ['Azure Key Vault', 'Managed Identities'],
+          deliverable: 'An App Service that reads its database connection string from Key Vault using Managed Identity.',
+          tags: ['Key Vault', 'Managed Identity', 'Security']
+        }
+      ],
+      capstone: [
+        {
+          id: 'az204-cap-01', code: 'Capstone 1',
+          title: 'Serverless API with Azure Functions',
+          phase: 'Phases 2–4',
+          duration: '3–4 hours', difficulty: 'Intermediate',
+          objective: 'Build a complete REST API using Azure Functions, Cosmos DB for storage, Key Vault for secrets, and API Management as the gateway.',
+          prereqs: ['Complete Labs 1–4'],
+          deliverable: 'A published API Management endpoint backed by Azure Functions and Cosmos DB.',
+          tags: ['Azure Functions', 'Cosmos DB', 'APIM', 'Serverless']
+        },
+        {
+          id: 'az204-cap-02', code: 'Capstone 2',
+          title: 'Event-Driven Microservice',
+          phase: 'Phases 3–4',
+          duration: '4–5 hours', difficulty: 'Advanced',
+          objective: 'Build a microservice architecture using Azure Service Bus for messaging, Azure Functions as consumers, and Blob Storage for persistence.',
+          prereqs: ['Azure Service Bus', 'Azure Event Grid and Event Hubs'],
+          deliverable: 'Two Azure Functions communicating via Service Bus with dead-letter queue handling.',
+          tags: ['Service Bus', 'Event-Driven', 'Microservices']
+        },
+        {
+          id: 'az204-cap-03', code: 'Capstone 3',
+          title: 'Full Azure Solution — AZ-204 Exam Ready',
+          phase: 'All Phases',
+          duration: '6–8 hours', difficulty: 'Advanced',
+          objective: 'Build a production-grade solution covering every AZ-204 domain — App Service, Functions, Cosmos DB, Key Vault, Service Bus, and monitoring.',
+          prereqs: ['Complete all Labs and Capstone 1–2'],
+          deliverable: 'A fully deployed Azure solution with Application Insights monitoring and a documented architecture diagram.',
+          tags: ['AZ-204', 'Exam Ready', 'Full Solution', 'Azure']
+        }
+      ]
+    }
   },
 
   // ── PL-300 ──────────────────────────────────────────────────
@@ -209,7 +361,83 @@ const COURSE_CATALOG = {
           'Practice Scenarios and Review'
         ]
       }
-    ]
+    ],
+    labs: {
+      handson: [
+        {
+          id: 'pl300-lab-01', code: 'Lab 01',
+          title: 'Connect and Transform Sales Data',
+          phase: 'Phase 1 — Power BI Foundations',
+          duration: '45 min', difficulty: 'Beginner',
+          objective: 'Connect Power BI Desktop to an Excel sales file, clean and transform data in Power Query, and load it into the data model.',
+          prereqs: ['Introduction to Power BI Desktop', 'Connecting to Data Sources', 'Power Query Basics'],
+          deliverable: 'A Power BI Desktop file with cleaned sales data loaded and ready for modeling.',
+          tags: ['Power Query', 'Excel', 'Data Transformation']
+        },
+        {
+          id: 'pl300-lab-02', code: 'Lab 02',
+          title: 'Build a Star Schema Data Model',
+          phase: 'Phase 2 — Data Modeling',
+          duration: '60 min', difficulty: 'Beginner',
+          objective: 'Create a proper star schema with a Fact table and Dimension tables, define relationships, and validate the model.',
+          prereqs: ['Understanding Data Models', 'Relationships in Power BI', 'Star Schema vs Snowflake Schema'],
+          deliverable: 'A Power BI model with correct relationships, a Date table, and hidden foreign keys.',
+          tags: ['Star Schema', 'Relationships', 'Data Model']
+        },
+        {
+          id: 'pl300-lab-03', code: 'Lab 03',
+          title: 'Write DAX Measures for Business KPIs',
+          phase: 'Phase 3 — DAX Deep Dive',
+          duration: '75 min', difficulty: 'Intermediate',
+          objective: 'Write DAX measures for Total Sales, YTD Sales, % Growth, and a dynamic Top N ranking using RANKX.',
+          prereqs: ['Introduction to DAX', 'CALCULATE and Context Transition', 'Time Intelligence Functions'],
+          deliverable: 'A Power BI file with 8+ DAX measures covering time intelligence and ranking patterns.',
+          tags: ['DAX', 'CALCULATE', 'Time Intelligence', 'RANKX']
+        },
+        {
+          id: 'pl300-lab-04', code: 'Lab 04',
+          title: 'Build and Publish a Sales Dashboard',
+          phase: 'Phase 4 — Reports and Dashboards',
+          duration: '90 min', difficulty: 'Intermediate',
+          objective: 'Design a multi-page Power BI report with slicers, drill-through, bookmarks, and row-level security, then publish to Power BI Service.',
+          prereqs: ['Building Effective Visualizations', 'Slicers, Filters and Drill-through', 'Row-Level Security (RLS)', 'Power BI Service and Workspaces'],
+          deliverable: 'A published Power BI report with RLS configured and shared with a workspace.',
+          tags: ['Reports', 'RLS', 'Power BI Service', 'Dashboard']
+        }
+      ],
+      capstone: [
+        {
+          id: 'pl300-cap-01', code: 'Capstone 1',
+          title: 'End-to-End Sales Analytics Solution',
+          phase: 'Phases 1–4',
+          duration: '3–4 hours', difficulty: 'Intermediate',
+          objective: 'Build a complete sales analytics solution from raw CSV data — Power Query transformation, star schema model, DAX KPIs, and a polished report.',
+          prereqs: ['Complete Labs 1–4'],
+          deliverable: 'A Power BI Desktop file with full data pipeline, model, and 3-page executive report.',
+          tags: ['End-to-End', 'Sales Analytics', 'Power BI']
+        },
+        {
+          id: 'pl300-cap-02', code: 'Capstone 2',
+          title: 'HR Analytics Dashboard with RLS',
+          phase: 'Phases 2–4',
+          duration: '3–4 hours', difficulty: 'Intermediate',
+          objective: 'Build an HR analytics report with headcount, attrition, salary bands, and department drill-through. Configure RLS so managers see only their department.',
+          prereqs: ['Complete Capstone 1', 'Row-Level Security (RLS)'],
+          deliverable: 'A published Power BI report with department-level RLS and manager access configured.',
+          tags: ['HR Analytics', 'RLS', 'Drill-through', 'Workspaces']
+        },
+        {
+          id: 'pl300-cap-03', code: 'Capstone 3',
+          title: 'PL-300 Exam-Ready Portfolio Project',
+          phase: 'All Phases',
+          duration: '5–6 hours', difficulty: 'Advanced',
+          objective: 'Build a comprehensive Power BI solution covering all PL-300 exam domains — ingestion, modeling, DAX, visualizations, deployment pipelines, and performance optimization.',
+          prereqs: ['Complete all Labs and Capstones 1–2'],
+          deliverable: 'A deployment-pipeline-enabled Power BI solution with documented DAX patterns and performance notes.',
+          tags: ['PL-300', 'Exam Ready', 'Deployment Pipelines', 'Performance']
+        }
+      ]
+    }
   }
 
 };

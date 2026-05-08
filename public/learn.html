@@ -827,47 +827,10 @@ let ADMIN_SECRET = null;
 const _courseStorageKey = 'rrskv_done_' + _courseId;
 let done = new Set(JSON.parse(localStorage.getItem(_courseStorageKey) || '[]'));
 
-const LABS = {
-  handson: [
-    { id:'lab-01', code:'LAB-01', title:'Hello Blazor — Your First Component',
-      phase:'Phase 1 — C# Foundations', difficulty:'Beginner', duration:'45 min',
-      objective:'Scaffold a Blazor Server project and build your first interactive component using C# variables, loops, and event binding.',
-      deliverable:'A running Blazor Server app with a custom HelloCard component that responds to user input.',
-      prereqs:['Variables in C#','Loops','Functions in C#','User Input and Output in C#'] },
-    { id:'lab-02', code:'LAB-02', title:'OOP in Action — Classes and Services',
-      phase:'Phase 2 — OOP: The Blazor Way', difficulty:'Intermediate', duration:'60 min',
-      objective:'Apply OOP principles by designing a CourseService using classes, inheritance, and interfaces wired into a Blazor component.',
-      deliverable:'A C# class library with Course, ICoursable interface, and a Blazor page rendering live course data.',
-      prereqs:['Classes and Objects in C#','Inheritance in C#','Interfaces in C#','Encapsulation in C#','Polymorphism in C#'] },
-    { id:'lab-03', code:'LAB-03', title:'Forms, Validation and API Calls',
-      phase:'Phase 3 — Blazor with .NET 8', difficulty:'Intermediate', duration:'75 min',
-      objective:'Build a Blazor data-entry form with validation and wire it to a backend REST API using HttpClient.',
-      deliverable:'A Blazor Server app with an EditForm, DataAnnotations validation, and live POST to a .NET 8 minimal API.',
-      prereqs:['Your First Blazor Component','Data Binding in Blazor','Event Handling in Blazor','Dependency Injection in Blazor','Forms and Validation in Blazor'] },
-    { id:'lab-04', code:'LAB-04', title:'Connect Azure OpenAI to Blazor',
-      phase:'Phase 4 — Azure AI Integration', difficulty:'Advanced', duration:'90 min',
-      objective:'Connect a Blazor app to Azure OpenAI GPT-4o and build a real-time chat interface with streaming responses.',
-      deliverable:'A Blazor app with a ChatService, chat UI component, and live streaming responses from Azure OpenAI.',
-      prereqs:['Azure OpenAI Service — Key Concepts','Calling REST APIs from Blazor with HttpClient','State Management in Blazor','JavaScript Interop in Blazor','Secure API Key Management in Azure'] }
-  ],
-  capstone: [
-    { id:'cap-01', code:'CAP-01', title:'Blazor Task Manager',
-      phase:'After Phase 2', difficulty:'Intermediate', duration:'2–3 hrs',
-      objective:'Build a full-featured task management app in Blazor Server demonstrating all core OOP and component patterns.',
-      deliverable:'A Blazor Server app with Task CRUD, filtering, and persistence via a C# service layer.',
-      prereqs:['All of Phase 1','All of Phase 2'] },
-    { id:'cap-02', code:'CAP-02', title:'AI-Powered Knowledge Base',
-      phase:'After Phase 3', difficulty:'Advanced', duration:'3–4 hrs',
-      objective:'Build a searchable knowledge base that uses Azure OpenAI embeddings to answer questions from custom documents.',
-      deliverable:'A Blazor Server app with document upload, vector search, and an AI Q&amp;A interface.',
-      prereqs:['All of Phase 1','All of Phase 2','All of Phase 3'] },
-    { id:'cap-03', code:'CAP-03', title:'Intelligent Enterprise Application',
-      phase:'After Phase 4', difficulty:'Advanced', duration:'4–6 hrs',
-      objective:'Build and deploy a complete intelligent Blazor app with Azure AI integration to Azure App Service.',
-      deliverable:'A deployed Blazor app on Azure App Service with AI-powered features and a live URL.',
-      prereqs:['All phases','Deploying Blazor App to Azure App Service','Secure API Key Management in Azure'] }
-  ]
-};
+// Load labs from course catalog dynamically
+const LABS = (_courseData && _courseData.labs)
+  ? _courseData.labs
+  : { handson: [], capstone: [] };
 
 // ── API ────────────────────────────────────────────────────
 async function apiPost(path, body) {
@@ -1568,9 +1531,13 @@ function switchMode(mode) {
   document.getElementById('tab-labs').classList.toggle('active', mode === 'labs');
 
   const hint = document.getElementById('mode-hint');
+  const labCount  = LABS.handson  ? LABS.handson.length  : 0;
+  const capCount  = LABS.capstone ? LABS.capstone.length : 0;
   hint.textContent = mode === 'lessons'
     ? (ALL.length + ' lessons across ' + PHASES.length + ' phases')
-    : '4 hands-on labs · 3 capstone projects';
+    : labCount > 0
+      ? (labCount + ' hands-on labs · ' + capCount + ' capstone projects')
+      : 'Labs coming soon for this course';
 
   const lessonsToC = document.getElementById('toc-lessons');
   const labsToC    = document.getElementById('toc-labs');
@@ -1632,6 +1599,16 @@ function buildLabsSidebar() {
   if (!toc) return;
   toc.innerHTML = '';
 
+  if (!LABS.handson || LABS.handson.length === 0) {
+    toc.innerHTML = `
+      <div style="padding:20px 12px;text-align:center;
+                  font-size:12px;color:var(--ink-3);
+                  line-height:1.6">
+        🧪 Labs for this course<br>are coming soon
+      </div>`;
+    return;
+  }
+
   const labsHdr = document.createElement('div');
   labsHdr.className = 'phase-header';
   labsHdr.innerHTML = '<span class="phase-indicator" style="background:var(--p1)"></span>Hands-on Labs';
@@ -1671,6 +1648,31 @@ function buildLabsHomeList() {
 
   labsList.innerHTML = '';
   capList.innerHTML  = '';
+
+  if (!LABS.handson || LABS.handson.length === 0) {
+    labsList.innerHTML = `
+      <div style="
+        padding:32px 20px;text-align:center;
+        border:1px dashed var(--line);
+        border-radius:10px;margin-top:16px">
+        <div style="font-size:28px;margin-bottom:12px">🧪</div>
+        <div style="font-size:14px;font-weight:600;
+                    color:var(--ink);margin-bottom:8px">
+          Labs coming soon
+        </div>
+        <p style="font-size:13px;color:var(--ink-3);
+                  max-width:360px;margin:0 auto;
+                  line-height:1.65">
+          Hands-on labs for this course are being developed.
+          Check back soon or explore the
+          <a href="learn.html" style="color:var(--accent)">
+            .NET 8 &amp; Azure AI course</a> which has
+          full labs available now.
+        </p>
+      </div>`;
+    capList.innerHTML = '';
+    return;
+  }
 
   LABS.handson.forEach((lab, i) => {
     const row = document.createElement('div');
