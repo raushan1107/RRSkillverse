@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Skill Map — RR Skillverse</title>
+<link rel="stylesheet" href="css/main.css"/>
+<style>
+.skillmap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.skill-domain {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:var(--radius-xl); overflow:hidden;
+  transition:border-color 0.2s, box-shadow 0.2s;
+}
+.skill-domain:hover { border-color:var(--border-md); box-shadow:var(--sh2); }
+.skill-domain-header {
+  padding:20px 22px; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:12px;
+  background:rgba(255,255,255,0.015);
+}
+.sdh-icon { font-size:22px; }
+.sdh-title { font-size:15px; font-weight:700; color:var(--text); }
+.sdh-count { margin-left:auto; font-size:10px; font-weight:600; color:var(--text-dim); }
+.skill-list { padding:16px 20px; display:flex; flex-direction:column; gap:12px; }
+.skill-row { display:flex; flex-direction:column; gap:5px; }
+.skill-row-top { display:flex; align-items:center; justify-content:space-between; }
+.skill-name { font-size:12px; font-weight:600; color:var(--text); }
+.skill-pct  { font-size:10px; font-weight:700; color:var(--accent); font-family:var(--mono); }
+
+.legend { display:flex; gap:16px; margin-bottom:28px; flex-wrap:wrap; }
+.legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-muted); }
+.legend-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+
+@media(max-width:1100px){ .skillmap-grid{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:700px) { .skillmap-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<script src="js/nav.js"></script>
+<div class="page-body">
+  <div class="page-hero">
+    <div class="page-hero-eyebrow">03 — Technical Stack</div>
+    <h1>Skill <em>Map</em></h1>
+    <p>A comprehensive view of technologies taught, built with, and certified in — spanning cloud, development, data, and AI.</p>
+  </div>
+  <div class="page-content-wide">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#3fb950"></div>Expert (90–100%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#0ea5e9"></div>Advanced (70–89%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Proficient (50–69%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#6366f1"></div>Learning (&lt;50%)</div>
+    </div>
+    <div class="skillmap-grid" id="skillmapGrid"></div>
+  </div>
+</div>
+<script src="js/main.js"></script>
+<script>
+const SKILLS = [
+  { domain:'☁️ Microsoft Azure', skills:[
+    {name:'Azure App Services',pct:95},{name:'Azure Functions',pct:90},
+    {name:'Azure API Management',pct:88},{name:'Azure Service Bus',pct:85},
+    {name:'Azure Logic Apps',pct:82},{name:'Azure Cosmos DB',pct:78},
+    {name:'Azure Active Directory',pct:80},{name:'Azure DevOps',pct:72},
+  ]},
+  { domain:'⚡ Power Platform', skills:[
+    {name:'Power BI (PL-300)',pct:97},{name:'DAX',pct:95},
+    {name:'M Query / Power Query',pct:92},{name:'Power Apps (PL-400)',pct:88},
+    {name:'Power Automate',pct:85},{name:'Copilot Studio',pct:82},
+    {name:'Power Pages',pct:72},{name:'Dataverse',pct:78},
+  ]},
+  { domain:'🔷 .NET Ecosystem', skills:[
+    {name:'C#',pct:90},{name:'ASP.NET Core',pct:88},
+    {name:'Web API',pct:87},{name:'Blazor',pct:80},
+    {name:'Entity Framework Core',pct:82},{name:'Microservices',pct:75},
+    {name:'gRPC',pct:65},{name:'SignalR',pct:68},
+  ]},
+  { domain:'🤖 AI & Machine Learning', skills:[
+    {name:'Azure AI Services',pct:82},{name:'Azure OpenAI',pct:78},
+    {name:'Copilot (Microsoft)',pct:85},{name:'TensorFlow',pct:65},
+    {name:'Azure ML Studio',pct:72},{name:'Python (ML)',pct:70},
+  ]},
+  { domain:'📊 Data & Analytics', skills:[
+    {name:'SQL Server',pct:88},{name:'Data Modeling',pct:90},
+    {name:'Paginated Reports (SSRS)',pct:82},{name:'Python (Data)',pct:72},
+    {name:'Excel & Power Pivot',pct:85},{name:'ETL Pipelines',pct:78},
+  ]},
+  { domain:'🌐 Web & Frontend', skills:[
+    {name:'HTML / CSS',pct:88},{name:'JavaScript',pct:80},
+    {name:'React.js',pct:68},{name:'Bootstrap',pct:85},
+    {name:'jQuery',pct:75},{name:'Tailwind CSS',pct:62},
+  ]},
+  { domain:'🔧 Systems & Embedded', skills:[
+    {name:'Qt / QML',pct:75},{name:'C++',pct:70},
+    {name:'OpenGL',pct:60},{name:'Linux',pct:72},
+    {name:'VMware vSphere',pct:65},{name:'CCNA Networking',pct:68},
+  ]},
+  { domain:'🏗️ Architecture & Design', skills:[
+    {name:'APIGEE API Management',pct:82},{name:'System Design',pct:78},
+    {name:'Distributed Systems',pct:72},{name:'Caching & CDN',pct:70},
+    {name:'Load Balancing',pct:68},{name:'Event-Driven Architecture',pct:75},
+  ]},
+  { domain:'🛠️ Tools & DevOps', skills:[
+    {name:'Git & GitHub',pct:85},{name:'Azure DevOps Pipelines',pct:72},
+    {name:'Docker',pct:65},{name:'Postman',pct:80},
+    {name:'VS Code / Visual Studio',pct:95},{name:'Figma',pct:50},
+  ]},
+];
+
+function getColor(pct) {
+  if (pct >= 90) return '#3fb950';
+  if (pct >= 70) return '#0ea5e9';
+  if (pct >= 50) return '#f59e0b';
+  return '#6366f1';
+}
+
+const grid = document.getElementById('skillmapGrid');
+grid.innerHTML = SKILLS.map(domain => `
+  <div class="skill-domain" data-reveal>
+    <div class="skill-domain-header">
+      <span class="sdh-icon">${domain.domain.split(' ')[0]}</span>
+      <span class="sdh-title">${domain.domain.split(' ').slice(1).join(' ')}</span>
+      <span class="sdh-count">${domain.skills.length} skills</span>
+    </div>
+    <div class="skill-list">
+      ${domain.skills.map(s => `
+        <div class="skill-row">
+          <div class="skill-row-top">
+            <span class="skill-name">${s.name}</span>
+            <span class="skill-pct">${s.pct}%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width:0%;background:${getColor(s.pct)}" data-width="${s.pct}"></div>
+          </div>
+        </div>`).join('')}
+    </div>
+  </div>`).join('');
+
+// Animate progress bars when visible
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.progress-fill').forEach(bar => {
+        const w = bar.dataset.width;
+        setTimeout(() => bar.style.width = w + '%', 100);
+      });
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.skill-domain').forEach(d => io.observe(d));
+</script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RR Skillverse — Learning Platform</title>
+<meta name="description" content="RR Skillverse — Power Platform, Azure, .NET and AI learning by MCT Raushan Ranjan. 2900+ professionals trained globally."/>
+<link rel="icon" href="images/favicon.ico"/>
+<link rel="stylesheet" href="css/main.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.1.0/typed.umd.min.js"></script>
+<style>
+/* ═══════════════════════ HERO ═══════════════════════════ */
+.hero-banner {
+  min-height: calc(100vh - 60px);
+  position: relative; display: flex;
+  align-items: center; justify-content: center;
+  overflow: hidden; text-align: center;
+}
+.hero-banner-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(135deg, #040d1a 0%, #061230 30%, #0d1f4a 55%, #081828 80%, #040d1a 100%);
+}
+/* If a Banner.jpg exists, it overlays with a dark tint */
+.hero-banner-img {
+  position: absolute; inset: 0; z-index: 1;
+  background: url('images/Banner.jpg') center/cover no-repeat;
+  opacity: 0.18;
+}
+.hero-orb { position:absolute; border-radius:50%; pointer-events:none; filter:blur(80px); opacity:0.16; }
+.hero-orb-1 { width:700px;height:700px;background:#1a56db;top:-15%;left:-10%;animation:orbF1 12s ease-in-out infinite; }
+.hero-orb-2 { width:500px;height:500px;background:#0ea5e9;bottom:-10%;right:-5%;animation:orbF2 15s ease-in-out infinite; }
+.hero-orb-3 { width:380px;height:380px;background:#6366f1;top:40%;left:45%;animation:orbF3 10s ease-in-out infinite; }
+@keyframes orbF1{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,30px)}}
+@keyframes orbF2{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,-40px)}}
+@keyframes orbF3{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)}}
+.hero-grid-overlay {
+  position:absolute;inset:0;z-index:2;
+  background-image:linear-gradient(to right,rgba(255,255,255,.028) 1px,transparent 1px),
+                   linear-gradient(to bottom,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 0%,transparent 100%);
+}
+.hero-particle{position:absolute;border-radius:50%;background:var(--accent);pointer-events:none;animation:partFloat linear infinite;}
+@keyframes partFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}5%{opacity:.6}95%{opacity:.3}100%{transform:translateY(-80px) rotate(540deg);opacity:0}}
+.hero-content{position:relative;z-index:3;padding:60px 32px;max-width:860px;width:100%;}
+.hero-eyebrow-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 14px 5px 6px;
+  background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.28);
+  border-radius:20px;margin-bottom:28px;
+  font-size:11px;font-weight:700;letter-spacing:.8px;color:#fbbf24;
+  animation:fadeDown .6s ease both;
+}
+.hero-eyebrow-dot{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#fbbf24);display:flex;align-items:center;justify-content:center;font-size:11px;color:#000;animation:blink 2.5s ease infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-typed-wrap{min-height:130px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.hero-typed-text{font-size:clamp(32px,5.5vw,66px);font-weight:800;letter-spacing:-1.5px;color:#fff;line-height:1.1;animation:fadeDown .7s ease .1s both;}
+.typed-cursor{font-size:clamp(30px,5vw,60px);color:var(--accent);animation:typedBlink .7s ease infinite;}
+@keyframes typedBlink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-sub-text{font-size:16px;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:36px;max-width:580px;margin-left:auto;margin-right:auto;animation:fadeDown .7s ease .2s both;}
+.hero-sub-text strong{color:rgba(255,255,255,.9);}
+.hero-cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;animation:fadeDown .7s ease .3s both;}
+.btn-hero-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:linear-gradient(135deg,#1a56db,#0ea5e9);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;letter-spacing:.2px;cursor:pointer;text-decoration:none;box-shadow:0 4px 20px rgba(26,86,219,.45);transition:all .2s;}
+.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(26,86,219,.55);}
+.btn-hero-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);border:1.5px solid rgba(255,255,255,.2);border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;backdrop-filter:blur(8px);transition:all .2s;}
+.btn-hero-outline:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);transform:translateY(-2px);}
+.hero-stats-bar{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;animation:fadeDown .7s ease .45s both;}
+.hero-stat-item{display:flex;flex-direction:column;align-items:center;padding:0 28px;border-right:1px solid rgba(255,255,255,.1);}
+.hero-stat-item:last-child{border-right:none;}
+.hero-stat-num{font-size:26px;font-weight:800;letter-spacing:-.5px;color:#fff;line-height:1;}
+.hero-stat-num span{color:var(--accent);}
+.hero-stat-label{font-size:10px;font-weight:600;letter-spacing:.5px;color:rgba(255,255,255,.4);margin-top:4px;text-transform:uppercase;}
+.hero-scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.3);font-size:9px;letter-spacing:1px;text-transform:uppercase;z-index:3;animation:fadeDown 1s ease .8s both;}
+.scroll-chevron{width:20px;height:20px;border-right:2px solid rgba(255,255,255,.25);border-bottom:2px solid rgba(255,255,255,.25);transform:rotate(45deg);animation:scrollBounce 1.8s ease infinite;}
+@keyframes scrollBounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══════════════════════ MARQUEE ════════════════════════ */
+.marquee-band{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:12px 0;}
+.marquee-track{display:flex;white-space:nowrap;animation:marq 32s linear infinite;}
+.marquee-item{display:inline-flex;align-items:center;gap:8px;padding:0 28px;font-size:11px;font-weight:500;letter-spacing:.4px;color:var(--text-dim);flex-shrink:0;}
+.marquee-sep{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.1);}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════════════════ SECTIONS ═══════════════════════ */
+.section-wrap{padding:90px 64px;}
+.section-wrap-alt{background:var(--bg2);}
+.section-heading{text-align:center;margin-bottom:52px;}
+.section-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.section-eyebrow::before{content:'';width:20px;height:1.5px;background:currentColor;border-radius:1px;}
+.section-title{font-size:clamp(26px,3.5vw,40px);font-weight:800;letter-spacing:-.6px;color:var(--text);margin-bottom:12px;line-height:1.1;}
+.section-title em{font-style:italic;color:var(--accent);font-weight:400;}
+.section-sub{font-size:14px;color:var(--text-muted);max-width:500px;margin:0 auto;line-height:1.75;}
+
+/* ═══════════════════════ OFFER CARDS ════════════════════ */
+.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.offer-card{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;transition:border-color .2s,transform .25s,box-shadow .25s;}
+.offer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform .35s;}
+.offer-card:hover{border-color:var(--border-md);transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.4);}
+.offer-card:hover::before{transform:scaleX(1);}
+.offer-icon{font-size:26px;}
+.offer-title{font-size:16px;font-weight:700;color:var(--text);}
+.offer-desc{font-size:12.5px;color:var(--text-muted);line-height:1.72;flex:1;}
+.offer-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.offer-tag{font-size:9.5px;font-weight:600;padding:2px 8px;border-radius:20px;background:var(--bg3);color:var(--text-muted);border:1px solid var(--border);}
+
+/* ═══════════════════════ YOUTUBE ════════════════════════ */
+.yt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.yt-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .2s,transform .25s,box-shadow .25s;display:flex;flex-direction:column;text-decoration:none;color:inherit;}
+.yt-card:hover{border-color:rgba(255,80,80,.35);transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,0,0,.45);}
+.yt-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--bg4);}
+.yt-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s;}
+.yt-card:hover .yt-thumb img{transform:scale(1.05);}
+.yt-thumb-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;background:linear-gradient(135deg,var(--bg4),var(--bg3));}
+.yt-play-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.yt-card:hover .yt-play-overlay{background:rgba(0,0,0,.38);}
+.yt-play-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,0,0,.9);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.7);transition:opacity .2s,transform .2s;}
+.yt-card:hover .yt-play-btn{opacity:1;transform:scale(1);}
+.yt-play-btn svg{color:#fff;margin-left:3px;}
+.yt-badge{position:absolute;top:8px;right:8px;background:rgba(255,0,0,.92);color:#fff;font-size:9px;font-weight:700;letter-spacing:.5px;padding:2px 7px;border-radius:4px;text-transform:uppercase;}
+.yt-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;gap:7px;}
+.yt-category{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,80,80,.85);}
+.yt-title{font-size:13px;font-weight:700;color:var(--text);line-height:1.35;}
+.yt-desc{font-size:11px;color:var(--text-muted);line-height:1.62;flex:1;}
+.yt-links{display:flex;flex-direction:column;gap:5px;margin-top:4px;}
+.yt-link{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:10px;font-weight:600;color:var(--text-muted);text-decoration:none;transition:all .15s;}
+.yt-link:hover{background:rgba(255,0,0,.1);border-color:rgba(255,0,0,.25);color:#ff6b6b;}
+
+/* ═══════════════════════ TESTIMONIALS ══════════════════ */
+.testi-track-wrap{overflow:hidden;position:relative;}
+.testi-track-wrap::before,.testi-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+.testi-track-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent);}
+.testi-track-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent);}
+.testi-track{display:flex;gap:16px;animation:testiScroll 60s linear infinite;}
+.testi-track:hover{animation-play-state:paused;}
+.testi-card-wrap{flex-shrink:0;width:300px;}
+.testi-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px;height:100%;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s;}
+.testi-card:hover{border-color:var(--border-md);transform:translateY(-4px);}
+.testi-stars{color:#f59e0b;font-size:11px;letter-spacing:2px;}
+.testi-quote-mark{font-size:32px;color:rgba(14,165,233,.2);line-height:.6;font-family:Georgia,serif;font-weight:900;}
+.testi-text{font-size:11.5px;color:var(--text-muted);line-height:1.78;font-style:italic;flex:1;}
+.testi-person{display:flex;align-items:center;gap:9px;margin-top:4px;}
+.testi-av{width:32px;height:32px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brand-dark),var(--brand));display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;}
+.testi-name{font-size:11px;font-weight:700;color:var(--text);}
+.testi-loc{font-size:9px;color:var(--text-dim);margin-top:1px;}
+.testi-tag{font-size:8.5px;font-weight:600;color:var(--accent);margin-top:2px;}
+@keyframes testiScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════════════════ CTA ════════════════════════════ */
+.cta-section{padding:110px 64px;text-align:center;background:linear-gradient(160deg,rgba(26,86,219,.07) 0%,rgba(14,165,233,.03) 100%);border-top:1px solid var(--border);position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(26,86,219,.08) 0%,transparent 65%);pointer-events:none;}
+.cta-title{font-size:clamp(28px,4.5vw,48px);font-weight:800;letter-spacing:-.8px;color:var(--text);margin-bottom:16px;line-height:1.1;}
+.cta-title em{font-style:italic;color:var(--accent);font-weight:400;}
+.cta-sub{font-size:15px;color:var(--text-muted);margin-bottom:40px;}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+/* ═══════════════════════ FOOTER ═════════════════════════ */
+.site-footer{background:var(--bg2);border-top:1px solid var(--border);padding:36px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-brand{font-size:15px;font-weight:800;letter-spacing:-.3px;color:var(--text);}
+.footer-copy{font-size:11px;color:var(--text-dim);}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap;}
+.footer-links a{font-size:11px;color:var(--text-muted);transition:color .15s;}
+.footer-links a:hover{color:var(--accent);}
+
+/* ═══════════════════════ RESPONSIVE ═════════════════════ */
+@media(max-width:1100px){.yt-grid{grid-template-columns:repeat(2,1fr)}.offer-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+  .section-wrap{padding:60px 20px;}
+  .offer-grid,.yt-grid{grid-template-columns:1fr;}
+  .hero-stat-item{padding:0 14px;}
+  .cta-section,.site-footer{padding-left:20px;padding-right:20px;}
+}
+</style>
+</head>
+<body>
+<script src="js/nav.js"></script>
+<div class="page-body">
+
+<!-- ═══════════════════ HERO ════════════════════════════ -->
+<section class="hero-banner">
+  <div class="hero-banner-bg"></div>
+  <div class="hero-banner-img"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+  <div class="hero-grid-overlay"></div>
+  <div id="heroParticles"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow-pill">
+      <div class="hero-eyebrow-dot">✦</div>
+      MCT Raushan Ranjan &nbsp;·&nbsp; Koenig Solutions &nbsp;·&nbsp; 2900+ Trained Globally
+    </div>
+    <div class="hero-typed-wrap">
+      <h1 class="hero-typed-text">
+        <span id="typed-text"></span><span class="typed-cursor">|</span>
+      </h1>
+    </div>
+    <p class="hero-sub-text">
+      Learn. Build. Grow. With <strong>RR Skillverse.</strong><br/>
+      Your complete platform for <strong>Azure · Power Platform · .NET · AI</strong> — built by a Microsoft Certified Trainer.
+    </p>
+    <div class="hero-cta-row">
+      <a href="courses.html" class="btn-hero-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="2" width="14" height="11" rx="2"/><path d="M5 15h6M8 13v2"/></svg>
+        Skillverse Library
+      </a>
+      <a href="ai-agent.html" class="btn-hero-outline">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+        Ask AI Agent
+      </a>
+      <a href="team.html" class="btn-hero-outline">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3 2.5-5 6-5s6 2 6 5"/></svg>
+        Meet our Team!
+      </a>
+      <!-- <a href="learn.html" class="btn-hero-outline">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v5L2 13h12L10 7V2"/><path d="M5 2h6"/></svg>
+        .NET 8 &amp; Azure AI →
+      </a> -->
+    </div>
+    <div class="hero-stats-bar">
+      <div class="hero-stat-item"><div class="hero-stat-num"><span data-counter="2900">0</span><span>+</span></div><div class="hero-stat-label">Professionals Trained</div></div>
+      <div class="hero-stat-item"><div class="hero-stat-num"><span data-counter="38">0</span><span>+</span></div><div class="hero-stat-label">Certifications</div></div>
+      <div class="hero-stat-item"><div class="hero-stat-num"><span data-counter="10">0</span><span>+</span></div><div class="hero-stat-label">Years Teaching</div></div>
+      <div class="hero-stat-item"><div class="hero-stat-num"><span data-counter="25">0</span><span>+</span></div><div class="hero-stat-label">Countries Reached</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint"><span>Scroll</span><div class="scroll-chevron"></div></div>
+</section>
+
+<!-- ═══════════════════ MARQUEE ═════════════════════════ -->
+<div class="marquee-band"><div class="marquee-track" id="marqTrack"></div></div>
+
+<!-- ═══════════════════ WHAT WE OFFER ══════════════════ -->
+<section class="section-wrap">
+  <div class="section-heading">
+    <div class="section-eyebrow">What We Offer</div>
+    <h2 class="section-title">Everything you need to <em>master</em> modern tech</h2>
+    <p class="section-sub">Curated learning paths built from real enterprise experience — not just tutorials</p>
+  </div>
+  <div class="offer-grid">
+    <div class="offer-card" data-reveal><div class="offer-icon">⚡</div><div class="offer-title">Power Platform</div><div class="offer-desc">Power BI, Power Apps, Power Automate, and Copilot Studio with real-world enterprise use cases and PL-300/PL-400 certification prep.</div><div class="offer-tags"><span class="offer-tag">Power BI (PL-300)</span><span class="offer-tag">Power Apps</span><span class="offer-tag">Power Automate</span><span class="offer-tag">Copilot Studio</span></div><a href="courses.html?cat=power" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
+    <div class="offer-card" data-reveal><div class="offer-icon">☁️</div><div class="offer-title">Azure & Cloud</div><div class="offer-desc">Hands-on Azure from fundamentals to developer associate — App Services, Functions, Integration, API Management, and AI Services.</div><div class="offer-tags"><span class="offer-tag">AZ-204</span><span class="offer-tag">AZ-104</span><span class="offer-tag">Azure AI</span><span class="offer-tag">Service Bus</span></div><a href="courses.html?cat=azure" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
+    <div class="offer-card" data-reveal><div class="offer-icon">🔷</div><div class="offer-title">.NET & Blazor</div><div class="offer-desc">Master ASP.NET Core, C#, Blazor, Web API, Entity Framework and Microservices architecture for scalable enterprise applications.</div><div class="offer-tags"><span class="offer-tag">C# / ASP.NET</span><span class="offer-tag">Blazor</span><span class="offer-tag">Web API</span><span class="offer-tag">Microservices</span></div><a href="courses.html?cat=dotnet" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
+    <div class="offer-card" data-reveal><div class="offer-icon">🤖</div><div class="offer-title">AI & Machine Learning</div><div class="offer-desc">From Azure AI Services to TensorFlow — build intelligent applications and integrate AI into real enterprise systems.</div><div class="offer-tags"><span class="offer-tag">Azure AI</span><span class="offer-tag">TensorFlow</span><span class="offer-tag">Copilot</span><span class="offer-tag">ML Pipelines</span></div><a href="courses.html?cat=ai" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
+    <div class="offer-card" data-reveal><div class="offer-icon">📊</div><div class="offer-title">Data Analytics</div><div class="offer-desc">DAX, M Query, SQL Server, data modeling, paginated reports, and end-to-end BI solutions for business insights.</div><div class="offer-tags"><span class="offer-tag">DAX</span><span class="offer-tag">M Query</span><span class="offer-tag">SQL Server</span><span class="offer-tag">Data Modeling</span></div><a href="courses.html?cat=data" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
+    <div class="offer-card" data-reveal><div class="offer-icon">🏗️</div><div class="offer-title">System Design</div><div class="offer-desc">Scalable architecture patterns, distributed systems, caching, load balancing, and replication for senior engineers and architects.</div><div class="offer-tags"><span class="offer-tag">Distributed Systems</span><span class="offer-tag">Caching</span><span class="offer-tag">Scalability</span></div><a href="courses.html?cat=sysdesign" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ YOUTUBE PLAYLISTS ══════════════ -->
+<section class="section-wrap section-wrap-alt">
+  <div class="section-heading">
+    <div class="section-eyebrow" style="color:#ff6b6b;--tw:20px">
+      <span style="display:inline-block;width:20px;height:1.5px;background:#ff6b6b;border-radius:1px;margin-right:8px;vertical-align:middle"></span>
+      YouTube
+    </div>
+    <h2 class="section-title">Explore My <em style="color:#ff6b6b">YouTube</em> Playlists</h2>
+    <p class="section-sub">Free in-depth video series — from Python basics to enterprise Power BI, 300+ videos and counting</p>
+  </div>
+  <div class="yt-grid" id="ytGrid"></div>
+</section>
+
+<!-- ═══════════════════ TESTIMONIALS ══════════════════ -->
+<section class="section-wrap">
+  <div class="section-heading">
+    <div class="section-eyebrow">What My Students Say</div>
+    <h2 class="section-title">Real stories, <em>real impact</em></h2>
+    <p class="section-sub">Here's what learners across the world have experienced after attending my sessions and mentorship — from 25+ countries.</p>
+  </div>
+  <div class="testi-track-wrap"><div class="testi-track" id="testiRow1"></div></div>
+  <div style="margin-top:16px"><div class="testi-track-wrap"><div class="testi-track" id="testiRow2" style="animation-direction:reverse;animation-duration:70s"></div></div></div>
+</section>
+
+<!-- ═══════════════════ CTA ════════════════════════════ -->
+<section class="cta-section">
+  <div class="cta-title" data-reveal>Ready to start your<br/><em>learning journey?</em></div>
+  <p class="cta-sub" data-reveal>Join thousands of professionals who've grown with RR Skillverse</p>
+  <div class="cta-btns" data-reveal>
+    <a href="courses.html"  class="btn btn-accent btn-lg">Browse All Courses</a>
+    <a href="ai-agent.html" class="btn btn-secondary btn-lg">Chat with AI Agent</a>
+    <a href="profile.html"  class="btn btn-ghost btn-lg">Meet the Trainer</a>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═════════════════════════ -->
+<footer class="site-footer">
+  <div>
+    <div class="footer-brand">RR Skillverse</div>
+    <div class="footer-copy">© 2026 · MCT Raushan Ranjan · Noida, India</div>
+  </div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/raushanranjan" target="_blank">LinkedIn</a>
+    <a href="https://github.com/raushan1107" target="_blank">GitHub</a>
+    <a href="https://www.youtube.com/@RaushanRanjan" target="_blank">YouTube</a>
+    <a href="certifications.html">Certifications</a>
+    <a href="ai-agent.html">AI Agent</a>
+  </div>
+</footer>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+/* ── Typed.js ─────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.Typed) {
+    new Typed('#typed-text', {
+      strings: [
+        'Welcome to RR Skillverse','Empower Your Future','Master Real Skills',
+        'Unlock Your Potential','Learn. Build. Succeed.',
+        'Your Gateway to Tech Brilliance','Explore the Power Platform',
+        'Code Your Ideas to Life','Be Future-Ready with Real Skills',
+        'Fuel Your Growth with Knowledge','From Basics to Brilliance',
+        'Make Learning a Habit','Where Curiosity Meets Creation',
+        'Turning Knowledge into Action','Your Skill Journey Starts Here',
+        'Craft Your Career with Confidence','Level Up with Every Click',
+        'Master the Tools of Tomorrow','RR Skillverse: Learn. Share. Grow.',
+        'Simplifying Tech, Empowering You','Real Projects. Real Growth.',
+        'Transforming Passion into Expertise','Every Skill Counts'
+      ],
+      typeSpeed: 60, backSpeed: 30, backDelay: 2000, loop: true, showCursor: false
+    });
+  }
+});
+
+/* ── Particles ────────────────────────────────────────── */
+(function() {
+  const w = document.getElementById('heroParticles');
+  if (!w) return;
+  w.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden';
+  for (let i = 0; i < 24; i++) {
+    const p = document.createElement('div'); p.className = 'hero-particle';
+    const sz = Math.random() * 3 + 1.5;
+    Object.assign(p.style, { width: sz+'px', height: sz+'px', left: Math.random()*100+'%', animationDuration: (Math.random()*14+14)+'s', animationDelay: (Math.random()*20)+'s', opacity: (Math.random()*.15+.04) });
+    w.appendChild(p);
+  }
+})();
+
+/* ── Marquee ──────────────────────────────────────────── */
+const MARQUEE = ['Azure Developer AZ-204','Power BI PL-300','MCT Certified','Power Platform Developer','CCNA · Cisco','ASP.NET Core Blazor','APIGEE API Management','TensorFlow · ML','2900+ Professionals Trained','Qt / QML Embedded','Copilot Studio','System Design','Python Programming','Data Analytics','Azure AI Services'];
+const mt = document.getElementById('marqTrack');
+if (mt) { const h = MARQUEE.map(t=>`<span class="marquee-item">${t}<span class="marquee-sep"></span></span>`).join(''); mt.innerHTML = h+h; }
+
+/* ── YouTube Playlists ────────────────────────────────── */
+const YT = [
+  { img:'images/YT-PowerBI.jpg',     emoji:'📊', cat:'Power BI',           title:'Power BI Beginners Course 2025',    desc:'Complete Power BI from scratch — dashboards, DAX, relationships, and publishing.',
+    links:[{l:'Watch Playlist',u:'https://www.youtube.com/playlist?list=PL_kJ0aInVVKLbWcpSQqL3GdKqK8M4V_tf'}] },
+  { img:'images/M -language.png',    emoji:'🔡', cat:'Power Query',        title:'M Language Learning Series',        desc:'Deep dive into Power Query M language — transformations, custom functions, parameters.',
+    links:[{l:'Watch Playlist',u:'https://www.youtube.com/playlist?list=PL_kJ0aInVVKKKJPS-3yKJ5abOWFjWns5p'}] },
+  { img:'images/YT-SoftwareEng.jpg', emoji:'🖥️', cat:'CS Fundamentals',   title:'Software Engineering',              desc:'Core software engineering principles, design patterns, SDLC, and architecture.',
+    links:[{l:'Watch Playlist',u:'https://www.youtube.com/playlist?list=PL_kJ0aInVVKKbnGxxUREQgrpFtuh47znm'}] },
+  { img:'images/YT-DataAnalytics.jpg',emoji:'📈', cat:'Data Analytics',    title:'Data Analytics Series',            desc:'End-to-end data analytics — Excel, SQL, Python, and visualization techniques.',
+    links:[{l:'Watch Playlist',u:'https://www.youtube.com/playlist?list=PL_kJ0aInVVKKJQB_-5uoEyALme0CPOsYr'}] },
+  { img:'images/YT-SoftwarePM.jpg',  emoji:'📋', cat:'Project Management', title:'Software Project Management',       desc:'Agile, Scrum, PMBOK, risk management, and delivery frameworks.',
+    links:[{l:'Watch Playlist',u:'https://www.youtube.com/playlist?list=PL_kJ0aInVVKKMZhBCfwSIrhGkd9jW2wS3'}] },
+  { img:'images/YT-ComputerNetworks.jpg',emoji:'🌐', cat:'Networking',     title:'Computer Networks',                 desc:'OSI model, TCP/IP, routing, switching, DNS, subnetting and network security.',
+    links:[{l:'Watch Playlist',u:'https://www.youtube.com/playlist?list=PL_kJ0aInVVKIBvmUXuUGIsN3MYmwwHeCY'}] },
+  { img:'images/YT-Shorts.jpg',      emoji:'⚡', cat:'Shorts',             title:'Programming & Python Shorts',       desc:'Quick bite-sized tips on programming concepts, Python tricks, and tech insights.',
+    links:[{l:'Programming Shorts',u:'https://www.youtube.com/playlist?list=PL_kJ0aInVVKJvK7OPhmYbKHzxjUFfbmd3'},{l:'Turtle Graphics',u:'https://www.youtube.com/playlist?list=PL_kJ0aInVVKKiohYzSLm0J0JTnuFWKU7z'}] },
+  { img:'images/YT-Projects.jpg',    emoji:'🚀', cat:'Projects',           title:'Guided Python Projects',            desc:'Hands-on real Python projects — build, run, and understand from scratch.',
+    links:[{l:'QR Code Generator',u:'https://youtu.be/0f7rgHJusuo?si=MdXl985CGQe4hqJ9'},{l:'Link Shortener',u:'https://youtu.be/WTrwOs8EZ4I?si=3kTX1QZONidXmjWm'},{l:'Alarm Clock',u:'https://youtu.be/ex7UxIyeAX8?si=AmHubgV5slMax2_r'}] },
+];
+const ytGrid = document.getElementById('ytGrid');
+if (ytGrid) {
+  ytGrid.innerHTML = YT.map(p => `
+    <div class="yt-card">
+      <div class="yt-thumb">
+        <img src="${p.img}" alt="${p.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="yt-thumb-fallback" style="display:none">${p.emoji}</div>
+        <div class="yt-play-overlay"><div class="yt-play-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><polygon points="4,2 14,8 4,14"/></svg></div></div>
+        <div class="yt-badge">▶ YouTube</div>
+      </div>
+      <div class="yt-body">
+        <div class="yt-category">${p.cat}</div>
+        <div class="yt-title">${p.title}</div>
+        <div class="yt-desc">${p.desc}</div>
+        <div class="yt-links">${p.links.map(l=>`<a href="${l.u}" target="_blank" class="yt-link"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><polygon points="4,2 14,8 4,14"/></svg>${l.l}</a>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+
+/* ── ALL Testimonials ─────────────────────────────────── */
+const ALL_T = [
+  {n:'Robert Ifeonu Ph.D.',      loc:'Nigeria',         tag:'Co-pilot Training',          t:'One of the most insightful and engaging learning experiences I\'ve had — his technical competence and ability to create an impactful learning environment was remarkable.'},
+  {n:'Kenthia Roberts',          loc:'United States',   tag:'Teaching Quality',            t:'Instructor Raushan was very knowledgeable and patient. He went above and beyond to create additional supplemental material and a personable, safe environment to ask questions.'},
+  {n:'Khalid Almasi',            loc:'Saudi Arabia',    tag:'Training',                    t:'Your mastery of the course materials and ability to convey complex concepts were outstanding. You have truly excelled as a trainer, and your efforts have significantly impacted my learning experience.'},
+  {n:'Vijay Divakar',            loc:'UK',              tag:'Power BI Data Analyst',       t:'The trainer was extremely knowledgeable and engaging. The hands-on examples helped reinforce the concepts. I feel confident in my ability to use Power BI now.'},
+  {n:'Alexander Komissarov',     loc:'Netherlands',     tag:'Customized Learning',         t:'Raushan was able to adjust his base course to the needs of my organization/job profile. The fact the tutor goes the extra mile for the customer is very much appreciated.'},
+  {n:'William Lyimo',            loc:'Tanzania',        tag:'Exceptional Training',        t:'Qubits quizzes, lab practicals, and real-world examples helped reinforce learning. Your enthusiasm was infectious. Thank you for an exceptional training experience.'},
+  {n:'Sara Alhindl',             loc:'Saudi Arabia',    tag:'.NET Course',                 t:'Your ability to simplify complex concepts and unwavering support were instrumental in my understanding. Your contagious enthusiasm created a positive and engaging learning environment.'},
+  {n:'Awais Khurshed',           loc:'Saudi Arabia',    tag:'Practical Examples',          t:'Raushan is an exceptional trainer — passionate, knowledgeable, and able to explain complex concepts in an easy-to-understand way. One of the most engaging learning experiences I\'ve had.'},
+  {n:'Andy Bishop',              loc:'UK',              tag:'Experienced Trainer',         t:'Raushan described big ideas in a modular fashion; starting with basic level understanding and building with increasing complexity — he is clearly a talented and experienced trainer.'},
+  {n:'Gloria G Bussungu',        loc:'Tanzania',        tag:'Teaching Technique',          t:'He explains concepts before diving into "how". His unique teaching technique and use of quizzes made everything easier to grasp. He should keep his spirit up.'},
+  {n:'Martina Alinda',           loc:'Software Engineer', tag:'Blazor Training',           t:'I attended Raushan\'s ASP.NET Blazor Training and was truly impressed. His expertise and engaging teaching style made complex concepts accessible and enjoyable.'},
+  {n:'Shikha Chaudhary',         loc:'India',           tag:'Cloud Engineer',              t:'Raushan is always on top of things, finds solutions before anyone else does. A confident speaker and wonderful storyteller/teacher — highly recommended.'},
+  {n:'Mayol Abraham Mach Garang',loc:'Rwanda',          tag:'Professional & Relatable',    t:'With all my heart, I can testify to his professionalism by the way he made his presentation with relatable illustrations. Raushan is very good at his job.'},
+  {n:'Binta Saidy',              loc:'Gambia',          tag:'Power BI',                    t:'He is patient and professional, very helpful in answering all our questions. He has really built my confidence in Power BI and taken my knowledge to an excellent level.'},
+  {n:'Michael Pope',             loc:'UK',              tag:'Customized Course',           t:'Raushan explained the content clearly relating course topics to use cases that are easy to understand. He was able to tweak the course to better suit our interests.'},
+  {n:'Richard Dale',             loc:'United States',   tag:'Knowledgeable Instructor',    t:'Very knowledgeable instructor. Raushan covered a lot of material, but made sure everyone understood the information before moving forward with additional topics.'},
+  {n:'Sam Stephens',             loc:'United States',   tag:'Coding & Debugging',          t:'Raushan did a great job breaking everything down to fundamental components. This was also obvious in his continuous support in debugging labs issues with attendees.'},
+  {n:'Anusha Raghavendra',       loc:'UK',              tag:'QT/QML Associate',            t:'The course was well structured with seamless integration of hands-on examples with theoretical concepts. Raushan was knowledgeable, clear and responsive. Highly recommended!'},
+  {n:'Priya Sharma',             loc:'India',           tag:'Training',                    t:'Excellent pace and use of time. Well delivered, good subject knowledge. Training has already been put into practice.'},
+  {n:'Joaquin Serrano Torres',   loc:'Spain',           tag:'Simplified Concepts',         t:'The trainer went the extra mile to simplify complex concepts, making them easy to understand. Priority and empathy are extraordinary.'},
+  {n:'Kanaani Abukhadra',        loc:'Saudi Arabia',    tag:'Dedicated Teacher',           t:'A dedicated teacher. Very knowledgeable, clear, and motivated. Ties concepts and theories together well. I would be glad to take another course with him.'},
+  {n:'Charles Irving Angeles',   loc:'UAE',             tag:'Power BI Advanced',           t:'I wanted to thank Mr. Raushan for the excellent Power BI Advanced training. His teaching style, along with the structure of the course, really helped me grasp the concepts.'},
+  {n:'Feras Bin Hussain',        loc:'Saudi Arabia',    tag:'Inspiring Instructor',        t:'Your dedication and ability to convey complex concepts were outstanding. You have truly excelled as a trainer, and your efforts have significantly impacted my learning experience.'},
+  {n:'Hasen Alhussaini',         loc:'Saudi Arabia',    tag:'Apigee API Platform',         t:'Your expertise and clear explanations on Apigee and API security best practices were truly inspiring. Thank you for making complex concepts easy to understand and engaging.'},
+  {n:'Seth Dahar',               loc:'United States',   tag:'Applicable Training',         t:'Excellent training sessions. I really appreciate that you diverged the training to topics that were applicable and needed for our use.'},
+  {n:'Teera Jason',              loc:'United States',   tag:'Power BI Data Analyst',       t:'Raushan was thorough and detail-oriented, beginning with foundational Power BI concepts and progressively building toward more advanced functions.'},
+  {n:'Ravi Kumar',               loc:'India',           tag:'Engaging & Communicative',    t:'Very enthusiastic, excellent communicating skill, very engaging.'},
+  {n:'Mallareddy Annireddy',     loc:'India',           tag:'Cloud Applications',          t:'Very good training from Raushan, very useful to grow cloud applications. The way of explanation with examples was very nice. Thanks for your support Raushan.'},
+  {n:'Salome Kabodiba',          loc:'South Africa',    tag:'Inspiring Sessions',          t:'Your sessions are not just informative, but also inspiring. Thank you for your hard work and commitment. Keep up the amazing work, you\'re making a significant impact.'},
+  {n:'David Kamara',             loc:'Tanzania',        tag:'Interactive',                 t:'Trainer is interactive and friendly. It helps us to understand better. Keep up the good work Mr Raushan.'},
+  {n:'Aji Kumba Saine',          loc:'Gambia',          tag:'Informative & Visual',        t:'The course was very informative and well structured. The Trainer was able to explain the concepts easily with the help of visuals and demonstrations.'},
+  {n:'Simarjit Bains',           loc:'India',           tag:'C# Training',                 t:'He helped make many concepts crystal clear in such a short span of time. I am sure I am way more knowledgeable in C# with his help.'},
+  {n:'Manju',                    loc:'India',           tag:'Azure/Cloud',                 t:'Raushan has very good knowledge on coding, Azure & other cloud technologies. He explains concepts clearly and follows up to make sure you understood thoroughly.'},
+  {n:'Julia Kim',                loc:'United States',   tag:'Great Instructor',            t:'Raushan Ranjan was a great instructor. He was very knowledgeable about the material, patient with troubleshooting, and covered all topics thoroughly.'},
+  {n:'Nina Biggs',               loc:'United States',   tag:'Patient',                     t:'How thorough he was and patient.'},
+  {n:'Conner Caprio',            loc:'United States',   tag:'Course Delivery',             t:'They did a fantastic job getting through so much material in one week. Lots to unpack in such a short time.'},
+  {n:'Gaurav Menon',             loc:'United States',   tag:'Simplifying Concepts',        t:'Great work Raushan, keep going, you are doing wonders simplifying concepts.'},
+  {n:'Amey Chitale',             loc:'India',           tag:'Engaging Session',            t:'Very interesting session. Recap at start of every session was very helpful. Supporting video addition was an excellent way to understand topics.'},
+  {n:'Winfred Thongana',         loc:'Uganda',          tag:'Informative Training',        t:'The training was informative and enjoyable. I can\'t thank you enough for your hard work and enthusiasm.'},
+  {n:'Martha Alinda',            loc:'Uganda',          tag:'Passion & Expertise',         t:'Your passion and expertise inspired us, making a significant impact on our learning journey. We are truly grateful for your dedication and guidance.'},
+  {n:'Nawaf Abdulaziz Alsaif',   loc:'Saudi Arabia',    tag:'Focused Training',            t:'The trainer is great, he concentrates on the most important topics and answers all the trainees\' questions.'},
+  {n:'Hamad Alaskar',            loc:'Saudi Arabia',    tag:'Clear Delivery',              t:'He was a great trainer and the way he delivered the course was clear and smooth, providing good examples.'},
+  {n:'Rajesh Sahu',              loc:'India',           tag:'Doubt Resolution',            t:'He has very good and deep understanding of the topics, always ready to help you solve your doubts.'},
+  {n:'Karin Ford',               loc:'United States',   tag:'Knowledge & Examples',        t:'The trainer demonstrated a high level of knowledge and expertise, providing clear explanations and insightful examples that enhanced the overall learning experience.'},
+  {n:'Khalid Ebrahim Al-Jaber',  loc:'Qatar',           tag:'Perfect & Informative',       t:'Mr. Raushan Ranjan is perfect. He is very kind and informative. He gives information step-by-step and makes sure all participants understand.'},
+  {n:'Travis Hollinghead',       loc:'United States',   tag:'Talented & Technical',        t:'Raushan is a very talented, dedicated, and technical trainer in his description and instruction of this course material.'},
+  {n:'Abhishek Pal',             loc:'India',           tag:'Engaging Trainer',            t:'Great knowledge, made us feel like a friend. Jokes and fun added to learning. Explained real-life examples. His chit-chat in between lectures kept us from getting bored.'},
+  {n:'Varun Gupta',              loc:'India',           tag:'Simplified Learning',         t:'Concepts were taught very well and got to learn new things. I really enjoyed the way of his teaching and simplifying the concepts.'},
+  {n:'Sarosh Engineer',          loc:'India',           tag:'Interactive & Engaging',      t:'Good way of explaining concepts, taking time to clear participant doubts & keeping session interactive & interesting.'},
+];
+
+function buildTCard(t) {
+  const ini = t.n.split(' ').map(w=>w[0]).slice(0,2).join('');
+  return `<div class="testi-card-wrap"><div class="testi-card">
+    <div class="testi-stars">★★★★★</div>
+    <div class="testi-quote-mark">"</div>
+    <div class="testi-text">${t.t}</div>
+    <div class="testi-person">
+      <div class="testi-av">${ini}</div>
+      <div><div class="testi-name">${t.n}</div><div class="testi-loc">${t.loc}</div><div class="testi-tag">${t.tag}</div></div>
+    </div>
+  </div></div>`;
+}
+
+// Split into two rows for the dual-track effect
+const half = Math.ceil(ALL_T.length / 2);
+const row1 = ALL_T.slice(0, half);
+const row2 = ALL_T.slice(half);
+
+const t1 = document.getElementById('testiRow1');
+const t2 = document.getElementById('testiRow2');
+if (t1) { const h = row1.map(buildTCard).join(''); t1.innerHTML = h+h; }
+if (t2) { const h = row2.map(buildTCard).join(''); t2.innerHTML = h+h; }
+</script>
+</body>
+</html>

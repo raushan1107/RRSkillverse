@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Hands-on Labs — RR Skillverse</title>
+<link rel="stylesheet" href="css/main.css"/>
+<style>
+.labs-hero { text-align:center; padding:56px 24px 40px; }
+.labs-hero h1 { font-size:clamp(28px,4vw,42px); font-weight:800; letter-spacing:-.6px; color:var(--text); margin-bottom:12px; line-height:1.15; }
+.labs-hero h1 em { font-style:italic; color:var(--accent); font-weight:400; }
+.labs-hero p { font-size:15px; color:var(--text-muted); max-width:560px; margin:0 auto 32px; line-height:1.75; }
+.labs-hero-eyebrow { font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+
+.filter-bar {
+  display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+  padding:0 24px 40px;
+}
+.filter-btn {
+  padding:7px 16px; border-radius:20px; font-size:12px; font-weight:600;
+  border:1.5px solid var(--border); background:transparent; color:var(--text-muted);
+  cursor:pointer; transition:all .15s; font-family:var(--font);
+}
+.filter-btn:hover { border-color:var(--border-md); color:var(--text); background:var(--bg3); }
+.filter-btn.active { background:var(--brand-glow); border-color:rgba(26,86,219,0.4); color:var(--accent); }
+
+.labs-section { max-width:1120px; margin:0 auto; padding:0 24px 48px; }
+.labs-section-title {
+  font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  color:var(--text-dim); margin-bottom:20px; padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+
+.labs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; margin-bottom:48px; }
+
+.lab-card {
+  background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg);
+  display:flex; flex-direction:column; overflow:hidden;
+  transition:border-color .2s, transform .2s, box-shadow .2s;
+}
+.lab-card:hover { border-color:var(--border-md); transform:translateY(-3px); box-shadow:var(--sh2); }
+.lab-card-top { height:4px; }
+.lab-card-top.handson { background:linear-gradient(90deg,#6366f1,#8b5cf6); }
+.lab-card-top.capstone { background:linear-gradient(90deg,#f59e0b,#f97316); }
+.lab-card-body { padding:18px 20px; flex:1; display:flex; flex-direction:column; gap:6px; }
+.lab-code { font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--text-dim); font-family:var(--mono); }
+.lab-type-badge {
+  display:inline-flex; align-items:center; gap:4px;
+  font-size:9px; font-weight:700; padding:2px 7px; border-radius:10px; margin-left:6px;
+}
+.badge-handson { background:rgba(99,102,241,0.15); color:#a5b4fc; border:1px solid rgba(99,102,241,0.25); }
+.badge-capstone { background:rgba(245,158,11,0.15); color:#fbbf24; border:1px solid rgba(245,158,11,0.25); }
+.lab-title { font-size:14px; font-weight:700; color:var(--text); line-height:1.35; }
+.lab-phase { font-size:11px; color:var(--text-dim); }
+.lab-meta { display:flex; align-items:center; gap:10px; margin-top:4px; flex-wrap:wrap; }
+.lab-meta span { font-size:10px; color:var(--text-dim); display:flex; align-items:center; gap:3px; }
+.lab-difficulty {
+  font-size:10px; font-weight:600; padding:2px 8px; border-radius:20px;
+}
+.diff-beginner     { background:rgba(63,185,80,0.12); color:#4ade80; border:1px solid rgba(63,185,80,0.2); }
+.diff-intermediate { background:rgba(245,158,11,0.12); color:#fbbf24; border:1px solid rgba(245,158,11,0.2); }
+.diff-advanced     { background:rgba(248,81,73,0.12); color:#fb7185; border:1px solid rgba(248,81,73,0.2); }
+.lab-card-footer {
+  padding:12px 20px; border-top:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+
+.coming-soon-section {
+  max-width:1120px; margin:0 auto; padding:0 24px 64px;
+}
+.coming-soon-card {
+  background:var(--bg2); border:1px dashed var(--border); border-radius:var(--radius-lg);
+  padding:32px; display:flex; align-items:center; justify-content:space-between;
+  gap:24px; flex-wrap:wrap; margin-bottom:12px;
+}
+.coming-soon-left { display:flex; align-items:center; gap:16px; }
+.coming-soon-icon {
+  width:44px; height:44px; border-radius:var(--radius);
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; flex-shrink:0;
+}
+.coming-soon-title { font-size:15px; font-weight:700; color:var(--text); margin-bottom:4px; }
+.coming-soon-sub { font-size:12px; color:var(--text-muted); }
+.badge-coming { font-size:10px; font-weight:700; padding:4px 12px; border-radius:20px; background:var(--bg3); color:var(--text-dim); border:1px solid var(--border); }
+
+@media(max-width:640px) {
+  .labs-section,.coming-soon-section { padding-left:16px; padding-right:16px; }
+  .labs-hero { padding:40px 16px 28px; }
+}
+</style>
+</head>
+<body>
+<script src="js/nav.js"></script>
+<div class="page-body">
+
+  <div class="labs-hero">
+    <div class="labs-hero-eyebrow">Hands-on Practice</div>
+    <h1>Labs &amp; <em>Projects</em></h1>
+    <p>Step-by-step guided labs and capstone projects for the .NET 8 &amp; Azure AI track. Build real things, not just read about them.</p>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" id="btn-all" onclick="setFilter('all',this)">All Labs</button>
+    <button class="filter-btn" id="btn-handson" onclick="setFilter('handson',this)">Hands-on</button>
+    <button class="filter-btn" id="btn-capstone" onclick="setFilter('capstone',this)">Capstone</button>
+    <button class="filter-btn" id="btn-live" onclick="setFilter('live',this)">Live Now</button>
+  </div>
+
+  <div class="labs-section" id="labsContent">
+
+    <!-- Hands-on Labs -->
+    <div id="handsonSection">
+      <div class="labs-section-title">Hands-on Labs · .NET 8 &amp; Azure AI</div>
+      <div class="labs-grid">
+
+        <div class="lab-card" data-type="handson">
+          <div class="lab-card-top handson"></div>
+          <div class="lab-card-body">
+            <div class="lab-code">LAB-01 <span class="lab-type-badge badge-handson">Hands-on</span></div>
+            <div class="lab-title">Hello Blazor — Your First Component</div>
+            <div class="lab-phase">Phase 1 — C# Foundations</div>
+            <div class="lab-meta">
+              <span>⏱ 45 min</span>
+              <span class="lab-difficulty diff-beginner">Beginner</span>
+            </div>
+          </div>
+          <div class="lab-card-footer">
+            <span style="font-size:10px;color:var(--text-dim)">Build · Run · Ship</span>
+            <a href="learn.html?mode=labs&lab=lab-01" class="btn btn-primary btn-sm">Start Lab →</a>
+          </div>
+        </div>
+
+        <div class="lab-card" data-type="handson">
+          <div class="lab-card-top handson"></div>
+          <div class="lab-card-body">
+            <div class="lab-code">LAB-02 <span class="lab-type-badge badge-handson">Hands-on</span></div>
+            <div class="lab-title">OOP in Action — Classes and Services</div>
+            <div class="lab-phase">Phase 2 — OOP: The Blazor Way</div>
+            <div class="lab-meta">
+              <span>⏱ 60 min</span>
+              <span class="lab-difficulty diff-intermediate">Intermediate</span>
+            </div>
+          </div>
+          <div class="lab-card-footer">
+            <span style="font-size:10px;color:var(--text-dim)">Build · Run · Ship</span>
+            <a href="learn.html?mode=labs&lab=lab-02" class="btn btn-primary btn-sm">Start Lab →</a>
+          </div>
+        </div>
+
+        <div class="lab-card" data-type="handson">
+          <div class="lab-card-top handson"></div>
+          <div class="lab-card-body">
+            <div class="lab-code">LAB-03 <span class="lab-type-badge badge-handson">Hands-on</span></div>
+            <div class="lab-title">Forms, Validation and API Calls</div>
+            <div class="lab-phase">Phase 3 — Blazor with .NET 8</div>
+            <div class="lab-meta">
+              <span>⏱ 75 min</span>
+              <span class="lab-difficulty diff-intermediate">Intermediate</span>
+            </div>
+          </div>
+          <div class="lab-card-footer">
+            <span style="font-size:10px;color:var(--text-dim)">Build · Run · Ship</span>
+            <a href="learn.html?mode=labs&lab=lab-03" class="btn btn-primary btn-sm">Start Lab →</a>
+          </div>
+        </div>
+
+        <div class="lab-card" data-type="handson">
+          <div class="lab-card-top handson"></div>
+          <div class="lab-card-body">
+            <div class="lab-code">LAB-04 <span class="lab-type-badge badge-handson">Hands-on</span></div>
+            <div class="lab-title">Connect Azure OpenAI to Blazor</div>
+            <div class="lab-phase">Phase 4 — Azure AI Integration</div>
+            <div class="lab-meta">
+              <span>⏱ 90 min</span>
+              <span class="lab-difficulty diff-advanced">Advanced</span>
+            </div>
+          </div>
+          <div class="lab-card-footer">
+            <span style="font-size:10px;color:var(--text-dim)">Build · Run · Ship</span>
+            <a href="learn.html?mode=labs&lab=lab-04" class="btn btn-primary btn-sm">Start Lab →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Capstone Projects -->
+    <div id="capstoneSection">
+      <div class="labs-section-title">Capstone Projects · .NET 8 &amp; Azure AI</div>
+      <div class="labs-grid">
+
+        <div class="lab-card" data-type="capstone">
+          <div class="lab-card-top capstone"></div>
+          <div class="lab-card-body">
+            <div class="lab-code">CAP-01 <span class="lab-type-badge badge-capstone">Capstone</span></div>
+            <div class="lab-title">Blazor Task Manager</div>
+            <div class="lab-phase">After Phase 2</div>
+            <div class="lab-meta">
+              <span>⏱ 2–3 hrs</span>
+              <span class="lab-difficulty diff-intermediate">Intermediate</span>
+            </div>
+          </div>
+          <div class="lab-card-footer">
+            <span style="font-size:10px;color:var(--text-dim)">Full Project</span>
+            <a href="learn.html?mode=labs&lab=cap-01" class="btn btn-primary btn-sm">Start →</a>
+          </div>
+        </div>
+
+        <div class="lab-card" data-type="capstone">
+          <div class="lab-card-top capstone"></div>
+          <div class="lab-card-body">
+            <div class="lab-code">CAP-02 <span class="lab-type-badge badge-capstone">Capstone</span></div>
+            <div class="lab-title">AI-Powered Knowledge Base</div>
+            <div class="lab-phase">After Phase 3</div>
+            <div class="lab-meta">
+              <span>⏱ 3–4 hrs</span>
+              <span class="lab-difficulty diff-advanced">Advanced</span>
+            </div>
+          </div>
+          <div class="lab-card-footer">
+            <span style="font-size:10px;color:var(--text-dim)">Full Project</span>
+            <a href="learn.html?mode=labs&lab=cap-02" class="btn btn-primary btn-sm">Start →</a>
+          </div>
+        </div>
+
+        <div class="lab-card" data-type="capstone">
+          <div class="lab-card-top capstone"></div>
+          <div class="lab-card-body">
+            <div class="lab-code">CAP-03 <span class="lab-type-badge badge-capstone">Capstone</span></div>
+            <div class="lab-title">Intelligent Enterprise Application</div>
+            <div class="lab-phase">After Phase 4</div>
+            <div class="lab-meta">
+              <span>⏱ 4–6 hrs</span>
+              <span class="lab-difficulty diff-advanced">Advanced</span>
+            </div>
+          </div>
+          <div class="lab-card-footer">
+            <span style="font-size:10px;color:var(--text-dim)">Full Project</span>
+            <a href="learn.html?mode=labs&lab=cap-03" class="btn btn-primary btn-sm">Start →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Coming Soon -->
+  <div class="coming-soon-section">
+    <div class="labs-section-title">More Tracks — Coming Soon</div>
+
+    <div class="coming-soon-card">
+      <div class="coming-soon-left">
+        <div class="coming-soon-icon" style="background:rgba(0,120,212,0.12)">⚡</div>
+        <div>
+          <div class="coming-soon-title">Power Platform Labs</div>
+          <div class="coming-soon-sub">Power BI, Power Apps, Power Automate &amp; Copilot Studio hands-on projects</div>
+        </div>
+      </div>
+      <span class="badge-coming">Coming Soon</span>
+    </div>
+
+    <div class="coming-soon-card">
+      <div class="coming-soon-left">
+        <div class="coming-soon-icon" style="background:rgba(14,165,233,0.12)">☁️</div>
+        <div>
+          <div class="coming-soon-title">Azure Labs</div>
+          <div class="coming-soon-sub">AZ-204, Azure Integration Services, API Management, and Azure AI Services labs</div>
+        </div>
+      </div>
+      <span class="badge-coming">Coming Soon</span>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div>
+      <div class="footer-brand">RR Skillverse</div>
+      <div class="footer-copy">© 2026 · MCT Raushan Ranjan · Noida, India</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/raushanranjan" target="_blank">LinkedIn</a>
+      <a href="https://github.com/raushan1107" target="_blank">GitHub</a>
+      <a href="https://www.youtube.com/@RaushanRanjan" target="_blank">YouTube</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="ai-agent.html">AI Agent</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+let activeFilter = 'all';
+
+function setFilter(f, el) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderCards();
+}
+
+function renderCards() {
+  const cards = document.querySelectorAll('.lab-card');
+  cards.forEach(card => {
+    const type = card.dataset.type;
+    let show = false;
+    if (activeFilter === 'all') show = true;
+    else if (activeFilter === 'handson' && type === 'handson') show = true;
+    else if (activeFilter === 'capstone' && type === 'capstone') show = true;
+    else if (activeFilter === 'live') show = true;
+    card.style.display = show ? '' : 'none';
+  });
+  const handsonSection = document.getElementById('handsonSection');
+  const capstoneSection = document.getElementById('capstoneSection');
+  if (activeFilter === 'capstone') handsonSection.style.display = 'none';
+  else handsonSection.style.display = '';
+  if (activeFilter === 'handson') capstoneSection.style.display = 'none';
+  else capstoneSection.style.display = '';
+}
+</script>
+</body>
+</html>

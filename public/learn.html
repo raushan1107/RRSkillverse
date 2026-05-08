@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RR Skillverse · Intelligent Enterprise Dev with .NET 8 & Azure AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:        #0f0f0d;
+  --ink-2:      #3a3a38;
+  --ink-3:      #888884;
+  --ink-4:      #b8b8b4;
+  --line:       #e8e8e4;
+  --wash:       #fafaf8;
+  --surface:    #ffffff;
+  --accent:     #0066ff;
+  --accent-bg:  #f0f5ff;
+  --p1:         #2a7a52;
+  --p2:         #7048a0;
+  --p3:         #b85c1a;
+  --p4:         #0055dd;
+  --err:        #b85040;
+  --font:       'Geist', sans-serif;
+  --mono:       'Geist Mono', monospace;
+  --sidebar:    256px;
+  --header:     48px;
+  --radius:     4px;
+}
+
+html, body { height: 100%; }
+body { font-family: var(--font); background: var(--wash); color: var(--ink-2); font-size: 14.5px; line-height: 1.75; }
+.shell { display: flex; flex-direction: column; height: 100vh; padding-top: 60px; }
+
+/* ── HEADER ──────────────────────────────────────────────── */
+.header {
+  height: var(--header);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  flex-shrink: 0;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.brand:hover .brand-name { color: var(--ink-3); }
+.brand-mark {
+  width: 28px; height: 28px;
+  background: var(--ink);
+  border-radius: 5px;
+  border-left: 2px solid var(--accent);          /* B1 */
+  display: flex; align-items: center; justify-content: center;
+  color: var(--surface);
+  font-family: var(--mono);
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+.brand-name { font-size: 14px; font-weight: 500; color: var(--ink); transition: color 0.1s; }
+.header-divider { width: 1px; height: 18px; background: var(--line); margin: 0 16px; flex-shrink: 0; }
+.header-course { font-size: 13px; color: var(--ink-3); }
+.header-right { margin-left: auto; }
+.progress-tag { font-size: 12px; color: var(--ink-3); font-family: var(--mono); }
+
+/* ── LAYOUT ──────────────────────────────────────────────── */
+.body-wrap { display: flex; flex: 1; overflow: hidden; min-height: 0; }
+
+/* ── SIDEBAR ─────────────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar);
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.sidebar-top { padding: 10px 12px; border-bottom: 1px solid var(--line); }
+/* B7 — search wrapper + icon */
+.search-wrap { position: relative; }
+.search-icon {
+  position: absolute; left: 9px; top: 50%; transform: translateY(-50%);
+  pointer-events: none; display: flex; align-items: center;
+  color: var(--ink-4);
+}
+.search-icon svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; }
+.sidebar-search {
+  width: 100%; height: 30px;
+  background: var(--wash);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0 10px 0 28px;                         /* B7 — room for icon */
+  font-family: var(--font); font-size: 13px; color: var(--ink-2);
+  outline: none;
+  transition: border-color 0.1s;
+}
+.sidebar-search:focus { border-color: var(--ink-3); }
+.sidebar-search::placeholder { color: var(--ink-4); }
+.toc-scroll { flex: 1; overflow-y: auto; padding: 0 0 24px; }
+.toc-scroll::-webkit-scrollbar { width: 2px; }
+.toc-scroll::-webkit-scrollbar-thumb { background: var(--line); }
+.phase-block { margin-bottom: 8px; }
+/* B2 — phase header becomes a flex row with colored indicator */
+.phase-header {
+  display: flex; align-items: center; gap: 8px;   /* B2 */
+  padding: 16px 12px 4px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  user-select: none;
+}
+.phase-indicator {
+  width: 2px; height: 12px;
+  border-radius: 1px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.toc-lesson {
+  display: flex; align-items: baseline; gap: 8px;
+  padding: 4px 12px 4px 20px;
+  font-size: 13px; color: var(--ink-3);
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: color 0.1s;
+  line-height: 1.5;
+}
+.toc-lesson:hover { color: var(--ink-2); }
+.toc-lesson.active { color: var(--accent); border-left-color: var(--accent); font-weight: 500; }
+.lesson-idx { font-family: var(--mono); font-size: 10px; color: var(--ink-4); flex-shrink: 0; }
+.lesson-title-text { flex: 1; }
+.lesson-check { font-size: 10px; color: transparent; flex-shrink: 0; transition: color 0.1s; }
+.toc-lesson.done .lesson-check { color: var(--ink-4); }
+
+/* ── MAIN ────────────────────────────────────────────────── */
+.main { flex: 1; overflow-y: auto; min-height: 0; background: var(--wash); }
+.main::-webkit-scrollbar { width: 4px; }
+.main::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+.main-inner { max-width: 680px; margin: 0 auto; padding: 48px 32px 96px; }
+
+/* ── HOME ────────────────────────────────────────────────── */
+/* B10 — view transitions */
+.home-view { transition: opacity 0.2s ease; }
+.home-view.off { display: none; }
+.home-view.fading-out { opacity: 0; transition: opacity 0.1s ease; }
+.home-eyebrow {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 12px;
+}
+.home-title {
+  font-size: 32px; font-weight: 600;
+  line-height: 1.15; color: var(--ink);
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+.home-desc {
+  font-size: 15px; color: var(--ink-3);
+  line-height: 1.7; max-width: 480px;
+  margin-bottom: 20px;
+}
+/* B5 — stats row */
+.home-stat-row {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; font-family: var(--mono);
+  color: var(--ink-4);
+  margin-bottom: 28px; letter-spacing: 0.2px;
+}
+.stat-sep { color: var(--line); }
+/* B4 — phase rows with translate on hover */
+.phase-rows { }
+.phase-row {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: transform 0.15s ease;              /* B4 */
+}
+.phase-row:first-child { border-top: 1px solid var(--line); }
+.phase-row:hover { transform: translateX(4px); } /* B4 */
+.phase-row-left {
+  display: flex; align-items: center; gap: 12px;
+  flex: 1;
+}
+.phase-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.phase-row-title {
+  font-size: 14px; font-weight: 500; color: var(--ink);
+  transition: color 0.1s;
+}
+.phase-row:hover .phase-row-title { color: var(--accent); }
+.phase-row-count { font-family: var(--mono); font-size: 12px; color: var(--ink-3); flex-shrink: 0; }
+.btn-start {
+  display: inline-flex; align-items: center;
+  background: var(--ink); color: var(--surface);
+  border: none; border-radius: var(--radius);
+  padding: 9px 18px;
+  font-family: var(--font); font-size: 14px; font-weight: 500;
+  cursor: pointer;
+  margin-top: 28px;
+  transition: opacity 0.1s;
+}
+.btn-start:hover { opacity: 0.82; }
+.home-divider { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+.trainer-byline { display: flex; flex-direction: column; gap: 4px; }
+.trainer-byline-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+.trainer-byline-info { font-size: 13px; color: var(--ink-3); }
+
+/* ── LESSON ──────────────────────────────────────────────── */
+/* B10 — view transitions */
+.lesson-view { display: none; }
+.lesson-view.on { display: block; transition: opacity 0.2s ease; }
+.lesson-view.fading-out { opacity: 0; transition: opacity 0.1s ease; }
+.lesson-nav-top {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 32px;
+  font-size: 12px; color: var(--ink-3);
+}
+.breadcrumb-link { cursor: pointer; transition: color 0.1s; }
+.breadcrumb-link:hover { color: var(--ink-2); }
+#bc-lesson { color: var(--ink); }
+/* B3 — accent rule before phase tag */
+.lesson-rule {
+  width: 32px; height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  margin-bottom: 16px;
+}
+.lesson-phase-tag {
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.ph-p1 { color: var(--p1); }
+.ph-p2 { color: var(--p2); }
+.ph-p3 { color: var(--p3); }
+.ph-p4 { color: var(--p4); }
+.lesson-title {
+  font-size: 26px; font-weight: 600;
+  letter-spacing: -0.5px; line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.lesson-meta-row {
+  display: flex; gap: 20px; align-items: center;
+  font-size: 12px; color: var(--ink-3);
+  padding-bottom: 24px; margin-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ── LOADING STATE (Part A) ──────────────────────────────── */
+#lesson-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 48px 0;
+  transition: opacity 0.2s;
+}
+.loading-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  animation: dotpulse 1.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes dotpulse {
+  0%, 100% { opacity: 0.25; transform: scale(0.9); }
+  50%       { opacity: 1;    transform: scale(1.1); }
+}
+#loading-msg {
+  font-size: 13px;
+  color: var(--ink-3);
+  font-family: var(--font);
+  transition: opacity 0.3s;
+}
+#lesson-rendered {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+#lesson-rendered.entering {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* ── LESSON CONTENT ──────────────────────────────────────── */
+.lesson-rendered h2 {
+  font-size: 17px; font-weight: 500; letter-spacing: -0.2px;
+  color: var(--ink);
+  margin: 32px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.lesson-rendered h3 {
+  font-size: 11px; font-weight: 600;
+  color: var(--ink-3);
+  text-transform: uppercase; letter-spacing: 1.2px;
+  margin: 24px 0 10px;
+}
+.lesson-rendered p { font-size: 14.5px; color: var(--ink-2); line-height: 1.75; margin-bottom: 14px; }
+.lesson-rendered strong { color: var(--ink); font-weight: 600; }
+.lesson-rendered ul, .lesson-rendered ol { padding-left: 20px; margin-bottom: 14px; }
+.lesson-rendered li { font-size: 14.5px; color: var(--ink-2); line-height: 1.7; margin-bottom: 4px; }
+.lesson-rendered code {
+  font-family: var(--mono); font-size: 13px;
+  background: var(--wash); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 1px 5px;
+  color: var(--ink-2);
+}
+.lesson-rendered pre {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0; margin: 20px 0;
+  overflow: hidden;
+}
+.code-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--wash);
+  user-select: none;                               /* B6 */
+}
+.code-lang { font-size: 11px; font-family: var(--mono); color: var(--ink-3); }
+.copy-btn {
+  font-size: 11px; font-family: var(--font); color: var(--ink-3);
+  background: none; border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 2px 8px; cursor: pointer;
+  transition: color 0.1s, border-color 0.1s;
+}
+.copy-btn:hover { color: var(--ink-2); border-color: var(--ink-3); }
+.lesson-rendered pre code {
+  display: block; padding: 16px;
+  font-size: 13px; line-height: 1.6;
+  background: none; border: none; border-radius: 0;
+  overflow-x: auto; color: var(--ink-2);
+}
+.hljs { background: transparent !important; }
+
+/* ── CALLOUTS ────────────────────────────────────────────── */
+.callout { border-left: 3px solid; padding: 12px 16px; margin: 20px 0; }
+.callout-label { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.callout p { font-size: 14px; color: var(--ink-2); margin: 0; line-height: 1.65; }
+.callout.analogy { border-color: var(--p4); }
+.callout.analogy .callout-label { color: var(--p4); }
+.callout.tip { border-color: var(--p1); }
+.callout.tip .callout-label { color: var(--p1); }
+.callout.warn { border-color: var(--p3); }
+.callout.warn .callout-label { color: var(--p3); }
+
+/* ── QUIZ ────────────────────────────────────────────────── */
+.quiz-block {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 24px 0; margin: 32px 0;
+}
+.quiz-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-3); margin-bottom: 12px; }
+.quiz-question { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 14px; line-height: 1.5; }
+.quiz-options { display: flex; flex-direction: column; gap: 7px; }
+.quiz-opt {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 8px 12px; font-size: 13px; color: var(--ink-2);
+  text-align: left; cursor: pointer; font-family: var(--font);
+  transition: border-color 0.1s; line-height: 1.4;
+}
+.quiz-opt:hover { border-color: var(--ink-3); }
+.quiz-opt.correct { border-color: var(--p1); color: var(--p1); pointer-events: none; }
+.quiz-opt.wrong   { border-color: var(--err); color: var(--err); pointer-events: none; }
+.quiz-opt.reveal  { pointer-events: none; }
+/* B9 — small dot indicator for answered state */
+.quiz-opt.correct::before {
+  content: '';
+  display: inline-block;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--p1);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.quiz-opt.wrong::before {
+  content: '';
+  display: inline-block;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--err);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.quiz-fb { margin-top: 12px; font-size: 13px; display: none; }
+.quiz-fb.ok   { display: block; color: var(--p1); }
+.quiz-fb.fail { display: block; color: var(--err); }
+
+/* ── ASK A DOUBT ─────────────────────────────────────────── */
+.ask-section { padding-top: 24px; margin-top: 32px; border-top: 1px solid var(--line); }
+.ask-label { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+.ask-row { display: flex; gap: 8px; }
+.ask-input {
+  flex: 1; height: 34px;
+  background: var(--wash); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 0 10px; font-family: var(--font); font-size: 13px; color: var(--ink-2);
+  outline: none; transition: border-color 0.1s;
+}
+.ask-input:focus { border-color: var(--ink-3); }
+.ask-input::placeholder { color: var(--ink-4); }
+.ask-btn {
+  height: 34px; padding: 0 14px;
+  background: var(--ink); border: none; border-radius: var(--radius);
+  color: var(--surface); font-family: var(--font); font-size: 13px; font-weight: 500;
+  cursor: pointer; white-space: nowrap;
+  transition: opacity 0.1s;
+}
+.ask-btn:hover { opacity: 0.82; }
+.ask-btn:disabled { opacity: 0.4; cursor: wait; }
+.ask-response {
+  margin-top: 14px; font-size: 13.5px; line-height: 1.75; color: var(--ink-2);
+  display: none; padding-top: 14px; border-top: 1px solid var(--line);
+}
+.ask-response.on { display: block; }
+.ask-response p { margin-bottom: 8px; }
+
+/* ── LESSON FOOTER NAV ───────────────────────────────────── */
+.lesson-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 48px; padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.btn-nav {
+  background: none; border: 1px solid var(--line); border-radius: var(--radius);
+  font-size: 13px; color: var(--ink-3);
+  padding: 7px 14px; cursor: pointer; font-family: var(--font);
+  transition: color 0.1s, border-color 0.1s;
+}
+.btn-nav:hover { border-color: var(--ink-2); color: var(--ink-2); }
+.btn-nav:disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+.btn-nav.fwd { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.btn-nav.fwd:hover { opacity: 0.82; }
+/* B8 — mark complete: text-only button with check animation */
+.btn-done {
+  background: none; border: none;
+  font-size: 12px; color: var(--ink-4);
+  cursor: pointer; font-family: var(--font); padding: 0;
+  transition: color 0.1s;
+}
+.btn-done:hover { color: var(--p1); }
+.btn-done.on { color: var(--p1); }
+.btn-done .check-char {
+  display: inline-block;
+  transition: transform 0.15s ease-out, opacity 0.15s;
+}
+.btn-done.on .check-char {
+  animation: checkpop 0.2s ease-out;
+}
+@keyframes checkpop {
+  0%   { transform: scale(0); }
+  70%  { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* ── MODE NAV ────────────────────────────────────────────── */
+.mode-nav {
+  height: 38px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 20px;
+  gap: 0;
+  flex-shrink: 0;
+}
+.mode-tab {
+  height: 38px;
+  padding: 0 16px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: color 0.1s, border-color 0.1s;
+  margin-bottom: -1px;
+}
+.mode-tab:hover { color: var(--ink-2); }
+.mode-tab.active { color: var(--ink); font-weight: 500; border-bottom-color: var(--ink); }
+.mode-nav-right { margin-left: auto; display: flex; align-items: center; }
+.mode-nav-hint { font-size: 11px; font-family: var(--mono); color: var(--ink-4); }
+
+/* ── LABS HOME ───────────────────────────────────────────── */
+.home-section-title {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--ink-3);
+  padding-top: 24px;
+}
+.phase-row-right {
+  display: flex; align-items: center;
+  gap: 12px; margin-left: auto;
+}
+.phase-row-label {
+  font-size: 14px; font-weight: 500; color: var(--ink);
+  transition: color 0.1s;
+}
+.phase-row:hover .phase-row-label { color: var(--accent); }
+
+/* ── LAB VIEW ────────────────────────────────────────────── */
+.lab-view { display: none; }
+.lab-view.on { display: block; transition: opacity 0.2s ease; }
+.lab-view.fading-out { opacity: 0; transition: opacity 0.1s ease; }
+#lab-loading {
+  display: flex; align-items: center; gap: 10px;
+  padding: 48px 0; transition: opacity 0.2s;
+}
+#lab-rendered { transition: opacity 0.35s ease, transform 0.35s ease; }
+#lab-rendered.entering { opacity: 0; transform: translateY(6px); }
+
+/* ── ERROR STATE ─────────────────────────────────────────── */
+.error-state {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px; font-size: 13.5px; color: var(--err); line-height: 1.7;
+}
+.error-state strong { color: var(--err); display: block; margin-bottom: 8px; }
+
+/* ── Topnav injected by nav.js ───────────────────────────── */
+.topnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: rgba(13,17,23,0.97);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  z-index: 1000;
+  font-family: 'Geist', sans-serif;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; flex-shrink: 0; margin-right: 32px;
+}
+.nav-logo {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #1a56db, #0ea5e9);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 12px; color: #fff;
+}
+.nav-brand-name { font-size: 14px; font-weight: 700; color: #e6edf3; letter-spacing: -0.3px; line-height: 1.2; }
+.nav-brand-sub  { font-size: 10px; color: #7d8590; }
+.nav-links {
+  display: flex; align-items: center;
+  gap: 2px; flex: 1; list-style: none; margin: 0; padding: 0;
+}
+.nav-links a {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 10px; border-radius: 6px;
+  font-size: 12px; font-weight: 500;
+  color: #7d8590; text-decoration: none;
+  transition: all 0.15s; white-space: nowrap;
+}
+.nav-links a svg { width: 13px; height: 13px; flex-shrink: 0; }
+.nav-links a:hover { background: #21262d; color: #e6edf3; }
+.nav-links a.active {
+  background: rgba(26,86,219,0.15);
+  color: #0ea5e9;
+  border: 1px solid rgba(26,86,219,0.2);
+}
+.nav-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.nav-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg,#1e429f,#1a56db);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: #fff;
+  text-decoration: none; overflow: hidden; flex-shrink: 0;
+}
+.nav-status {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: #21262d; font-size: 10px; color: #7d8590;
+  cursor: pointer;
+}
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: #3fb950; flex-shrink: 0; }
+.nav-hamburger { display: none; }
+.nav-drawer { display: none; }
+.ai-fab {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #1a56db, #0ea5e9);
+  border: none; color: white; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(26,86,219,0.4);
+  z-index: 500; transition: transform 0.2s;
+}
+.ai-fab:hover { transform: scale(1.08); }
+.ai-fab-tooltip { display: none; }
+.shell { padding-top: 60px !important; }
+</style>
+</head>
+<body>
+<script src="js/nav.js"></script>
+<div class="shell">
+
+  <div style="background:#fff;border-bottom:1px solid #e8e8e4;padding:7px 20px;display:flex;align-items:center;gap:8px;font-size:12px;color:#888884;flex-shrink:0">
+    <a href="courses.html" style="color:#888884;text-decoration:none;transition:color 0.1s" onmouseover="this.style.color='#0f0f0d'" onmouseout="this.style.color='#888884'">← Skillverse Library</a>
+    <span>›</span>
+    <span style="color:#0f0f0d;font-weight:500">Intelligent Enterprise Dev · .NET 8 &amp; Azure AI</span>
+  </div>
+
+  <nav class="mode-nav">
+    <button class="mode-tab active" id="tab-lessons" onclick="switchMode('lessons')">
+      Lessons
+    </button>
+    <button class="mode-tab" id="tab-labs" onclick="switchMode('labs')">
+      Labs &amp; Projects
+    </button>
+    <div class="mode-nav-right">
+      <span class="mode-nav-hint" id="mode-hint">46 lessons across 4 phases</span>
+    </div>
+  </nav>
+
+  <div class="body-wrap">
+
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <!-- B7 — SVG search icon -->
+        <div class="search-wrap">
+          <span class="search-icon">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="7" cy="7" r="4.5"/>
+              <line x1="10.5" y1="10.5" x2="14" y2="14"/>
+            </svg>
+          </span>
+          <input class="sidebar-search" type="text" id="search" placeholder="Search lessons…" />
+        </div>
+      </div>
+      <div class="toc-scroll" id="toc-lessons"></div>
+      <div class="toc-scroll" id="toc-labs" style="display:none"></div>
+    </nav>
+
+    <main class="main" id="main">
+      <div class="main-inner">
+
+        <!-- HOME ─────────────────────────────────────────── -->
+        <div class="home-view" id="home">
+          <div class="home-eyebrow">MCT Edition · Koenig Solutions</div>
+          <h1 class="home-title">Intelligent Enterprise Development<br>with .NET 8 &amp; Azure AI</h1>
+          <p class="home-desc">A zero-to-production path — from first C# line to a Blazor app powered by Azure AI. Taught the way a trainer explains it.</p>
+          <!-- B5 — stats row -->
+          <div class="home-stat-row">
+            <span>46 lessons</span>
+            <span class="stat-sep">·</span>
+            <span>4 phases</span>
+            <span class="stat-sep">·</span>
+            <span>Zero to Azure AI</span>
+          </div>
+          <div class="phase-rows" id="phase-rows"></div>
+          <button class="btn-start" onclick="goFirst()">Begin Learning →</button>
+          <hr class="home-divider">
+          <div class="trainer-byline">
+            <div class="trainer-byline-name">Raushan Ranjan</div>
+            <div class="trainer-byline-info">Microsoft Certified Trainer (MCT) · Senior Corporate Trainer</div>
+            <div class="trainer-byline-info">Koenig Solutions, Noida</div>
+          </div>
+        </div>
+
+        <!-- LABS HOME ────────────────────────────────────── -->
+        <div class="home-view off" id="labs-home">
+          <div class="home-eyebrow">Hands-on Practice · RR Skillverse</div>
+          <h1 class="home-title">Labs &amp;<br>Capstone Projects</h1>
+          <p class="home-desc">Apply what you learn immediately. Each lab ties directly to a learning phase. Capstones are full-scope builds — you deploy something real.</p>
+          <div class="home-stat-row">
+            <span>4 hands-on labs</span>
+            <span class="stat-sep">·</span>
+            <span>3 capstone projects</span>
+            <span class="stat-sep">·</span>
+            <span>Build from day one</span>
+          </div>
+          <div class="home-section-title" style="margin-bottom:0">Hands-on Labs</div>
+          <div id="labs-list"></div>
+          <div class="home-section-title" style="margin-top:32px;margin-bottom:0">Capstone Projects</div>
+          <div id="capstone-list"></div>
+        </div>
+
+        <!-- LESSON ───────────────────────────────────────── -->
+        <div class="lesson-view" id="lesson-view">
+          <div class="lesson-nav-top">
+            <span class="breadcrumb-link" onclick="goHome()">Home</span>
+            <span>›</span>
+            <span id="bc-phase"></span>
+            <span>›</span>
+            <span id="bc-lesson"></span>
+          </div>
+          <!-- B3 — accent rule anchors the eye -->
+          <div class="lesson-rule"></div>
+          <div class="lesson-phase-tag" id="phase-tag"></div>
+          <h1 class="lesson-title" id="lesson-title">Loading…</h1>
+          <div class="lesson-meta-row">
+            <span id="meta-phase-name"></span>
+            <span>~8 min read</span>
+            <span>RR Simplified · Azure GPT-4o</span>
+          </div>
+          <div class="lesson-body">
+            <!-- Part A — loading state -->
+            <div id="lesson-loading" style="display:none">
+              <span class="loading-dot"></span>
+              <span id="loading-msg">Preparing lesson...</span>
+            </div>
+            <div id="lesson-rendered"></div>
+          </div>
+          <div class="ask-section">
+            <div class="ask-label">Ask a Doubt</div>
+            <div class="ask-row">
+              <input class="ask-input" type="text" id="ask-input" placeholder="Type your question about this topic…" />
+              <button class="ask-btn" id="ask-btn" onclick="askDoubt()">Ask →</button>
+            </div>
+            <div class="ask-response" id="ask-resp"></div>
+          </div>
+          <div class="lesson-footer">
+            <button class="btn-nav" id="btn-prev" onclick="go(-1)">← Previous</button>
+            <button class="btn-done" id="btn-done" onclick="toggleDone()">Mark complete</button>
+            <button class="btn-nav fwd" id="btn-next" onclick="go(1)">Next →</button>
+          </div>
+        </div>
+
+        <!-- LAB VIEW ─────────────────────────────────────── -->
+        <div class="lab-view" id="lab-view">
+          <div class="lesson-nav-top">
+            <span class="breadcrumb-link" onclick="goHome()">Home</span>
+            <span>›</span>
+            <span id="bc-lab-phase"></span>
+            <span>›</span>
+            <span id="bc-lab-title"></span>
+          </div>
+          <div class="lesson-rule"></div>
+          <div class="lesson-phase-tag" id="lab-phase-tag"></div>
+          <h1 class="lesson-title" id="lab-title"></h1>
+          <div class="lesson-meta-row">
+            <span id="lab-meta-phase"></span>
+            <span>Hands-on Lab</span>
+            <span>RR Skillverse</span>
+          </div>
+          <div class="lesson-body">
+            <div id="lab-loading" style="display:none">
+              <span class="loading-dot"></span>
+              <span id="lab-loading-msg">Loading lab guide…</span>
+            </div>
+            <div id="lab-rendered"></div>
+          </div>
+          <div class="lesson-footer">
+            <button class="btn-nav" onclick="goHome()">← Back</button>
+            <button class="btn-done" id="lab-done-btn" onclick="toggleLabDone()">Mark complete</button>
+            <button class="btn-nav" id="lab-regen-btn" style="display:none" onclick="regenLab()">↺ Regenerate</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<script>
+const PHASES = [
+  { id:'p1', label:'Phase 1', title:'C# Foundations',
+    desc:'Core syntax every .NET developer must know — for absolute beginners.',
+    dot:'var(--p1)',
+    lessons:['Basic Structure of a C# Program','Data Types in C#','Variables in C#','Operators in C#','Control Flow — If, Else, Switch','Loops — For, While, Do-While','Functions in C#','String Handling in C#','User Input and Output in C#','Type Casting in C#'] },
+  { id:'p2', label:'Phase 2', title:'OOP — The Blazor Way',
+    desc:'Object-Oriented concepts Blazor uses — taught with real app context.',
+    dot:'var(--p2)',
+    lessons:['Classes and Objects in C#','Constructors in C#','Properties in C#','Encapsulation in C#','Inheritance in C#','Interfaces in C# — The Blazor Contract','Abstract Classes in C#','Polymorphism in C#','Static vs Instance Members','Exception Handling in C#','Delegates and Lambda Expressions'] },
+  { id:'p3', label:'Phase 3', title:'Blazor with .NET 8',
+    desc:'Build interactive web UIs in C# — from first component to real application.',
+    dot:'var(--p3)',
+    lessons:['What is Blazor? Server vs WebAssembly vs Auto','Setting Up a .NET 8 Blazor Project','Your First Blazor Component','Data Binding in Blazor','Event Handling in Blazor','Component Parameters and Cascading Values','Forms and Validation in Blazor','Dependency Injection in Blazor','Calling REST APIs from Blazor with HttpClient','State Management in Blazor','Routing in Blazor','Layouts and Navigation in Blazor','Lifecycle Methods — OnInitialized, OnParametersSet','JavaScript Interop in Blazor'] },
+  { id:'p4', label:'Phase 4', title:'Azure AI Integration',
+    desc:'Connect Blazor to Azure AI — intelligent chat, search, and smart features.',
+    dot:'var(--p4)',
+    lessons:['Introduction to Azure AI Services','Azure OpenAI Service — Key Concepts','Connecting Blazor to Azure OpenAI GPT-4o','Building an AI Chat UI in Blazor','Streaming Responses with Server-Sent Events','Prompt Engineering for Enterprise Apps','Azure AI Search — Semantic Search in Blazor','Azure Cognitive Services — Vision and Language','Secure API Key Management in Azure','Deploying Blazor App to Azure App Service','Putting It All Together — Intelligent Enterprise App'] }
+];
+
+let ALL = [];
+PHASES.forEach((ph, pi) => {
+  ph.lessons.forEach((title, li) => {
+    ALL.push({ title, phaseIdx: pi, phase: ph, lessonIdx: li, globalIdx: ALL.length });
+  });
+});
+
+let currentIdx = -1;
+let done = new Set(JSON.parse(localStorage.getItem('rrskv_done') || '[]'));
+
+const LABS = {
+  handson: [
+    { id:'lab-01', code:'LAB-01', title:'Hello Blazor — Your First Component',
+      phase:'Phase 1 — C# Foundations', difficulty:'Beginner', duration:'45 min',
+      objective:'Scaffold a Blazor Server project and build your first interactive component using C# variables, loops, and event binding.',
+      deliverable:'A running Blazor Server app with a custom HelloCard component that responds to user input.',
+      prereqs:['Variables in C#','Loops','Functions in C#','User Input and Output in C#'] },
+    { id:'lab-02', code:'LAB-02', title:'OOP in Action — Classes and Services',
+      phase:'Phase 2 — OOP: The Blazor Way', difficulty:'Intermediate', duration:'60 min',
+      objective:'Apply OOP principles by designing a CourseService using classes, inheritance, and interfaces wired into a Blazor component.',
+      deliverable:'A C# class library with Course, ICoursable interface, and a Blazor page rendering live course data.',
+      prereqs:['Classes and Objects in C#','Inheritance in C#','Interfaces in C#','Encapsulation in C#','Polymorphism in C#'] },
+    { id:'lab-03', code:'LAB-03', title:'Forms, Validation and API Calls',
+      phase:'Phase 3 — Blazor with .NET 8', difficulty:'Intermediate', duration:'75 min',
+      objective:'Build a Blazor data-entry form with validation and wire it to a backend REST API using HttpClient.',
+      deliverable:'A Blazor Server app with an EditForm, DataAnnotations validation, and live POST to a .NET 8 minimal API.',
+      prereqs:['Your First Blazor Component','Data Binding in Blazor','Event Handling in Blazor','Dependency Injection in Blazor','Forms and Validation in Blazor'] },
+    { id:'lab-04', code:'LAB-04', title:'Connect Azure OpenAI to Blazor',
+      phase:'Phase 4 — Azure AI Integration', difficulty:'Advanced', duration:'90 min',
+      objective:'Connect a Blazor app to Azure OpenAI GPT-4o and build a real-time chat interface with streaming responses.',
+      deliverable:'A Blazor app with a ChatService, chat UI component, and live streaming responses from Azure OpenAI.',
+      prereqs:['Azure OpenAI Service — Key Concepts','Calling REST APIs from Blazor with HttpClient','State Management in Blazor','JavaScript Interop in Blazor','Secure API Key Management in Azure'] }
+  ],
+  capstone: [
+    { id:'cap-01', code:'CAP-01', title:'Blazor Task Manager',
+      phase:'After Phase 2', difficulty:'Intermediate', duration:'2–3 hrs',
+      objective:'Build a full-featured task management app in Blazor Server demonstrating all core OOP and component patterns.',
+      deliverable:'A Blazor Server app with Task CRUD, filtering, and persistence via a C# service layer.',
+      prereqs:['All of Phase 1','All of Phase 2'] },
+    { id:'cap-02', code:'CAP-02', title:'AI-Powered Knowledge Base',
+      phase:'After Phase 3', difficulty:'Advanced', duration:'3–4 hrs',
+      objective:'Build a searchable knowledge base that uses Azure OpenAI embeddings to answer questions from custom documents.',
+      deliverable:'A Blazor Server app with document upload, vector search, and an AI Q&amp;A interface.',
+      prereqs:['All of Phase 1','All of Phase 2','All of Phase 3'] },
+    { id:'cap-03', code:'CAP-03', title:'Intelligent Enterprise Application',
+      phase:'After Phase 4', difficulty:'Advanced', duration:'4–6 hrs',
+      objective:'Build and deploy a complete intelligent Blazor app with Azure AI integration to Azure App Service.',
+      deliverable:'A deployed Blazor app on Azure App Service with AI-powered features and a live URL.',
+      prereqs:['All phases','Deploying Blazor App to Azure App Service','Secure API Key Management in Azure'] }
+  ]
+};
+
+// ── API ────────────────────────────────────────────────────
+async function apiPost(path, body) {
+  const res = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Server error ' + res.status);
+  return data;
+}
+
+// ── Part A: Loading sequence ───────────────────────────────
+const LOADING_MSGS = [
+  'Reading the topic...',
+  'Thinking like Raushan...',
+  'Building the analogy...',
+  'Writing the code example...',
+  'Adding the quick quiz...',
+  'Reviewing for clarity...'
+];
+let loadingInterval = null;
+let loadingStageTimeout = null;
+
+function startLoadingSequence() {
+  const container = document.getElementById('lesson-loading');
+  const msgEl = document.getElementById('loading-msg');
+  const rendered = document.getElementById('lesson-rendered');
+
+  rendered.innerHTML = '';
+  rendered.style.opacity = '1';
+  rendered.classList.remove('entering');
+
+  msgEl.textContent = 'Preparing lesson...';
+  msgEl.style.opacity = '1';
+  container.style.opacity = '0';
+  container.style.display = 'flex';
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    container.style.opacity = '1';
+  }));
+
+  let msgIndex = 0;
+  // Stage 2 starts after 0.8s
+  loadingStageTimeout = setTimeout(() => {
+    loadingStageTimeout = null;
+    // Fade to first cycling message immediately
+    msgEl.style.opacity = '0';
+    setTimeout(() => {
+      msgEl.textContent = LOADING_MSGS[msgIndex % LOADING_MSGS.length];
+      msgIndex++;
+      requestAnimationFrame(() => requestAnimationFrame(() => { msgEl.style.opacity = '1'; }));
+    }, 300);
+    // Then cycle every 2.2s
+    loadingInterval = setInterval(() => {
+      msgEl.style.opacity = '0';
+      setTimeout(() => {
+        msgEl.textContent = LOADING_MSGS[msgIndex % LOADING_MSGS.length];
+        msgIndex++;
+        requestAnimationFrame(() => requestAnimationFrame(() => { msgEl.style.opacity = '1'; }));
+      }, 300);
+    }, 2200);
+  }, 800);
+}
+
+function stopLoadingSequence(htmlContent, postRender) {
+  if (loadingStageTimeout) { clearTimeout(loadingStageTimeout); loadingStageTimeout = null; }
+  if (loadingInterval)     { clearInterval(loadingInterval);    loadingInterval = null; }
+
+  const container = document.getElementById('lesson-loading');
+  const rendered = document.getElementById('lesson-rendered');
+
+  // Fade out loading (200ms)
+  container.style.opacity = '0';
+  setTimeout(() => {
+    container.style.display = 'none';
+    container.style.opacity = '';
+
+    // Set content, start in entering state
+    rendered.innerHTML = htmlContent;
+    rendered.classList.add('entering');
+
+    // Force reflow then release — CSS transition plays
+    rendered.offsetHeight;
+    rendered.classList.remove('entering');
+
+    if (postRender) postRender(rendered);
+  }, 200);
+}
+
+// ── B10: View transitions ──────────────────────────────────
+function showLesson() {
+  const home   = document.getElementById('home');
+  const lesson = document.getElementById('lesson-view');
+  if (lesson.classList.contains('on')) return; // already visible
+
+  home.classList.add('fading-out');
+  setTimeout(() => {
+    home.classList.add('off');
+    home.classList.remove('fading-out');
+    lesson.classList.add('on', 'fading-out');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      lesson.classList.remove('fading-out');
+    }));
+  }, 100);
+}
+
+function showHome() {
+  const home   = document.getElementById('home');
+  const lesson = document.getElementById('lesson-view');
+  if (!lesson.classList.contains('on')) return; // already on home
+
+  lesson.classList.add('fading-out');
+  setTimeout(() => {
+    lesson.classList.remove('on', 'fading-out');
+    home.classList.remove('off');
+    home.classList.add('fading-out');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      home.classList.remove('fading-out');
+    }));
+  }, 100);
+}
+
+// ── Sidebar ────────────────────────────────────────────────
+function buildSidebar() {
+  const toc = document.getElementById('toc-lessons');
+  toc.innerHTML = '';
+  let gi = 0;
+  PHASES.forEach((ph) => {
+    const block = document.createElement('div');
+    block.className = 'phase-block';
+
+    // B2 — phase header with colored left indicator
+    const hdr = document.createElement('div');
+    hdr.className = 'phase-header';
+    hdr.innerHTML =
+      '<span class="phase-indicator" style="background:var(--' + ph.id + ')"></span>' +
+      ph.label + ' · ' + ph.title;
+    block.appendChild(hdr);
+
+    ph.lessons.forEach((title, li) => {
+      const idx = gi++;
+      const el = document.createElement('div');
+      el.className = 'toc-lesson' + (done.has(idx) ? ' done' : '');
+      el.id = 'tl-' + idx;
+      el.innerHTML =
+        '<span class="lesson-idx">' + String(li + 1).padStart(2, '0') + '</span>' +
+        '<span class="lesson-title-text">' + title + '</span>' +
+        '<span class="lesson-check">✓</span>';
+      el.onclick = () => loadLesson(idx);
+      block.appendChild(el);
+    });
+
+    toc.appendChild(block);
+  });
+}
+
+// ── Home phase rows ────────────────────────────────────────
+function buildPhaseRows() {
+  const container = document.getElementById('phase-rows');
+  container.innerHTML = '';
+  PHASES.forEach((ph, pi) => {
+    const row = document.createElement('div');
+    row.className = 'phase-row';
+    row.onclick = () => loadLesson(phaseStart(pi));
+    row.innerHTML =
+      '<div class="phase-row-left">' +
+        '<div class="phase-dot" style="background:' + ph.dot + '"></div>' +
+        '<span class="phase-row-title">' + ph.label + ' — ' + ph.title + '</span>' +
+      '</div>' +
+      '<span class="phase-row-count">' + ph.lessons.length + ' lessons</span>';
+    container.appendChild(row);
+  });
+}
+
+function phaseStart(pi) {
+  let i = 0;
+  for (let j = 0; j < pi; j++) i += PHASES[j].lessons.length;
+  return i;
+}
+
+// ── Progress ───────────────────────────────────────────────
+function updateProgress() {
+  document.getElementById('prog-tag').textContent = done.size + ' / ' + ALL.length;
+}
+function saveDone() {
+  localStorage.setItem('rrskv_done', JSON.stringify([...done]));
+  updateProgress();
+}
+
+// ── Navigation ─────────────────────────────────────────────
+function goHome() {
+  if (currentMode === 'labs') {
+    showLabsHome();
+  } else {
+    showLessonsHome();
+  }
+}
+function goFirst() { loadLesson(0); }
+function go(dir) {
+  const n = currentIdx + dir;
+  if (n >= 0 && n < ALL.length) loadLesson(n);
+}
+
+// B8 — mark complete with check animation
+function toggleDone() {
+  if (currentIdx < 0) return;
+  const btn = document.getElementById('btn-done');
+  if (done.has(currentIdx)) {
+    done.delete(currentIdx);
+    btn.innerHTML = 'Mark complete';
+    btn.classList.remove('on');
+    document.getElementById('tl-' + currentIdx)?.classList.remove('done');
+  } else {
+    done.add(currentIdx);
+    btn.innerHTML = '<span class="check-char">✓</span> Done';
+    btn.classList.add('on');
+    document.getElementById('tl-' + currentIdx)?.classList.add('done');
+  }
+  saveDone();
+}
+
+function loadLesson(idx) {
+  currentIdx = idx;
+  const lesson = ALL[idx], ph = lesson.phase;
+
+  showLesson();
+
+  document.getElementById('bc-phase').textContent  = ph.label + ' · ' + ph.title;
+  document.getElementById('bc-lesson').textContent = lesson.title;
+  document.getElementById('lesson-title').textContent = lesson.title;
+  document.getElementById('meta-phase-name').textContent = ph.title;
+
+  const tag = document.getElementById('phase-tag');
+  tag.textContent = ph.label + ' — ' + ph.title;
+  tag.className = 'lesson-phase-tag ph-' + ph.id;
+
+  // B8 — set initial done button state with check-char markup
+  const db = document.getElementById('btn-done');
+  if (done.has(idx)) {
+    db.innerHTML = '<span class="check-char">✓</span> Done';
+    db.className = 'btn-done on';
+  } else {
+    db.innerHTML = 'Mark complete';
+    db.className = 'btn-done';
+  }
+
+  document.getElementById('btn-prev').disabled = idx === 0;
+  document.getElementById('btn-next').disabled = idx === ALL.length - 1;
+
+  document.querySelectorAll('.toc-lesson').forEach(el => el.classList.remove('active'));
+  const a = document.getElementById('tl-' + idx);
+  if (a) { a.classList.add('active'); a.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+
+  document.getElementById('ask-input').value = '';
+  document.getElementById('ask-resp').classList.remove('on');
+  document.getElementById('ask-resp').innerHTML = '';
+  document.getElementById('main').scrollTo(0, 0);
+
+  generateLesson(lesson);
+}
+
+// ── Lesson generation (Part A) ─────────────────────────────
+async function generateLesson(lesson) {
+  startLoadingSequence();
+  try {
+    const data = await apiPost('/api/lesson', {
+      lessonTitle: lesson.title,
+      phaseLabel:  lesson.phase.label,
+      phaseTitle:  lesson.phase.title
+    });
+    const html = transformCallouts(data.content);
+    stopLoadingSequence(html, (rendered) => {
+      // Attach hljs and quiz handlers after content is in DOM
+      rendered.querySelectorAll('pre code').forEach(block => {
+        hljs.highlightElement(block);
+        const pre = block.closest('pre');
+        const hdr = document.createElement('div');
+        hdr.className = 'code-header';
+        hdr.innerHTML = '<span class="code-lang">C# · Example</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>'; /* B6 */
+        pre.insertBefore(hdr, pre.firstChild);
+      });
+      rendered.querySelectorAll('.quiz-opt').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const block = this.closest('.quiz-block');
+          block.querySelectorAll('.quiz-opt').forEach(b => b.classList.add('reveal'));
+          const fb = block.querySelector('.quiz-fb');
+          if (this.dataset.correct === 'true') {
+            this.classList.add('correct');
+            fb.textContent = '✓ Correct — well done!';
+            fb.className = 'quiz-fb ok';
+          } else {
+            this.classList.add('wrong');
+            block.querySelector('[data-correct="true"]')?.classList.add('correct');
+            fb.textContent = '✗ Not quite — the highlighted option is correct.';
+            fb.className = 'quiz-fb fail';
+          }
+        });
+      });
+    });
+  } catch (err) {
+    stopLoadingSequence(
+      '<div class="error-state"><strong>Could not generate lesson.</strong>' + err.message + '</div>',
+      null
+    );
+  }
+}
+
+function transformCallouts(html) {
+  return html
+    .replace(/<analogy>([\s\S]*?)<\/analogy>/g, '<div class="callout analogy"><div class="callout-label">Analogy</div><p>$1</p></div>')
+    .replace(/<tip>([\s\S]*?)<\/tip>/g,         '<div class="callout tip"><div class="callout-label">Trainer Tip</div><p>$1</p></div>')
+    .replace(/<warn>([\s\S]*?)<\/warn>/g,        '<div class="callout warn"><div class="callout-label">Watch Out</div><p>$1</p></div>');
+}
+
+function copyCode(btn) {
+  const code = btn.closest('pre').querySelector('code');
+  if (code) navigator.clipboard.writeText(code.textContent).then(() => {
+    btn.textContent = 'Copied';
+    setTimeout(() => btn.textContent = 'Copy', 1600);
+  });
+}
+
+async function askDoubt() {
+  const input = document.getElementById('ask-input');
+  const btn   = document.getElementById('ask-btn');
+  const resp  = document.getElementById('ask-resp');
+  const q = input.value.trim();
+  if (!q || currentIdx < 0) return;
+  btn.disabled = true; btn.textContent = '…';
+  resp.classList.add('on');
+  resp.innerHTML = '<span style="color:var(--ink-3)">Thinking…</span>';
+  try {
+    const data = await apiPost('/api/doubt', { question: q, lessonTitle: ALL[currentIdx].title });
+    resp.innerHTML = data.content;
+  } catch (e) {
+    resp.innerHTML = '<p style="color:var(--err)">' + e.message + '</p>';
+  }
+  btn.disabled = false; btn.textContent = 'Ask →';
+}
+
+// ── Search ─────────────────────────────────────────────────
+document.getElementById('search').addEventListener('input', function () {
+  const q = this.value.toLowerCase().trim();
+  document.querySelectorAll('.toc-lesson').forEach(el => {
+    el.style.display = !q || el.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+});
+
+document.getElementById('ask-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') askDoubt();
+});
+
+// ── Init ───────────────────────────────────────────────────
+(function handleURLParams() {
+  const p = new URLSearchParams(window.location.search);
+  const courseParam = p.get('course');
+  const modeParam   = p.get('mode');
+  const labParam    = p.get('lab');
+  if (courseParam && courseParam !== 'dotnet' && courseParam !== 'net') {
+    const name = courseParam.charAt(0).toUpperCase() + courseParam.slice(1);
+    document.getElementById('main').innerHTML =
+      `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--ink-3)">
+        <div style="font-size:32px">🚧</div>
+        <div style="font-size:16px;font-weight:500;color:var(--ink)">${name} course coming soon</div>
+        <div style="font-size:13px">We're building this track — check back soon!</div>
+        <a href="courses.html" style="margin-top:8px;font-size:13px;color:var(--accent)">← Back to Skillverse Library</a>
+      </div>`;
+    return;
+  }
+  if (modeParam === 'labs') {
+    window._deepLinkMode = 'labs';
+    window._deepLinkLab  = labParam || null;
+  }
+})();
+
+buildSidebar();
+buildPhaseRows();
+buildLabsSidebar();
+buildLabsHomeList();
+updateProgress();
+checkAdminMode();
+
+if (window._deepLinkMode === 'labs') {
+  switchMode('labs');
+  if (window._deepLinkLab) {
+    setTimeout(() => loadLab(window._deepLinkLab), 150);
+  }
+}
+
+// ── apiGet helper ──────────────────────────────────────────
+async function apiGet(url) {
+  const res = await fetch(url);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Server error ' + res.status);
+  return data;
+}
+
+// ── Lab data helper ────────────────────────────────────────
+function getAllLabs() {
+  return [...LABS.handson, ...LABS.capstone];
+}
+
+// ── Lab state ──────────────────────────────────────────────
+let currentLabId = null;
+
+// ── Lab view transitions ───────────────────────────────────
+function showLab() {
+  document.getElementById('home').classList.add('off');
+  document.getElementById('labs-home').classList.add('off');
+  document.getElementById('lesson-view').classList.remove('on');
+  document.getElementById('lab-view').classList.add('on');
+}
+
+function toggleLabDone() {
+  const btn = document.getElementById('lab-done-btn');
+  btn.classList.toggle('on');
+  btn.textContent = btn.classList.contains('on') ? '✓ Done' : 'Mark complete';
+}
+
+// ── generateLabGuide ───────────────────────────────────────
+async function generateLabGuide(lab) {
+  const loadingEl  = document.getElementById('lab-loading');
+  const renderedEl = document.getElementById('lab-rendered');
+
+  renderedEl.innerHTML = '';
+  loadingEl.style.display = 'flex';
+  loadingEl.style.opacity = '1';
+
+  const msgEl = document.getElementById('lab-loading-msg');
+
+  msgEl.textContent = 'Checking for saved guide…';
+
+  try {
+    const cached = await apiGet('/api/lab/' + lab.id);
+
+    if (cached.cached) {
+      stopLabLoading(loadingEl, renderedEl, cached.content, cached.generatedAt);
+      return;
+    }
+
+    const messages = [
+      'No saved guide yet — generating now…',
+      'Planning the steps…',
+      'Writing setup instructions…',
+      'Adding code examples…',
+      'Building the walkthrough…',
+      'Saving for all students…',
+    ];
+    let idx = 0;
+    msgEl.textContent = messages[0];
+
+    const interval = setInterval(() => {
+      idx = (idx + 1) % messages.length;
+      msgEl.style.opacity = '0';
+      setTimeout(() => {
+        msgEl.textContent = messages[idx];
+        msgEl.style.opacity = '1';
+      }, 150);
+    }, 2200);
+
+    const result = await apiPost('/api/lab/generate', {
+      labId:          lab.id,
+      labTitle:       lab.title,
+      labPhase:       lab.phase,
+      labObjective:   lab.objective,
+      labDeliverable: lab.deliverable,
+      labPrereqs:     lab.prereqs
+    });
+
+    clearInterval(interval);
+    stopLabLoading(loadingEl, renderedEl, result.content, result.generatedAt);
+
+  } catch (err) {
+    loadingEl.style.display = 'none';
+    renderedEl.innerHTML =
+      '<div class="error-state"><strong>Could not load lab guide.</strong><br><br>' +
+      err.message + '</div>';
+  }
+}
+
+function stopLabLoading(loadingEl, renderedEl, htmlContent, generatedAt) {
+  loadingEl.style.opacity = '0';
+  setTimeout(() => {
+    loadingEl.style.display = 'none';
+
+    const html = transformCallouts(htmlContent);
+
+    const date = generatedAt
+      ? new Date(generatedAt).toLocaleDateString('en-IN',
+          { day: 'numeric', month: 'short', year: 'numeric' })
+      : null;
+    const dateNote = date
+      ? '<p style="font-size:11px;color:var(--ink-4);margin-top:32px;font-family:var(--mono);">Lab guide generated ' + date + '</p>'
+      : '';
+
+    renderedEl.classList.add('entering');
+    renderedEl.innerHTML = html + dateNote;
+
+    renderedEl.querySelectorAll('pre code').forEach(block => {
+      hljs.highlightElement(block);
+      const pre = block.closest('pre');
+      const hdr = document.createElement('div');
+      hdr.className = 'code-header';
+      hdr.innerHTML = '<span class="code-lang">C#</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>';
+      pre.insertBefore(hdr, pre.firstChild);
+    });
+
+    requestAnimationFrame(() => { renderedEl.classList.remove('entering'); });
+  }, 200);
+}
+
+// ── Mode switching ─────────────────────────────────────────
+let currentMode = 'lessons';
+
+function switchMode(mode) {
+  currentMode = mode;
+
+  document.getElementById('tab-lessons').classList.toggle('active', mode === 'lessons');
+  document.getElementById('tab-labs').classList.toggle('active', mode === 'labs');
+
+  const hint = document.getElementById('mode-hint');
+  hint.textContent = mode === 'lessons'
+    ? '46 lessons across 4 phases'
+    : '4 hands-on labs · 3 capstone projects';
+
+  const lessonsToC = document.getElementById('toc-lessons');
+  const labsToC    = document.getElementById('toc-labs');
+  if (lessonsToC) lessonsToC.style.display = mode === 'lessons' ? '' : 'none';
+  if (labsToC)    labsToC.style.display    = mode === 'labs'    ? '' : 'none';
+
+  if (mode === 'lessons') {
+    showLessonsHome();
+  } else {
+    showLabsHome();
+  }
+}
+
+function showLessonsHome() {
+  document.getElementById('home').classList.remove('off');
+  document.getElementById('labs-home').classList.add('off');
+  document.getElementById('lesson-view').classList.remove('on');
+  const labView = document.getElementById('lab-view');
+  if (labView) labView.classList.remove('on');
+  document.querySelectorAll('.toc-lesson').forEach(el => el.classList.remove('active'));
+  document.getElementById('main').scrollTo(0, 0);
+  currentIdx = -1;
+}
+
+function showLabsHome() {
+  document.getElementById('home').classList.add('off');
+  document.getElementById('labs-home').classList.remove('off');
+  document.getElementById('lesson-view').classList.remove('on');
+  const labView = document.getElementById('lab-view');
+  if (labView) labView.classList.remove('on');
+  document.getElementById('main').scrollTo(0, 0);
+}
+
+// ── Load a lab ─────────────────────────────────────────────
+function loadLab(id) {
+  const lab = getAllLabs().find(l => l.id === id);
+  if (!lab) return;
+
+  currentLabId = id;
+  showLab();
+
+  document.getElementById('bc-lab-phase').textContent = lab.phase;
+  document.getElementById('bc-lab-title').textContent = lab.title;
+  document.getElementById('lab-title').textContent    = lab.title;
+  document.getElementById('lab-meta-phase').textContent = lab.phase;
+
+  // Highlight in sidebar
+  document.querySelectorAll('#toc-labs .toc-lesson').forEach(el => el.classList.remove('active'));
+  const tocEl = document.getElementById('tl-lab-' + id);
+  if (tocEl) { tocEl.classList.add('active'); tocEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+
+  document.getElementById('main').scrollTo(0, 0);
+  generateLabGuide(lab);
+}
+
+// ── Build labs sidebar ─────────────────────────────────────
+function buildLabsSidebar() {
+  const toc = document.getElementById('toc-labs');
+  if (!toc) return;
+  toc.innerHTML = '';
+
+  const labsHdr = document.createElement('div');
+  labsHdr.className = 'phase-header';
+  labsHdr.innerHTML = '<span class="phase-indicator" style="background:var(--p1)"></span>Hands-on Labs';
+  toc.appendChild(labsHdr);
+
+  LABS.handson.forEach(lab => {
+    const el = document.createElement('div');
+    el.className = 'toc-lesson';
+    el.id = 'tl-lab-' + lab.id;
+    el.innerHTML = '<span class="lesson-idx">' + lab.code + '</span>' +
+      '<span class="lesson-title-text">' + lab.title + '</span>';
+    el.onclick = () => loadLab(lab.id);
+    toc.appendChild(el);
+  });
+
+  const capHdr = document.createElement('div');
+  capHdr.className = 'phase-header';
+  capHdr.innerHTML = '<span class="phase-indicator" style="background:var(--p4)"></span>Capstone Projects';
+  toc.appendChild(capHdr);
+
+  LABS.capstone.forEach(cap => {
+    const el = document.createElement('div');
+    el.className = 'toc-lesson';
+    el.id = 'tl-lab-' + cap.id;
+    el.innerHTML = '<span class="lesson-idx">' + cap.code + '</span>' +
+      '<span class="lesson-title-text">' + cap.title + '</span>';
+    el.onclick = () => loadLab(cap.id);
+    toc.appendChild(el);
+  });
+}
+
+// ── Build labs home lists ──────────────────────────────────
+function buildLabsHomeList() {
+  const labsList = document.getElementById('labs-list');
+  const capList  = document.getElementById('capstone-list');
+  if (!labsList || !capList) return;
+
+  labsList.innerHTML = '';
+  capList.innerHTML  = '';
+
+  LABS.handson.forEach((lab, i) => {
+    const row = document.createElement('div');
+    row.className = 'phase-row';
+    if (i === 0) row.style.borderTop = '1px solid var(--line)';
+    row.innerHTML =
+      '<div class="phase-row-left">' +
+        '<span style="width:7px;height:7px;border-radius:50%;background:var(--p1);flex-shrink:0;display:inline-block"></span>' +
+        '<span class="phase-row-label">' + lab.code + ' — ' + lab.title + '</span>' +
+      '</div>' +
+      '<div class="phase-row-right">' +
+        '<span style="font-size:10px;font-family:var(--mono);color:var(--ink-4);text-transform:uppercase;letter-spacing:0.5px">' + lab.difficulty + '</span>' +
+        '<span style="font-size:11px;font-family:var(--mono);color:var(--ink-4)">' + lab.duration + '</span>' +
+      '</div>';
+    row.style.cursor = 'pointer';
+    row.onclick = () => loadLab(lab.id);
+    labsList.appendChild(row);
+  });
+
+  LABS.capstone.forEach((cap, i) => {
+    const row = document.createElement('div');
+    row.className = 'phase-row';
+    if (i === 0) row.style.borderTop = '1px solid var(--line)';
+    row.innerHTML =
+      '<div class="phase-row-left">' +
+        '<span style="width:7px;height:7px;border-radius:50%;background:var(--p4);flex-shrink:0;display:inline-block"></span>' +
+        '<span class="phase-row-label">' + cap.code + ' — ' + cap.title + '</span>' +
+      '</div>' +
+      '<div class="phase-row-right">' +
+        '<span style="font-size:10px;font-family:var(--mono);color:var(--ink-4);text-transform:uppercase;letter-spacing:0.5px">' + cap.difficulty + '</span>' +
+        '<span style="font-size:11px;font-family:var(--mono);color:var(--ink-4)">' + cap.duration + '</span>' +
+      '</div>';
+    row.style.cursor = 'pointer';
+    row.onclick = () => loadLab(cap.id);
+    capList.appendChild(row);
+  });
+}
+
+// ── Admin mode ─────────────────────────────────────────────
+let ADMIN_SECRET = null;
+
+function checkAdminMode() {
+  const hash = window.location.hash;
+  const match = hash.match(/admin=([^&]+)/);
+  if (match) {
+    ADMIN_SECRET = decodeURIComponent(match[1]);
+    document.getElementById('lab-regen-btn').style.display = '';
+    console.log('Admin mode active');
+  }
+}
+
+async function regenLab() {
+  if (!currentLabId || !ADMIN_SECRET) return;
+  if (!confirm('Regenerate this lab guide? The current version will be replaced for all students.')) return;
+
+  try {
+    await fetch('/api/lab/' + currentLabId, {
+      method: 'DELETE',
+      headers: { 'x-admin-secret': ADMIN_SECRET }
+    });
+    const lab = getAllLabs().find(l => l.id === currentLabId);
+    if (lab) generateLabGuide(lab);
+  } catch (e) {
+    alert('Regenerate failed: ' + e.message);
+  }
+}
+</script>
+</body>
+</html>

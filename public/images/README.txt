@@ -1,0 +1,12 @@
+Place your images here:
+- raushanranjan.jpg   (Profile photo)
+- M -language.png     (M Language playlist thumb)
+- YT-PowerBI.jpg      (Power BI playlist thumb)
+- YT-SoftwareEng.jpg  (Software Eng playlist thumb)
+- YT-DataAnalytics.jpg
+- YT-SoftwarePM.jpg
+- YT-ComputerNetworks.jpg
+- YT-Shorts.jpg
+- YT-Projects.jpg
+- YT-1.jpg            (General/hero fallback)
+- Banner.jpg          (Optional hero background)

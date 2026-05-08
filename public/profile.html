@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Raushan Ranjan — Profile · RR Skillverse</title>
+<link rel="stylesheet" href="css/main.css"/>
+<style>
+.profile-layout { display:grid; grid-template-columns:320px 1fr; gap:36px; padding:40px 48px; }
+.profile-sidebar {}
+.profile-card {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:var(--radius-xl); overflow:hidden; position:sticky; top:80px;
+}
+.profile-card-top {
+  padding:32px 24px 24px; text-align:center;
+  background:linear-gradient(180deg,rgba(26,86,219,0.08) 0%,transparent 100%);
+  border-bottom:1px solid var(--border);
+}
+.profile-photo {
+  width:110px; height:110px; border-radius:50%;
+  object-fit:cover; margin:0 auto 16px;
+  border:3px solid rgba(26,86,219,0.4);
+  box-shadow:0 0 0 6px rgba(26,86,219,0.08);
+  background:var(--bg3);
+  display:block;
+}
+.profile-photo-fallback {
+  width:110px; height:110px; border-radius:50%;
+  background:linear-gradient(135deg,var(--brand-dark),var(--accent));
+  display:flex; align-items:center; justify-content:center;
+  font-size:32px; font-weight:800; color:#fff;
+  margin:0 auto 16px;
+  border:3px solid rgba(26,86,219,0.4);
+  box-shadow:0 0 0 6px rgba(26,86,219,0.08);
+}
+.profile-name { font-size:20px; font-weight:800; letter-spacing:-0.4px; color:var(--text); margin-bottom:4px; }
+.profile-title { font-size:12px; color:var(--accent); font-weight:600; margin-bottom:12px; }
+.profile-badges { display:flex; flex-wrap:wrap; gap:5px; justify-content:center; margin-bottom:16px; }
+.profile-live {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:10px; color:var(--success); font-weight:600;
+}
+.profile-live::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--success); animation:livePulse 2s infinite; }
+@keyframes livePulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.profile-card-body { padding:18px 20px; display:flex; flex-direction:column; gap:0; }
+.profile-meta-row {
+  display:flex; align-items:flex-start; gap:10px;
+  padding:10px 0; border-bottom:1px solid var(--border);
+  font-size:11px;
+}
+.profile-meta-row:last-child { border-bottom:none; }
+.profile-meta-icon { font-size:13px; flex-shrink:0; margin-top:1px; }
+.profile-meta-key { color:var(--text-dim); min-width:70px; font-size:10px; font-weight:600; letter-spacing:0.3px; text-transform:uppercase; }
+.profile-meta-val { color:var(--text-muted); flex:1; }
+.profile-meta-val a { color:var(--accent); }
+
+.profile-socials { display:flex; gap:8px; padding:16px 20px; border-top:1px solid var(--border); }
+.social-btn {
+  flex:1; padding:8px; border-radius:var(--radius);
+  background:var(--bg3); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; cursor:pointer; transition:all 0.15s; text-decoration:none;
+}
+.social-btn:hover { background:var(--bg4); border-color:var(--border-hover); transform:translateY(-2px); }
+
+/* Right column */
+.profile-main { display:flex; flex-direction:column; gap:28px; }
+.profile-section {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:var(--radius-xl); overflow:hidden;
+}
+.profile-section-header {
+  padding:16px 22px; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:10px;
+  background:rgba(255,255,255,0.015);
+}
+.psh-icon { font-size:16px; }
+.psh-title { font-size:14px; font-weight:700; color:var(--text); }
+.psh-count { margin-left:auto; }
+.profile-section-body { padding:20px 22px; }
+
+/* Quote */
+.profile-quote {
+  padding:20px 22px 20px 26px;
+  border-left:3px solid var(--accent);
+  background:rgba(14,165,233,0.03);
+  font-size:14px; font-style:italic; color:var(--text-muted);
+  line-height:1.75;
+}
+
+/* Experience timeline */
+.exp-timeline { display:flex; flex-direction:column; gap:0; }
+.exp-item {
+  display:grid; grid-template-columns:160px 1fr;
+  border-bottom:1px solid var(--border); padding:18px 0;
+  position:relative;
+}
+.exp-item:last-child { border-bottom:none; }
+.exp-item::before {
+  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:linear-gradient(180deg,var(--brand),var(--accent));
+  transform:scaleY(0); transform-origin:top; transition:transform 0.35s;
+  border-radius:0 2px 2px 0;
+}
+.exp-item:hover::before { transform:scaleY(1); }
+.exp-meta { padding-right:20px; }
+.exp-period { font-size:10px; color:var(--amber); font-weight:600; line-height:1.6; margin-bottom:4px; }
+.exp-company { font-size:10px; color:var(--text-dim); line-height:1.55; }
+.exp-right {}
+.exp-role { font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px; display:flex; align-items:center; flex-wrap:wrap; gap:5px; }
+.exp-desc { font-size:12px; color:var(--text-muted); line-height:1.75; }
+.exp-pts { list-style:none; margin-top:6px; }
+.exp-pts li { font-size:11px; color:var(--text-muted); padding-left:14px; position:relative; margin-bottom:3px; line-height:1.6; }
+.exp-pts li::before { content:'›'; position:absolute; left:0; color:var(--accent); }
+
+/* Skills grid */
+.sk-category { margin-bottom:20px; }
+.sk-cat-title { font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px; }
+.sk-tags-wrap { display:flex; flex-wrap:wrap; gap:5px; }
+.sk-tag {
+  font-size:10px; font-weight:600; padding:3px 9px; border-radius:20px;
+  background:var(--bg3); color:var(--text-muted);
+  border:1px solid var(--border); transition:all 0.15s;
+}
+.sk-tag:hover { border-color:var(--accent); color:var(--accent); background:rgba(14,165,233,0.07); }
+.sk-tag.highlight { border-color:rgba(26,86,219,0.3); color:var(--accent); background:var(--brand-glow); }
+
+/* Projects grid */
+.proj-list { display:flex; flex-direction:column; gap:14px; }
+.proj-item {
+  display:grid; grid-template-columns:40px 1fr auto;
+  align-items:start; gap:14px;
+  padding:16px 18px; background:var(--bg3);
+  border:1px solid var(--border); border-radius:var(--radius-lg);
+  transition:all 0.15s;
+}
+.proj-item:hover { border-color:var(--border-hover); background:var(--bg4); }
+.proj-icon { font-size:22px; text-align:center; }
+.proj-name { font-size:13px; font-weight:700; color:var(--text); margin-bottom:3px; }
+.proj-desc { font-size:11px; color:var(--text-muted); line-height:1.65; }
+.proj-stack { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+.proj-stack span { font-size:9px; font-weight:600; padding:1px 6px; border-radius:20px; background:rgba(26,86,219,0.12); color:#60a5fa; }
+.proj-link { font-size:18px; color:var(--text-dim); text-decoration:none; transition:color 0.15s; }
+.proj-link:hover { color:var(--accent); }
+
+/* Contact form */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+.form-field {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:var(--radius); padding:9px 12px;
+  color:var(--text); font-family:var(--font); font-size:12px; outline:none;
+  transition:border-color 0.2s; width:100%;
+}
+.form-field:focus { border-color:rgba(26,86,219,0.4); box-shadow:0 0 0 3px rgba(26,86,219,0.07); }
+.form-field::placeholder { color:var(--text-dim); }
+select.form-field { cursor:pointer; }
+textarea.form-field { resize:vertical; min-height:90px; }
+.contact-btns { display:flex; gap:8px; margin-top:12px; }
+
+@media(max-width:1024px) {
+  .profile-layout { grid-template-columns:1fr; padding:24px; }
+  .profile-card { position:static; }
+  .exp-item { grid-template-columns:1fr; }
+  .exp-meta { margin-bottom:6px; }
+  .contact-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<script src="js/nav.js"></script>
+<div class="page-body">
+  <div class="page-hero">
+    <div class="page-hero-eyebrow">Founder & Trainer</div>
+    <h1>Raushan <em>Ranjan</em></h1>
+    <p>Microsoft Certified Trainer · Azure Developer · Power Platform Expert · Iconic Corporate Trainer at Koenig Solutions</p>
+  </div>
+
+  <div class="profile-layout">
+
+    <!-- ── LEFT SIDEBAR ── -->
+    <div class="profile-sidebar">
+      <div class="profile-card">
+        <div class="profile-card-top">
+          <img src="images/raushanranjan.jpg" alt="Raushan Ranjan" class="profile-photo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="profile-photo-fallback" style="display:none">RR</div>
+          <div class="profile-name">Raushan Ranjan</div>
+          <div class="profile-title">Microsoft Certified Trainer (MCT)</div>
+          <div class="profile-badges">
+            <span class="badge badge-blue">MCT</span>
+            <span class="badge badge-amber">Azure Dev</span>
+            <span class="badge badge-teal">Power BI</span>
+            <span class="badge badge-purple">PL-400</span>
+          </div>
+          <div class="profile-live">Available for Training &amp; Consulting</div>
+        </div>
+        <div class="profile-card-body">
+          <div class="profile-meta-row">
+            <span class="profile-meta-icon">📍</span>
+            <span class="profile-meta-key">Location</span>
+            <span class="profile-meta-val">Noida, UP, India</span>
+          </div>
+          <div class="profile-meta-row">
+            <span class="profile-meta-icon">🏢</span>
+            <span class="profile-meta-key">Company</span>
+            <span class="profile-meta-val">Koenig Solutions Pvt. Ltd.</span>
+          </div>
+          <div class="profile-meta-row">
+            <span class="profile-meta-icon">🎓</span>
+            <span class="profile-meta-key">Education</span>
+            <span class="profile-meta-val">B.Tech IT · ABES Engineering College</span>
+          </div>
+          <div class="profile-meta-row">
+            <span class="profile-meta-icon">📧</span>
+            <span class="profile-meta-key">Email</span>
+            <span class="profile-meta-val"><a href="mailto:raushanr1107@gmail.com">raushanr1107@gmail.com</a></span>
+          </div>
+          <div class="profile-meta-row">
+            <span class="profile-meta-icon">🌐</span>
+            <span class="profile-meta-key">Founder</span>
+            <span class="profile-meta-val">RR Skillverse, The Soft Grid</span>
+          </div>
+          <div class="profile-meta-row">
+            <span class="profile-meta-icon">✈️</span>
+            <span class="profile-meta-key">Co-Founder</span>
+            <span class="profile-meta-val">Explore All Ways (Travel)</span>
+          </div>
+          <div class="profile-meta-row">
+            <span class="profile-meta-icon">🏠</span>
+            <span class="profile-meta-key">Co-Founder</span>
+            <span class="profile-meta-val">Govind Boys Hostel (Patna)</span>
+          </div>
+        </div>
+        <div class="profile-socials">
+          <a href="https://linkedin.com/in/raushanranjan" target="_blank" class="social-btn" title="LinkedIn">💼</a>
+          <a href="https://github.com/raushan1107" target="_blank" class="social-btn" title="GitHub">🔗</a>
+          <a href="https://youtube.com" target="_blank" class="social-btn" title="YouTube">▶️</a>
+          <a href="https://instagram.com/raushanwanders" target="_blank" class="social-btn" title="Instagram">📸</a>
+          <a href="mailto:raushanr1107@gmail.com" class="social-btn" title="Email">✉️</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MAIN ── -->
+    <div class="profile-main">
+
+      <!-- Quote -->
+      <div class="profile-quote" data-reveal>
+        "Training should not just transfer knowledge — it should build capability, confidence, and execution readiness."
+      </div>
+
+      <!-- About -->
+      <div class="profile-section" data-reveal>
+        <div class="profile-section-header">
+          <span class="psh-icon">👤</span>
+          <span class="psh-title">About Me</span>
+        </div>
+        <div class="profile-section-body">
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.85;margin-bottom:12px">
+            I'm <strong style="color:var(--text)">Raushan Ranjan</strong> — an Iconic Corporate Trainer at Koenig Solutions and a
+            <strong style="color:var(--text)">Microsoft Certified Trainer (MCT)</strong> with 10+ years in education and 4+ years in enterprise technology enablement.
+            I've trained <strong style="color:var(--text)">2900+ professionals globally</strong> across Azure, AI, Power Platform, .NET, and modern application development.
+          </p>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.85;margin-bottom:12px">
+            Beyond training, I <strong style="color:var(--text)">architect and implement</strong> scalable enterprise solutions — bridging knowledge transfer and real business outcomes.
+            I'm like a photon in the double-slit experiment: a curious, adventurous spirit always exploring new ideas.
+          </p>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.85">
+            Engineer by profession. <strong style="color:var(--text)">Educator by passion.</strong>
+            Whether you're a student, job seeker, or working professional — <em>Bachho ka Bhavisya hoga Raushan.</em>
+          </p>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="grid grid-4" data-reveal>
+        <div class="stat-card" style="text-align:center">
+          <div class="stat-number"><span data-counter="2900">0</span><span>+</span></div>
+          <div class="stat-label">Professionals Trained</div>
+        </div>
+        <div class="stat-card" style="text-align:center">
+          <div class="stat-number"><span data-counter="10">0</span><span>+</span></div>
+          <div class="stat-label">Years in Education</div>
+        </div>
+        <div class="stat-card" style="text-align:center">
+          <div class="stat-number"><span data-counter="38">0</span><span>+</span></div>
+          <div class="stat-label">Certifications</div>
+        </div>
+        <div class="stat-card" style="text-align:center">
+          <div class="stat-number"><span data-counter="25">0</span><span>+</span></div>
+          <div class="stat-label">Countries Reached</div>
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div class="profile-section" data-reveal>
+        <div class="profile-section-header">
+          <span class="psh-icon">💼</span>
+          <span class="psh-title">Career Timeline</span>
+          <span class="psh-count"><span class="badge badge-gray">7 roles</span></span>
+        </div>
+        <div class="profile-section-body" style="padding:0 22px">
+          <div class="exp-timeline">
+            <div class="exp-item">
+              <div class="exp-meta">
+                <div class="exp-period">Feb 2026 — Present</div>
+                <div class="exp-company">Koenig Solutions<br/>Full-time</div>
+              </div>
+              <div class="exp-right">
+                <div class="exp-role">Iconic Corporate Trainer <span class="badge badge-amber">Promoted</span><span class="badge badge-green">Current</span></div>
+                <div class="exp-desc">Promoted for consistent excellence in enterprise training. Delivering advanced Azure, AI, Power BI, .NET & Power Platform training globally.</div>
+                <ul class="exp-pts">
+                  <li>Scenario-driven enterprise learning experiences</li>
+                  <li>Mentoring fellow trainers on delivery quality</li>
+                  <li>Skill diversification in Azure Data & AI</li>
+                </ul>
+              </div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-meta">
+                <div class="exp-period">Feb 2024 — Feb 2026</div>
+                <div class="exp-company">Koenig Solutions</div>
+              </div>
+              <div class="exp-right">
+                <div class="exp-role">Senior Corporate Trainer</div>
+                <div class="exp-desc">Led global enterprise training for Azure, Power Platform, .NET, and APIGEE API Management. Outstanding client feedback across global assignments.</div>
+              </div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-meta">
+                <div class="exp-period">Jul 2022 — Feb 2024</div>
+                <div class="exp-company">Koenig Solutions</div>
+              </div>
+              <div class="exp-right">
+                <div class="exp-role">Corporate Trainer</div>
+                <div class="exp-desc">Delivered cutting-edge interactive training in Microsoft Azure and .NET technologies. Empowered professionals for real project execution.</div>
+              </div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-meta">
+                <div class="exp-period">Sep 2020 — Present</div>
+                <div class="exp-company">Explore All Ways<br/>Co-Founder</div>
+              </div>
+              <div class="exp-right">
+                <div class="exp-role">Co-Founder &amp; CTO <span class="badge badge-blue">Active</span></div>
+                <div class="exp-desc">Architected and built the full frontend of a Tour & Travel company. Manages all web development and IT infrastructure.</div>
+              </div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-meta">
+                <div class="exp-period">Apr 2014 — Aug 2023</div>
+                <div class="exp-company">RR Education<br/>Founder</div>
+              </div>
+              <div class="exp-right">
+                <div class="exp-role">Managing Director &amp; Educator</div>
+                <div class="exp-desc">Founded and led RR Education for nearly a decade — taught Physics, Python, Web Development, and Mathematics with adaptive learning plans.</div>
+              </div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-meta">
+                <div class="exp-period">Nov 2018 — Present</div>
+                <div class="exp-company">YouTube / RR Education</div>
+              </div>
+              <div class="exp-right">
+                <div class="exp-role">Educational Content Creator <span class="badge badge-blue">Active</span></div>
+                <div class="exp-desc">High-quality educational content covering Azure, Power BI, Python, .NET and more — building an influential presence in the developer-education community.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="profile-section" data-reveal>
+        <div class="profile-section-header">
+          <span class="psh-icon">⚡</span>
+          <span class="psh-title">Technical Stack</span>
+        </div>
+        <div class="profile-section-body">
+          <div class="sk-category">
+            <div class="sk-cat-title">☁️ Microsoft Azure</div>
+            <div class="sk-tags-wrap">
+              <span class="sk-tag highlight">AZ-204</span><span class="sk-tag highlight">AZ-104</span>
+              <span class="sk-tag">API Management</span><span class="sk-tag">Service Bus</span>
+              <span class="sk-tag">Logic Apps</span><span class="sk-tag">Azure AI</span>
+              <span class="sk-tag">App Services</span><span class="sk-tag">Azure Functions</span>
+              <span class="sk-tag">Cloud Architecture</span>
+            </div>
+          </div>
+          <div class="sk-category">
+            <div class="sk-cat-title">⚡ Power Platform</div>
+            <div class="sk-tags-wrap">
+              <span class="sk-tag highlight">Power BI (PL-300)</span><span class="sk-tag highlight">Power Apps (PL-400)</span>
+              <span class="sk-tag">Power Automate</span><span class="sk-tag">Power Pages</span>
+              <span class="sk-tag">Copilot Studio</span><span class="sk-tag">DAX</span>
+              <span class="sk-tag">M Query</span><span class="sk-tag">SQL Server</span>
+            </div>
+          </div>
+          <div class="sk-category">
+            <div class="sk-cat-title">🔷 .NET & Modern Dev</div>
+            <div class="sk-tags-wrap">
+              <span class="sk-tag highlight">C#</span><span class="sk-tag highlight">ASP.NET Core</span>
+              <span class="sk-tag">Web API</span><span class="sk-tag">Blazor</span>
+              <span class="sk-tag">Entity Framework</span><span class="sk-tag">Microservices</span>
+              <span class="sk-tag">REST & gRPC</span>
+            </div>
+          </div>
+          <div class="sk-category">
+            <div class="sk-cat-title">🤖 AI / ML & Other</div>
+            <div class="sk-tags-wrap">
+              <span class="sk-tag">TensorFlow</span><span class="sk-tag">Python</span>
+              <span class="sk-tag">APIGEE</span><span class="sk-tag">Qt/QML</span>
+              <span class="sk-tag">React.js</span><span class="sk-tag">System Design</span>
+              <span class="sk-tag">OpenGL</span><span class="sk-tag">Linux</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="profile-section" data-reveal>
+        <div class="profile-section-header">
+          <span class="psh-icon">🚀</span>
+          <span class="psh-title">Selected Projects</span>
+        </div>
+        <div class="profile-section-body">
+          <div class="proj-list">
+            <div class="proj-item">
+              <div class="proj-icon">🌿</div>
+              <div>
+                <div class="proj-name">Disease Detection in Plants</div>
+                <div class="proj-desc">ML model for plant disease detection with React frontend and TensorFlow backend. Agricultural AI impact project.</div>
+                <div class="proj-stack"><span>React</span><span>TensorFlow</span><span>Python</span></div>
+              </div>
+              <a href="https://github.com/raushan1107" target="_blank" class="proj-link">↗</a>
+            </div>
+            <div class="proj-item">
+              <div class="proj-icon">☁️</div>
+              <div>
+                <div class="proj-name">Portfolio on Azure</div>
+                <div class="proj-desc">.NET portfolio deployed on Azure App Service with CI/CD pipeline integration and production ASP.NET Core MVC architecture.</div>
+                <div class="proj-stack"><span>ASP.NET Core</span><span>Azure</span><span>C#</span></div>
+              </div>
+              <a href="https://raushanranjan.azurewebsites.net/" target="_blank" class="proj-link">↗</a>
+            </div>
+            <div class="proj-item">
+              <div class="proj-icon">✈️</div>
+              <div>
+                <div class="proj-name">Explore All Ways</div>
+                <div class="proj-desc">Tour & Travel company frontend — architected and built. Actively maintained as Co-Founder product.</div>
+                <div class="proj-stack"><span>HTML/CSS</span><span>Bootstrap</span><span>jQuery</span></div>
+              </div>
+              <a href="https://github.com/raushan1107" target="_blank" class="proj-link">↗</a>
+            </div>
+            <div class="proj-item">
+              <div class="proj-icon">🔗</div>
+              <div>
+                <div class="proj-name">Azure Integration Demo Suite</div>
+                <div class="proj-desc">Reference architecture for enterprise Azure integration patterns — live-used in AZ-204 corporate training globally.</div>
+                <div class="proj-stack"><span>Azure</span><span>API Mgmt</span><span>Service Bus</span><span>C#</span></div>
+              </div>
+              <a href="https://github.com/raushan1107" target="_blank" class="proj-link">↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact / Hire -->
+      <div class="profile-section" data-reveal>
+        <div class="profile-section-header">
+          <span class="psh-icon">📬</span>
+          <span class="psh-title">Get In Touch</span>
+        </div>
+        <div class="profile-section-body">
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:18px;line-height:1.7">
+            Available for enterprise training, Azure consulting, Power Platform workshops, and scalable solution architecture. Global engagements welcome.
+          </p>
+          <div class="contact-grid">
+            <input type="text" class="form-field" id="cName" placeholder="Your Name"/>
+            <input type="email" class="form-field" id="cEmail" placeholder="Email Address"/>
+            <input type="text" class="form-field" id="cPhone" placeholder="Phone / WhatsApp"/>
+            <select class="form-field" id="cService">
+              <option value="">Select Requirement</option>
+              <option>Corporate Training</option>
+              <option>Workshop / Webinar</option>
+              <option>Azure Consulting</option>
+              <option>Power BI / Power Platform</option>
+              <option>Project Support</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <textarea class="form-field" id="cMessage" placeholder="Describe your requirement…" style="width:100%;margin-top:10px"></textarea>
+          <div class="contact-btns">
+            <button class="btn btn-primary" onclick="sendWhatsApp()">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 1.41.37 2.74 1.02 3.89L0 16l4.23-1.11A8 8 0 1 0 8 0zm0 14.5a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13zM5.5 4.5c-.28 0-.75.1-.75.75C4.75 6 5.5 7.5 6.75 8.75S9.5 10.75 10.5 10.75c.5 0 .75-.5.75-.75v-.5c0-.25-.25-.5-.5-.5H10c-.25 0-.5-.25-.5-.5S9 8 9 8s-1-1-.5-1.5l.5-.5c.25-.25 0-.5-.25-.5H8.25C8 5.5 7.75 5 7.5 5H7c-.25 0-.5-.5-.5-.5H5.5z"/></svg>
+              WhatsApp
+            </button>
+            <button class="btn btn-secondary" onclick="sendEmail()">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4h14v9a1 1 0 01-1 1H2a1 1 0 01-1-1V4z"/><path d="M1 4l7 5 7-5"/></svg>
+              Email
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.profile-main -->
+  </div><!-- /.profile-layout -->
+</div>
+<script src="js/main.js"></script>
+<script>
+function getFormData() {
+  return {
+    name:    document.getElementById('cName').value,
+    email:   document.getElementById('cEmail').value,
+    phone:   document.getElementById('cPhone').value,
+    service: document.getElementById('cService').value,
+    message: document.getElementById('cMessage').value
+  };
+}
+function sendWhatsApp() {
+  const d = getFormData();
+  const text = `Hello Raushan,%0A%0AName: ${d.name}%0AEmail: ${d.email}%0APhone: ${d.phone}%0ARequirement: ${d.service}%0AMessage: ${d.message}`;
+  window.open(`https://wa.me/918285862455?text=${text}`, '_blank');
+}
+function sendEmail() {
+  const d = getFormData();
+  const body = `Hello Raushan,\n\nName: ${d.name}\nEmail: ${d.email}\nPhone: ${d.phone}\nRequirement: ${d.service}\nMessage: ${d.message}`;
+  window.location.href = `mailto:raushanr1107@gmail.com?subject=Training / Consulting Enquiry&body=${encodeURIComponent(body)}`;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem \"C:\\\\Users\\\\raush\\\\Downloads\\\\skillverse-webapp-v5\\\\skillverse\\\\\" -Recurse | Select-Object FullName | Format-Table -AutoSize *)",
+      "PowerShell(Rename-Item *)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(\\(Get-ChildItem \"C:\\\\Users\\\\raush\\\\Downloads\\\\rr-skillverse\\\\public\" -Recurse\\).Name | Sort-Object)",
+      "Bash(node -e ' *)",
+      "Bash(node --check _syntax_check.js)",
+      "Bash(del \"C:\\\\Users\\\\raush\\\\Downloads\\\\rr-skillverse\\\\_syntax_check.js\")"
+    ]
+  }
+}
