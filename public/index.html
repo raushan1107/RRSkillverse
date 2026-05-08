@@ -99,7 +99,7 @@
 
 /* ═══════════════════════ MARQUEE ════════════════════════ */
 .marquee-band{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:12px 0;}
-.marquee-track{display:flex;white-space:nowrap;animation:marq 32s linear infinite;}
+.marquee-track{display:flex;white-space:nowrap;animation:marq 48s linear infinite;}
 .marquee-item{display:inline-flex;align-items:center;gap:8px;padding:0 28px;font-size:11px;font-weight:500;letter-spacing:.4px;color:var(--text-dim);flex-shrink:0;}
 .marquee-sep{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.1);}
 @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -117,8 +117,8 @@
 /* ═══════════════════════ OFFER CARDS ════════════════════ */
 .offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 .offer-card{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;transition:border-color .2s,transform .25s,box-shadow .25s;}
-.offer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform .35s;}
-.offer-card:hover{border-color:var(--border-md);transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.4);}
+.offer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform .25s;}
+.offer-card:hover{border-color:var(--border-md);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4);}
 .offer-card:hover::before{transform:scaleX(1);}
 .offer-icon{font-size:26px;}
 .offer-title{font-size:16px;font-weight:700;color:var(--text);}
@@ -127,70 +127,46 @@
 .offer-tag{font-size:9.5px;font-weight:600;padding:2px 8px;border-radius:20px;background:var(--bg3);color:var(--text-muted);border:1px solid var(--border);}
 
 /* ═══════════════════════ YOUTUBE ════════════════════════ */
-.yt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-.yt-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .2s,transform .25s,box-shadow .25s;display:flex;flex-direction:column;text-decoration:none;color:inherit;}
-.yt-card:hover{border-color:rgba(255,80,80,.35);transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,0,0,.45);}
-.yt-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--bg4);}
-.yt-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s;}
-.yt-card:hover .yt-thumb img{transform:scale(1.05);}
-.yt-thumb-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;background:linear-gradient(135deg,var(--bg4),var(--bg3));}
-.yt-play-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;transition:background .2s;}
-.yt-card:hover .yt-play-overlay{background:rgba(0,0,0,.38);}
-.yt-play-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,0,0,.9);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.7);transition:opacity .2s,transform .2s;}
-.yt-card:hover .yt-play-btn{opacity:1;transform:scale(1);}
-.yt-play-btn svg{color:#fff;margin-left:3px;}
-.yt-badge{position:absolute;top:8px;right:8px;background:rgba(255,0,0,.92);color:#fff;font-size:9px;font-weight:700;letter-spacing:.5px;padding:2px 7px;border-radius:4px;text-transform:uppercase;}
-.yt-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;gap:7px;}
-.yt-category{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,80,80,.85);}
-.yt-title{font-size:13px;font-weight:700;color:var(--text);line-height:1.35;}
-.yt-desc{font-size:11px;color:var(--text-muted);line-height:1.62;flex:1;}
-.yt-links{display:flex;flex-direction:column;gap:5px;margin-top:4px;}
-.yt-link{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:10px;font-weight:600;color:var(--text-muted);text-decoration:none;transition:all .15s;}
-.yt-link:hover{background:rgba(255,0,0,.1);border-color:rgba(255,0,0,.25);color:#ff6b6b;}
+.yt-new-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.yt-new-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:row;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s,box-shadow .2s;min-height:120px;}
+.yt-new-card:hover{border-color:rgba(255,68,68,.3);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.35);}
+.yt-new-thumb{width:180px;flex-shrink:0;position:relative;background:var(--bg4);overflow:hidden;}
+.yt-new-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s;}
+.yt-new-card:hover .yt-new-thumb img{transform:scale(1.06);}
+.yt-new-thumb-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px;background:linear-gradient(135deg,var(--bg4),var(--bg3));}
+.yt-new-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background .2s;}
+.yt-new-card:hover .yt-new-play{background:rgba(0,0,0,.4);}
+.yt-new-play-btn{width:40px;height:40px;border-radius:50%;background:rgba(255,0,0,.9);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.7);transition:opacity .2s,transform .2s;}
+.yt-new-card:hover .yt-new-play-btn{opacity:1;transform:scale(1);}
+.yt-new-body{padding:16px 18px;flex:1;display:flex;flex-direction:column;gap:6px;justify-content:center;}
+.yt-new-category{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,68,68,.8);}
+.yt-new-title{font-size:14px;font-weight:700;color:var(--text);line-height:1.3;}
+.yt-new-desc{font-size:11.5px;color:var(--text-muted);line-height:1.6;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.yt-new-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+.yt-new-link{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:10px;font-weight:600;color:var(--text-muted);text-decoration:none;transition:all .15s;white-space:nowrap;}
+.yt-new-link:hover{background:rgba(255,68,68,.1);border-color:rgba(255,68,68,.25);color:#ff6b6b;}
+@media(max-width:900px){.yt-new-grid{grid-template-columns:1fr;}.yt-new-thumb{width:140px;}}
+@media(max-width:600px){.yt-new-card{flex-direction:column;}.yt-new-thumb{width:100%;height:160px;}}
 
 /* ═══════════════════════ TESTIMONIALS ══════════════════ */
-.testi-track-wrap{overflow:hidden;position:relative;}
-.testi-track-wrap::before,.testi-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
-.testi-track-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent);}
-.testi-track-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent);}
-.testi-track{display:flex;gap:16px;animation:testiScroll 60s linear infinite;}
-.testi-track:hover{animation-play-state:paused;}
-.testi-card-wrap{flex-shrink:0;width:300px;}
-.testi-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px;height:100%;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s;}
-.testi-card:hover{border-color:var(--border-md);transform:translateY(-4px);}
-.testi-stars{color:#f59e0b;font-size:11px;letter-spacing:2px;}
-.testi-quote-mark{font-size:32px;color:rgba(14,165,233,.2);line-height:.6;font-family:Georgia,serif;font-weight:900;}
-.testi-text{font-size:11.5px;color:var(--text-muted);line-height:1.78;font-style:italic;flex:1;}
-.testi-person{display:flex;align-items:center;gap:9px;margin-top:4px;}
-.testi-av{width:32px;height:32px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brand-dark),var(--brand));display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;}
-.testi-name{font-size:11px;font-weight:700;color:var(--text);}
-.testi-loc{font-size:9px;color:var(--text-dim);margin-top:1px;}
-.testi-tag{font-size:8.5px;font-weight:600;color:var(--accent);margin-top:2px;}
-@keyframes testiScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* ═══════════════════════ TESTI NEW GRID ════════════════ */
-.testi-stats-bar{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin-bottom:36px;padding:24px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.testi-stat{display:flex;flex-direction:column;align-items:center;padding:0 36px;}
-.testi-stat-num{font-size:28px;font-weight:800;color:var(--text);letter-spacing:-.5px;}
-.testi-stat-label{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text-muted);margin-top:2px;}
-.testi-stat-div{width:1px;height:40px;background:var(--border);flex-shrink:0;}
-.testi-filters{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:32px;}
-.testi-filter-btn{padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--bg2);color:var(--text-muted);transition:all .15s;}
-.testi-filter-btn:hover{border-color:var(--border-md);color:var(--text);}
-.testi-filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
-.testi-new-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-.testi-new-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s,transform .2s;}
-.testi-new-card:hover{border-color:var(--border-md);transform:translateY(-3px);}
-.testi-new-top{display:flex;align-items:center;justify-content:space-between;}
-.testi-new-stars{color:#f59e0b;font-size:11px;letter-spacing:2px;}
-.testi-new-tag{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.15);padding:2px 8px;border-radius:10px;}
-.testi-new-quote{font-size:12px;color:var(--text-muted);line-height:1.78;font-style:italic;flex:1;}
-.testi-new-person{display:flex;align-items:center;gap:10px;margin-top:4px;}
-.testi-new-av{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--brand-dark),var(--brand));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;}
-.testi-new-name{font-size:12px;font-weight:700;color:var(--text);}
-.testi-new-loc{font-size:10px;color:var(--text-dim);margin-top:1px;}
-@media(max-width:1100px){.testi-new-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:768px){.testi-new-grid{grid-template-columns:1fr;}.testi-stat{padding:0 18px;}}
+.testi-cred-bar{display:flex;align-items:center;justify-content:center;gap:0;margin:32px auto 48px;max-width:720px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.testi-cred-item{flex:1;padding:18px 16px;text-align:center;display:flex;flex-direction:column;gap:4px;}
+.testi-cred-num{font-size:18px;font-weight:800;color:var(--accent);letter-spacing:-.3px;line-height:1;}
+.testi-cred-label{font-size:10px;color:var(--text-dim);font-weight:500;line-height:1.4;}
+.testi-cred-div{width:1px;height:40px;background:var(--border);flex-shrink:0;}
+.testi-wall{columns:3;column-gap:16px;}
+.testi-wall-card{break-inside:avoid;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:16px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s;}
+.testi-wall-card:hover{border-color:var(--border-md);transform:translateY(-2px);}
+.testi-wall-stars{color:#f59e0b;font-size:11px;letter-spacing:1.5px;}
+.testi-wall-text{font-size:13px;color:var(--text-muted);line-height:1.72;font-style:italic;}
+.testi-wall-text::before{content:open-quote;font-size:24px;color:rgba(14,165,233,.2);line-height:.5;display:block;margin-bottom:6px;font-family:Georgia,serif;font-style:normal;}
+.testi-wall-person{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--border);margin-top:2px;}
+.testi-wall-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#1e429f,#1a56db);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:white;flex-shrink:0;}
+.testi-wall-name{font-size:11.5px;font-weight:700;color:var(--text);}
+.testi-wall-meta{font-size:9.5px;color:var(--text-dim);margin-top:1px;}
+.testi-wall-tag{margin-left:auto;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;background:rgba(26,86,219,.08);color:var(--accent);border:1px solid rgba(26,86,219,.15);white-space:nowrap;flex-shrink:0;}
+@media(max-width:900px){.testi-wall{columns:2;}.testi-cred-bar{flex-wrap:wrap;}.testi-cred-item{min-width:50%;}.testi-cred-div{display:none;}}
+@media(max-width:600px){.testi-wall{columns:1;}}
 
 /* ═══════════════════════ CTA ════════════════════════════ */
 .cta-section{padding:110px 64px;text-align:center;background:linear-gradient(160deg,rgba(26,86,219,.07) 0%,rgba(14,165,233,.03) 100%);border-top:1px solid var(--border);position:relative;overflow:hidden;}
@@ -209,10 +185,10 @@
 .footer-links a:hover{color:var(--accent);}
 
 /* ═══════════════════════ RESPONSIVE ═════════════════════ */
-@media(max-width:1100px){.yt-grid{grid-template-columns:repeat(2,1fr)}.offer-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1100px){.offer-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){
   .section-wrap{padding:60px 20px;}
-  .offer-grid,.yt-grid{grid-template-columns:1fr;}
+  .offer-grid{grid-template-columns:1fr;}
   .hero-stat-item{padding:0 14px;}
   .cta-section,.site-footer{padding-left:20px;padding-right:20px;}
 }
@@ -278,10 +254,6 @@ window.addEventListener('load', () => {
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3 2.5-5 6-5s6 2 6 5"/></svg>
         About US!
       </a>
-      <a href="https://www.linkedin.com/in/raushanranjan/" target="_blank" rel="noopener" class="btn-hero-outline">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
-        LinkedIn
-      </a>
       <!-- <a href="learn.html" class="btn-hero-outline">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v5L2 13h12L10 7V2"/><path d="M5 2h6"/></svg>
         .NET 8 &amp; Azure AI →
@@ -320,37 +292,50 @@ window.addEventListener('load', () => {
 <!-- ═══════════════════ YOUTUBE PLAYLISTS ══════════════ -->
 <section class="section-wrap section-wrap-alt">
   <div class="section-heading">
-    <div class="section-eyebrow" style="color:#ff6b6b;--tw:20px">
-      <span style="display:inline-block;width:20px;height:1.5px;background:#ff6b6b;border-radius:1px;margin-right:8px;vertical-align:middle"></span>
-      YouTube
-    </div>
-    <h2 class="section-title">Explore My <em style="color:#ff6b6b">YouTube</em> Playlists</h2>
-    <p class="section-sub">Free in-depth video series — from Python basics to enterprise Power BI, 300+ videos and counting</p>
+    <div class="section-eyebrow" style="color:#ff4444">YouTube</div>
+    <h2 class="section-title">Free learning, <em style="color:#ff4444">on YouTube</em></h2>
+    <p class="section-sub">300+ free videos across Power BI, .NET, Python, Data Analytics, Networking and more. No signup required.</p>
   </div>
-  <div class="yt-grid" id="ytGrid"></div>
+  <div class="yt-new-grid" id="ytGrid"></div>
 </section>
 
 <!-- ═══════════════════ TESTIMONIALS ══════════════════ -->
 <section class="section-wrap">
   <div class="section-heading">
     <div class="section-eyebrow">What My Students Say</div>
-    <h2 class="section-title">Real stories, <em>real impact</em></h2>
-    <p class="section-sub">Here's what learners across the world have experienced after attending my sessions and mentorship — from 25+ countries.</p>
+    <h2 class="section-title">
+      Trusted by learners in <em>25+ countries</em>
+    </h2>
+    <p class="section-sub">
+      From enterprise teams in Saudi Arabia to solo
+      developers in Uganda — real feedback from real
+      training sessions, delivered globally.
+    </p>
+    <!-- Credibility bar -->
+    <div class="testi-cred-bar">
+      <div class="testi-cred-item">
+        <span class="testi-cred-num">500+</span>
+        <span class="testi-cred-label">Training sessions delivered</span>
+      </div>
+      <div class="testi-cred-div"></div>
+      <div class="testi-cred-item">
+        <span class="testi-cred-num">★★★★★</span>
+        <span class="testi-cred-label">Consistently rated 5 stars</span>
+      </div>
+      <div class="testi-cred-div"></div>
+      <div class="testi-cred-item">
+        <span class="testi-cred-num">25+</span>
+        <span class="testi-cred-label">Countries represented</span>
+      </div>
+      <div class="testi-cred-div"></div>
+      <div class="testi-cred-item">
+        <span class="testi-cred-num">3200+</span>
+        <span class="testi-cred-label">Professionals trained</span>
+      </div>
+    </div>
   </div>
-  <div class="testi-stats-bar">
-    <div class="testi-stat"><span class="testi-stat-num" id="testiReviewCount">49</span><span class="testi-stat-label">Reviews</span></div>
-    <div class="testi-stat-div"></div>
-    <div class="testi-stat"><span class="testi-stat-num">25+</span><span class="testi-stat-label">Countries</span></div>
-    <div class="testi-stat-div"></div>
-    <div class="testi-stat"><span class="testi-stat-num" style="color:#f59e0b">★ 5.0</span><span class="testi-stat-label">Avg Rating</span></div>
-    <div class="testi-stat-div"></div>
-    <div class="testi-stat"><span class="testi-stat-num">100%</span><span class="testi-stat-label">Would Recommend</span></div>
-  </div>
-  <div class="testi-filters" id="testiFilters"></div>
-  <div class="testi-new-grid" id="testiNewGrid"></div>
-  <div style="text-align:center;margin-top:36px" id="testiLoadMoreWrap">
-    <button class="btn btn-ghost" onclick="loadMoreTestimonials()" id="testiLoadMoreBtn">Load more reviews</button>
-  </div>
+  <!-- Masonry wall — no filters, no pagination -->
+  <div class="testi-wall" id="testiWall"></div>
 </section>
 
 <!-- ═══════════════════ CTA ════════════════════════════ -->
@@ -443,19 +428,24 @@ const YT = [
 ];
 const ytGrid = document.getElementById('ytGrid');
 if (ytGrid) {
+  ytGrid.className = 'yt-new-grid';
   ytGrid.innerHTML = YT.map(p => `
-    <div class="yt-card">
-      <div class="yt-thumb">
-        <img src="${p.img}" alt="${p.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="yt-thumb-fallback" style="display:none">${p.emoji}</div>
-        <div class="yt-play-overlay"><div class="yt-play-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><polygon points="4,2 14,8 4,14"/></svg></div></div>
-        <div class="yt-badge">▶ YouTube</div>
+    <div class="yt-new-card">
+      <div class="yt-new-thumb">
+        <img src="${p.img}" alt="${p.title}" loading="lazy"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="yt-new-thumb-fallback" style="display:none">${p.emoji}</div>
+        <div class="yt-new-play">
+          <div class="yt-new-play-btn">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="white"><polygon points="4,2 14,8 4,14"/></svg>
+          </div>
+        </div>
       </div>
-      <div class="yt-body">
-        <div class="yt-category">${p.cat}</div>
-        <div class="yt-title">${p.title}</div>
-        <div class="yt-desc">${p.desc}</div>
-        <div class="yt-links">${p.links.map(l=>`<a href="${l.u}" target="_blank" class="yt-link"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><polygon points="4,2 14,8 4,14"/></svg>${l.l}</a>`).join('')}</div>
+      <div class="yt-new-body">
+        <div class="yt-new-category">${p.cat}</div>
+        <div class="yt-new-title">${p.title}</div>
+        <div class="yt-new-desc">${p.desc}</div>
+        <div class="yt-new-links">${p.links.map(l=>`<a href="${l.u}" target="_blank" rel="noopener" class="yt-new-link"><svg width="8" height="8" viewBox="0 0 16 16" fill="currentColor"><polygon points="4,2 14,8 4,14"/></svg>${l.l}</a>`).join('')}</div>
       </div>
     </div>`).join('');
 }
@@ -513,76 +503,29 @@ const ALL_T = [
   {n:'Sarosh Engineer',          loc:'India',           tag:'Interactive & Engaging',      t:'Good way of explaining concepts, taking time to clear participant doubts & keeping session interactive & interesting.'},
 ];
 
-const TESTI_PAGE_SIZE = 9;
-let testiShowing = TESTI_PAGE_SIZE;
-let testiActiveFilter = 'All';
-
-function getTestiTags() {
-  const seen = new Set();
-  const tags = ['All'];
-  ALL_T.forEach(t => { if (!seen.has(t.tag)) { seen.add(t.tag); tags.push(t.tag); } });
-  return tags;
-}
-
-function buildTestiFilters() {
-  const wrap = document.getElementById('testiFilters');
-  if (!wrap) return;
-  wrap.innerHTML = getTestiTags().map(tag =>
-    `<button class="testi-filter-btn${tag === testiActiveFilter ? ' active' : ''}" onclick="filterTestimonials(this)"  data-tag="${tag}">${tag}</button>`
-  ).join('');
-}
-
-function getFilteredTestis() {
-  return testiActiveFilter === 'All' ? ALL_T : ALL_T.filter(t => t.tag === testiActiveFilter);
-}
-
-function renderTestimonials() {
-  const grid = document.getElementById('testiNewGrid');
-  if (!grid) return;
-  const list = getFilteredTestis().slice(0, testiShowing);
-  grid.innerHTML = list.map(t => {
-    const ini = t.n.split(' ').map(w => w[0]).slice(0, 2).join('');
-    return `<div class="testi-new-card">
-      <div class="testi-new-top">
-        <div class="testi-new-stars">★★★★★</div>
-        <div class="testi-new-tag">${t.tag}</div>
-      </div>
-      <div class="testi-new-quote">"${t.t}"</div>
-      <div class="testi-new-person">
-        <div class="testi-new-av">${ini}</div>
-        <div><div class="testi-new-name">${t.n}</div><div class="testi-new-loc">${t.loc}</div></div>
-      </div>
-    </div>`;
+function buildTestiWall() {
+  const wall = document.getElementById('testiWall');
+  if (!wall) return;
+  const shuffled = [...ALL_T].sort(() => Math.random() - 0.5);
+  wall.innerHTML = shuffled.map(t => {
+    const initials = t.n.split(' ').map(w => w[0]).join('').slice(0, 2);
+    return `
+      <div class="testi-wall-card">
+        <div class="testi-wall-stars">★★★★★</div>
+        <div class="testi-wall-text">${t.t}</div>
+        <div class="testi-wall-person">
+          <div class="testi-wall-av">${initials}</div>
+          <div>
+            <div class="testi-wall-name">${t.n}</div>
+            <div class="testi-wall-meta">${t.loc}</div>
+          </div>
+          <div class="testi-wall-tag">${t.tag}</div>
+        </div>
+      </div>`;
   }).join('');
-  const wrap = document.getElementById('testiLoadMoreWrap');
-  const btn  = document.getElementById('testiLoadMoreBtn');
-  if (wrap && btn) {
-    const total = getFilteredTestis().length;
-    if (testiShowing >= total) {
-      wrap.style.display = 'none';
-    } else {
-      wrap.style.display = '';
-      btn.textContent = `Load more (${total - testiShowing} remaining)`;
-    }
-  }
 }
 
-function filterTestimonials(el) {
-  testiActiveFilter = el.dataset.tag;
-  testiShowing = TESTI_PAGE_SIZE;
-  buildTestiFilters();
-  renderTestimonials();
-}
-
-function loadMoreTestimonials() {
-  testiShowing += TESTI_PAGE_SIZE;
-  renderTestimonials();
-}
-
-const _rc = document.getElementById('testiReviewCount');
-if (_rc) _rc.textContent = ALL_T.length;
-buildTestiFilters();
-renderTestimonials();
+buildTestiWall();
 </script>
 </body>
 </html>
