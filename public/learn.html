@@ -802,6 +802,9 @@ PHASES.forEach((ph, pi) => {
 });
 
 let currentIdx = -1;
+let currentMode = 'lessons';
+let currentLabId = null;
+let ADMIN_SECRET = null;
 let done = new Set(JSON.parse(localStorage.getItem('rrskv_done') || '[]'));
 
 const LABS = {
@@ -1245,9 +1248,6 @@ function getAllLabs() {
   return [...LABS.handson, ...LABS.capstone];
 }
 
-// ── Lab state ──────────────────────────────────────────────
-let currentLabId = null;
-
 // ── Lab view transitions ───────────────────────────────────
 function showLab() {
   document.getElementById('home').classList.add('off');
@@ -1355,8 +1355,6 @@ function stopLabLoading(loadingEl, renderedEl, htmlContent, generatedAt) {
 }
 
 // ── Mode switching ─────────────────────────────────────────
-let currentMode = 'lessons';
-
 function switchMode(mode) {
   currentMode = mode;
 
@@ -1506,8 +1504,6 @@ function buildLabsHomeList() {
 }
 
 // ── Admin mode ─────────────────────────────────────────────
-let ADMIN_SECRET = null;
-
 function checkAdminMode() {
   const hash = window.location.hash;
   const match = hash.match(/admin=([^&]+)/);
