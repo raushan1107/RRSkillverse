@@ -1176,6 +1176,294 @@ const BLOG_POSTS = [
   },
 
   {
+    id: 'power-bi-data-transformation',
+    title: 'Chapter 4.3: Data Transformation in Power BI — Clean and Reshape with Power Query',
+    category: 'power-platform',
+    topic: 'power-bi',
+    tags: ['Power BI', 'PL-300', 'Power Query', 'Data Transformation', 'ETL', 'Applied Steps', 'Data Cleaning'],
+    published: '2025-04-22',
+    updated: '2025-04-22',
+    readTime: '7 min',
+    excerpt: 'Once you\'ve profiled your data, the next crucial step is transformation. Power BI\'s Power Query Editor lets you clean, reshape, and structure data without ever touching the original source. Think of it as fixing your Lego pieces before building the castle.',
+    featured: false,
+    content: `
+<div class="blog-story">
+
+  <p>Once you\'ve profiled your data, the next crucial step is
+  <strong>transformation</strong>. Power BI empowers you to clean, reshape, and
+  structure data with the help of its intuitive Power Query Editor. Whether you\'re
+  removing unnecessary columns or pivoting your entire dataset, these transformations
+  make your data analytics-ready — without ever touching the original source.</p>
+
+  <blockquote class="blog-quote">
+    "Power Query transformations are non-destructive — your original data remains
+    untouched while you shape a working version tailored to your needs."
+  </blockquote>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🔧 Common Data Transformation Actions</h2>
+    <p>Power Query Editor exposes a rich set of transformation operations through
+    its ribbon — no code required for most tasks. Here are the most commonly used
+    ones:</p>
+
+    <div class="blog-transform-grid">
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🗑️</span>
+        <div>
+          <div class="blog-transform-name">Remove Columns / Rows</div>
+          <div class="blog-transform-desc">Strip out irrelevant, empty, or
+          duplicate data that would clutter your model.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">✏️</span>
+        <div>
+          <div class="blog-transform-name">Rename Columns</div>
+          <div class="blog-transform-desc">Give columns meaningful names —
+          "Amt" becomes "Sales Amount", "Dt" becomes "Order Date".</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔢</span>
+        <div>
+          <div class="blog-transform-name">Change Data Types</div>
+          <div class="blog-transform-desc">Ensure dates are typed as Date,
+          numbers as Decimal/Integer, and text as Text. Wrong types break DAX
+          calculations.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔽</span>
+        <div>
+          <div class="blog-transform-name">Filter Rows</div>
+          <div class="blog-transform-desc">Keep only the records that matter —
+          filter by date range, region, product category, or any condition.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">✂️</span>
+        <div>
+          <div class="blog-transform-name">Split Columns</div>
+          <div class="blog-transform-desc">Break "Full Name" into "First Name"
+          and "Last Name", or split "Product - Size" into two usable
+          columns.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔗</span>
+        <div>
+          <div class="blog-transform-name">Merge Columns</div>
+          <div class="blog-transform-desc">Combine "City" and "State" into a
+          single "Location" column for cleaner visualisation.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔄</span>
+        <div>
+          <div class="blog-transform-name">Pivot / Unpivot Columns</div>
+          <div class="blog-transform-desc">Reshape flat wide tables into tall,
+          analysis-friendly formats — or vice versa. Essential for poorly
+          structured source data.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📦</span>
+        <div>
+          <div class="blog-transform-name">Group By</div>
+          <div class="blog-transform-desc">Aggregate rows — sum sales by region,
+          count orders by product, or average quantity by category.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>⚙️ Applied Steps — The Magic Recorder</h2>
+    <p>Every transformation you perform is recorded in the
+    <strong>Applied Steps</strong> pane on the right side of Power Query Editor.
+    Think of it as your personal data-cleaning history — a transparent audit trail
+    of every operation applied to your data.</p>
+    <ul>
+      <li>Rename any step to make the pipeline self-documenting</li>
+      <li>Double-click a step to review or edit the transformation settings</li>
+      <li>Delete a step to undo it — the remaining steps re-run automatically</li>
+      <li>Reorder steps when needed (with caution — some steps depend on
+      earlier ones)</li>
+      <li>Each step generates an M language formula — visible in the formula bar</li>
+    </ul>
+    <div class="blog-fact-pill blog-fact-pill-green">
+      <span class="blog-fact-label">💡 Key Principle</span>
+      Applied Steps are executed <strong>top to bottom</strong> in sequence.
+      If you rename a column in Step 3, any step after that which references the
+      old column name will break. Always be mindful of step order when editing
+      existing pipelines.
+    </div>
+  </div>
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>🔄 Real-World Example — Sales Report Cleanup</h2>
+    <p>Imagine you\'re working on a report for a retail clothing company. You receive
+    a CSV file with thousands of rows from multiple store branches. Here\'s a typical
+    transformation pipeline:</p>
+
+    <div class="blog-steps-pipeline">
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">1</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Remove irrelevant columns</div>
+          <div class="blog-pipeline-desc">Delete "Internal Notes" and "ProcessedBy"
+          — not needed for sales analysis.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">2</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Fix data types</div>
+          <div class="blog-pipeline-desc">"Sale Date" is stored as text — change it
+          to Date type so time intelligence DAX works correctly.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">3</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Filter rows</div>
+          <div class="blog-pipeline-desc">Keep only data from the last 2 years —
+          filter on Sale Date ≥ today minus 730 days.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">4</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Split column</div>
+          <div class="blog-pipeline-desc">"Product Name - Size" splits into two
+          columns: "Product Name" and "Size" — by delimiter.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">5</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Merge columns</div>
+          <div class="blog-pipeline-desc">Combine "City" and "State" into a single
+          "Location" column separated by ", " for cleaner map visuals.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step blog-pipeline-step-done">
+        <div class="blog-pipeline-num blog-pipeline-num-done">✓</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Close &amp; Apply</div>
+          <div class="blog-pipeline-desc">Data is clean, consistent, and loaded
+          into the model — ready for relationships and DAX measures.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🧠 Analogy — Data as Lego Blocks</h2>
+    <p>Think of each row of data as a Lego piece. Raw data might have broken,
+    mismatched, or oddly shaped pieces. <strong>Transformation is like fixing
+    the pieces</strong> — cutting some, merging others, snapping them into the
+    right orientation — so you can build a stable, accurate model.</p>
+    <p>Without proper preparation, your Lego castle will collapse under its own
+    weight. 🏰 The same is true for Power BI reports built on messy, untyped,
+    or duplicated data.</p>
+  </div>
+
+  <div class="blog-summary">
+    <h2>📌 Summary — Transformation Principles to Remember</h2>
+    <ul style="padding-left:18px;margin-top:10px">
+      <li style="margin-bottom:8px">
+        <strong>Non-destructive by design</strong> — Power Query never modifies
+        your original data source. All transformations create a computed view.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Applied Steps are sequential</strong> — steps execute top to
+        bottom. Edit with awareness of downstream dependencies.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Data types matter</strong> — wrong types cause DAX errors and
+        incorrect aggregations. Always verify types after loading data.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Transform before you model</strong> — clean data in Power Query,
+        not in DAX. It is more efficient and easier to maintain.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Transformation = trust</strong> — reports built on clean,
+        well-shaped data earn credibility with stakeholders.
+      </li>
+    </ul>
+  </div>
+
+  <div class="blog-exercise">
+    <h2>🧠 Try It Yourself</h2>
+    <p>Open the Sales dataset in Power Query and complete these tasks:</p>
+    <ol class="blog-exercise-steps">
+      <li>
+        <strong>Filter rows based on a condition</strong><br/>
+        Keep only orders where the Sales Amount is greater than 1000.
+        Check the Applied Steps pane — notice the new "Filtered Rows" step.
+      </li>
+      <li>
+        <strong>Split a column</strong><br/>
+        If your dataset has a column like "Product - Size", split it by the
+        delimiter " - " into two separate columns. Rename both clearly.
+      </li>
+      <li>
+        <strong>Rename an Applied Step</strong><br/>
+        Right-click any step in the Applied Steps pane and rename it to
+        something descriptive like "Remove Internal Columns" instead of
+        the default "Removed Columns".
+      </li>
+    </ol>
+  </div>
+
+  <div class="blog-mslearn">
+    <div class="blog-mslearn-title">📚 Go Deeper — Microsoft Learn Resources</div>
+    <ul class="blog-mslearn-links">
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-query/transform-data"
+           target="_blank" rel="noopener">
+          Transform data in Power Query Editor
+        </a>
+      </li>
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-query/applied-steps"
+           target="_blank" rel="noopener">
+          Understanding Applied Steps in Power Query
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="blog-next-chapter">
+    <span class="blog-next-label">Up Next in Chapter 4</span>
+    <span class="blog-next-title">
+      4.4 Data Modeling — Fact and Dimension tables, star schema vs snowflake
+      schema, relationship cardinality, and why a clean model is the
+      foundation of every great Power BI report.
+    </span>
+  </div>
+
+</div>
+    `
+  },
+
+  {
     id: 'blazor-component-lifecycle',
     title: 'Blazor Component Lifecycle — Every Method Explained',
     category: 'dotnet',

@@ -1171,6 +1171,132 @@
     grid-column: 1;
   }
 }
+
+/* ── Transformation action grid ── */
+.blog-transform-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.blog-transform-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: border-color 0.15s;
+}
+
+.blog-transform-item:hover {
+  border-color: var(--border-md);
+}
+
+.blog-transform-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.blog-transform-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.blog-transform-desc {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ── Pipeline steps ── */
+.blog-steps-pipeline {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 18px 0 4px;
+  gap: 0;
+}
+
+.blog-pipeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: border-color 0.15s;
+}
+
+.blog-pipeline-step:hover {
+  border-color: var(--border-md);
+}
+
+.blog-pipeline-step-done {
+  border-color: rgba(45,122,79,0.3);
+  background: rgba(45,122,79,0.04);
+}
+
+.blog-pipeline-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(26,86,219,0.12);
+  border: 1px solid rgba(26,86,219,0.25);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-family: var(--mono);
+}
+
+.blog-pipeline-num-done {
+  background: rgba(45,122,79,0.12);
+  border-color: rgba(45,122,79,0.3);
+  color: #2d7a4f;
+}
+
+.blog-pipeline-content {
+  flex: 1;
+}
+
+.blog-pipeline-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.blog-pipeline-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.blog-pipeline-connector {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1;
+  padding: 3px 0;
+  margin-left: 13px;
+}
+
+@media (max-width: 640px) {
+  .blog-transform-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
 <body>
