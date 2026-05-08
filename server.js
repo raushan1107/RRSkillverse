@@ -418,23 +418,29 @@ app.get('/api/lab/:id', (req, res) => {
 // ── POST /api/lab/generate — generate and cache ────────────
 app.post('/api/lab/generate', labGenLimiter, async (req, res) => {
   const { labId, labTitle, labPhase, labObjective,
-          labDeliverable, labPrereqs } = req.body;
+          labDeliverable, labPrereqs, labStyle, courseTitle } = req.body;
 
   if (!labId || !labTitle) {
     return res.status(400).json({ error: 'Missing required fields.' });
   }
 
-  const id             = String(labId).replace(/[^a-z0-9-]/g, '').slice(0, 20);
-  const safeTitle      = String(labTitle).slice(0, 120).replace(/[<>]/g, '');
-  const safePhase      = String(labPhase || '').slice(0, 80).replace(/[<>]/g, '');
-  const safeObjective  = String(labObjective || '').slice(0, 400);
+  const id              = String(labId).replace(/[^a-z0-9-]/g, '').slice(0, 20);
+  const safeTitle       = String(labTitle).slice(0, 120).replace(/[<>]/g, '');
+  const safePhase       = String(labPhase || '').slice(0, 80).replace(/[<>]/g, '');
+  const safeObjective   = String(labObjective || '').slice(0, 400);
   const safeDeliverable = String(labDeliverable || '').slice(0, 300);
-  const safePrereqs    = Array.isArray(labPrereqs)
+  const safePrereqs     = Array.isArray(labPrereqs)
     ? labPrereqs.slice(0, 6).map(p => String(p).slice(0, 80)).join(', ')
     : '';
+  const safeLabStyle    = (labStyle === 'gui') ? 'gui' : 'code';
+  const safeCourseTitle = courseTitle
+    ? String(courseTitle).slice(0, 120).replace(/[<>]/g, '')
+    : '';
+
+  const courseLabel = safeCourseTitle || 'this course';
 
   const systemMsg = `You are Raushan Ranjan, MCT, Koenig Solutions.
-Write a precise, step-by-step hands-on lab guide for a .NET 8 & Blazor course.
+Write a precise, step-by-step hands-on lab guide for ${courseLabel}.
 
 Lab: "${safeTitle}"
 Phase: ${safePhase}
@@ -442,36 +448,48 @@ Objective: ${safeObjective}
 Deliverable: ${safeDeliverable}
 Prerequisites covered: ${safePrereqs}
 
+${safeLabStyle === 'gui'
+  ? `IMPORTANT — GUI COURSE RULES:
+This is a GUI-based tool course (${safeCourseTitle}).
+Do NOT include any terminal commands, CMD, PowerShell,
+or CLI instructions whatsoever.
+Do NOT include code blocks with shell commands.
+ALL steps must describe UI interactions:
+- "Click Get Data → Excel Workbook"
+- "In the Power Query Editor, select the Sales column"
+- "Drag Revenue to the Values well"
+Use numbered steps. Be specific about what to click,
+where to look, and what to type in UI fields.`
+  : `This course uses code and CLI tools.
+Include terminal commands, code blocks, and CLI steps
+where appropriate. Use the language relevant to this course.`}
+
 CRITICAL — this guide must be REPRODUCIBLE. Every student must get
-the same result. Use exact file names, exact variable names,
-exact commands. No variation allowed.
+the same result. No variation allowed.
 
 Output HTML only. Structure exactly as follows:
 
 <h2>Environment Check</h2>
-<p>What the student needs installed before starting.</p>
-<pre><code class="language-bash">exact commands to verify setup</code></pre>
+<p>What the student needs installed or open before starting.</p>
 
 <h2>Step 1 — [Action Title]</h2>
 <p>What and WHY — one short paragraph.</p>
-<pre><code class="language-csharp">exact code</code></pre>
 <tip>One practical trainer tip for this step</tip>
 
 [Repeat Step N pattern for 4–7 steps]
 
 <h2>Run and Verify</h2>
-<p>Exact steps to run the project and what the student should see.</p>
+<p>Exact steps to verify the result and what the student should see.</p>
 <warn>One common mistake that causes this step to fail</warn>
 
 <h2>What You Built</h2>
 <p>2–3 sentences. What concept was practiced. How it connects to the next lab.</p>
 
 Rules:
-- All file names use exact casing: e.g. WeatherService.cs not weatherservice.cs
-- All commands are complete and copy-pasteable
-- Code blocks are complete, not partial snippets
 - No placeholders like YOUR_VALUE — use sensible defaults
-- Output HTML only, no markdown, no backtick fences outside code blocks`;
+- Output HTML only, no markdown, no backtick fences outside code blocks
+- For code courses: include complete, copy-pasteable code blocks
+- For GUI courses: describe UI steps in detail — what to click, where to find it, what to enter`;
 
   const userMsg = `Generate the complete lab guide for: "${safeTitle}".
 This guide will be saved and shown to all students — make it precise and consistent.`;

@@ -7,6 +7,13 @@ const COURSE_CATALOG = {
     subtitle: 'Intelligent Enterprise Dev · .NET 8 & Azure AI',
     description: 'A zero-to-production learning path. Start with zero C# knowledge, build solid fundamentals, then develop real Blazor applications powered by Azure AI.',
     stats: ['46 lessons', '4 phases', 'Zero to Azure AI'],
+    loadingMessages: [
+      'Writing the code example…',
+      'Generating lesson content…',
+      'Compiling concepts…',
+      'Preparing your lesson…'
+    ],
+    labStyle: 'code',
     phases: [
       {
         label: 'Phase 1', title: 'C# Foundations',
@@ -164,6 +171,13 @@ const COURSE_CATALOG = {
     subtitle: 'AZ-204 · Azure Developer Associate',
     description: 'Build cloud-native solutions on Azure — Functions, Cosmos DB, Blob Storage, API Management, and secure enterprise deployments.',
     stats: ['40+ lessons', '5 phases', 'Developer → Certified'],
+    loadingMessages: [
+      'Provisioning the Azure example…',
+      'Generating lesson content…',
+      'Deploying concepts to your brain…',
+      'Preparing your lesson…'
+    ],
+    labStyle: 'code',
     phases: [
       {
         label: 'Phase 1', title: 'Azure Foundations',
@@ -305,6 +319,13 @@ const COURSE_CATALOG = {
     subtitle: 'PL-300 · Power BI Data Analyst Associate',
     description: 'Complete Power BI from data connection to enterprise deployment — DAX, data modeling, reports, dashboards, and the PL-300 certification.',
     stats: ['45+ lessons', '5 phases', 'Analyst → Certified'],
+    loadingMessages: [
+      'Building the Power BI walkthrough…',
+      'Preparing your lesson…',
+      'Generating visual examples…',
+      'Loading Power BI concepts…'
+    ],
+    labStyle: 'gui',
     phases: [
       {
         label: 'Phase 1', title: 'Power BI Foundations',
@@ -438,7 +459,14 @@ const COURSE_CATALOG = {
         }
       ]
     }
-  }
+  },
+
+  // ── Fallback loading messages for courses without their own ─
+  defaultLoadingMessages: [
+    'Preparing your lesson…',
+    'Generating content…',
+    'Loading…'
+  ]
 
 };
 

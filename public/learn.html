@@ -841,14 +841,9 @@ async function apiPost(path, body) {
 }
 
 // ── Part A: Loading sequence ───────────────────────────────
-const LOADING_MSGS = [
-  'Reading the topic...',
-  'Thinking like Raushan...',
-  'Building the analogy...',
-  'Writing the code example...',
-  'Adding the quick quiz...',
-  'Reviewing for clarity...'
-];
+const LOADING_MSGS = (_courseData && _courseData.loadingMessages)
+  ? _courseData.loadingMessages
+  : ['Preparing your lesson…', 'Generating content…', 'Loading…'];
 let loadingInterval = null;
 let loadingStageTimeout = null;
 
@@ -1478,7 +1473,9 @@ async function generateLabGuide(lab) {
       labPhase:       lab.phase,
       labObjective:   lab.objective,
       labDeliverable: lab.deliverable,
-      labPrereqs:     lab.prereqs
+      labPrereqs:     lab.prereqs,
+      labStyle:       (_courseData && _courseData.labStyle) || 'code',
+      courseTitle:    _courseData ? _courseData.title : ''
     });
 
     clearInterval(interval);
