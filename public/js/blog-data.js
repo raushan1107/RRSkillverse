@@ -940,6 +940,242 @@ const BLOG_POSTS = [
   },
 
   {
+    id: 'power-bi-data-exploration-options',
+    title: 'Chapter 4.2: Data Exploration in Power BI — Column Quality, Distribution and Profile',
+    category: 'power-platform',
+    topic: 'power-bi',
+    tags: ['Power BI', 'PL-300', 'Power Query', 'Column Quality', 'Column Profile', 'Data Profiling', 'Data Cleaning'],
+    published: '2025-04-21',
+    updated: '2025-04-21',
+    readTime: '6 min',
+    excerpt: 'Before diving into visuals or modelling, understanding your data is a vital first step. Power BI\'s Power Query Editor gives you three powerful built-in tools — Column Quality, Column Distribution, and Column Profile — to validate, explore, and clean your data before it ever reaches a report.',
+    featured: false,
+    content: `
+<div class="blog-story">
+
+  <p>Before diving deep into visuals or modelling, <strong>understanding your data
+  is a vital first step</strong>. Power BI provides a powerful set of tools to help
+  you examine the structure, quality, and distribution of your data — directly within
+  the Power Query Editor, before any transformation or modelling begins.</p>
+
+  <blockquote class="blog-quote">
+    "These data exploration tools reduce the guesswork and allow report creators to
+    validate assumptions early in the development process."
+  </blockquote>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🔍 Data Preview and Column Indicators</h2>
+    <p>As soon as you load data into Power Query Editor, you get a preview grid of
+    your dataset. But there\'s more beneath the surface — enable
+    <strong>Column Quality</strong>, <strong>Column Distribution</strong>, and
+    <strong>Column Profile</strong> from the <strong>View</strong> tab to gain
+    richer insights about every column in your dataset.</p>
+    <p>Once enabled, Power Query displays contextual statistics above or below each
+    column — giving you an at-a-glance picture of your data\'s health before you
+    write a single transformation step.</p>
+  </div>
+
+  <div class="blog-profiling-grid">
+
+    <div class="blog-profiling-card">
+      <div class="blog-profiling-card-header">
+        <span class="blog-profiling-icon">✅</span>
+        <span class="blog-profiling-title">Column Quality</span>
+      </div>
+      <div class="blog-profiling-card-body">
+        <p>Shows the <strong>percentage of valid, error, and empty values</strong>
+        for each column as a horizontal bar directly above the column data.</p>
+        <ul>
+          <li>Instantly spot which columns have missing or dirty data</li>
+          <li>Green = valid, red = errors, grey = empty</li>
+          <li>Hover over the bar to see exact counts and percentages</li>
+          <li>Accessible via <em>View → Column quality</em></li>
+        </ul>
+        <div class="blog-profiling-use-case">
+          <span class="blog-profiling-use-label">When to use</span>
+          Quick data validation pass — identify columns that need cleaning
+          before you start building transformations.
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-profiling-card">
+      <div class="blog-profiling-card-header">
+        <span class="blog-profiling-icon">📊</span>
+        <span class="blog-profiling-title">Column Distribution</span>
+      </div>
+      <div class="blog-profiling-card-body">
+        <p>Visually displays the <strong>value distribution</strong> across a column
+        as a small histogram, plus distinct and unique value counts.</p>
+        <ul>
+          <li>Distinct count = number of different values (including duplicates counted once)</li>
+          <li>Unique count = values that appear exactly once</li>
+          <li>The histogram shows how data is spread — spot skewed distributions instantly</li>
+          <li>Helpful for verifying categorical columns (e.g. should Region have exactly 4 values?)</li>
+        </ul>
+        <div class="blog-profiling-use-case">
+          <span class="blog-profiling-use-label">When to use</span>
+          Spotting outliers, duplicate issues, and verifying that categorical
+          columns contain expected values only.
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-profiling-card blog-profiling-card-full">
+      <div class="blog-profiling-card-header">
+        <span class="blog-profiling-icon">🧪</span>
+        <span class="blog-profiling-title">Column Profile</span>
+      </div>
+      <div class="blog-profiling-card-body">
+        <p>The most detailed of the three — provides a <strong>full statistical
+        breakdown</strong> of a selected column in a dedicated panel at the bottom
+        of Power Query Editor.</p>
+        <ul>
+          <li>Count, empty count, distinct count, unique count</li>
+          <li>Min, max, average, standard deviation (for numeric columns)</li>
+          <li>Most frequent and least frequent values with counts</li>
+          <li>A value distribution chart for the selected column</li>
+          <li>Data type and any detected errors shown clearly</li>
+        </ul>
+        <div class="blog-profiling-use-case">
+          <span class="blog-profiling-use-label">When to use</span>
+          Deep-dive analysis of a specific column — understand its range,
+          outliers, and value distribution before deciding how to transform it.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>📁 How to Enable All Three Features</h2>
+    <p>All three tools are in the same place — the <strong>View</strong> tab of the
+    Power Query Editor ribbon:</p>
+    <ol style="padding-left:18px;margin-top:10px">
+      <li style="margin-bottom:8px">
+        Open Power Query Editor —
+        click <em>Transform Data</em> from the Home ribbon in Power BI Desktop
+      </li>
+      <li style="margin-bottom:8px">
+        Click the <strong>View</strong> tab in the Power Query ribbon
+      </li>
+      <li style="margin-bottom:8px">
+        In the <strong>Data Preview</strong> group, check:
+        <strong>Column quality</strong>, <strong>Column distribution</strong>,
+        and <strong>Column profile</strong>
+      </li>
+      <li style="margin-bottom:8px">
+        The indicators appear immediately — quality bars above columns,
+        distribution histograms below, and profile panel at the bottom
+        when you click a column
+      </li>
+    </ol>
+    <div class="blog-fact-pill blog-fact-pill-green">
+      <span class="blog-fact-label">💡 Pro Tip</span>
+      By default, Power Query profiles only the <strong>first 1,000 rows</strong>.
+      To profile the entire dataset, click the status bar at the bottom of Power
+      Query Editor and change it from "Column profiling based on top 1000 rows"
+      to "Column profiling based on entire data set". This matters for large tables
+      where errors may only appear in later rows.
+    </div>
+  </div>
+
+  <div class="blog-summary">
+    <h2>📌 Summary — Which Tool for Which Job</h2>
+    <div class="blog-comparison-table">
+      <div class="blog-table-header">
+        <div class="blog-table-cell blog-table-feature">Tool</div>
+        <div class="blog-table-cell">What It Shows</div>
+        <div class="blog-table-cell">Best Used For</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">✅ Column Quality</div>
+        <div class="blog-table-cell">Valid / Error / Empty %</div>
+        <div class="blog-table-cell">Quick data health check</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">📊 Column Distribution</div>
+        <div class="blog-table-cell">Value spread, distinct &amp; unique counts</div>
+        <div class="blog-table-cell">Spotting outliers and duplicates</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">🧪 Column Profile</div>
+        <div class="blog-table-cell">Full stats: min, max, avg, std dev, frequency</div>
+        <div class="blog-table-cell">Deep-dive on a specific column</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-exercise">
+    <h2>🧠 Quick Challenge — Test Your Understanding</h2>
+    <p>Answer these questions to check your grasp of the profiling tools:</p>
+    <ol class="blog-exercise-steps">
+      <li>
+        <strong>Which profiling feature would you use to see the most and
+        least frequent values in a column?</strong><br/>
+        <em style="color:var(--text-dim);font-size:12.5px">
+          Hint: It shows a full statistical breakdown with value frequency.
+        </em>
+      </li>
+      <li>
+        <strong>How can you identify columns with a high number of nulls
+        at a glance?</strong><br/>
+        <em style="color:var(--text-dim);font-size:12.5px">
+          Hint: It shows a colour-coded percentage bar above each column.
+        </em>
+      </li>
+      <li>
+        <strong>What feature helps in spotting skewed data or unexpected
+        value frequencies?</strong><br/>
+        <em style="color:var(--text-dim);font-size:12.5px">
+          Hint: It shows a histogram of how values are spread across the column.
+        </em>
+      </li>
+    </ol>
+    <div class="blog-challenge-answers">
+      <div class="blog-challenge-answer-title">✅ Answers</div>
+      <ol style="padding-left:18px;margin-top:8px;font-size:13px;color:var(--text-muted)">
+        <li style="margin-bottom:6px">
+          <strong>Column Profile</strong> — shows most/least frequent values
+          with counts in its detailed statistics panel.
+        </li>
+        <li style="margin-bottom:6px">
+          <strong>Column Quality</strong> — the grey section of the bar
+          represents empty/null values as a percentage.
+        </li>
+        <li style="margin-bottom:6px">
+          <strong>Column Distribution</strong> — the histogram reveals the
+          shape of the value distribution across the column.
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="blog-mslearn">
+    <div class="blog-mslearn-title">📚 Go Deeper — Microsoft Learn Resources</div>
+    <ul class="blog-mslearn-links">
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-query/data-profiling-tools"
+           target="_blank" rel="noopener">
+          Overview of data profiling tools in Power Query
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="blog-next-chapter">
+    <span class="blog-next-label">Up Next in Chapter 4</span>
+    <span class="blog-next-title">
+      4.3 Data Transformation — splitting columns, merging tables, unpivoting
+      data, and building reusable transformation steps in Power Query.
+    </span>
+  </div>
+
+</div>
+    `
+  },
+
+  {
     id: 'blazor-component-lifecycle',
     title: 'Blazor Component Lifecycle — Every Method Explained',
     category: 'dotnet',

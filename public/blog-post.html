@@ -1048,6 +1048,129 @@
   opacity: 0.75;
   text-decoration: underline;
 }
+
+/* ── Data profiling cards ── */
+.blog-profiling-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 28px 0;
+}
+
+.blog-profiling-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.blog-profiling-card:hover {
+  border-color: var(--border-md);
+  transform: translateY(-2px);
+}
+
+.blog-profiling-card-full {
+  grid-column: 1 / -1;
+}
+
+.blog-profiling-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-profiling-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.blog-profiling-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+.blog-profiling-card-body {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.blog-profiling-card-body p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.blog-profiling-card-body ul {
+  padding-left: 16px;
+  margin: 0;
+}
+
+.blog-profiling-card-body ul li {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  line-height: 1.6;
+}
+
+.blog-profiling-use-case {
+  background: rgba(26,86,219,0.05);
+  border: 1px solid rgba(26,86,219,0.15);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: 4px;
+}
+
+.blog-profiling-use-label {
+  display: block;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+/* ── Challenge answers reveal box ── */
+.blog-challenge-answers {
+  background: rgba(45,122,79,0.06);
+  border: 1px solid rgba(45,122,79,0.2);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-top: 20px;
+}
+
+.blog-challenge-answer-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #2d7a4f;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 640px) {
+  .blog-profiling-grid {
+    grid-template-columns: 1fr;
+  }
+  .blog-profiling-card-full {
+    grid-column: 1;
+  }
+}
 </style>
 </head>
 <body>
