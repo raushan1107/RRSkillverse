@@ -164,7 +164,13 @@ async function callAzure(messages, maxTokens) {
 function buildLessonSystemPrompt(courseId, courseTitle,
   phaseLabel, phaseTitle, lessonTitle) {
 
-  const trainerIdentity = `You are Raushan Ranjan, \
+  const trainerIdentity = `OUTPUT RULES — CRITICAL:
+Output raw HTML only. No markdown. No backticks.
+Do NOT wrap output in \`\`\`html or \`\`\` or any code fence.
+Do NOT include <!DOCTYPE>, <html>, <head>, or <body> tags.
+Start your response directly with the first HTML element.
+
+You are Raushan Ranjan, \
 a Microsoft Certified Trainer (MCT) at Koenig Solutions, India.
 You teach with a warm, direct classroom style.
 Always start with a real-world analogy.
@@ -348,7 +354,13 @@ Course: ${safeCourseTitle}`;
       [{ role: 'system', content: systemMsg }, { role: 'user', content: userMsg }],
       1800
     );
-    res.json({ content });
+    // Strip markdown fences if model ignored instructions
+    const cleanedContent = content
+      .replace(/^```html\s*/i, '')
+      .replace(/^```\s*/i, '')
+      .replace(/```\s*$/i, '')
+      .trim();
+    res.json({ content: cleanedContent });
   } catch (err) {
     console.error('Lesson generation error:', err.message);
     res.status(502).json({ error: err.message });
@@ -439,7 +451,13 @@ app.post('/api/lab/generate', labGenLimiter, async (req, res) => {
 
   const courseLabel = safeCourseTitle || 'this course';
 
-  const systemMsg = `You are Raushan Ranjan, MCT, Koenig Solutions.
+  const systemMsg = `OUTPUT RULES — CRITICAL:
+Output raw HTML only. No markdown. No backticks.
+Do NOT wrap output in \`\`\`html or \`\`\` or any code fence.
+Do NOT include <!DOCTYPE>, <html>, <head>, or <body> tags.
+Start your response directly with the first HTML element.
+
+You are Raushan Ranjan, MCT, Koenig Solutions.
 Write a precise, step-by-step hands-on lab guide for ${courseLabel}.
 
 Lab: "${safeTitle}"
@@ -500,18 +518,24 @@ This guide will be saved and shown to all students — make it precise and consi
        { role: 'user', content: userMsg }],
       2200
     );
+    // Strip markdown fences if model ignored instructions
+    const cleanedContent = content
+      .replace(/^```html\s*/i, '')
+      .replace(/^```\s*/i, '')
+      .replace(/```\s*$/i, '')
+      .trim();
 
     const filePath = path.join(LABS_CACHE_DIR, `${id}.json`);
     const cacheData = {
       labId: id,
       labTitle: safeTitle,
-      content,
+      content: cleanedContent,
       generatedAt: new Date().toISOString(),
       version: 1
     };
     await fsPromises.writeFile(filePath, JSON.stringify(cacheData, null, 2));
 
-    res.json({ cached: true, content, generatedAt: cacheData.generatedAt });
+    res.json({ cached: true, content: cleanedContent, generatedAt: cacheData.generatedAt });
   } catch (err) {
     console.error('Lab generation error:', err.message);
     res.status(502).json({ error: err.message });

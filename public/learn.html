@@ -624,6 +624,42 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 .ai-fab:hover { transform: scale(1.08); }
 .ai-fab-tooltip { display: none; }
 .shell { padding-top: 60px !important; }
+
+/* ── LAB DOWNLOAD BAR (PL-300 sample data) ───────────────── */
+.lab-download-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: rgba(26,86,219,0.06);
+  border: 1px solid rgba(26,86,219,0.2);
+  border-radius: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.lab-download-bar span:first-child {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.lab-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background: var(--accent, #1a56db);
+  color: white;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.lab-download-btn:hover { opacity: 0.88; }
+.lab-download-note {
+  font-size: 11px;
+  color: var(--ink-3, #888884);
+}
 </style>
 <script src="js/courses-data.js"></script>
 </head>
@@ -1506,6 +1542,23 @@ function stopLabLoading(loadingEl, renderedEl, htmlContent, generatedAt) {
 
     renderedEl.classList.add('entering');
     renderedEl.innerHTML = html + dateNote;
+
+    // Inject download bar for PL-300 labs (deterministic — works for cached labs too)
+    if (_courseId === 'pl300' && !renderedEl.querySelector('.lab-download-bar')) {
+      const bar = document.createElement('div');
+      bar.className = 'lab-download-bar';
+      bar.innerHTML = `
+        <span>📥 Sample Data</span>
+        <a href="/downloads/SalesData.xlsx"
+           download="SalesData.xlsx"
+           class="lab-download-btn">
+          Download SalesData.xlsx
+        </a>
+        <span class="lab-download-note">
+          50 rows · 2 sheets · INR sales data
+        </span>`;
+      renderedEl.insertBefore(bar, renderedEl.firstChild);
+    }
 
     renderedEl.querySelectorAll('pre code').forEach(block => {
       hljs.highlightElement(block);
