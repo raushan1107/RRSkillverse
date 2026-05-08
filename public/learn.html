@@ -1221,13 +1221,123 @@ document.getElementById('ask-input').addEventListener('keydown', e => {
   const labParam    = p.get('lab');
   if (courseParam && courseParam !== 'dotnet' && courseParam !== 'net') {
     const name = courseParam.charAt(0).toUpperCase() + courseParam.slice(1);
-    document.getElementById('main').innerHTML =
-      `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--ink-3)">
-        <div style="font-size:32px">🚧</div>
-        <div style="font-size:16px;font-weight:500;color:var(--ink)">${name} course coming soon</div>
-        <div style="font-size:13px">We're building this track — check back soon!</div>
-        <a href="courses.html" style="margin-top:8px;font-size:13px;color:var(--accent)">← Back to Skillverse Library</a>
-      </div>`;
+    document.getElementById('main').innerHTML = `
+    <div style="
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      min-height:calc(100vh - 200px);
+      padding:48px 32px;text-align:center;
+      gap:20px">
+
+      <div style="
+        width:72px;height:72px;border-radius:16px;
+        background:linear-gradient(135deg,
+          rgba(26,86,219,0.12),rgba(14,165,233,0.08));
+        border:1px solid rgba(26,86,219,0.2);
+        display:flex;align-items:center;
+        justify-content:center;font-size:28px">
+        🚧
+      </div>
+
+      <div style="
+        font-size:10px;font-weight:700;
+        letter-spacing:1px;text-transform:uppercase;
+        color:var(--ink-3,#888884);
+        font-family:var(--mono,'DM Mono',monospace)">
+        ${courseParam.toUpperCase().replace(/-/g,' ')}
+      </div>
+
+      <div style="
+        font-size:26px;font-weight:700;
+        color:var(--ink,#0f0f0d);
+        letter-spacing:-0.4px;line-height:1.2;
+        max-width:420px">
+        This course is being<br>prepared for you
+      </div>
+
+      <p style="
+        font-size:14px;color:var(--ink-3,#888884);
+        max-width:400px;line-height:1.75;margin:0">
+        We're building structured lessons, code examples,
+        and hands-on labs for this track.
+        The <strong style="color:var(--ink,#0f0f0d)">
+        Intelligent Enterprise Dev with .NET 8 &amp; Azure AI
+        </strong> course is live now.
+      </p>
+
+      <div style="
+        display:flex;gap:8px;margin-top:4px;
+        flex-wrap:wrap;justify-content:center">
+        <a href="learn.html" style="
+          background:var(--ink,#0f0f0d);color:white;
+          border-radius:8px;padding:10px 20px;
+          font-size:13.5px;font-weight:600;
+          text-decoration:none;
+          transition:background 0.15s"
+          onmouseover="this.style.background='#2d2d2b'"
+          onmouseout="this.style.background='var(--ink,#0f0f0d)'">
+          Open Live Course →
+        </a>
+        <a href="courses.html" style="
+          background:none;
+          border:1px solid var(--line,#e8e8e4);
+          color:var(--ink-3,#888884);
+          border-radius:8px;padding:10px 20px;
+          font-size:13.5px;font-weight:500;
+          text-decoration:none;
+          transition:all 0.15s"
+          onmouseover="this.style.borderColor='var(--ink-2,#3a3a38)';this.style.color='var(--ink,#0f0f0d)'"
+          onmouseout="this.style.borderColor='var(--line,#e8e8e4)';this.style.color='var(--ink-3,#888884)'">
+          ← Back to Library
+        </a>
+      </div>
+
+      <div style="
+        margin-top:16px;padding:16px 20px;
+        background:var(--off-white,#f8f8f6);
+        border:1px solid var(--line,#e8e8e4);
+        border-radius:10px;max-width:440px;width:100%">
+        <div style="
+          font-size:10px;font-weight:700;
+          letter-spacing:0.8px;text-transform:uppercase;
+          color:var(--ink-3,#888884);margin-bottom:10px">
+          Live Now
+        </div>
+        <div style="
+          display:flex;align-items:center;gap:10px;
+          text-decoration:none;cursor:pointer"
+          onclick="window.location.href='learn.html'">
+          <div style="
+            width:36px;height:36px;border-radius:8px;
+            background:linear-gradient(135deg,#1a56db,#0ea5e9);
+            display:flex;align-items:center;
+            justify-content:center;font-size:14px;
+            flex-shrink:0">🚀</div>
+          <div style="text-align:left">
+            <div style="
+              font-size:13px;font-weight:600;
+              color:var(--ink,#0f0f0d)">
+              Intelligent Enterprise Dev with .NET 8 &amp; Azure AI
+            </div>
+            <div style="
+              font-size:11px;color:var(--ink-3,#888884);
+              margin-top:2px">
+              46 lessons · 4 phases · Blazor + Azure AI
+            </div>
+          </div>
+          <div style="
+            margin-left:auto;font-size:11px;
+            font-weight:700;color:#2d7a4f;
+            background:rgba(45,122,79,0.1);
+            border:1px solid rgba(45,122,79,0.2);
+            border-radius:20px;padding:2px 9px;
+            white-space:nowrap">
+            ● LIVE
+          </div>
+        </div>
+      </div>
+
+    </div>`;
     return;
   }
   if (modeParam === 'labs') {

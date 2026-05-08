@@ -140,24 +140,19 @@
 }
 
 .course-live {
-  border-color: rgba(63,185,80,0.3) !important;
+  border-color: rgba(45,122,79,0.4) !important;
+  background: linear-gradient(160deg, rgba(45,122,79,0.06) 0%, var(--bg2) 50%) !important;
+  box-shadow: 0 0 0 1px rgba(45,122,79,0.15) inset !important;
 }
 .course-live::before {
   background: linear-gradient(90deg,#3fb950,#2d7a4f) !important;
   transform: scaleX(1) !important;
 }
+.course-live .course-title-new {
+  color: var(--text) !important;
+}
 .course-live-badge {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  font-size: 8.5px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  padding: 3px 9px;
-  border-radius: 20px;
-  background: rgba(63,185,80,0.15);
-  color: #3fb950;
-  border: 1px solid rgba(63,185,80,0.3);
+  display: none;
 }
 
 .course-card-header {
@@ -769,7 +764,15 @@ function renderCourses() {
     ? COURSES_DATA
     : COURSES_DATA.filter(c => c.cat === activeFilter);
 
-  if (!filtered.length) {
+  const sorted = [...filtered].sort((a, b) => {
+    if (a.live && !b.live) return -1;
+    if (!a.live && b.live) return 1;
+    const aSessions = parseInt(a.sessions) || 0;
+    const bSessions = parseInt(b.sessions) || 0;
+    return bSessions - aSessions;
+  });
+
+  if (!sorted.length) {
     grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><p>No courses in this category yet.</p></div>';
     return;
   }
@@ -781,13 +784,15 @@ function renderCourses() {
     'Beginner → Advanced':'#1a56db'
   };
 
-  grid.innerHTML = filtered.map(c => {
+  grid.innerHTML = sorted.map(c => {
     const color = levelColor[c.level] || '#888';
     return `<div class="course-card-new${c.live ? ' course-live' : ''}" onclick="window.location.href='${c.link}'">
-      ${c.live ? '<div class="course-live-badge">● LIVE NOW</div>' : ''}
       <div class="course-card-header">
         <span class="course-icon">${c.icon}</span>
-        <span class="course-sessions-badge">${c.sessions} sessions</span>
+        <div style="display:flex;align-items:center;gap:6px">
+          ${c.live ? `<span style="font-size:9px;font-weight:800;letter-spacing:0.5px;padding:3px 9px;border-radius:20px;background:rgba(45,122,79,0.15);color:#3fb950;border:1px solid rgba(45,122,79,0.3)">● LIVE</span>` : ''}
+          <span class="course-sessions-badge">${c.sessions} sessions</span>
+        </div>
       </div>
       <div class="course-short-code">${c.short}</div>
       <div class="course-title-new">${c.title}</div>
@@ -799,6 +804,7 @@ function renderCourses() {
         <span class="course-level-badge" style="color:${color};border-color:${color}40;background:${color}12">${c.level}</span>
         <span class="course-cta">${c.live ? 'Open Course →' : 'View Details →'}</span>
       </div>
+      ${c.live ? `<div style="margin:6px -22px -22px;padding:8px 22px;background:rgba(45,122,79,0.08);border-top:1px solid rgba(45,122,79,0.15);font-size:10px;font-weight:600;color:#3fb950;display:flex;align-items:center;gap:6px"><span>✓</span>AI-powered lessons · Labs included · Live now</div>` : ''}
     </div>`;
   }).join('');
 }
