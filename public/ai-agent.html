@@ -190,47 +190,25 @@ html, body {
   flex: 1; overflow-y: auto; padding: 8px;
 }
 .history-item {
-  position: relative;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 1px;
+  border: 1px solid transparent;
+  transition: all 0.12s;
   display: flex;
   flex-direction: column;
-  padding: 8px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.1s;
-  margin-bottom: 2px;
-  border: 1px solid transparent;
 }
-.history-item:hover {
-  background: var(--bg3);
-  border-color: var(--border);
+.history-item:hover { background: var(--bg3); border-color: var(--border); }
+.history-item:active { background: rgba(26,86,219,0.1); border-color: rgba(26,86,219,0.2); }
+.history-item-preview {
+  font-size: 12px; color: var(--text-muted); line-height: 1.4;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
 }
 .history-item:hover .history-item-preview { color: var(--text); }
-.history-item:hover::after {
-  content: 'Click to load · ✎ Dbl-click to rename';
-  position: absolute;
-  bottom: -20px;
-  left: 0;
-  font-size: 9px;
-  color: var(--text-dim);
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 10;
-  background: var(--bg2);
-  padding: 2px 4px;
-  border-radius: 3px;
-}
-.history-item-preview {
-  font-size: 11.5px; color: var(--text-muted);
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.history-item-time {
-  font-size: 9px; color: var(--text-dim);
-  margin-top: 3px; font-family: var(--mono);
-}
+.history-item-time { font-size: 9px; color: var(--text-dim); margin-top: 2px; font-family: var(--mono); }
+.history-rename-hint { opacity: 0; transition: opacity 0.15s; font-size: 10px; color: var(--text-dim); margin-left: 4px; flex-shrink: 0; }
+.history-item:hover .history-rename-hint { opacity: 1; }
 .btn-new-chat {
   margin: 10px; padding: 8px;
   background: rgba(26,86,219,0.1);
@@ -311,6 +289,7 @@ html, body {
   display: flex;
   gap: 10px;
   align-items: flex-start;
+  max-width: 100%;
 }
 .msg-row.user { flex-direction: row-reverse; }
 
@@ -328,22 +307,27 @@ html, body {
 }
 
 .msg-bubble {
-  max-width: 72%;
+  max-width: 75%;
+  min-width: 60px;
   padding: 12px 16px;
-  border-radius: 14px;
+  border-radius: 16px;
   font-size: 13.5px;
   line-height: 1.7;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .msg-row.agent .msg-bubble {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-top-left-radius: 4px;
   color: var(--text-muted);
+  max-width: 78%;
 }
 .msg-row.user .msg-bubble {
   background: linear-gradient(135deg, #1a56db, #1e429f);
   color: white;
   border-top-right-radius: 4px;
+  max-width: 68%;
 }
 
 /* Message content formatting — FIX 2 tighter spacing */
@@ -640,6 +624,7 @@ let chatHistory = [];
 let currentMode = 'general';
 let isTyping = false;
 const historyNames = JSON.parse(localStorage.getItem('rr_history_names') || '{}');
+const _histMsg = {};
 
 const MODES = [
   { id: 'general',  label: '💬 General',      hint: 'Ask anything...' },
@@ -1099,7 +1084,9 @@ function escapeHtml(text) {
   return String(text)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 // ── Typing indicator ──────────────────────────────────────────
@@ -1166,6 +1153,9 @@ function renderHistoryPanel(messages) {
     return;
   }
 
+  // Store full data keyed by id for safe onclick access
+  messages.forEach(m => { _histMsg[m.id] = m; });
+
   // Group messages by date
   const groups = {};
   messages.forEach(m => {
@@ -1184,19 +1174,28 @@ function renderHistoryPanel(messages) {
         ${date}
       </div>`;
     msgs.forEach(m => {
-      const rawPreview = m.user_message.length > 40
-        ? m.user_message.slice(0, 40) + '…'
-        : m.user_message;
+      // Clean preview: use only user_message, strip markdown chars, collapse whitespace
+      const cleanMsg = (m.user_message || '')
+        .replace(/[#*`_~>]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+      const rawPreview = cleanMsg.length > 45
+        ? cleanMsg.slice(0, 45) + '…'
+        : cleanMsg;
       const displayName = escapeHtml(historyNames[m.id] || rawPreview);
       const time = new Date(m.created_at).toLocaleTimeString('en-IN', {
         hour: '2-digit', minute: '2-digit'
       });
+      // id is a UUID — only [a-f0-9-], safe in any quote context
       html += `
         <div class="history-item"
-             onclick="loadHistoryItem(${JSON.stringify(m.user_message)},${JSON.stringify(m.agent_reply)},${JSON.stringify(m.created_at)})"
-             ondblclick="renameHistoryItem('${m.id}',${JSON.stringify(m.user_message)},event)"
+             onclick="loadHistoryItem('${m.id}')"
+             ondblclick="renameHistoryItem('${m.id}',event)"
              title="Click to load · Double-click to rename">
-          <div class="history-item-preview">${displayName}</div>
+          <div style="display:flex;align-items:center;gap:0;min-width:0">
+            <div class="history-item-preview" id="hip-${m.id}">${displayName}</div>
+            <span class="history-rename-hint" title="Double-click to rename">✎</span>
+          </div>
           <div class="history-item-time">${time}</div>
         </div>`;
     });
@@ -1206,14 +1205,16 @@ function renderHistoryPanel(messages) {
   if (countEl) countEl.textContent = `· ${messages.length}`;
 }
 
-function loadHistoryItem(userMessage, agentReply, timestamp) {
+function loadHistoryItem(id) {
+  const m = _histMsg[id];
+  if (!m) return;
   newChat();
   setTimeout(() => {
     const welcome = document.getElementById('chatWelcome');
     if (welcome) welcome.remove();
 
-    addMessage('user', userMessage, false);
-    addMessage('agent', agentReply, false);
+    addMessage('user', m.user_message, false);
+    addMessage('agent', m.agent_reply, false);
 
     const msgs = document.getElementById('chatMessages');
     msgs.insertAdjacentHTML('beforeend', `
@@ -1222,26 +1223,31 @@ function loadHistoryItem(userMessage, agentReply, timestamp) {
         <div style="flex:1;height:1px;background:var(--border)"></div>
         <span style="font-size:10px;color:var(--text-dim);
                      white-space:nowrap;font-family:var(--mono)">
-          Loaded from ${new Date(timestamp).toLocaleDateString('en-IN',
+          Loaded from ${new Date(m.created_at).toLocaleDateString('en-IN',
             { day: 'numeric', month: 'short' })} — continue below
         </span>
         <div style="flex:1;height:1px;background:var(--border)"></div>
       </div>`);
 
     chatHistory = [
-      { role: 'user', content: userMessage },
-      { role: 'assistant', content: agentReply }
+      { role: 'user', content: m.user_message },
+      { role: 'assistant', content: m.agent_reply }
     ];
     scrollToBottom();
   }, 100);
 }
 
-function renameHistoryItem(itemId, currentText, event) {
+function renameHistoryItem(itemId, event) {
   event.stopPropagation();
-  const el = event.currentTarget.querySelector('.history-item-preview');
-  if (!el) return;
+  const el = document.getElementById('hip-' + itemId);
+  if (!el || el.querySelector('input')) return;
 
-  const current = historyNames[itemId] || currentText;
+  const m = _histMsg[itemId];
+  const fallback = m
+    ? (m.user_message || '').replace(/[#*`_~>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 45)
+    : '';
+  const current = historyNames[itemId] || fallback;
+
   const input = document.createElement('input');
   input.value = current;
   input.style.cssText = `
@@ -1249,22 +1255,30 @@ function renameHistoryItem(itemId, currentText, event) {
     border:1px solid rgba(26,86,219,0.4);
     border-radius:4px;color:var(--text);
     font-size:11.5px;padding:3px 6px;
-    font-family:var(--font);outline:none;`;
-  el.innerHTML = '';
+    font-family:var(--font);outline:none;box-sizing:border-box;`;
+  el.textContent = '';
   el.appendChild(input);
   input.focus();
   input.select();
 
+  let saved = false;
   function save() {
-    const newName = input.value.trim() || currentText;
+    if (saved) return;
+    saved = true;
+    const newName = input.value.trim() || fallback;
     historyNames[itemId] = newName;
     localStorage.setItem('rr_history_names', JSON.stringify(historyNames));
     el.textContent = newName;
   }
+  function cancel() {
+    if (saved) return;
+    saved = true;
+    el.textContent = historyNames[itemId] || fallback;
+  }
   input.addEventListener('blur', save);
   input.addEventListener('keydown', e => {
-    if (e.key === 'Enter') { save(); input.blur(); }
-    if (e.key === 'Escape') { el.textContent = historyNames[itemId] || currentText; input.blur(); }
+    if (e.key === 'Enter') { e.preventDefault(); save(); input.blur(); }
+    if (e.key === 'Escape') { e.preventDefault(); cancel(); input.blur(); }
   });
 }
 
