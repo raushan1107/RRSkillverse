@@ -791,9 +791,13 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 </div>
 
 <script>
-// ── Load course from URL param ──────────────────────────────
-const _courseData = getCourseData();
-const _isKnownCourse = _courseData !== null;
+// ── Load course data ─────────────────────────────────────────
+const _courseId = new URLSearchParams(
+  window.location.search).get('course') || 'default';
+
+const _courseData = (typeof COURSE_CATALOG !== 'undefined')
+  ? (COURSE_CATALOG[_courseId] || null)
+  : null;
 
 // Build PHASES from loaded course data
 const PHASES = _courseData
@@ -801,7 +805,7 @@ const PHASES = _courseData
       id: ph.colorClass,
       label: ph.label,
       title: ph.title,
-      desc: '',
+      desc: ph.desc || '',
       colorClass: ph.colorClass,
       bgClass: ph.colorClass + '-bg',
       dot: ph.dot,
@@ -820,8 +824,7 @@ let currentIdx = -1;
 let currentMode = 'lessons';
 let currentLabId = null;
 let ADMIN_SECRET = null;
-const _courseStorageKey = 'rrskv_done_' +
-  (new URLSearchParams(window.location.search).get('course') || 'default');
+const _courseStorageKey = 'rrskv_done_' + _courseId;
 let done = new Set(JSON.parse(localStorage.getItem(_courseStorageKey) || '[]'));
 
 const LABS = {
@@ -1079,7 +1082,8 @@ function updateHomeScreen() {
 
 // ── Progress ───────────────────────────────────────────────
 function updateProgress() {
-  document.getElementById('prog-tag').textContent = done.size + ' / ' + ALL.length;
+  const el = document.getElementById('prog-tag');
+  if (el) el.textContent = done.size + ' / ' + ALL.length;
 }
 function saveDone() {
   localStorage.setItem(_courseStorageKey, JSON.stringify([...done]));
@@ -1359,40 +1363,74 @@ function buildComingSoonHTML(courseId) {
     </div>`;
 }
 
-// ── Init ───────────────────────────────────────────────────
-(function handleURLParams() {
-  const p = new URLSearchParams(window.location.search);
-  const courseParam = p.get('course');
-  const modeParam   = p.get('mode');
-  const labParam    = p.get('lab');
-  if (courseParam &&
-      typeof COURSE_CATALOG !== 'undefined' &&
-      !COURSE_CATALOG[courseParam]) {
-    document.getElementById('main').innerHTML = buildComingSoonHTML(courseParam);
-    return;
-  }
-  if (modeParam === 'labs') {
-    window._deepLinkMode = 'labs';
-    window._deepLinkLab  = labParam || null;
+// ── Breadcrumb — runs immediately, before any routing ───────
+(function updateBreadcrumb() {
+  const params = new URLSearchParams(window.location.search);
+  const courseId = params.get('course') || 'default';
+  const el = document.getElementById('breadcrumb-course-name');
+  if (!el) return;
+  if (typeof COURSE_CATALOG !== 'undefined' &&
+      COURSE_CATALOG[courseId]) {
+    el.textContent = COURSE_CATALOG[courseId].subtitle
+      || COURSE_CATALOG[courseId].title;
+  } else if (courseId === 'default' || !params.get('course')) {
+    el.textContent = 'Intelligent Enterprise Dev · .NET 8 & Azure AI';
+  } else {
+    el.textContent = courseId.toUpperCase().replace(/-/g, ' ');
   }
 })();
 
-buildSidebar();
-buildPhaseRows();
-buildLabsSidebar();
-buildLabsHomeList();
-updateProgress();
-updateHomeScreen();
-const bcName = document.getElementById('breadcrumb-course-name');
-if (bcName && _courseData) {
-  bcName.textContent = _courseData.subtitle || _courseData.title;
-}
-checkAdminMode();
+// ── Course routing + init (throw stops init for unknown courses)
+try {
+  (function routeCourse() {
+    const params = new URLSearchParams(window.location.search);
+    const courseId = params.get('course');
 
-if (window._deepLinkMode === 'labs') {
-  switchMode('labs');
-  if (window._deepLinkLab) {
-    setTimeout(() => loadLab(window._deepLinkLab), 150);
+    // No param = default course, proceed normally
+    if (!courseId) return;
+
+    // Course found in catalog = proceed normally
+    if (typeof COURSE_CATALOG !== 'undefined' &&
+        COURSE_CATALOG[courseId]) {
+      return;
+    }
+
+    // Unknown course = show coming soon, hide chrome, stop init
+    document.getElementById('main').innerHTML =
+      buildComingSoonHTML(courseId);
+
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) sidebar.style.display = 'none';
+
+    const modeNav = document.querySelector('.mode-nav');
+    if (modeNav) modeNav.style.display = 'none';
+
+    throw new Error('COURSE_NOT_FOUND:' + courseId);
+  })();
+
+  const _p = new URLSearchParams(window.location.search);
+  if (_p.get('mode') === 'labs') {
+    window._deepLinkMode = 'labs';
+    window._deepLinkLab  = _p.get('lab') || null;
+  }
+
+  buildSidebar();
+  buildPhaseRows();
+  buildLabsSidebar();
+  buildLabsHomeList();
+  updateProgress();
+  updateHomeScreen();
+  checkAdminMode();
+
+  if (window._deepLinkMode === 'labs') {
+    switchMode('labs');
+    if (window._deepLinkLab) {
+      setTimeout(() => loadLab(window._deepLinkLab), 150);
+    }
+  }
+} catch(e) {
+  if (!e.message?.startsWith('COURSE_NOT_FOUND')) {
+    console.error('Init error:', e);
   }
 }
 
