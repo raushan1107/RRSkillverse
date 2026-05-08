@@ -728,6 +728,218 @@ const BLOG_POSTS = [
   },
 
   {
+    id: 'power-bi-data-connectivity-modes',
+    title: 'Chapter 4.1: Data Connectivity Modes — Import, DirectQuery and Live Connection',
+    category: 'power-platform',
+    topic: 'power-bi',
+    tags: ['Power BI', 'PL-300', 'Import Mode', 'DirectQuery', 'Live Connection', 'Composite Models', 'Data Sources'],
+    published: '2025-04-20',
+    updated: '2025-04-20',
+    readTime: '8 min',
+    excerpt: 'Power BI offers several ways to connect to your data — each with different implications for performance, freshness, and functionality. Understanding Import, DirectQuery, and Live Connection is key to building reports that are both fast and accurate.',
+    featured: false,
+    content: `
+<div class="blog-story">
+
+  <p>Power BI offers several ways to connect with your data, each with its own
+  implications for performance, functionality, and data freshness. Understanding
+  these modes is key to building effective and efficient reports. Let\'s explore
+  the essentials of <strong>Import</strong>, <strong>DirectQuery</strong>, and
+  <strong>Live Connection</strong>.</p>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>💡 Import Mode — Data at Your Fingertips</h2>
+    <p>Import mode brings a <strong>copy of your data</strong> directly into
+    Power BI\'s high-performance in-memory engine (called VertiPaq).</p>
+    <ul>
+      <li>Leverages in-memory processing for rapid query response — highly
+      interactive reports with instant filtering</li>
+      <li>Unlocks the <strong>complete suite</strong> of Power Query transformations
+      and DAX calculations, allowing for rich data modelling and analysis</li>
+      <li>Operates on a <strong>snapshot</strong> of your data — requires scheduled
+      refreshes to reflect updates from the source</li>
+      <li>Best when speed and rich analytical capabilities are paramount and data
+      latency from scheduled refreshes is acceptable</li>
+    </ul>
+    <div class="blog-fact-pill">
+      <span class="blog-fact-label">⚡ Interesting Fact</span>
+      Power BI\'s VertiPaq engine employs advanced compression techniques, often
+      achieving data size reduction of <strong>10x or more</strong> — making even
+      large datasets manageable in memory.
+    </div>
+    <blockquote class="blog-quote">
+      Example: Analysing historical sales trends where daily updates are sufficient,
+      allowing for deep dives into past performance.
+    </blockquote>
+  </div>
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>🔗 DirectQuery Mode — Querying Live</h2>
+    <p>DirectQuery establishes a <strong>live connection</strong> to your data
+    source, querying it directly each time a visual is rendered or a filter
+    is applied.</p>
+    <ul>
+      <li>Provides <strong>near real-time data visibility</strong> — reports always
+      reflect the current state of the underlying data source</li>
+      <li>Enables analysis of datasets <strong>too large to fit in memory</strong>,
+      as data processing happens at the source</li>
+      <li>Performance is directly tied to the speed and capacity of the data source
+      — complex queries can impact report responsiveness</li>
+      <li>Some Power Query transformations and DAX functions have
+      <strong>restrictions</strong> due to the need to translate operations to the
+      source database\'s query language</li>
+      <li>Best suited for up-to-the-minute data: live operational metrics, financial
+      trading activity, or IoT sensor monitoring</li>
+    </ul>
+    <div class="blog-fact-pill blog-fact-pill-orange">
+      <span class="blog-fact-label">⚡ Interesting Fact</span>
+      DirectQuery is a powerful option for <strong>Big Volume of Data</strong>
+      scenarios — users can interact with massive datasets without extensive data
+      movement or duplication.
+    </div>
+    <blockquote class="blog-quote">
+      Example: Real-time monitoring of sensor data from industrial equipment to
+      identify immediate operational anomalies.
+    </blockquote>
+  </div>
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>🏢 Live Connection Mode — Leveraging Pre-built Models</h2>
+    <p>Live Connection connects to an <strong>existing, curated data model</strong>
+    hosted in Power BI Service or Analysis Services (Tabular / Multidimensional).</p>
+    <ul>
+      <li>Ensures <strong>consistency and a single source of truth</strong> — all
+      reports are built on top of a centrally managed, governed model</li>
+      <li>Benefits from performance tuning and optimisation already applied to the
+      underlying data model</li>
+      <li>Report creators focus on visualisation and report-level measures — no
+      need to worry about data modelling</li>
+      <li>The data model itself <strong>cannot be altered</strong> within the Power
+      BI Desktop file in Live Connection mode</li>
+      <li>Best for enterprise-scale reporting and collaboration on shared datasets</li>
+    </ul>
+    <div class="blog-fact-pill blog-fact-pill-green">
+      <span class="blog-fact-label">⚡ Interesting Fact</span>
+      Live Connection promotes a <strong>separation of concerns</strong> — data
+      engineers build robust models while business users concentrate on creating
+      insightful reports on top of them.
+    </div>
+    <blockquote class="blog-quote">
+      Example: Different departments using a central Analysis Services cube to
+      create their specific sales, marketing, or finance reports — all from the
+      same trusted model.
+    </blockquote>
+  </div>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🛠️ Composite Models — The Best of Both Worlds</h2>
+    <p>Composite Models allow you to <strong>combine multiple connection types</strong>
+    (Import, DirectQuery, and/or Live Connection) within a single Power BI report.</p>
+    <ul>
+      <li>Combine the speed of in-memory data with the real-time capabilities of
+      DirectQuery</li>
+      <li>Augment a Live Connection model with local tables imported separately</li>
+      <li>Create aggregated tables for performance on top of DirectQuery sources</li>
+      <li>Supports complex enterprise requirements that no single mode can address
+      alone</li>
+    </ul>
+  </div>
+
+  <div class="blog-summary">
+    <h2>📊 Summary — Connectivity Modes at a Glance</h2>
+    <div class="blog-comparison-table">
+      <div class="blog-table-header">
+        <div class="blog-table-cell blog-table-feature">Feature</div>
+        <div class="blog-table-cell">Import</div>
+        <div class="blog-table-cell">DirectQuery</div>
+        <div class="blog-table-cell">Live Connection</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Data Storage</div>
+        <div class="blog-table-cell">In-memory (Power BI)</div>
+        <div class="blog-table-cell">Stays at source</div>
+        <div class="blog-table-cell">External model</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Performance</div>
+        <div class="blog-table-cell blog-table-best">⚡ Fastest</div>
+        <div class="blog-table-cell">Source-dependent</div>
+        <div class="blog-table-cell">Generally fast</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">DAX &amp; Power Query</div>
+        <div class="blog-table-cell blog-table-best">✅ Full support</div>
+        <div class="blog-table-cell">⚠️ Limited</div>
+        <div class="blog-table-cell">Report-level only</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Real-time Data</div>
+        <div class="blog-table-cell">❌ Needs refresh</div>
+        <div class="blog-table-cell blog-table-best">✅ Near real-time</div>
+        <div class="blog-table-cell">Model schedule</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Large Datasets</div>
+        <div class="blog-table-cell">Limited by memory</div>
+        <div class="blog-table-cell blog-table-best">✅ Handles very large</div>
+        <div class="blog-table-cell">Depends on model</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Best Use Case</div>
+        <div class="blog-table-cell">Speed, rich analysis</div>
+        <div class="blog-table-cell">Live ops, IoT, trading</div>
+        <div class="blog-table-cell">Enterprise reporting</div>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:13.5px">
+      Choosing the optimal mode hinges on your specific data requirements,
+      performance expectations, and the need for real-time information.
+    </p>
+  </div>
+
+  <div class="blog-mslearn">
+    <div class="blog-mslearn-title">📚 Go Deeper — Microsoft Learn Resources</div>
+    <ul class="blog-mslearn-links">
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/power-bi-data-sources"
+           target="_blank" rel="noopener">
+          Power BI data sources overview
+        </a>
+      </li>
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-directquery-about"
+           target="_blank" rel="noopener">
+          DirectQuery in Power BI — deep dive
+        </a>
+      </li>
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-composite-models"
+           target="_blank" rel="noopener">
+          Composite models in Power BI Desktop
+        </a>
+      </li>
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-import-excel-workbooks"
+           target="_blank" rel="noopener">
+          Connect to Excel workbooks in Power BI Desktop
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="blog-next-chapter">
+    <span class="blog-next-label">Up Next in Chapter 4</span>
+    <span class="blog-next-title">
+      4.2 Data Exploration Options — Column Quality, Column Distribution,
+      and Column Profile in Power Query.
+    </span>
+  </div>
+
+</div>
+    `
+  },
+
+  {
     id: 'blazor-component-lifecycle',
     title: 'Blazor Component Lifecycle — Every Method Explained',
     category: 'dotnet',
