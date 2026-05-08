@@ -577,7 +577,13 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'learn.html'));
+  // Known portal routes serve learn.html
+  const portalRoutes = ['/learn', '/learn.html'];
+  if (portalRoutes.some(r => req.path.startsWith(r))) {
+    return res.sendFile(path.join(__dirname, 'public', 'learn.html'));
+  }
+  // Everything else is a 404
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
 const PORT = process.env.PORT || 3000;

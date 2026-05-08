@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin-agent.html
+Disallow: /api/
+
+Sitemap: https://rrskillverse.in/sitemap.xml
