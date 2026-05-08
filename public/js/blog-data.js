@@ -1757,6 +1757,368 @@ const BLOG_POSTS = [
   },
 
   {
+    id: 'power-bi-dax-basics',
+    title: 'Chapter 4.5: DAX Basics in Power BI — The Language of Powerful Calculations',
+    category: 'power-platform',
+    topic: 'power-bi',
+    tags: ['Power BI', 'PL-300', 'DAX', 'Measures', 'Calculated Columns', 'CALCULATE', 'Filter Context', 'SUM', 'DIVIDE'],
+    published: '2025-04-24',
+    updated: '2025-04-24',
+    readTime: '9 min',
+    excerpt: 'DAX (Data Analysis Expressions) is the formula language behind Power BI\'s brain. If you\'ve used Excel formulas, you already understand the idea — but DAX goes further. It works across related tables, respects filters in visuals, and recalculates automatically when a slicer is applied.',
+    featured: false,
+    content: `
+<div class="blog-story">
+
+  <p><strong>DAX</strong> (Data Analysis Expressions) is the formula language behind
+  Power BI\'s brain. It allows you to create custom calculations, aggregations, and
+  filters beyond the built-in visual options — making your reports smarter and more
+  interactive.</p>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>💬 Real-World Analogy — Excel on Steroids</h2>
+    <p>If you\'ve used Excel formulas like <code>SUMIF()</code> or
+    <code>VLOOKUP()</code>, you already understand the idea behind DAX. But DAX
+    goes significantly further:</p>
+    <div class="blog-dax-compare">
+      <div class="blog-dax-compare-col">
+        <div class="blog-dax-compare-header">📊 Excel Formulas</div>
+        <ul class="blog-dax-compare-list">
+          <li>Work on a single sheet or range</li>
+          <li>Calculated at the cell level</li>
+          <li>Static — don\'t respond to slicers</li>
+          <li>No cross-table awareness</li>
+        </ul>
+      </div>
+      <div class="blog-dax-compare-col blog-dax-compare-col-right">
+        <div class="blog-dax-compare-header blog-dax-compare-header-right">⚡ DAX in Power BI</div>
+        <ul class="blog-dax-compare-list">
+          <li>Work across multiple related tables</li>
+          <li>Recalculate dynamically per visual context</li>
+          <li>Respond instantly to slicers and filters</li>
+          <li>Understand model relationships automatically</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>🧮 The Three Types of DAX Expressions</h2>
+    <p>DAX can produce three fundamentally different outputs. Choosing the right
+    one is the first skill to master:</p>
+
+    <div class="blog-dax-types">
+
+      <div class="blog-dax-type-card blog-dax-type-column">
+        <div class="blog-dax-type-header">
+          <span class="blog-dax-type-icon">📌</span>
+          <span class="blog-dax-type-name">Calculated Column</span>
+        </div>
+        <div class="blog-dax-type-body">
+          <ul>
+            <li>Stored permanently in the data model</li>
+            <li>Calculated <strong>row-by-row</strong> at refresh time (Row Context)</li>
+            <li>Increases model size — use sparingly</li>
+            <li>Good for: categorisation, bucketing, combining fields</li>
+          </ul>
+          <div class="blog-dax-code-block">
+            <div class="blog-dax-code-label">Example</div>
+            <code>Profit = Sales[Total] - Sales[Cost]</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-dax-type-card blog-dax-type-measure">
+        <div class="blog-dax-type-header">
+          <span class="blog-dax-type-icon">📊</span>
+          <span class="blog-dax-type-name">Measure ✅ Preferred</span>
+        </div>
+        <div class="blog-dax-type-body">
+          <ul>
+            <li>Calculated <strong>on the fly</strong> when a visual renders</li>
+            <li>Responds dynamically to filters, slicers, and visual context (Filter Context)</li>
+            <li>Memory-efficient — not stored in the model</li>
+            <li>Good for: aggregations, KPIs, % of total, YTD</li>
+          </ul>
+          <div class="blog-dax-code-block">
+            <div class="blog-dax-code-label">Example</div>
+            <code>Total Sales = SUM(Sales[Amount])</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-dax-type-card blog-dax-type-table">
+        <div class="blog-dax-type-header">
+          <span class="blog-dax-type-icon">🧪</span>
+          <span class="blog-dax-type-name">Calculated Table</span>
+        </div>
+        <div class="blog-dax-type-body">
+          <ul>
+            <li>Returns a <strong>full table</strong> instead of a value or column</li>
+            <li>Stored in the model like a regular table</li>
+            <li>Used for Date tables, bridge tables, virtual aggregations</li>
+            <li>Good for: advanced modelling, helper tables</li>
+          </ul>
+          <div class="blog-dax-code-block">
+            <div class="blog-dax-code-label">Example</div>
+            <code>HighValueOrders = FILTER(Sales, Sales[Amount] &gt; 1000)</code>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <blockquote class="blog-quote" style="margin-top:16px">
+      "Measures are like answering a question on demand. Calculated Columns are
+      like writing the answer down ahead of time."
+    </blockquote>
+  </div>
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>🔁 Filter Context vs Row Context</h2>
+    <p>This is the concept that trips up most beginners — and unlocks everything
+    once understood.</p>
+
+    <div class="blog-context-compare">
+      <div class="blog-context-card blog-context-row">
+        <div class="blog-context-header">Row Context 📌</div>
+        <div class="blog-context-body">
+          <p>Used by <strong>Calculated Columns</strong>. Power BI evaluates the
+          formula once for each row in the table — like Excel dragging a formula
+          down.</p>
+          <div class="blog-dax-code-block">
+            <code>Margin % = DIVIDE(Sales[Profit], Sales[Total])</code>
+          </div>
+          <p style="margin-top:8px;font-size:12px">This runs for every row
+          individually — each row knows its own Sales[Profit] and Sales[Total].</p>
+        </div>
+      </div>
+      <div class="blog-context-card blog-context-filter">
+        <div class="blog-context-header">Filter Context 📊</div>
+        <div class="blog-context-body">
+          <p>Used by <strong>Measures</strong>. The filter context is the set of
+          filters currently applied by visuals, slicers, and report-level
+          filters.</p>
+          <div class="blog-dax-code-block">
+            <code>Total Sales = SUM(Sales[Amount])</code>
+          </div>
+          <p style="margin-top:8px;font-size:12px">When a slicer selects "North
+          Region", this measure automatically sums only North Region sales.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-fact-pill" style="margin-top:16px">
+      <span class="blog-fact-label">💡 Key Insight</span>
+      The <strong>CALCULATE()</strong> function is powerful because it lets you
+      <em>modify</em> the filter context inside a measure — adding, removing, or
+      replacing filters programmatically. It is the most important DAX function
+      to master after the basic aggregations.
+    </div>
+  </div>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🔥 Most Used DAX Functions</h2>
+    <p>These are the functions you will use in almost every Power BI project:</p>
+
+    <div class="blog-dax-functions-grid">
+
+      <div class="blog-dax-fn-card">
+        <div class="blog-dax-fn-name"><code>SUM()</code> / <code>AVERAGE()</code> / <code>COUNT()</code></div>
+        <div class="blog-dax-fn-cat">Aggregation</div>
+        <div class="blog-dax-fn-desc">Basic aggregations that respond to filter context. The foundation of every measure.</div>
+      </div>
+
+      <div class="blog-dax-fn-card blog-dax-fn-highlight">
+        <div class="blog-dax-fn-name"><code>CALCULATE()</code></div>
+        <div class="blog-dax-fn-cat">Context Modification</div>
+        <div class="blog-dax-fn-desc">The most powerful DAX function. Evaluates an expression in a modified filter context — used for YTD, % of Total, comparisons.</div>
+      </div>
+
+      <div class="blog-dax-fn-card">
+        <div class="blog-dax-fn-name"><code>DIVIDE()</code></div>
+        <div class="blog-dax-fn-cat">Safe Division</div>
+        <div class="blog-dax-fn-desc">Divides two numbers safely — returns a custom result (like 0 or BLANK) instead of an error when dividing by zero.</div>
+      </div>
+
+      <div class="blog-dax-fn-card">
+        <div class="blog-dax-fn-name"><code>FILTER()</code></div>
+        <div class="blog-dax-fn-cat">Table Filtering</div>
+        <div class="blog-dax-fn-desc">Returns a filtered subset of a table. Used inside CALCULATE() to define custom filter conditions.</div>
+      </div>
+
+      <div class="blog-dax-fn-card">
+        <div class="blog-dax-fn-name"><code>IF()</code> / <code>SWITCH()</code></div>
+        <div class="blog-dax-fn-cat">Conditional Logic</div>
+        <div class="blog-dax-fn-desc">Returns different values based on a condition. SWITCH() is cleaner for multiple conditions than nested IF() statements.</div>
+      </div>
+
+      <div class="blog-dax-fn-card">
+        <div class="blog-dax-fn-name"><code>RELATED()</code></div>
+        <div class="blog-dax-fn-cat">Cross-table Lookup</div>
+        <div class="blog-dax-fn-desc">Pulls a value from a related table via the model relationship. Used in calculated columns to bring in dimension attributes.</div>
+      </div>
+
+      <div class="blog-dax-fn-card">
+        <div class="blog-dax-fn-name"><code>SUMX()</code> / <code>AVERAGEX()</code></div>
+        <div class="blog-dax-fn-cat">Iterator Functions</div>
+        <div class="blog-dax-fn-desc">Iterate row-by-row over a table and aggregate the result. Used when you need row-level calculation before summing.</div>
+      </div>
+
+      <div class="blog-dax-fn-card">
+        <div class="blog-dax-fn-name"><code>TOTALYTD()</code> / <code>SAMEPERIODLASTYEAR()</code></div>
+        <div class="blog-dax-fn-cat">Time Intelligence</div>
+        <div class="blog-dax-fn-desc">Built-in time intelligence functions that require a marked Date table. Used for YTD, MTD, period comparisons.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>⚙️ Practical DAX Examples</h2>
+    <p>Here are three measures you should build in every sales report:</p>
+
+    <div class="blog-dax-examples">
+
+      <div class="blog-dax-example">
+        <div class="blog-dax-example-title">Total Sales</div>
+        <div class="blog-dax-example-desc">Sum all sales — adjusts to any filter.</div>
+        <div class="blog-dax-code-block">
+          <code>Total Sales = SUM(Sales[Amount])</code>
+        </div>
+      </div>
+
+      <div class="blog-dax-example">
+        <div class="blog-dax-example-title">% of Total Sales</div>
+        <div class="blog-dax-example-desc">Each row\'s sales as a percentage of the
+        overall total — uses CALCULATE to remove filters.</div>
+        <div class="blog-dax-code-block">
+          <code>% of Total =
+DIVIDE(
+  SUM(Sales[Amount]),
+  CALCULATE(SUM(Sales[Amount]), ALL(Sales))
+)</code>
+        </div>
+      </div>
+
+      <div class="blog-dax-example">
+        <div class="blog-dax-example-title">Sales YTD</div>
+        <div class="blog-dax-example-desc">Cumulative sales from the start of the
+        year — requires a marked Date table.</div>
+        <div class="blog-dax-code-block">
+          <code>Sales YTD =
+TOTALYTD(SUM(Sales[Amount]), Dates[Date])</code>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="blog-summary">
+    <h2>⚠️ Golden Rules for Writing DAX</h2>
+    <ul style="padding-left:18px;margin-top:10px">
+      <li style="margin-bottom:8px">
+        <strong>Use measures over calculated columns</strong> — measures are
+        more efficient, flexible, and respond to filter context. Use calculated
+        columns only when you need to store a value per row.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Use DIVIDE() not the / operator</strong> — DIVIDE(a, b) returns
+        BLANK instead of an error when b is zero, keeping your visuals clean.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Name measures clearly</strong> — "Total Sales ₹" is better than
+        "Measure1". Clear names make reports self-documenting.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Format your DAX</strong> — write one argument per line for
+        complex formulas. Use daxformatter.com to auto-format.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Test incrementally</strong> — build complex DAX one function at
+        a time, verifying the result at each stage before adding more complexity.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Master CALCULATE() early</strong> — it is the gateway to
+        advanced DAX. Every YTD, comparison, and overriding filter measure
+        uses it.
+      </li>
+    </ul>
+  </div>
+
+  <div class="blog-exercise">
+    <h2>🧠 Try It Yourself — Three Starter Measures</h2>
+    <p>Build these three measures in your Sales dataset to practise DAX:</p>
+    <ol class="blog-exercise-steps">
+      <li>
+        <strong>Total Sales using SUM()</strong><br/>
+        <div class="blog-dax-code-block" style="margin-top:6px">
+          <code>Total Sales = SUM(Sales[Amount])</code>
+        </div>
+        Add this to a Card visual. Apply a Region slicer and confirm it
+        updates dynamically.
+      </li>
+      <li>
+        <strong>Profit Calculated Column</strong><br/>
+        In the Sales table, create a new column:
+        <div class="blog-dax-code-block" style="margin-top:6px">
+          <code>Profit = Sales[Amount] - Sales[Cost]</code>
+        </div>
+        Notice it runs row-by-row and appears as a new column in the table.
+      </li>
+      <li>
+        <strong>% of Total Sales using DIVIDE()</strong><br/>
+        <div class="blog-dax-code-block" style="margin-top:6px">
+          <code>% of Total =
+DIVIDE(
+  SUM(Sales[Amount]),
+  CALCULATE(SUM(Sales[Amount]), ALL(Sales)),
+  0
+)</code>
+        </div>
+        Add this to a table visual alongside Product Name. Confirm each row
+        shows that product\'s share of total sales as a percentage.
+      </li>
+    </ol>
+  </div>
+
+  <div class="blog-mslearn">
+    <div class="blog-mslearn-title">📚 Go Deeper — Microsoft Learn Resources</div>
+    <ul class="blog-mslearn-links">
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-dax-overview"
+           target="_blank" rel="noopener">
+          Introduction to DAX in Power BI Desktop
+        </a>
+      </li>
+      <li>
+        <a href="https://learn.microsoft.com/en-us/dax/dax-function-reference"
+           target="_blank" rel="noopener">
+          DAX Function Reference — full index
+        </a>
+      </li>
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-bi/guidance/dax-overview"
+           target="_blank" rel="noopener">
+          DAX Best Practices for Power BI
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="blog-next-chapter">
+    <span class="blog-next-label">Up Next in Chapter 4</span>
+    <span class="blog-next-title">
+      4.6 Filters in Power BI — visual-level, page-level, and report-level
+      filters, and how they interact with slicers and cross-filtering.
+    </span>
+  </div>
+
+</div>
+    `
+  },
+
+  {
     id: 'blazor-component-lifecycle',
     title: 'Blazor Component Lifecycle — Every Method Explained',
     category: 'dotnet',

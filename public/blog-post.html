@@ -1591,6 +1591,272 @@
   .blog-relationship-types { grid-template-columns: 1fr; }
   .blog-schema-compare { grid-template-columns: 1fr; }
 }
+
+/* ── DAX Excel vs DAX compare ── */
+.blog-dax-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.blog-dax-compare-col {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.blog-dax-compare-header {
+  padding: 10px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-dax-compare-header-right {
+  background: linear-gradient(90deg,#1a56db,#0ea5e9);
+  color: white;
+}
+
+.blog-dax-compare-list {
+  padding: 10px 14px 10px 26px;
+  margin: 0;
+}
+
+.blog-dax-compare-list li {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  line-height: 1.6;
+}
+
+/* ── DAX type cards ── */
+.blog-dax-types {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.blog-dax-type-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.blog-dax-type-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-dax-type-icon { font-size: 16px; }
+
+.blog-dax-type-column .blog-dax-type-header {
+  background: rgba(99,102,241,0.07);
+}
+
+.blog-dax-type-measure .blog-dax-type-header {
+  background: rgba(45,122,79,0.07);
+}
+
+.blog-dax-type-table .blog-dax-type-header {
+  background: rgba(199,92,26,0.07);
+}
+
+.blog-dax-type-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.blog-dax-type-body ul {
+  padding-left: 16px;
+  margin: 0;
+}
+
+.blog-dax-type-body ul li {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  line-height: 1.6;
+}
+
+/* ── DAX code block ── */
+.blog-dax-code-block {
+  background: #0d1117;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 4px;
+}
+
+.blog-dax-code-block code {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: #79c0ff;
+  background: none;
+  border: none;
+  padding: 0;
+  white-space: pre;
+  display: block;
+}
+
+.blog-dax-code-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: #484f58;
+  margin-bottom: 6px;
+  font-family: var(--mono);
+}
+
+/* ── Filter vs Row context ── */
+.blog-context-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.blog-context-card {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.blog-context-header {
+  padding: 10px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: white;
+}
+
+.blog-context-row .blog-context-header {
+  background: linear-gradient(90deg,#6366f1,#7c4b9e);
+}
+
+.blog-context-filter .blog-context-header {
+  background: linear-gradient(90deg,#1a56db,#0ea5e9);
+}
+
+.blog-context-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.blog-context-body p {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── DAX functions grid ── */
+.blog-dax-functions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.blog-dax-fn-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: border-color 0.15s;
+}
+
+.blog-dax-fn-card:hover {
+  border-color: var(--border-md);
+}
+
+.blog-dax-fn-highlight {
+  background: rgba(26,86,219,0.05);
+  border-color: rgba(26,86,219,0.25);
+}
+
+.blog-dax-fn-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.blog-dax-fn-name code {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  background: rgba(26,86,219,0.08);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.blog-dax-fn-cat {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.blog-dax-fn-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── DAX practical examples ── */
+.blog-dax-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.blog-dax-example {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.blog-dax-example-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.blog-dax-example-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .blog-dax-compare { grid-template-columns: 1fr; }
+  .blog-context-compare { grid-template-columns: 1fr; }
+  .blog-dax-functions-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .blog-dax-code-block code { white-space: pre-wrap; }
+}
 </style>
 </head>
 <body>
