@@ -369,6 +369,224 @@
   .post-article { padding: 24px 0 40px; }
   .post-nav { grid-template-columns: 1fr; }
 }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BLOG STORY CONTENT STYLES
+   Used by .blog-story content in all blog posts
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.blog-story {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-muted);
+}
+
+.blog-story p {
+  margin-bottom: 16px;
+}
+
+.blog-story ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.blog-story ul li {
+  margin-bottom: 7px;
+  line-height: 1.65;
+}
+
+/* ── Intro pull quote ── */
+.blog-intro-quote {
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text);
+  text-align: center;
+  padding: 20px 28px;
+  background: rgba(26,86,219,0.05);
+  border-left: 3px solid var(--accent);
+  border-right: 3px solid var(--accent);
+  border-radius: 8px;
+  margin: 0 0 28px;
+}
+
+/* ── Callout blocks (problem / spark / info) ── */
+.blog-callout {
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 28px 0;
+  border: 1px solid var(--border);
+}
+
+.blog-callout h2 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: -0.2px;
+}
+
+.blog-callout p {
+  margin-bottom: 12px;
+}
+
+.blog-callout ul {
+  padding-left: 20px;
+  margin: 12px 0;
+}
+
+.blog-callout ul li {
+  margin-bottom: 7px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Problem variant — warm orange tint */
+.blog-callout-problem {
+  background: rgba(199,92,26,0.04);
+  border-color: rgba(199,92,26,0.18);
+}
+.blog-callout-problem h2 {
+  color: #c75c1a;
+  border-bottom-color: rgba(199,92,26,0.15);
+}
+
+/* Spark / insight variant — green tint */
+.blog-callout-spark {
+  background: rgba(45,122,79,0.04);
+  border-color: rgba(45,122,79,0.18);
+}
+.blog-callout-spark h2 {
+  color: #2d7a4f;
+  border-bottom-color: rgba(45,122,79,0.15);
+}
+
+/* Info / note variant — blue tint */
+.blog-callout-info {
+  background: rgba(26,86,219,0.04);
+  border-color: rgba(26,86,219,0.18);
+}
+.blog-callout-info h2 {
+  color: var(--accent);
+  border-bottom-color: rgba(26,86,219,0.15);
+}
+
+/* ── Blog images ── */
+.blog-figure {
+  margin: 22px 0;
+  text-align: center;
+}
+
+.blog-img {
+  max-width: 100%;
+  width: 380px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  display: block;
+  margin: 0 auto 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.blog-figure figcaption {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-top: 6px;
+}
+
+/* ── Pull quote / blockquote ── */
+.blog-quote {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--text-muted);
+  border-left: 3px solid var(--accent);
+  padding: 12px 20px;
+  margin: 20px 0;
+  background: rgba(26,86,219,0.04);
+  border-radius: 0 8px 8px 0;
+  line-height: 1.7;
+}
+
+/* ── Summary / takeaway box ── */
+.blog-summary {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 12px 12px;
+  padding: 24px 28px;
+  margin: 32px 0;
+}
+
+.blog-summary h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 14px;
+  letter-spacing: -0.2px;
+}
+
+.blog-summary p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+
+.blog-summary p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Coming Next chapter pill ── */
+.blog-next-chapter {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-top: 32px;
+}
+
+.blog-next-label {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(26,86,219,0.1);
+  border: 1px solid rgba(26,86,219,0.2);
+  border-radius: 20px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.blog-next-title {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .blog-intro-quote {
+    font-size: 16px;
+    padding: 16px 18px;
+  }
+  .blog-callout {
+    padding: 18px 18px;
+  }
+  .blog-img {
+    width: 100%;
+  }
+  .blog-next-chapter {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
 </style>
 </head>
 <body>
