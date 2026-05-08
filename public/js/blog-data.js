@@ -1464,6 +1464,299 @@ const BLOG_POSTS = [
   },
 
   {
+    id: 'power-bi-data-modeling',
+    title: 'Chapter 4.4: Data Modeling in Power BI — Facts, Dimensions, Relationships and Schema',
+    category: 'power-platform',
+    topic: 'power-bi',
+    tags: ['Power BI', 'PL-300', 'Data Modeling', 'Star Schema', 'Snowflake Schema', 'Fact Table', 'Dimension Table', 'Relationships'],
+    published: '2025-04-23',
+    updated: '2025-04-23',
+    readTime: '8 min',
+    excerpt: 'Data Modeling is the process of organising and relating multiple tables so that analysis is fast, logical, and efficient. Think of it as designing the blueprint of your data house — deciding what each room (table) does, how they connect (relationships), and what they hold (columns).',
+    featured: false,
+    content: `
+<div class="blog-story">
+
+  <p>In Power BI, <strong>Data Modeling</strong> is the process of organising and
+  relating multiple data tables in a way that makes analysis fast, logical, and
+  efficient. Think of it as designing the <em>blueprint of your data house</em> —
+  you decide what each room (table) does, how they connect (relationships), and
+  which rooms hold what (columns).</p>
+
+  <blockquote class="blog-quote">
+    "A well-designed data model is invisible to the end user — they just see fast,
+    accurate reports. A poorly designed one makes everything harder."
+  </blockquote>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🛍️ Real-World Analogy — A Supermarket System</h2>
+    <p>Imagine a supermarket\'s data. Every time a customer checks out, several
+    tables are involved:</p>
+    <div class="blog-table-type-grid">
+      <div class="blog-table-type-card blog-table-type-fact">
+        <div class="blog-table-type-header">
+          <span>📊</span>
+          <span>Sales Table</span>
+          <span class="blog-table-type-badge blog-badge-fact">Fact</span>
+        </div>
+        <div class="blog-table-type-desc">
+          Every bill generated — OrderID, ProductID, CustomerID, DateID,
+          Quantity, Amount. The measurable events.
+        </div>
+      </div>
+      <div class="blog-table-type-card blog-table-type-dim">
+        <div class="blog-table-type-header">
+          <span>📦</span>
+          <span>Products Table</span>
+          <span class="blog-table-type-badge blog-badge-dim">Dimension</span>
+        </div>
+        <div class="blog-table-type-desc">
+          All items with name, category, price, brand. Describes
+          <em>what</em> was sold.
+        </div>
+      </div>
+      <div class="blog-table-type-card blog-table-type-dim">
+        <div class="blog-table-type-header">
+          <span>👤</span>
+          <span>Customers Table</span>
+          <span class="blog-table-type-badge blog-badge-dim">Dimension</span>
+        </div>
+        <div class="blog-table-type-desc">
+          Customer name, city, segment, loyalty tier. Describes
+          <em>who</em> bought.
+        </div>
+      </div>
+      <div class="blog-table-type-card blog-table-type-dim">
+        <div class="blog-table-type-header">
+          <span>📅</span>
+          <span>Date Table</span>
+          <span class="blog-table-type-badge blog-badge-dim">Dimension</span>
+        </div>
+        <div class="blog-table-type-desc">
+          Full calendar with Day, Month, Quarter, Year, Weekday. Enables
+          all time intelligence DAX functions.
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:14px">Each sale <em>refers to</em> a specific customer,
+    product, and date. These references are <strong>relationships</strong>. Together
+    they form a data model.</p>
+  </div>
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>🗃️ Fact Tables vs Dimension Tables</h2>
+
+    <div class="blog-fd-compare">
+      <div class="blog-fd-col">
+        <div class="blog-fd-header blog-fd-header-fact">📊 Fact Table</div>
+        <ul class="blog-fd-list">
+          <li>Stores <strong>measurable events</strong> — sales, revenue, quantity, scores</li>
+          <li>Usually long (millions of rows) and narrow (few columns)</li>
+          <li>Contains <strong>foreign keys</strong> linking to dimension tables</li>
+          <li>Rows represent individual transactions or measurements</li>
+          <li>Examples: <code>Sales</code>, <code>Orders</code>, <code>Transactions</code>, <code>Logs</code></li>
+        </ul>
+      </div>
+      <div class="blog-fd-col">
+        <div class="blog-fd-header blog-fd-header-dim">📎 Dimension Table</div>
+        <ul class="blog-fd-list">
+          <li>Stores <strong>descriptive attributes</strong> about business entities</li>
+          <li>Usually short (fewer rows) and wide (many descriptive columns)</li>
+          <li>Contains a <strong>primary key</strong> referenced by the Fact table</li>
+          <li>Rows represent unique entities — one row per product, customer, date</li>
+          <li>Examples: <code>Products</code>, <code>Customers</code>, <code>Employees</code>, <code>Dates</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <blockquote class="blog-quote" style="margin-top:16px">
+      Think of <strong>Fact Tables</strong> as bank transactions and
+      <strong>Dimension Tables</strong> as your contact list. The transaction
+      shows "₹5,000 paid to Vendor A" — the contact list tells you everything
+      about Vendor A.
+    </blockquote>
+  </div>
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>🔗 Understanding Relationships</h2>
+    <p>Power BI allows you to define relationships between tables in the
+    <strong>Model View</strong>. You drag from the primary key of a Dimension
+    table to the foreign key in the Fact table.</p>
+
+    <div class="blog-relationship-types">
+      <div class="blog-rel-card blog-rel-onetoone">
+        <div class="blog-rel-title">1 : 1</div>
+        <div class="blog-rel-name">One-to-One</div>
+        <div class="blog-rel-desc">Each row in Table A matches exactly one row in Table B. Rare — usually means tables should be merged.</div>
+      </div>
+      <div class="blog-rel-card blog-rel-onetomany">
+        <div class="blog-rel-title">1 : *</div>
+        <div class="blog-rel-name">One-to-Many ✅ Preferred</div>
+        <div class="blog-rel-desc">One product can appear in many sales rows. This is the standard relationship in a star schema.</div>
+      </div>
+      <div class="blog-rel-card blog-rel-manytomany">
+        <div class="blog-rel-title">* : *</div>
+        <div class="blog-rel-name">Many-to-Many ⚠️</div>
+        <div class="blog-rel-desc">Avoid where possible — can cause ambiguous filter paths and incorrect aggregations. Resolve with a bridge table.</div>
+      </div>
+    </div>
+
+    <p style="margin-top:14px">Example of a correct one-to-many relationship:</p>
+    <div class="blog-rel-example">
+      <code>Products.ProductID</code>
+      <span class="blog-rel-arrow">——— 1 : * ———→</span>
+      <code>Sales.ProductID</code>
+    </div>
+    <p style="margin-top:12px">Filters flow <strong>from the "one" side to the "many" side</strong>
+    — slicing by a product name filters the Sales table automatically.</p>
+  </div>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🌟 Star Schema vs ❄️ Snowflake Schema</h2>
+    <p>These are the two dominant patterns for organising a data model:</p>
+
+    <div class="blog-schema-compare">
+      <div class="blog-schema-card blog-schema-star">
+        <div class="blog-schema-card-title">🌟 Star Schema</div>
+        <div class="blog-schema-diagram">
+          <div class="blog-schema-center">Sales<br/><span>Fact</span></div>
+          <div class="blog-schema-dims">
+            <div class="blog-schema-dim">Products</div>
+            <div class="blog-schema-dim">Customers</div>
+            <div class="blog-schema-dim">Dates</div>
+            <div class="blog-schema-dim">Regions</div>
+          </div>
+        </div>
+        <ul class="blog-schema-points">
+          <li>One Fact table at the centre</li>
+          <li>Dimension tables are denormalised (flat)</li>
+          <li>Faster query performance</li>
+          <li>Easier for Power BI to optimise</li>
+          <li><strong>Recommended for most Power BI models</strong></li>
+        </ul>
+      </div>
+      <div class="blog-schema-card blog-schema-snow">
+        <div class="blog-schema-card-title">❄️ Snowflake Schema</div>
+        <ul class="blog-schema-points" style="margin-top:14px">
+          <li>Dimension tables are <strong>normalised</strong> — split into multiple related tables</li>
+          <li>Example: Products → SubCategory → Category (three separate tables)</li>
+          <li>Reduces data storage and redundancy</li>
+          <li>More complex query paths — can slow Power BI down</li>
+          <li>Often arrives this way from a data warehouse — you may need to flatten it in Power Query</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-summary">
+    <h2>⚠️ Golden Rules for Good Data Modeling</h2>
+    <ul style="padding-left:18px;margin-top:10px">
+      <li style="margin-bottom:9px">
+        <strong>Always include a dedicated Date table</strong> — mark it as a
+        Date table in Power BI so time intelligence functions like TOTALYTD,
+        SAMEPERIODLASTYEAR, and DATEADD work correctly.
+      </li>
+      <li style="margin-bottom:9px">
+        <strong>Prefer star schema over snowflake</strong> — flatten dimension
+        tables in Power Query if they arrive normalised. Power BI performs
+        better with fewer joins.
+      </li>
+      <li style="margin-bottom:9px">
+        <strong>Remove unused columns</strong> — every column you import uses
+        memory. Only load what you need for your reports.
+      </li>
+      <li style="margin-bottom:9px">
+        <strong>Use surrogate keys</strong> — integer IDs are faster to join on
+        than text strings or composite keys.
+      </li>
+      <li style="margin-bottom:9px">
+        <strong>Avoid bidirectional relationships</strong> unless absolutely
+        necessary — they can cause unexpected filter propagation and slow down
+        your model.
+      </li>
+      <li style="margin-bottom:9px">
+        <strong>One-to-many is your friend</strong> — design your model so
+        filters flow cleanly from dimension tables into the fact table.
+      </li>
+    </ul>
+  </div>
+
+  <div class="blog-exercise">
+    <h2>🧠 Hands-on Mini Task</h2>
+    <p>Build a star schema from scratch in Power BI Desktop:</p>
+    <ol class="blog-exercise-steps">
+      <li>
+        <strong>Create three tables</strong><br/>
+        Use Enter Data to manually create <strong>Products</strong>,
+        <strong>Sales</strong>, and <strong>Customers</strong> tables with
+        at least 3 rows each and appropriate columns including ProductID
+        and CustomerID keys.
+      </li>
+      <li>
+        <strong>Define relationships</strong><br/>
+        Go to Model View. Drag <code>Products.ProductID</code> to
+        <code>Sales.ProductID</code>. Then drag
+        <code>Customers.CustomerID</code> to <code>Sales.CustomerID</code>.
+        Confirm both are one-to-many.
+      </li>
+      <li>
+        <strong>Test with a slicer</strong><br/>
+        Add a slicer for Customer Name on a report page. Add a table visual
+        showing Sales Amount. Confirm that selecting a customer filters
+        the sales correctly.
+      </li>
+      <li>
+        <strong>Add a Date table</strong><br/>
+        Use DAX to create a Date table:
+        <code style="display:block;margin-top:6px;padding:8px;
+                     background:var(--bg3);border-radius:6px;
+                     font-size:12px;color:var(--accent)">
+          DateTable = CALENDAR(DATE(2023,1,1), DATE(2025,12,31))
+        </code>
+        Mark it as a Date table from the Table Tools ribbon. Link it to
+        Sales.OrderDate. Now your model is time-intelligence ready.
+      </li>
+    </ol>
+  </div>
+
+  <div class="blog-mslearn">
+    <div class="blog-mslearn-title">📚 Go Deeper — Microsoft Learn Resources</div>
+    <ul class="blog-mslearn-links">
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-data-modeling"
+           target="_blank" rel="noopener">
+          Data Modeling in Power BI Desktop
+        </a>
+      </li>
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-star-schema"
+           target="_blank" rel="noopener">
+          Understand Star Schema in Power BI
+        </a>
+      </li>
+      <li>
+        <a href="https://learn.microsoft.com/en-us/power-bi/guidance/modeling-star-snowflake"
+           target="_blank" rel="noopener">
+          Star vs Snowflake Schema — guidance
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="blog-next-chapter">
+    <span class="blog-next-label">Up Next in Chapter 4</span>
+    <span class="blog-next-title">
+      4.5 DAX Basics — creating measures, calculated columns, and calculated
+      tables. Understanding the difference between a measure and a column,
+      and why it matters for your reports.
+    </span>
+  </div>
+
+</div>
+    `
+  },
+
+  {
     id: 'blazor-component-lifecycle',
     title: 'Blazor Component Lifecycle — Every Method Explained',
     category: 'dotnet',
