@@ -767,6 +767,128 @@
   .blog-rls-roles { gap: 8px; }
   .blog-rls-role { min-width: 80px; padding: 10px 8px; }
 }
+
+/* ── Chapter overview card grid ── */
+.blog-chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 28px 0;
+}
+
+.blog-chapter-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-chapter-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s;
+}
+
+.blog-chapter-card:hover {
+  border-color: var(--border-md);
+  transform: translateY(-2px);
+}
+
+.blog-chapter-card:hover::before {
+  transform: scaleX(1);
+}
+
+.blog-chapter-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.blog-chapter-number {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  font-family: var(--mono);
+  color: var(--accent);
+  background: rgba(26,86,219,0.1);
+  border: 1px solid rgba(26,86,219,0.2);
+  border-radius: 20px;
+  padding: 2px 8px;
+}
+
+.blog-chapter-icon {
+  font-size: 18px;
+}
+
+.blog-chapter-card-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.blog-chapter-card-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.blog-chapter-card-desc strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.blog-chapter-card-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+  padding: 6px 14px;
+  background: var(--accent);
+  color: white;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s;
+  align-self: flex-start;
+}
+
+.blog-chapter-card-btn:hover {
+  opacity: 0.85;
+}
+
+.blog-chapter-card-btn-soon {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+  padding: 6px 14px;
+  background: var(--bg3);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  align-self: flex-start;
+  cursor: default;
+}
+
+@media (max-width: 640px) {
+  .blog-chapter-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
 <body>

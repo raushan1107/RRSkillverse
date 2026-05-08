@@ -476,6 +476,258 @@ const BLOG_POSTS = [
   },
 
   {
+    id: 'power-bi-advanced-features-overview',
+    title: 'Chapter 4: Advanced Features — Taking Power BI to the Next Level',
+    category: 'power-platform',
+    topic: 'power-bi',
+    tags: ['Power BI', 'PL-300', 'DAX', 'Power Query', 'Data Modeling', 'RLS', 'AI Features', 'Advanced'],
+    published: '2025-04-19',
+    updated: '2025-04-19',
+    readTime: '5 min',
+    excerpt: 'Welcome to the advanced chapter of Raushan\'s Power BI journey. Having mastered the basics and sharing, it\'s time to explore the powerful tools that separate casual users from true Power BI practitioners — from DAX and Data Modeling to AI features and custom visuals.',
+    featured: false,
+    content: `
+<div class="blog-story">
+
+  <p>Welcome to the advanced features of Power BI! Having built his first reports,
+  shared them with his team, and set up row-level security, Raushan was ready to go
+  deeper. This chapter is a launchpad — an overview of the powerful tools and
+  techniques that separate casual users from true Power BI practitioners.</p>
+
+  <p>Each topic below is a deep-dive article of its own. Click any card to explore
+  that subject fully.</p>
+
+  <div class="blog-chapter-grid">
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.1</span>
+        <span class="blog-chapter-icon">🔌</span>
+      </div>
+      <div class="blog-chapter-card-title">Data Connectivity Modes</div>
+      <div class="blog-chapter-card-desc">
+        Understand the difference between <strong>Import</strong>,
+        <strong>DirectQuery</strong>, and <strong>Live Connection</strong> modes
+        — when to use each and what trade-offs come with them.
+      </div>
+      <a href="https://rreducationpowerbi.blogspot.com/2025/04/data-connectivity-modes.html"
+         target="_blank" rel="noopener"
+         class="blog-chapter-card-btn">Read Article →</a>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.2</span>
+        <span class="blog-chapter-icon">🔍</span>
+      </div>
+      <div class="blog-chapter-card-title">Data Exploration Options</div>
+      <div class="blog-chapter-card-desc">
+        Discover <strong>Column Quality</strong>, <strong>Column Distribution</strong>,
+        and <strong>Column Profile</strong> in Power Query — essential tools for
+        understanding your data before you model it.
+      </div>
+      <a href="https://rreducationpowerbi.blogspot.com/2025/04/Data-Exploration-Options-Column-Quality-Distribution-and-Profiling.html"
+         target="_blank" rel="noopener"
+         class="blog-chapter-card-btn">Read Article →</a>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.3</span>
+        <span class="blog-chapter-icon">⚙️</span>
+      </div>
+      <div class="blog-chapter-card-title">Data Transformation</div>
+      <div class="blog-chapter-card-desc">
+        Explore data transformation techniques in <strong>Power Query</strong> —
+        splitting columns, merging tables, unpivoting data, and building
+        reusable transformation steps.
+      </div>
+      <a href="https://rreducationpowerbi.blogspot.com/2025/04/transforming-data-in-power-bi.html"
+         target="_blank" rel="noopener"
+         class="blog-chapter-card-btn">Read Article →</a>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.4</span>
+        <span class="blog-chapter-icon">🗂️</span>
+      </div>
+      <div class="blog-chapter-card-title">Data Modeling</div>
+      <div class="blog-chapter-card-desc">
+        Grasp <strong>Fact</strong> and <strong>Dimension</strong> tables, star
+        schema vs snowflake schema, relationship cardinality, and why a clean
+        model is the foundation of every great report.
+      </div>
+      <span class="blog-chapter-card-btn blog-chapter-card-btn-soon">Coming Soon</span>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.5</span>
+        <span class="blog-chapter-icon">📐</span>
+      </div>
+      <div class="blog-chapter-card-title">DAX Basics</div>
+      <div class="blog-chapter-card-desc">
+        Get started with <strong>DAX</strong> — creating measures, calculated
+        columns, and calculated tables. Understand the difference between a
+        measure and a column, and why it matters.
+      </div>
+      <a href="https://rreducationpowerbi.blogspot.com/2025/04/dax-basics-in-power-bi.html"
+         target="_blank" rel="noopener"
+         class="blog-chapter-card-btn">Read Article →</a>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.6</span>
+        <span class="blog-chapter-icon">🔽</span>
+      </div>
+      <div class="blog-chapter-card-title">Filters</div>
+      <div class="blog-chapter-card-desc">
+        Explore the different types of filters in Power BI — visual-level,
+        page-level, and report-level filters — and how they interact with
+        slicers and cross-filtering.
+      </div>
+      <span class="blog-chapter-card-btn blog-chapter-card-btn-soon">Coming Soon</span>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.7</span>
+        <span class="blog-chapter-icon">📊</span>
+      </div>
+      <div class="blog-chapter-card-title">Advanced Visualizations</div>
+      <div class="blog-chapter-card-desc">
+        Go beyond bar charts — learn scatter plots, decomposition trees,
+        waterfall charts, ribbon charts, and when to use each one for
+        maximum clarity.
+      </div>
+      <span class="blog-chapter-card-btn blog-chapter-card-btn-soon">Coming Soon</span>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.9</span>
+        <span class="blog-chapter-icon">🎨</span>
+      </div>
+      <div class="blog-chapter-card-title">Formatting Reports</div>
+      <div class="blog-chapter-card-desc">
+        Learn how to format visuals, apply themes, control fonts and colours,
+        and build reports that look professional and are easy to read at a
+        glance.
+      </div>
+      <span class="blog-chapter-card-btn blog-chapter-card-btn-soon">Coming Soon</span>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.10</span>
+        <span class="blog-chapter-icon">📐</span>
+      </div>
+      <div class="blog-chapter-card-title">Layout Design</div>
+      <div class="blog-chapter-card-desc">
+        Explore tips for effective report layout — page sizing, alignment,
+        grouping visuals, and designing for both desktop and mobile viewing.
+      </div>
+      <span class="blog-chapter-card-btn blog-chapter-card-btn-soon">Coming Soon</span>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.11</span>
+        <span class="blog-chapter-icon">✨</span>
+      </div>
+      <div class="blog-chapter-card-title">Enhancing Visualizations</div>
+      <div class="blog-chapter-card-desc">
+        Learn about <strong>buttons</strong>, <strong>bookmarks</strong>,
+        <strong>tooltips</strong>, and <strong>sync slicers</strong> — the
+        features that turn a static report into an interactive experience.
+      </div>
+      <span class="blog-chapter-card-btn blog-chapter-card-btn-soon">Coming Soon</span>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.13</span>
+        <span class="blog-chapter-icon">🔗</span>
+      </div>
+      <div class="blog-chapter-card-title">Sync Slicers</div>
+      <div class="blog-chapter-card-desc">
+        Understand and use <strong>synchronised slicers</strong> — allowing a
+        single slicer to filter visuals across multiple pages of a report
+        simultaneously.
+      </div>
+      <span class="blog-chapter-card-btn blog-chapter-card-btn-soon">Coming Soon</span>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.14</span>
+        <span class="blog-chapter-icon">🧩</span>
+      </div>
+      <div class="blog-chapter-card-title">Custom &amp; Advanced Visuals</div>
+      <div class="blog-chapter-card-desc">
+        Learn how to import and use <strong>custom visuals</strong> from
+        AppSource — expanding Power BI\'s built-in library with community and
+        certified visuals.
+      </div>
+      <span class="blog-chapter-card-btn blog-chapter-card-btn-soon">Coming Soon</span>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.15</span>
+        <span class="blog-chapter-icon">🤖</span>
+      </div>
+      <div class="blog-chapter-card-title">AI Features</div>
+      <div class="blog-chapter-card-desc">
+        Explore Power BI\'s built-in AI tools — <strong>Q&amp;A visual</strong>,
+        <strong>Key Influencers</strong>, <strong>Anomaly Detection</strong>,
+        and <strong>Smart Narrative</strong> — that surface insights automatically.
+      </div>
+      <span class="blog-chapter-card-btn blog-chapter-card-btn-soon">Coming Soon</span>
+    </div>
+
+    <div class="blog-chapter-card">
+      <div class="blog-chapter-card-header">
+        <span class="blog-chapter-number">4.16</span>
+        <span class="blog-chapter-icon">🔒</span>
+      </div>
+      <div class="blog-chapter-card-title">RLS Implementation</div>
+      <div class="blog-chapter-card-desc">
+        Learn the step-by-step process for implementing
+        <strong>Row-Level Security</strong> — defining roles in Power BI Desktop,
+        writing DAX filter rules, and testing in Power BI Service.
+      </div>
+      <span class="blog-chapter-card-btn blog-chapter-card-btn-soon">Coming Soon</span>
+    </div>
+
+  </div>
+
+  <div class="blog-summary" style="margin-top:32px">
+    <h2>📌 How to Use This Chapter</h2>
+    <p>Each card above links to its own dedicated article with explanations,
+    examples, and exercises. Work through them in order if you\'re following
+    Raushan\'s journey from scratch, or jump directly to the topic you need most.</p>
+    <p>Topics marked <strong>Coming Soon</strong> are being written and will be
+    published progressively. Subscribe to the YouTube channel or bookmark this
+    page to catch each one as it drops.</p>
+  </div>
+
+  <div class="blog-next-chapter">
+    <span class="blog-next-label">Series Progress</span>
+    <span class="blog-next-title">
+      You are in Chapter 4 of Raushan\'s Power BI Journey.
+      Start with 4.1 Data Connectivity Modes and work your way through
+      each sub-topic to build a complete, professional-level Power BI skill set.
+    </span>
+  </div>
+
+</div>
+    `
+  },
+
+  {
     id: 'blazor-component-lifecycle',
     title: 'Blazor Component Lifecycle — Every Method Explained',
     category: 'dotnet',
