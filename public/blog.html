@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Learn by Technology — RR Skillverse</title>
+<meta name="description" content="Real hand-notes, demo guides,
+  and learning curves by MCT Raushan Ranjan. Power BI, Azure,
+  C#, Blazor, OpenGL, AI/ML and more."/>
+<meta property="og:title" content="Tech Blogs — RR Skillverse"/>
+<meta property="og:image" content="https://rrskillverse.in/images/og-thumbnail.svg"/>
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
+<link rel="stylesheet" href="css/main.css"/>
+<script src="js/blog-data.js"></script>
+<style>
+
+/* ── Blog layout ── */
+.blog-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 0;
+  min-height: calc(100vh - 60px);
+}
+
+/* ── Sidebar ── */
+.blog-sidebar {
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  padding: 24px 0;
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+.blog-sidebar-section {
+  margin-bottom: 8px;
+}
+.blog-sidebar-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 0 16px;
+  margin-bottom: 6px;
+  display: block;
+}
+.blog-sidebar-group {
+  margin-bottom: 16px;
+}
+.blog-sidebar-group-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 16px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.blog-sidebar-group-header:hover {
+  background: var(--bg3);
+}
+.blog-sidebar-group-header.active {
+  color: var(--accent);
+}
+.blog-sidebar-topics {
+  padding: 0 0 4px 0;
+}
+.blog-topic-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 16px 5px 36px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+}
+.blog-topic-link:hover {
+  color: var(--text);
+  background: var(--bg3);
+}
+.blog-topic-link.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: rgba(26,86,219,0.06);
+  font-weight: 600;
+}
+.blog-topic-count {
+  font-size: 9px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 6px;
+  color: var(--text-dim);
+}
+.blog-topic-link.active .blog-topic-count {
+  background: rgba(26,86,219,0.15);
+  color: var(--accent);
+  border-color: rgba(26,86,219,0.2);
+}
+
+/* ── Main content ── */
+.blog-main {
+  padding: 32px 40px 64px;
+  min-width: 0;
+}
+
+/* ── Blog header ── */
+.blog-main-header {
+  margin-bottom: 28px;
+}
+.blog-main-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.blog-main-eyebrow::before {
+  content: '';
+  width: 16px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+.blog-main-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.4px;
+  margin-bottom: 6px;
+}
+.blog-main-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── Search + controls ── */
+.blog-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.blog-search {
+  flex: 1;
+  min-width: 200px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.blog-search:focus {
+  border-color: rgba(26,86,219,0.4);
+  box-shadow: 0 0 0 3px rgba(26,86,219,0.07);
+}
+.blog-search::placeholder { color: var(--text-dim); }
+.blog-count {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ── Featured post (hero card) ── */
+.blog-featured {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.blog-featured::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+}
+.blog-featured:hover {
+  border-color: var(--border-md);
+  transform: translateY(-2px);
+}
+.blog-featured-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(26,86,219,0.1);
+  border: 1px solid rgba(26,86,219,0.2);
+  border-radius: 20px;
+  padding: 2px 10px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.blog-featured-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.blog-featured-excerpt {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 620px;
+  margin-bottom: 16px;
+}
+.blog-featured-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.blog-featured-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.blog-featured-cta {
+  position: absolute;
+  right: 32px;
+  bottom: 28px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.blog-featured:hover .blog-featured-cta { opacity: 1; }
+
+/* ── Post grid ── */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.blog-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.blog-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s;
+}
+.blog-card:hover {
+  border-color: var(--border-md);
+  transform: translateY(-2px);
+}
+.blog-card:hover::before { transform: scaleX(1); }
+.blog-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.blog-topic-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--bg3);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.blog-read-time {
+  font-size: 10px;
+  color: var(--text-dim);
+  font-family: var(--mono);
+}
+.blog-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+}
+.blog-card-excerpt {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.blog-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.blog-card-date {
+  font-size: 10px;
+  color: var(--text-dim);
+}
+.blog-card-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.blog-tag {
+  font-size: 9px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: rgba(26,86,219,0.08);
+  color: var(--accent);
+  border: 1px solid rgba(26,86,219,0.15);
+}
+
+/* ── Empty state ── */
+.blog-empty {
+  text-align: center;
+  padding: 64px 32px;
+  color: var(--text-muted);
+}
+.blog-empty-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .blog-layout { grid-template-columns: 200px 1fr; }
+  .blog-main { padding: 24px 24px 48px; }
+}
+@media (max-width: 768px) {
+  .blog-layout { grid-template-columns: 1fr; }
+  .blog-sidebar {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+  }
+  .blog-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<script src="js/nav.js"></script>
+<div class="page-body">
+  <div class="blog-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="blog-sidebar" id="blogSidebar"></aside>
+
+    <!-- MAIN -->
+    <main class="blog-main">
+      <div class="blog-main-header">
+        <div class="blog-main-eyebrow" id="blogEyebrow">All Articles</div>
+        <div class="blog-main-title" id="blogTitle">Learn by Technology</div>
+        <div class="blog-main-desc" id="blogDesc">
+          Real hand-notes, demo guides, and learning curves
+          by MCT Raushan Ranjan — verified from enterprise training.
+        </div>
+      </div>
+
+      <div class="blog-controls">
+        <input type="text" class="blog-search"
+               id="blogSearch"
+               placeholder="Search articles…"
+               oninput="renderPosts()"/>
+        <div class="blog-count" id="blogCount"></div>
+      </div>
+
+      <div id="blogFeatured"></div>
+      <div class="blog-grid" id="blogGrid"></div>
+    </main>
+
+  </div>
+</div>
+<script src="js/main.js"></script>
+<script>
+
+// ── State ───────────────────────────────────────────
+let activeCat   = null;
+let activeTopic = null;
+
+// ── Read URL params on load ─────────────────────────
+(function initFromURL() {
+  const p = new URLSearchParams(window.location.search);
+  activeCat   = p.get('cat')   || null;
+  activeTopic = p.get('topic') || null;
+})();
+
+// ── Build sidebar ───────────────────────────────────
+function buildSidebar() {
+  const sidebar = document.getElementById('blogSidebar');
+  if (!sidebar) return;
+
+  let html = `
+    <div class="blog-sidebar-section">
+      <span class="blog-sidebar-label">Browse</span>
+      <div class="blog-sidebar-group">
+        <div class="blog-sidebar-group-header ${!activeCat ? 'active' : ''}"
+             onclick="setFilter(null, null)">
+          📚 All Articles
+        </div>
+      </div>
+    </div>
+    <div class="blog-sidebar-section">
+      <span class="blog-sidebar-label">By Technology</span>`;
+
+  Object.entries(BLOG_CATEGORIES).forEach(([catKey, cat]) => {
+    const catActive = activeCat === catKey;
+    html += `
+      <div class="blog-sidebar-group">
+        <div class="blog-sidebar-group-header ${catActive && !activeTopic ? 'active' : ''}"
+             onclick="setFilter('${catKey}', null)"
+             style="${catActive ? 'color:' + cat.color : ''}">
+          ${cat.icon} ${cat.label}
+        </div>
+        <div class="blog-sidebar-topics"
+             style="${catActive ? '' : 'display:none'}"
+             id="topics-${catKey}">`;
+
+    Object.entries(cat.topics).forEach(([topicKey, topicLabel]) => {
+      const count = BLOG_POSTS.filter(
+        p => p.category === catKey && p.topic === topicKey
+      ).length;
+      html += `
+          <div class="blog-topic-link ${activeTopic === topicKey ? 'active' : ''}"
+               onclick="setFilter('${catKey}', '${topicKey}')">
+            ${topicLabel}
+            <span class="blog-topic-count">${count}</span>
+          </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  html += `</div>`;
+  sidebar.innerHTML = html;
+}
+
+// ── Filter handler ──────────────────────────────────
+function setFilter(cat, topic) {
+  activeCat   = cat;
+  activeTopic = topic;
+
+  const url = new URL(window.location);
+  if (cat)   url.searchParams.set('cat', cat);
+  else       url.searchParams.delete('cat');
+  if (topic) url.searchParams.set('topic', topic);
+  else       url.searchParams.delete('topic');
+  history.pushState({}, '', url);
+
+  buildSidebar();
+  updateHeader();
+  renderPosts();
+}
+
+// ── Update page header based on filter ─────────────
+function updateHeader() {
+  const eyebrow = document.getElementById('blogEyebrow');
+  const title   = document.getElementById('blogTitle');
+  const desc    = document.getElementById('blogDesc');
+
+  if (!activeCat) {
+    eyebrow.textContent = 'All Articles';
+    title.textContent   = 'Learn by Technology';
+    desc.textContent    =
+      'Real hand-notes, demo guides, and learning curves ' +
+      'by MCT Raushan Ranjan — verified from enterprise training.';
+    return;
+  }
+
+  const cat = BLOG_CATEGORIES[activeCat];
+  if (!cat) return;
+
+  if (!activeTopic) {
+    eyebrow.textContent = cat.label;
+    title.textContent   = cat.icon + ' ' + cat.label;
+    desc.textContent    = 'All articles in ' + cat.label + ' by MCT Raushan Ranjan.';
+  } else {
+    const topicLabel = cat.topics[activeTopic] || activeTopic;
+    eyebrow.textContent = cat.label + ' › ' + topicLabel;
+    title.textContent   = topicLabel;
+    desc.textContent    =
+      'Deep-dive articles on ' + topicLabel +
+      ' from real enterprise training sessions.';
+  }
+}
+
+// ── Format date ─────────────────────────────────────
+function fmtDate(str) {
+  return new Date(str).toLocaleDateString('en-IN', {
+    day: 'numeric', month: 'short', year: 'numeric'
+  });
+}
+
+// ── Render posts ────────────────────────────────────
+function renderPosts() {
+  const q = (document.getElementById('blogSearch')?.value || '').toLowerCase();
+
+  let posts = BLOG_POSTS.filter(p => {
+    const catOk    = !activeCat   || p.category === activeCat;
+    const topicOk  = !activeTopic || p.topic    === activeTopic;
+    const searchOk = !q
+      || p.title.toLowerCase().includes(q)
+      || p.excerpt.toLowerCase().includes(q)
+      || p.tags.some(t => t.toLowerCase().includes(q));
+    return catOk && topicOk && searchOk;
+  });
+
+  posts = posts.sort((a, b) => {
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    return new Date(b.published) - new Date(a.published);
+  });
+
+  const countEl = document.getElementById('blogCount');
+  if (countEl) {
+    countEl.textContent = posts.length + ' article' + (posts.length !== 1 ? 's' : '');
+  }
+
+  const featuredEl = document.getElementById('blogFeatured');
+  const featured = posts.find(p => p.featured);
+  if (featured && !q && !activeTopic) {
+    featuredEl.innerHTML = `
+      <div class="blog-featured" onclick="openPost('${featured.id}')">
+        <div class="blog-featured-badge">⭐ Featured Article</div>
+        <div class="blog-featured-title">${featured.title}</div>
+        <div class="blog-featured-excerpt">${featured.excerpt}</div>
+        <div class="blog-featured-meta">
+          <span>📅 ${fmtDate(featured.published)}</span>
+          <span>⏱ ${featured.readTime} read</span>
+          <span>🏷 ${featured.tags.slice(0,3).join(' · ')}</span>
+        </div>
+        <div class="blog-featured-cta">Read article →</div>
+      </div>`;
+    posts = posts.filter(p => p.id !== featured.id);
+  } else {
+    featuredEl.innerHTML = '';
+  }
+
+  const grid = document.getElementById('blogGrid');
+  if (!posts.length) {
+    grid.innerHTML = `
+      <div class="blog-empty" style="grid-column:1/-1">
+        <div class="blog-empty-icon">📭</div>
+        <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px">
+          No articles found
+        </div>
+        <p style="font-size:13px;max-width:320px;margin:0 auto;line-height:1.65">
+          ${q
+            ? 'No articles match "' + q + '". Try a different search.'
+            : 'No articles in this category yet — check back soon.'}
+        </p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = posts.map(p => {
+    const cat = BLOG_CATEGORIES[p.category];
+    const topicLabel = cat?.topics?.[p.topic] || p.topic;
+    return `
+      <div class="blog-card" onclick="openPost('${p.id}')">
+        <div class="blog-card-top">
+          <span class="blog-topic-badge"
+                style="color:${cat?.color};background:${cat?.color}18;border-color:${cat?.color}30">
+            ${topicLabel}
+          </span>
+          <span class="blog-read-time">${p.readTime}</span>
+        </div>
+        <div class="blog-card-title">${p.title}</div>
+        <div class="blog-card-excerpt">${p.excerpt}</div>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">${fmtDate(p.published)}</span>
+          <div class="blog-card-tags">
+            ${p.tags.slice(0,3).map(t => `<span class="blog-tag">${t}</span>`).join('')}
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ── Open post ────────────────────────────────────────
+function openPost(id) {
+  window.location.href = '/blog-post.html?id=' + id;
+}
+
+// ── Init ─────────────────────────────────────────────
+buildSidebar();
+updateHeader();
+renderPosts();
+
+</script>
+</body>
+</html>

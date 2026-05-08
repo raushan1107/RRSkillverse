@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title id="pageTitle">Article — RR Skillverse</title>
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
+<link rel="stylesheet" href="css/main.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"/>
+<script src="js/blog-data.js"></script>
+<style>
+
+/* ── Post layout ── */
+.post-shell {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
+}
+
+/* ── Breadcrumb ── */
+.post-breadcrumb {
+  grid-column: 1 / -1;
+  padding: 14px 0 0;
+  font-size: 11.5px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.post-breadcrumb a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.post-breadcrumb a:hover { color: var(--accent); }
+.post-breadcrumb-sep { opacity: 0.4; }
+
+/* ── Article ── */
+.post-article {
+  padding: 32px 48px 80px 0;
+  min-width: 0;
+}
+.post-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.post-topic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  text-decoration: none;
+}
+.post-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-dim);
+  flex-wrap: wrap;
+}
+.post-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.post-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.post-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 20px;
+  background: var(--bg3);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+/* ── Article body typography ── */
+.post-body {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-muted);
+}
+.post-body h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 36px 0 14px;
+  letter-spacing: -0.3px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.post-body h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 28px 0 10px;
+}
+.post-body p { margin-bottom: 16px; }
+.post-body ul, .post-body ol {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+.post-body li { margin-bottom: 6px; }
+.post-body strong { color: var(--text); font-weight: 600; }
+.post-body code {
+  font-family: var(--mono);
+  font-size: 13px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 6px;
+  color: var(--accent);
+}
+.post-body pre {
+  background: #0d1117;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+.post-body pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: 13px;
+}
+.post-body blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 12px 20px;
+  margin: 20px 0;
+  background: rgba(26,86,219,0.04);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text-muted);
+}
+.post-body .tip {
+  background: rgba(45,122,79,0.08);
+  border: 1px solid rgba(45,122,79,0.2);
+  border-left: 3px solid #2d7a4f;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin: 16px 0;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+.post-body .tip::before {
+  content: '💡 Trainer Tip — ';
+  font-weight: 700;
+  color: #2d7a4f;
+}
+.post-body .warn {
+  background: rgba(199,92,26,0.08);
+  border: 1px solid rgba(199,92,26,0.2);
+  border-left: 3px solid #c75c1a;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin: 16px 0;
+  font-size: 13.5px;
+}
+.post-body .warn::before {
+  content: '⚠️ Watch Out — ';
+  font-weight: 700;
+  color: #c75c1a;
+}
+
+/* ── Post navigation ── */
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.post-nav-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.post-nav-card:hover {
+  border-color: var(--border-md);
+  transform: translateY(-2px);
+}
+.post-nav-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+.post-nav-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+.post-nav-card.next { text-align: right; }
+
+/* ── Right sidebar ── */
+.post-sidebar {
+  padding: 32px 0 80px 32px;
+  border-left: 1px solid var(--border);
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+.post-sidebar-section {
+  margin-bottom: 28px;
+}
+.post-sidebar-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+
+/* ── Author card ── */
+.author-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+}
+.author-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(26,86,219,0.3);
+  margin: 0 auto 10px;
+  display: block;
+}
+.author-avatar-fallback {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a56db, #0ea5e9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+  margin: 0 auto 10px;
+}
+.author-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.author-title {
+  font-size: 10.5px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.author-bio {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── Related posts ── */
+.related-post-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.related-post-item:last-child { border-bottom: none; }
+.related-post-item:hover .related-post-title { color: var(--accent); }
+.related-post-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 4px;
+  transition: color 0.15s;
+}
+.related-post-meta {
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+/* ── Ask AI bar ── */
+.ask-ai-bar {
+  background: linear-gradient(135deg, rgba(26,86,219,0.08), rgba(14,165,233,0.05));
+  border: 1px solid rgba(26,86,219,0.2);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+.ask-ai-bar-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.ask-ai-bar-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.ask-ai-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: white;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.ask-ai-btn:hover { opacity: 0.88; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .post-shell { grid-template-columns: 1fr; padding: 0 16px; }
+  .post-sidebar {
+    position: static;
+    padding: 0 0 40px;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+  .post-article { padding: 24px 0 40px; }
+  .post-nav { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<script src="js/nav.js"></script>
+<div class="page-body">
+
+  <div class="post-shell" id="postShell">
+
+    <!-- BREADCRUMB -->
+    <nav class="post-breadcrumb" id="postBreadcrumb">
+      <a href="/blog.html">← Blog</a>
+    </nav>
+
+    <!-- ARTICLE -->
+    <article class="post-article" id="postArticle">
+      <div style="padding:80px 0;text-align:center;color:var(--text-dim)">
+        Loading article…
+      </div>
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="post-sidebar" id="postSidebar"></aside>
+
+  </div>
+
+</div>
+<script src="js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+
+// ── Load post from URL ───────────────────────────────
+const postId = new URLSearchParams(window.location.search).get('id');
+const post   = BLOG_POSTS.find(p => p.id === postId);
+
+if (!post) {
+  document.getElementById('postArticle').innerHTML = `
+    <div style="text-align:center;padding:80px 0">
+      <div style="font-size:40px;margin-bottom:16px">📭</div>
+      <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px">
+        Article not found
+      </div>
+      <p style="color:var(--text-muted);margin-bottom:20px">
+        This article may have moved or been removed.
+      </p>
+      <a href="/blog.html" style="color:var(--accent);font-weight:600">
+        ← Back to all articles
+      </a>
+    </div>`;
+} else {
+  renderPost(post);
+}
+
+function fmtDate(str) {
+  return new Date(str).toLocaleDateString('en-IN', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+}
+
+function renderPost(post) {
+  document.title = post.title + ' — RR Skillverse';
+
+  const cat        = BLOG_CATEGORIES[post.category];
+  const topicLabel = cat?.topics?.[post.topic] || post.topic;
+
+  document.getElementById('postBreadcrumb').innerHTML = `
+    <a href="/blog.html">Blog</a>
+    <span class="post-breadcrumb-sep">›</span>
+    <a href="/blog.html?cat=${post.category}">${cat?.label || post.category}</a>
+    <span class="post-breadcrumb-sep">›</span>
+    <a href="/blog.html?cat=${post.category}&topic=${post.topic}">${topicLabel}</a>
+    <span class="post-breadcrumb-sep">›</span>
+    <span style="color:var(--text)">${post.title}</span>`;
+
+  document.getElementById('postArticle').innerHTML = `
+    <header class="post-header">
+      <a href="/blog.html?cat=${post.category}&topic=${post.topic}"
+         class="post-topic-badge"
+         style="color:${cat?.color};background:${cat?.color}18;border:1px solid ${cat?.color}30">
+        ${cat?.icon} ${topicLabel}
+      </a>
+      <h1 class="post-title">${post.title}</h1>
+      <div class="post-meta">
+        <span class="post-meta-item">📅 ${fmtDate(post.published)}</span>
+        <span class="post-meta-item">⏱ ${post.readTime} read</span>
+        ${post.updated !== post.published
+          ? `<span class="post-meta-item">✏️ Updated ${fmtDate(post.updated)}</span>`
+          : ''}
+        <span class="post-meta-item">✍️ Raushan Ranjan · MCT</span>
+      </div>
+      <div class="post-tags">
+        ${post.tags.map(t => `<span class="post-tag">${t}</span>`).join('')}
+      </div>
+    </header>
+
+    <div class="post-body" id="postBody">
+      ${post.content}
+    </div>
+
+    ${buildPostNav(post)}`;
+
+  if (window.hljs) {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  }
+
+  buildSidebar(post);
+}
+
+// ── Prev / Next navigation ──────────────────────────
+function buildPostNav(post) {
+  const sorted = [...BLOG_POSTS].sort(
+    (a, b) => new Date(b.published) - new Date(a.published)
+  );
+  const idx  = sorted.findIndex(p => p.id === post.id);
+  const prev = sorted[idx + 1];
+  const next = sorted[idx - 1];
+
+  if (!prev && !next) return '';
+
+  return `
+    <nav class="post-nav">
+      <div>
+        ${prev ? `
+          <div class="post-nav-card"
+               onclick="location.href='/blog-post.html?id=${prev.id}'">
+            <div class="post-nav-label">← Previous</div>
+            <div class="post-nav-title">${prev.title}</div>
+          </div>` : ''}
+      </div>
+      <div>
+        ${next ? `
+          <div class="post-nav-card next"
+               onclick="location.href='/blog-post.html?id=${next.id}'">
+            <div class="post-nav-label">Next →</div>
+            <div class="post-nav-title">${next.title}</div>
+          </div>` : ''}
+      </div>
+    </nav>`;
+}
+
+// ── Build sidebar ───────────────────────────────────
+function buildSidebar(post) {
+  const cat     = BLOG_CATEGORIES[post.category];
+  const related = BLOG_POSTS
+    .filter(p => p.topic === post.topic && p.id !== post.id)
+    .slice(0, 5);
+
+  document.getElementById('postSidebar').innerHTML = `
+
+    <div class="post-sidebar-section">
+      <div class="post-sidebar-title">Written by</div>
+      <div class="author-card">
+        <img src="/images/raushanranjan.jpg"
+             class="author-avatar"
+             alt="Raushan Ranjan"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="author-avatar-fallback" style="display:none">RR</div>
+        <div class="author-name">Raushan Ranjan</div>
+        <div class="author-title">Microsoft Certified Trainer · MCT</div>
+        <div class="author-bio">
+          Senior Corporate Trainer at Koenig Solutions.
+          10+ years teaching Azure, Power Platform,
+          .NET and AI to enterprise teams globally.
+        </div>
+      </div>
+    </div>
+
+    <div class="post-sidebar-section">
+      <div class="ask-ai-bar">
+        <div class="ask-ai-bar-title">🤖 Ask Axiom AI</div>
+        <div class="ask-ai-bar-sub">
+          Have a question about this topic?
+          Ask the AI trained on Raushan's courses.
+        </div>
+        <a href="/ai-agent.html?q=${encodeURIComponent('Explain: ' + post.title)}"
+           class="ask-ai-btn">
+          Ask about this →
+        </a>
+      </div>
+    </div>
+
+    ${related.length ? `
+    <div class="post-sidebar-section">
+      <div class="post-sidebar-title">More in ${cat?.topics?.[post.topic] || post.topic}</div>
+      ${related.map(r => `
+        <div class="related-post-item"
+             onclick="location.href='/blog-post.html?id=${r.id}'">
+          <div class="related-post-title">${r.title}</div>
+          <div class="related-post-meta">
+            ${r.readTime} · ${new Date(r.published).toLocaleDateString('en-IN', {
+              month: 'short', year: 'numeric'
+            })}
+          </div>
+        </div>`).join('')}
+    </div>` : ''}
+
+    <div class="post-sidebar-section">
+      <a href="/blog.html?cat=${post.category}&topic=${post.topic}"
+         style="font-size:12px;color:var(--accent);font-weight:600;text-decoration:none">
+        ← All ${cat?.topics?.[post.topic] || ''} articles
+      </a>
+    </div>`;
+}
+
+</script>
+</body>
+</html>

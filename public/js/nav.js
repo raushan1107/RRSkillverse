@@ -4,7 +4,7 @@
 ═══════════════════════════════════════════════════════ */
 
 /* ── Blog category data for Learn mega-menu ─────────── */
-const BLOG_CATEGORIES = [
+const NAV_BLOG_CATEGORIES = [
   {
     group: 'Power Platform',
     icon: '⚡',
@@ -95,7 +95,7 @@ function buildLearnMegaMenu() {
         </span>
       </div>
       <div class="mega-menu-grid">
-        ${BLOG_CATEGORIES.map(cat => `
+        ${NAV_BLOG_CATEGORIES.map(cat => `
           <div class="mega-col">
             <div class="mega-col-header">
               <span class="mega-col-icon">${cat.icon}</span>
