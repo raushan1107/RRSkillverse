@@ -149,24 +149,31 @@
 @media(max-width:600px){.yt-new-card{flex-direction:column;}.yt-new-thumb{width:100%;height:160px;}}
 
 /* ═══════════════════════ TESTIMONIALS ══════════════════ */
-.testi-cred-bar{display:flex;align-items:center;justify-content:center;gap:0;margin:32px auto 48px;max-width:720px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-.testi-cred-item{flex:1;padding:18px 16px;text-align:center;display:flex;flex-direction:column;gap:4px;}
-.testi-cred-num{font-size:18px;font-weight:800;color:var(--accent);letter-spacing:-.3px;line-height:1;}
-.testi-cred-label{font-size:10px;color:var(--text-dim);font-weight:500;line-height:1.4;}
-.testi-cred-div{width:1px;height:40px;background:var(--border);flex-shrink:0;}
-.testi-wall{columns:3;column-gap:16px;}
-.testi-wall-card{break-inside:avoid;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:16px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s;}
-.testi-wall-card:hover{border-color:var(--border-md);transform:translateY(-2px);}
-.testi-wall-stars{color:#f59e0b;font-size:11px;letter-spacing:1.5px;}
-.testi-wall-text{font-size:13px;color:var(--text-muted);line-height:1.72;font-style:italic;}
-.testi-wall-text::before{content:open-quote;font-size:24px;color:rgba(14,165,233,.2);line-height:.5;display:block;margin-bottom:6px;font-family:Georgia,serif;font-style:normal;}
-.testi-wall-person{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--border);margin-top:2px;}
-.testi-wall-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#1e429f,#1a56db);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:white;flex-shrink:0;}
-.testi-wall-name{font-size:11.5px;font-weight:700;color:var(--text);}
-.testi-wall-meta{font-size:9.5px;color:var(--text-dim);margin-top:1px;}
-.testi-wall-tag{margin-left:auto;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;background:rgba(26,86,219,.08);color:var(--accent);border:1px solid rgba(26,86,219,.15);white-space:nowrap;flex-shrink:0;}
-@media(max-width:900px){.testi-wall{columns:2;}.testi-cred-bar{flex-wrap:wrap;}.testi-cred-item{min-width:50%;}.testi-cred-div{display:none;}}
-@media(max-width:600px){.testi-wall{columns:1;}}
+.testi-cred-bar{display:flex;align-items:center;justify-content:center;gap:0;margin:28px auto 44px;max-width:680px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.testi-cred-item{flex:1;padding:16px;text-align:center;display:flex;flex-direction:column;gap:4px;}
+.testi-cred-num{font-size:17px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-0.2px;}
+.testi-cred-label{font-size:9.5px;color:var(--text-dim);font-weight:500;letter-spacing:0.3px;}
+.testi-cred-div{width:1px;height:36px;background:var(--border);flex-shrink:0;}
+.testi-scroll-section{position:relative;overflow:hidden;}
+.testi-fade-left,.testi-fade-right{position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none;}
+.testi-fade-left{left:0;background:linear-gradient(to right,var(--bg),transparent);}
+.testi-fade-right{right:0;background:linear-gradient(to left,var(--bg),transparent);}
+.testi-scroll-row{overflow:hidden;}
+.testi-scroll-track{display:flex;gap:14px;width:max-content;animation:testiScroll 55s linear infinite;}
+.testi-scroll-track:hover{animation-play-state:paused;}
+.testi-reverse{animation-direction:reverse;animation-duration:65s;}
+@keyframes testiScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.testi-card{flex-shrink:0;width:300px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s;cursor:default;}
+.testi-card:hover{border-color:var(--border-md);transform:translateY(-3px);}
+.testi-stars{color:#f59e0b;font-size:11px;letter-spacing:1.5px;}
+.testi-quote-mark{font-size:28px;color:rgba(14,165,233,.18);line-height:.5;font-family:Georgia,serif;font-weight:900;}
+.testi-text{font-size:12px;color:var(--text-muted);line-height:1.72;font-style:italic;flex:1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
+.testi-person{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--border);}
+.testi-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#1e429f,#1a56db);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:white;flex-shrink:0;}
+.testi-name{font-size:11px;font-weight:700;color:var(--text);line-height:1.2;}
+.testi-loc{font-size:9px;color:var(--text-dim);margin-top:1px;}
+.testi-tag{margin-left:auto;font-size:8.5px;font-weight:700;padding:2px 7px;border-radius:20px;background:rgba(26,86,219,.08);color:var(--accent);border:1px solid rgba(26,86,219,.15);white-space:nowrap;flex-shrink:0;}
+@media(max-width:768px){.testi-cred-bar{flex-wrap:wrap;}.testi-cred-item{min-width:50%;}.testi-cred-div{display:none;}.testi-card{width:260px;}}
 
 /* ═══════════════════════ CTA ════════════════════════════ */
 .cta-section{padding:110px 64px;text-align:center;background:linear-gradient(160deg,rgba(26,86,219,.07) 0%,rgba(14,165,233,.03) 100%);border-top:1px solid var(--border);position:relative;overflow:hidden;}
@@ -307,25 +314,25 @@ window.addEventListener('load', () => {
       Trusted by learners in <em>25+ countries</em>
     </h2>
     <p class="section-sub">
-      From enterprise teams in Saudi Arabia to solo
-      developers in Uganda — real feedback from real
-      training sessions, delivered globally.
+      From enterprise teams in Saudi Arabia to developers
+      in Australia — real feedback from 500+ training
+      sessions delivered globally.
     </p>
     <!-- Credibility bar -->
     <div class="testi-cred-bar">
       <div class="testi-cred-item">
         <span class="testi-cred-num">500+</span>
-        <span class="testi-cred-label">Training sessions delivered</span>
+        <span class="testi-cred-label">Training sessions</span>
       </div>
       <div class="testi-cred-div"></div>
       <div class="testi-cred-item">
         <span class="testi-cred-num">★★★★★</span>
-        <span class="testi-cred-label">Consistently rated 5 stars</span>
+        <span class="testi-cred-label">Consistently rated</span>
       </div>
       <div class="testi-cred-div"></div>
       <div class="testi-cred-item">
         <span class="testi-cred-num">25+</span>
-        <span class="testi-cred-label">Countries represented</span>
+        <span class="testi-cred-label">Countries</span>
       </div>
       <div class="testi-cred-div"></div>
       <div class="testi-cred-item">
@@ -334,8 +341,17 @@ window.addEventListener('load', () => {
       </div>
     </div>
   </div>
-  <!-- Masonry wall — no filters, no pagination -->
-  <div class="testi-wall" id="testiWall"></div>
+  <!-- Dual auto-scrolling rows -->
+  <div class="testi-scroll-section">
+    <div class="testi-fade-left"></div>
+    <div class="testi-fade-right"></div>
+    <div class="testi-scroll-row">
+      <div class="testi-scroll-track" id="testiRow1"></div>
+    </div>
+    <div class="testi-scroll-row" style="margin-top:14px">
+      <div class="testi-scroll-track testi-reverse" id="testiRow2"></div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════ CTA ════════════════════════════ -->
@@ -501,31 +517,69 @@ const ALL_T = [
   {n:'Abhishek Pal',             loc:'India',           tag:'Engaging Trainer',            t:'Great knowledge, made us feel like a friend. Jokes and fun added to learning. Explained real-life examples. His chit-chat in between lectures kept us from getting bored.'},
   {n:'Varun Gupta',              loc:'India',           tag:'Simplified Learning',         t:'Concepts were taught very well and got to learn new things. I really enjoyed the way of his teaching and simplifying the concepts.'},
   {n:'Sarosh Engineer',          loc:'India',           tag:'Interactive & Engaging',      t:'Good way of explaining concepts, taking time to clear participant doubts & keeping session interactive & interesting.'},
+  {n:'Pradip Pal',                loc:'United Arab Emirates', tag:'Power Platform',           t:'Very professional and friendly way of delivering the training. Excellent experience overall.'},
+  {n:'Nicola Galasso',            loc:'United Arab Emirates', tag:'Power Platform',           t:'Excellent training. Well structured and clearly delivered.'},
+  {n:'Jason Yu',                  loc:'United Arab Emirates', tag:'Power Platform',           t:'Effective training — enjoyed the last 3 days. Raushan is a very personable and affable person, this translated into a good personality that came through during discussion of topics.'},
+  {n:'Khawla Mohamed Alkhoori',   loc:'United Arab Emirates', tag:'Power Platform',           t:'Would recommend Raushan to anyone looking for Microsoft related training. Course content was highlighted on Day 1 and a brief recap was given at the beginning of each session.'},
+  {n:'Mariam Mohamed Almheiri',   loc:'United Arab Emirates', tag:'Power Platform',           t:'It was clear, understandable, and easy to understand. Great delivery throughout.'},
+  {n:'Saeeda Al Suwaidi',         loc:'United Arab Emirates', tag:'Microsoft Tools',          t:'The trainer was very helpful throughout the session and demonstrated a strong understanding of Microsoft tools. He effectively linked the content to real-time, practical examples relevant to our day-to-day work, which made the discussion more engaging and easier to understand. He was also responsive to questions and provided clear, practical explanations that added real value to the session.'},
+  {n:'Khaled Al Kahil',           loc:'United Arab Emirates', tag:'Microsoft Tools',          t:'Raushan is very knowledgeable and quite flexible in his approach to training. He cleared some important concepts in my mind. I want to thank him.'},
+  {n:'Kgopotso Mchunu',           loc:'South Africa',    tag:'Training Excellence',          t:'Very good. I believe he is excellent at training someone who has no background in the topic. The room felt safe for me to ask questions where I did not understand. I was not made to feel stupid for any questions I asked and he is patient.'},
+  {n:'Daniel Henke',              loc:'Germany',         tag:'ASP.NET Blazor',               t:'The training sessions with Raushan were very good and I learned very much.'},
+  {n:'Alexander Leer',            loc:'Germany',         tag:'ASP.NET Blazor',               t:'The lessons are well-structured and based on solid subject knowledge. The trainer clearly has a firm grasp of the subject matter and conveys the content in a way that is easy to understand and practical. Questions are answered competently at all times. Overall, a very positive learning experience — I would definitely recommend it. Thumbs up!'},
+  {n:'Hamam Faisal Al Dheeb Ba Omar', loc:'Oman',        tag:'Training Quality',             t:'Great approach and easy to understand. Big thanks to Raushan — supportive and well prepared. The trainer explained the subject clearly and made complex topics easy to understand.'},
+  {n:'Malik Ali Salim Al Siyabi', loc:'Oman',            tag:'Training Quality',             t:'Great approach and easy to understand. Big thanks to Raushan.'},
+  {n:'Amna Mohammed Nasser Al Zaabi', loc:'Oman',        tag:'Training Quality',             t:'Excellent. Supportive and well prepared.'},
+  {n:'Shamsa Ahmed Said Hamed Alafifi', loc:'Oman',      tag:'Training Quality',             t:'Excellent. The trainer explained the subject clearly and made complex topics easy to understand.'},
+  {n:'Iliyasu Aliyu',             loc:'Nigeria',         tag:'Structured Delivery',          t:'Trainer had solid knowledge of the subject and delivered the content clearly. The training was informative and structured properly.'},
+  {n:'Junaid Oloruntobi Emmanuel',loc:'Nigeria',         tag:'Structured Delivery',          t:'Excellent delivery. Calm demeanour. And a sound knowledge of the topic.'},
+  {n:'Omolaja Adebola Olaniyi',   loc:'Nigeria',         tag:'Structured Delivery',          t:'Exceptional. He delivers his lectures with passion. You can tell he enjoys doing this.'},
+  {n:'Faturoti Abiola Ibukun',    loc:'Nigeria',         tag:'Subject Matter Expert',        t:'He is a subject matter expert with vast practical knowledge in the domain area.'},
+  {n:'Nnodim Okechukwu Kenneth',  loc:'Nigeria',         tag:'Structured Delivery',          t:'The trainer is well grounded and friendly.'},
+  {n:'Elena Muatocuene',          loc:'Germany',         tag:'ASP.NET Blazor',               t:'The trainer, Raushan Ranjan, for Build Web Applications with ASP.NET Blazor provided us with expert guidance throughout the entire course. He was always friendly, open to questions and explained complex topics in an understandable way. His helpful manner and excellent cooperation during the exercises and discussions were particularly positive. Overall, it was a very enjoyable and informative training course with a dedicated and highly skilled trainer. Thank you very much for your support and excellent cooperation.'},
+  {n:'Bhavesh Parikh',            loc:'India',           tag:'Copilot Studio',               t:'I would rate the trainer very highly for his ability to deliver the subject effectively. The sessions were well-structured, engaging, and easy to follow, even when covering complex aspects of Copilot Studio. The trainer demonstrated strong subject-matter expertise and explained concepts with clarity, using relevant examples and practical insights. What stood out most was his ability to simplify technical topics and ensure that participants remained engaged throughout the training. He was also approachable and responsive to questions, creating an interactive learning environment that encouraged participation. Overall, it was a highly valuable learning experience.'},
+  {n:'Nikolaus Engelbrecht',      loc:'South Africa',    tag:'Communication Skills',         t:'Very good communication skills making it easy to grasp the content of the course. Provides meaningful examples to create a better understanding. Raushan is very knowledgeable in the topic and was able to answer any questions easily.'},
+  {n:'Von Beaty',                 loc:'United States',   tag:'OpenGL & Vulkan',              t:'Raushan Ranjan was able to provide the OpenGL and Vulkan concepts at both the high level and cleared up how the specifics worked. Through the demos and his explanation it made sense.'},
+  {n:'Ron Vincent Aspuria',       loc:'United States',   tag:'OpenGL & Vulkan',              t:'Good and clear. Makes sure to get back to students questions if no answer is given immediately. The content itself is very structured.'},
+  {n:'Blaine Kutin',              loc:'United States',   tag:'OpenGL & Vulkan',              t:'Very Strong. The Instructor is very intelligent and skilled in the concepts. I appreciate all the extra resources he has set up. I liked how he could quickly and confidently answer questions and do further research if needed to quickly follow up. Very knowledgeable expert instructor.'},
+  {n:'Alfonso Pelayo',            loc:'United States',   tag:'OpenGL & Vulkan',              t:'Raushan is knowledgeable and ready to patiently help.'},
+  {n:'Oscar Ramirez',             loc:'United States',   tag:'OpenGL & Vulkan',              t:'100% delivers the subject effectively.'},
+  {n:'Jack Loui',                 loc:'United States',   tag:'OpenGL & Vulkan',              t:'Mr. Ranjan was an excellent instructor. He was very patient and knowledgeable with the teaching subject. We have learned a lot from this training class.'},
+  {n:'Jose Cahue',                loc:'United States',   tag:'OpenGL & Vulkan',              t:'Raushan, you made me understand why before showing how. The radar looked cool, but what stuck was realizing the same GPU code runs in C++, C#, or anything else — the pipeline is what matters, not the language. Your demos actually made sense. Most importantly, you never let confusion slide — you would trace through errors until the lesson was clear. You were also always open when students asked about Vulkan compute or C# integration, you built entire new demos on the spot to show it. That flexibility while keeping everything structured and logical is rare. One of the best tutors I have had.'},
+  {n:'Joel Tan',                  loc:'Singapore',       tag:'Friendly & Thorough',          t:'Great, helpful and friendly. Willing to go through each part to great detail.'},
+  {n:'Marcelo Furukawa',          loc:'Australia',       tag:'Attentive Trainer',            t:'Raushan was excellent — he was really attentive with my progress and answered all my questions.'},
+  {n:'Prajakta Petkar',           loc:'India',           tag:'AZ-204',                       t:'I just wanted to take a moment to thank you sincerely for the AZ-204 training. Your way of teaching is truly something special — everything is so clear, structured, and easy to follow, and the way you explain even complex topics makes them feel simple and logical. One more thing I truly appreciate is how you answer every question — big or small — with so much patience and a full heart. It means a lot and makes the learning environment feel very comfortable. Because of your guidance, many concepts that were confusing before now make complete sense to me. I genuinely feel more confident and better prepared.'},
 ];
 
-function buildTestiWall() {
-  const wall = document.getElementById('testiWall');
-  if (!wall) return;
-  const shuffled = [...ALL_T].sort(() => Math.random() - 0.5);
-  wall.innerHTML = shuffled.map(t => {
-    const initials = t.n.split(' ').map(w => w[0]).join('').slice(0, 2);
-    return `
-      <div class="testi-wall-card">
-        <div class="testi-wall-stars">★★★★★</div>
-        <div class="testi-wall-text">${t.t}</div>
-        <div class="testi-wall-person">
-          <div class="testi-wall-av">${initials}</div>
-          <div>
-            <div class="testi-wall-name">${t.n}</div>
-            <div class="testi-wall-meta">${t.loc}</div>
-          </div>
-          <div class="testi-wall-tag">${t.tag}</div>
-        </div>
-      </div>`;
-  }).join('');
+function buildScrollCard(t) {
+  const ini = t.n.split(' ').map(w => w[0]).join('').slice(0, 2);
+  return `<div class="testi-card">
+    <div class="testi-stars">★★★★★</div>
+    <div class="testi-quote-mark">"</div>
+    <div class="testi-text">${t.t}</div>
+    <div class="testi-person">
+      <div class="testi-av">${ini}</div>
+      <div>
+        <div class="testi-name">${t.n}</div>
+        <div class="testi-loc">${t.loc}</div>
+      </div>
+      <div class="testi-tag">${t.tag}</div>
+    </div>
+  </div>`;
 }
 
-buildTestiWall();
+function buildScrollRows() {
+  const shuffled = [...ALL_T].sort(() => Math.random() - 0.5);
+  const half = Math.ceil(shuffled.length / 2);
+  const row1 = shuffled.slice(0, half);
+  const row2 = shuffled.slice(half);
+  const r1 = document.getElementById('testiRow1');
+  const r2 = document.getElementById('testiRow2');
+  if (r1) { const h = row1.map(buildScrollCard).join(''); r1.innerHTML = h + h; }
+  if (r2) { const h = row2.map(buildScrollCard).join(''); r2.innerHTML = h + h; }
+}
+
+buildScrollRows();
 </script>
 </body>
 </html>

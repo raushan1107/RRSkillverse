@@ -376,6 +376,33 @@
   font-weight: 600;
 }
 
+/* ── Featured testimonials ── */
+.feat-testi-hero{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;}
+.feat-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s,transform .2s;}
+.feat-card:hover{border-color:var(--border-md);transform:translateY(-2px);}
+.feat-stars{color:#f59e0b;font-size:13px;letter-spacing:2px;}
+.feat-course{font-size:10px;font-weight:700;letter-spacing:.5px;color:var(--accent);text-transform:uppercase;}
+.feat-quote{font-size:13px;color:var(--text-muted);line-height:1.78;font-style:italic;border:none;padding:0;margin:0;flex:1;}
+.feat-person{display:flex;align-items:center;gap:10px;padding-top:14px;border-top:1px solid var(--border);}
+.feat-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#1e429f,#1a56db);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;flex-shrink:0;}
+.feat-name{font-size:12.5px;font-weight:700;color:var(--text);}
+.feat-loc{font-size:10px;color:var(--text-dim);margin-top:2px;}
+.feat-testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.feat-card-sm{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s;}
+.feat-card-sm:hover{border-color:var(--border-md);transform:translateY(-2px);}
+.feat-stars-sm{color:#f59e0b;font-size:11px;letter-spacing:1.5px;}
+.feat-quote-sm{font-size:12.5px;color:var(--text-muted);line-height:1.72;font-style:italic;flex:1;}
+.feat-person-sm{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--border);}
+.feat-av-sm{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#1e429f,#1a56db);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:white;flex-shrink:0;}
+.feat-name-sm{font-size:11px;font-weight:700;color:var(--text);}
+.feat-loc-sm{font-size:9px;color:var(--text-dim);margin-top:1px;}
+.feat-countries{margin-top:32px;padding:20px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.feat-countries-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text-dim);white-space:nowrap;flex-shrink:0;}
+.feat-countries-list{display:flex;flex-wrap:wrap;gap:8px;}
+.feat-countries-list span{font-size:11px;color:var(--text-muted);background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:3px 10px;}
+@media(max-width:900px){.feat-testi-hero,.feat-testi-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.feat-testi-hero,.feat-testi-grid{grid-template-columns:1fr;}}
+
 /* ── CTA ── */
 .about-cta {
   background: var(--bg2);
@@ -686,9 +713,173 @@
 
   <!-- TESTIMONIALS -->
   <div class="about-section">
-    <div class="section-label">What Learners Say</div>
-    <h2>Real stories from<br>25+ countries.</h2>
-    <div class="testi-grid" id="testiGrid"></div>
+    <div class="section-label">Featured Reviews</div>
+    <h2>What learners say,<br>in their own words.</h2>
+    <p style="font-size:14px;color:var(--text-muted);line-height:1.7;max-width:620px;margin-bottom:32px">
+      Selected from 500+ training sessions delivered across 25+ countries. Every rating: Excellent.
+    </p>
+
+    <!-- 3 hero featured cards -->
+    <div class="feat-testi-hero">
+
+      <div class="feat-card feat-card-large">
+        <div class="feat-stars">★★★★★</div>
+        <div class="feat-course">ASP.NET Blazor · Germany</div>
+        <blockquote class="feat-quote">
+          "The trainer, Raushan Ranjan, provided expert guidance throughout the entire course. He was
+          always friendly, open to questions and explained complex topics in an understandable way. His
+          helpful manner and excellent cooperation during exercises were particularly positive. It was a
+          very enjoyable and informative training course with a dedicated and highly skilled trainer."
+        </blockquote>
+        <div class="feat-person">
+          <div class="feat-av">EL</div>
+          <div>
+            <div class="feat-name">Elena Muatocuene</div>
+            <div class="feat-loc">Germany · Feb 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card feat-card-large">
+        <div class="feat-stars">★★★★★</div>
+        <div class="feat-course">OpenGL &amp; Vulkan · United States</div>
+        <blockquote class="feat-quote">
+          "You made me understand why before showing how. Your demos actually made sense. Most
+          importantly, you never let confusion slide — you would trace through errors until the lesson
+          was clear. You built entire new demos on the spot when students asked. That flexibility while
+          keeping everything structured and logical is rare. One of the best tutors I have had."
+        </blockquote>
+        <div class="feat-person">
+          <div class="feat-av">JC</div>
+          <div>
+            <div class="feat-name">Jose Cahue</div>
+            <div class="feat-loc">United States · Apr 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card feat-card-large">
+        <div class="feat-stars">★★★★★</div>
+        <div class="feat-course">AZ-204 · India</div>
+        <blockquote class="feat-quote">
+          "Your way of teaching is truly something special. Everything is so clear, structured, and
+          easy to follow, and the way you explain even complex topics makes them feel simple and
+          logical. The way you answer every question — big or small — with so much patience and a
+          full heart makes the learning environment feel very comfortable. Because of your guidance,
+          many concepts that were confusing before now make complete sense to me."
+        </blockquote>
+        <div class="feat-person">
+          <div class="feat-av">PP</div>
+          <div>
+            <div class="feat-name">Prajakta Petkar</div>
+            <div class="feat-loc">India · Dec 2025</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Secondary grid -->
+    <div class="feat-testi-grid" style="margin-top:20px">
+
+      <div class="feat-card-sm">
+        <div class="feat-stars-sm">★★★★★</div>
+        <div class="feat-quote-sm">"The sessions were well-structured, engaging, and easy to follow. The trainer demonstrated strong subject-matter expertise. What stood out was his ability to simplify technical topics and ensure participants remained engaged. A highly valuable learning experience."</div>
+        <div class="feat-person-sm">
+          <div class="feat-av-sm">BP</div>
+          <div>
+            <div class="feat-name-sm">Bhavesh Parikh</div>
+            <div class="feat-loc-sm">India · Copilot Studio · Mar 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card-sm">
+        <div class="feat-stars-sm">★★★★★</div>
+        <div class="feat-quote-sm">"The trainer was very helpful throughout the session and demonstrated a strong understanding of Microsoft tools. He effectively linked the content to real-time, practical examples relevant to our day-to-day work. He was also responsive to questions and provided clear, practical explanations that added real value."</div>
+        <div class="feat-person-sm">
+          <div class="feat-av-sm">SS</div>
+          <div>
+            <div class="feat-name-sm">Saeeda Al Suwaidi</div>
+            <div class="feat-loc-sm">UAE · Microsoft Tools · Dec 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card-sm">
+        <div class="feat-stars-sm">★★★★★</div>
+        <div class="feat-quote-sm">"Very good communication skills making it easy to grasp the content. Provides meaningful examples to create a better understanding. Raushan is very knowledgeable in the topic and was able to answer any questions easily."</div>
+        <div class="feat-person-sm">
+          <div class="feat-av-sm">NE</div>
+          <div>
+            <div class="feat-name-sm">Nikolaus Engelbrecht</div>
+            <div class="feat-loc-sm">South Africa · Apr 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card-sm">
+        <div class="feat-stars-sm">★★★★★</div>
+        <div class="feat-quote-sm">"The room felt safe for me to ask questions where I did not understand. I was not made to feel stupid for any questions I asked and he is patient. I believe he is excellent at training someone who has no background in the topic."</div>
+        <div class="feat-person-sm">
+          <div class="feat-av-sm">KM</div>
+          <div>
+            <div class="feat-name-sm">Kgopotso Mchunu</div>
+            <div class="feat-loc-sm">South Africa · Dec 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card-sm">
+        <div class="feat-stars-sm">★★★★★</div>
+        <div class="feat-quote-sm">"The lessons are well-structured and based on solid subject knowledge. The trainer clearly has a firm grasp of the subject matter and conveys the content in a way that is easy to understand and practical. A very positive learning experience — I would definitely recommend it. Thumbs up!"</div>
+        <div class="feat-person-sm">
+          <div class="feat-av-sm">AL</div>
+          <div>
+            <div class="feat-name-sm">Alexander Leer</div>
+            <div class="feat-loc-sm">Germany · ASP.NET Blazor · Jan 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card-sm">
+        <div class="feat-stars-sm">★★★★★</div>
+        <div class="feat-quote-sm">"Exceptional. He delivers his lectures with passion. You can tell he enjoys doing this. He is a subject matter expert with vast practical knowledge in the domain area."</div>
+        <div class="feat-person-sm">
+          <div class="feat-av-sm">OA</div>
+          <div>
+            <div class="feat-name-sm">Omolaja Adebola Olaniyi &amp; Faturoti Abiola</div>
+            <div class="feat-loc-sm">Nigeria · Feb 2026</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Countries represented -->
+    <div class="feat-countries">
+      <div class="feat-countries-label">Reviews from</div>
+      <div class="feat-countries-list">
+        <span>🇮🇳 India</span>
+        <span>🇩🇪 Germany</span>
+        <span>🇺🇸 United States</span>
+        <span>🇸🇦 Saudi Arabia</span>
+        <span>🇹🇿 Tanzania</span>
+        <span>🇬🇧 United Kingdom</span>
+        <span>🇿🇦 South Africa</span>
+        <span>🇳🇬 Nigeria</span>
+        <span>🇦🇪 UAE</span>
+        <span>🇴🇲 Oman</span>
+        <span>🇸🇬 Singapore</span>
+        <span>🇦🇺 Australia</span>
+        <span>🇶🇦 Qatar</span>
+        <span>🇪🇸 Spain</span>
+        <span>🇳🇱 Netherlands</span>
+        <span>🇬🇲 Gambia</span>
+        <span>+ 10 more</span>
+      </div>
+    </div>
+
   </div>
 
 </div><!-- end about-body -->
