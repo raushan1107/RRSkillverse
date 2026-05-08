@@ -107,6 +107,173 @@ const BLOG_POSTS = [
   },
 
   {
+    id: 'power-bi-first-dashboard',
+    title: 'Chapter 2: From "Not My Thing" to "Wow!" — Raushan\'s First Power BI Dashboard',
+    category: 'power-platform',
+    topic: 'power-bi',
+    tags: ['Power BI', 'PL-300', 'Beginners', 'Dashboard', 'Visualizations', 'Excel'],
+    published: '2025-04-17',
+    updated: '2025-04-17',
+    readTime: '6 min',
+    excerpt: 'Raushan woke up the next morning feeling a mix of excitement and nervousness. He had downloaded Power BI Desktop — and now it was time to see if the tool could live up to its promises. Spoiler: it did.',
+    featured: false,
+    content: `
+<div class="blog-story">
+
+  <p>Raushan woke up the next morning feeling a mix of excitement and nervousness.
+  He had downloaded Power BI Desktop (the free version), and now it was time to see
+  if the tool could live up to its promises.</p>
+
+  <p>He opened the app, and the first thing he noticed was how clean and simple
+  everything seemed. No code, no complicated terms — just an interface that looked
+  like a cross between Excel and a modern design tool.</p>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>📊 Connecting to Data</h2>
+    <p>Raushan\'s first task was clear: get some data in there.</p>
+    <p>Luckily, he had a neat Excel file saved on his computer with his company\'s
+    sales data. It wasn\'t huge — just a few columns — but it was enough to get started.</p>
+    <p>He clicked on <strong>Get Data</strong> and selected <strong>Excel</strong>.
+    In seconds, the file opened, showing him all the sheets in it. He selected the
+    sheet called "Sales Data," and with a click, the data was imported.</p>
+  </div>
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>🧑‍💻 The Power of the Fields Pane</h2>
+    <p>The next challenge: turning this boring data into something useful. On the
+    right-hand side, Raushan noticed a <strong>Fields pane</strong>. This was where
+    he would drag and drop the columns he wanted to use for his report. He selected
+    a few:</p>
+    <ul>
+      <li>Product Name</li>
+      <li>Region</li>
+      <li>Sales Amount</li>
+      <li>Date</li>
+    </ul>
+    <p>Suddenly, Power BI turned those boring rows and columns into something a lot
+    more engaging — a live, dynamic canvas ready to be transformed into charts and
+    visuals.</p>
+  </div>
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>🔧 Building His First Visuals</h2>
+    <p>Raushan didn\'t know much about what a "bar chart" or "pie chart" could do,
+    but the options were right there in the <strong>Visualizations pane</strong>.
+    He clicked on the Bar Chart option. Instantly, Power BI plotted the sales by
+    Product Name, showing him how each product had performed.</p>
+    <p>Then he thought: <em>"What about sales by region?"</em></p>
+    <p>With a couple of clicks, he turned his data into a <strong>map</strong> to
+    visualise which regions were performing the best.</p>
+  </div>
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>📈 Adding Interactivity</h2>
+    <p>Raushan\'s eyes lit up when he realised how interactive Power BI could be.
+    The map was cool, but it didn\'t tell him the whole story.</p>
+    <p>He clicked on a region, and boom — the rest of his visualisations updated
+    automatically. He could now see sales breakdowns just for that region, without
+    needing to build separate reports or filter data manually.</p>
+
+    <blockquote class="blog-quote">
+      "This is better than Excel… way better!" Raushan thought.
+    </blockquote>
+  </div>
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🔄 Refreshing Data</h2>
+    <p>Raushan had one last task: ensuring the data could refresh automatically.
+    He clicked the <strong>Refresh</strong> button in Power BI Desktop, and within
+    seconds, the tool updated his visuals with the latest data from his Excel sheet.</p>
+    <p>No more exporting new charts. No more manually updating graphs.
+    Everything was automatic.</p>
+  </div>
+
+  <div class="blog-summary">
+    <h2>🚀 Summary — What You Learned in Chapter 2</h2>
+    <p>Here\'s a quick recap of the key concepts covered in this chapter:</p>
+    <ul style="padding-left:18px;margin-top:10px">
+      <li style="margin-bottom:8px">
+        <strong>Power BI Desktop</strong> is a free, simple tool to create
+        reports and dashboards — no coding required.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Data Connectivity:</strong> You can easily import data from
+        Excel, databases, or web sources in seconds.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Interactive Visualisations:</strong> Create graphs, charts,
+        and maps that automatically update when you click.
+      </li>
+      <li style="margin-bottom:8px">
+        <strong>Instant Analysis:</strong> Filter data, click on regions or
+        categories, and see changes in real time across the entire report.
+      </li>
+    </ul>
+  </div>
+
+  <div class="blog-exercise">
+    <h2>📝 Try It Yourself — Build Your First Sales Dashboard</h2>
+    <p>Now it\'s your turn to do what Raushan just did. Use the dummy dataset
+    below and follow these steps:</p>
+
+    <div class="blog-exercise-download">
+      <span>📥 Dummy Dataset</span>
+      <a href="/downloads/SalesData.xlsx"
+         download="SalesData.xlsx"
+         class="lab-download-btn">
+        Download Sales Data (Excel)
+      </a>
+      <span class="lab-download-note">50 rows · 2 sheets · INR sales data</span>
+    </div>
+
+    <ol class="blog-exercise-steps">
+      <li>
+        <strong>Connect to the Sales Data</strong><br/>
+        Open Power BI Desktop, click <em>Get Data</em>, and load the Sales
+        Data from the Excel file.
+      </li>
+      <li>
+        <strong>Build Basic Visualisations</strong>
+        <ul>
+          <li>Create a Bar Chart to show Sales Amount by Product</li>
+          <li>Create a Map to show Sales by Region</li>
+          <li>Add a Line Chart to show Sales Trends Over Time</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Add Filters and Slicers</strong>
+        <ul>
+          <li>Add a slicer for Region to filter the entire report by region</li>
+          <li>Add a slicer for Product to focus on a specific product</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Test Interactivity</strong><br/>
+        Click on a region on the map — confirm the bar chart and line chart
+        update automatically.
+      </li>
+      <li>
+        <strong>Refresh Data</strong><br/>
+        Manually change a few numbers in the Excel sheet to simulate new data,
+        then click Refresh in Power BI Desktop to confirm it updates.
+      </li>
+    </ol>
+  </div>
+
+  <div class="blog-next-chapter">
+    <span class="blog-next-label">Coming Next</span>
+    <span class="blog-next-title">
+      Chapter 3: "Sharing and Collaborating" — Raushan learns how to share
+      his report with his team, collaborate on it, and control who sees what
+      using Power BI Service roles and permissions.
+    </span>
+  </div>
+
+</div>
+    `
+  },
+
+  {
     id: 'blazor-component-lifecycle',
     title: 'Blazor Component Lifecycle — Every Method Explained',
     category: 'dotnet',

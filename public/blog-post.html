@@ -587,6 +587,86 @@
     gap: 8px;
   }
 }
+
+/* ── Exercise block ── */
+.blog-exercise {
+  background: rgba(45,122,79,0.04);
+  border: 1px solid rgba(45,122,79,0.2);
+  border-top: 3px solid #2d7a4f;
+  border-radius: 0 0 12px 12px;
+  padding: 24px 28px;
+  margin: 32px 0;
+}
+
+.blog-exercise h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2d7a4f;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(45,122,79,0.15);
+}
+
+.blog-exercise p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.blog-exercise-download {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.blog-exercise-download span:first-child {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.blog-exercise-steps {
+  padding-left: 20px;
+  margin: 0;
+  counter-reset: exercise-counter;
+  list-style: none;
+}
+
+.blog-exercise-steps > li {
+  counter-increment: exercise-counter;
+  margin-bottom: 16px;
+  padding-left: 10px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  border-left: 2px solid rgba(45,122,79,0.3);
+  padding: 8px 0 8px 16px;
+}
+
+.blog-exercise-steps > li strong {
+  color: var(--text);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13.5px;
+}
+
+.blog-exercise-steps ul {
+  padding-left: 18px;
+  margin-top: 6px;
+}
+
+.blog-exercise-steps ul li {
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
 </style>
 </head>
 <body>
