@@ -2258,123 +2258,169 @@ DIVIDE(
       </div>
     </div>
 
-    ${[
-      {
-        id: \'ms1\', title: \'1. Introduction to Data & Analytics\',
-        meta: \'3 modules\', links: [
-          [\'Understand types of data and data storage\', \'https://learn.microsoft.com/en-us/training/modules/understand-concepts-of-data-analytics/4-understand-types-of-data-data-storage\'],
-          [\'Roles in data\', \'https://learn.microsoft.com/en-us/training/modules/data-analytics-microsoft/3-roles\'],
-          [\'Introduction to data analytics\', \'https://learn.microsoft.com/en-us/training/modules/data-analytics-microsoft/1-introduction\']
-        ]
-      },
-      {
-        id: \'ms2\', title: \'2. Types of Data Analysis & Analyst Tasks\',
-        meta: \'4 modules\', links: [
-          [\'Get started with Microsoft data analytics\', \'https://learn.microsoft.com/en-us/training/modules/data-analytics-microsoft/2-data-analysis\'],
-          [\'Understand data analytics types\', \'https://learn.microsoft.com/en-us/training/modules/understand-concepts-of-data-analytics/2-understand-data-analytics-types\'],
-          [\'Explore the data analytics process\', \'https://learn.microsoft.com/en-us/training/modules/understand-concepts-of-data-analytics/3-explore-data-analytics-process\'],
-          [\'Tasks of a data analyst\', \'https://learn.microsoft.com/en-us/training/modules/data-analytics-microsoft/4-tasks\']
-        ]
-      },
-      {
-        id: \'ms3\', title: \'3. Power BI Components & Building Blocks\',
-        meta: \'3 modules\', links: [
-          [\'Introduction to Power BI\', \'https://learn.microsoft.com/en-us/training/modules/get-started-with-power-bi/1-introduction\'],
-          [\'Capabilities of Microsoft Power BI\', \'https://learn.microsoft.com/en-us/training/modules/get-started-with-power-bi/2-using-power-bi\'],
-          [\'Building blocks of Power BI\', \'https://learn.microsoft.com/en-us/training/modules/get-started-with-power-bi/3-building-blocks-of-power-bi\']
-        ]
-      },
-      {
-        id: \'ms4\', title: \'4. Prepare Data (Load, Explore, Transform)\',
-        meta: \'3 modules\', links: [
-          [\'Get data from files\', \'https://learn.microsoft.com/en-us/training/modules/get-data/2-data-files\'],
-          [\'Get data from relational data sources\', \'https://learn.microsoft.com/en-us/training/modules/get-data/3-relational-data\'],
-          [\'Get data from a NoSQL database\', \'https://learn.microsoft.com/en-us/training/modules/get-data/4-nosql-database\'],
-          [\'Get data from online services\', \'https://learn.microsoft.com/en-us/training/modules/get-data/5-online-services\'],
-          [\'Explore / Profile data in Power BI\', \'https://learn.microsoft.com/en-us/training/modules/clean-data-power-bi/6-profile-data\'],
-          [\'Simplify the data structure\', \'https://learn.microsoft.com/en-us/training/modules/clean-data-power-bi/3-data-structure\'],
-          [\'Evaluate and change column data types\', \'https://learn.microsoft.com/en-us/training/modules/clean-data-power-bi/4-column-data-types\'],
-          [\'Combine multiple tables into a single table\', \'https://learn.microsoft.com/en-us/training/modules/clean-data-power-bi/5-combine-tables\']
-        ]
-      },
-      {
-        id: \'ms5\', title: \'5. Model Data (Fact/Dim, Relationships, DAX)\',
-        meta: \'5 modules\', links: [
-          [\'Fact and dimension tables\', \'https://learn.microsoft.com/en-us/kusto/concepts/fact-and-dimension-tables?view=microsoft-fabric\'],
-          [\'Introduction to modeling your data\', \'https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/1-overview-power-bi\'],
-          [\'How to manage your data relationships\', \'https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/2-how-to-manage-data-relationships\'],
-          [\'Optimize data models\', \'https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/4-optimize-data-models\'],
-          [\'DAX overview\', \'https://learn.microsoft.com/en-us/dax/dax-overview\'],
-          [\'DAX syntax reference\', \'https://learn.microsoft.com/en-us/dax/dax-syntax-reference\'],
-          [\'Create measures\', \'https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/4b-create-calculated-measures\'],
-          [\'Create calculated columns\', \'https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/3-create-calculated-columns\'],
-          [\'Create calculated tables\', \'https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/5-create-calculated-tables\'],
-          [\'DAX function reference\', \'https://learn.microsoft.com/en-us/dax/dax-function-reference\']
-        ]
-      },
-      {
-        id: \'ms6\', title: \'6. Visualize Data (Effective Visuals, Formatting, Layout)\',
-        meta: \'5 modules\', links: [
-          [\'Visualization types in Power BI\', \'https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a\'],
-          [\'Get started formatting report visualizations\', \'https://learn.microsoft.com/en-us/power-bi/visuals/service-getting-started-with-color-formatting-and-axis-properties\'],
-          [\'Tips and tricks for formatting in reports\', \'https://learn.microsoft.com/en-us/power-bi/visuals/service-tips-and-tricks-for-color-formatting?tabs=powerbi-desktop\'],
-          [\'Customize visualization titles, backgrounds, labels, and legends\', \'https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-customize-title-background-and-legend\'],
-          [\'Page layout and formatting\', \'https://learn.microsoft.com/en-us/training/modules/visuals-in-power-bi/12-formatting\'],
-          [\'Create slicers\', \'https://learn.microsoft.com/en-us/training/modules/visuals-in-power-bi/4-create-slicers\']
-        ]
-      },
-      {
-        id: \'ms7\', title: \'7. Analyze with Power BI (AI, Advanced Visuals)\',
-        meta: \'8 modules\', links: [
-          [\'Use the Analyze feature to explain fluctuations\', \'https://learn.microsoft.com/en-us/power-bi/consumer/end-user-analyze-visuals\'],
-          [\'Create smart narrative summaries\', \'https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-smart-narrative\'],
-          [\'Create key influencers visualizations\', \'https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-influencers?tabs=powerbi-desktop\'],
-          [\'Create decomposition tree visuals\', \'https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-decomposition-tree\'],
-          [\'Anomaly detection\', \'https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-anomaly-detection\'],
-          [\'Use AI Insights in Power BI Desktop\', \'https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-ai-insights\'],
-          [\'Q&A for Power BI business users\', \'https://learn.microsoft.com/en-us/power-bi/consumer/end-user-q-and-a\'],
-          [\'Tips for asking questions in Power BI Q&A\', \'https://learn.microsoft.com/en-us/power-bi/consumer/end-user-q-and-a-tips\']
-        ]
-      },
-      {
-        id: \'ms8\', title: \'8. Manage Power BI Environment (Workspaces, Refresh, RLS)\',
-        meta: \'10 modules\', links: [
-          [\'Workspaces in Power BI\', \'https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-new-workspaces\'],
-          [\'Create a workspace in Power BI\', \'https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-create-the-new-workspaces\'],
-          [\'Roles in workspaces in Power BI\', \'https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-roles-new-workspaces\'],
-          [\'Monitor usage metrics in the workspaces\', \'https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-modern-usage-metrics\'],
-          [\'Introduction to dashboards for Power BI designers\', \'https://learn.microsoft.com/en-us/power-bi/create-reports/service-dashboards\'],
-          [\'Create a Power BI dashboard from a report\', \'https://learn.microsoft.com/en-us/power-bi/create-reports/service-dashboard-create\'],
-          [\'Tips for designing a great Power BI dashboard\', \'https://learn.microsoft.com/en-us/power-bi/create-reports/service-dashboards-design-tips\'],
-          [\'Implement row-level security (RLS)\', \'https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security\'],
-          [\'Implement object-level security (OLS)\', \'https://learn.microsoft.com/en-us/fabric/security/service-admin-object-level-security?tabs=table\']
-        ]
-      },
-      {
-        id: \'ms9\', title: \'9. Additional Learning\',
-        meta: \'4 modules\', links: [
-          [\'Create interactive reports using Copilot for Power BI\', \'https://learn.microsoft.com/en-us/training/modules/power-bi-copilot/\'],
-          [\'Use Advanced Editor to modify M code\', \'https://learn.microsoft.com/en-us/training/modules/clean-data-power-bi/7-advanced-editor\'],
-          [\'Write DAX queries with Copilot\', \'https://learn.microsoft.com/en-us/dax/dax-copilot\'],
-          [\'Implement row-level security (RLS)\', \'https://learn.microsoft.com/en-us/training/modules/row-level-security-power-bi/\']
-        ]
-      }
-    ].map(path => \`
-      <div class="blog-lhub-accordion">
-        <div class="blog-lhub-acc-header" onclick="toggleLHub(\'acc-\${path.id}-body\')">
-          <span class="blog-lhub-acc-title">\${path.title}</span>
-          <span class="blog-lhub-acc-meta">Learning Path · \${path.meta}</span>
-          <span class="blog-lhub-acc-chevron" id="acc-\${path.id}-chev">▸</span>
-        </div>
-        <div class="blog-lhub-acc-body" id="acc-\${path.id}-body">
-          <ul class="blog-lhub-link-list">
-            \${path.links.map(([label, url]) =>
-              \`<li><a href="\${url}" target="_blank" rel="noopener">\${label}</a></li>\`
-            ).join(\'\')}
-          </ul>
-        </div>
-      </div>\`
-    ).join(\'\')}
+    <div class="blog-lhub-accordion">
+      <div class="blog-lhub-acc-header" onclick="toggleLHub(\'acc-ms1-body\')">
+        <span class="blog-lhub-acc-title">1. Introduction to Data &amp; Analytics</span>
+        <span class="blog-lhub-acc-meta">Learning Path · 3 modules</span>
+        <span class="blog-lhub-acc-chevron" id="acc-ms1-chev">▸</span>
+      </div>
+      <div class="blog-lhub-acc-body" id="acc-ms1-body">
+        <ul class="blog-lhub-link-list">
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/understand-concepts-of-data-analytics/4-understand-types-of-data-data-storage" target="_blank" rel="noopener">Understand types of data and data storage</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/data-analytics-microsoft/3-roles" target="_blank" rel="noopener">Roles in data</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/data-analytics-microsoft/1-introduction" target="_blank" rel="noopener">Introduction to data analytics</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="blog-lhub-accordion">
+      <div class="blog-lhub-acc-header" onclick="toggleLHub(\'acc-ms2-body\')">
+        <span class="blog-lhub-acc-title">2. Types of Data Analysis &amp; Analyst Tasks</span>
+        <span class="blog-lhub-acc-meta">Learning Path · 4 modules</span>
+        <span class="blog-lhub-acc-chevron" id="acc-ms2-chev">▸</span>
+      </div>
+      <div class="blog-lhub-acc-body" id="acc-ms2-body">
+        <ul class="blog-lhub-link-list">
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/data-analytics-microsoft/2-data-analysis" target="_blank" rel="noopener">Get started with Microsoft data analytics</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/understand-concepts-of-data-analytics/2-understand-data-analytics-types" target="_blank" rel="noopener">Understand data analytics types</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/understand-concepts-of-data-analytics/3-explore-data-analytics-process" target="_blank" rel="noopener">Explore the data analytics process</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/data-analytics-microsoft/4-tasks" target="_blank" rel="noopener">Tasks of a data analyst</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="blog-lhub-accordion">
+      <div class="blog-lhub-acc-header" onclick="toggleLHub(\'acc-ms3-body\')">
+        <span class="blog-lhub-acc-title">3. Power BI Components &amp; Building Blocks</span>
+        <span class="blog-lhub-acc-meta">Learning Path · 3 modules</span>
+        <span class="blog-lhub-acc-chevron" id="acc-ms3-chev">▸</span>
+      </div>
+      <div class="blog-lhub-acc-body" id="acc-ms3-body">
+        <ul class="blog-lhub-link-list">
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/get-started-with-power-bi/1-introduction" target="_blank" rel="noopener">Introduction to Power BI</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/get-started-with-power-bi/2-using-power-bi" target="_blank" rel="noopener">Capabilities of Microsoft Power BI</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/get-started-with-power-bi/3-building-blocks-of-power-bi" target="_blank" rel="noopener">Building blocks of Power BI</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="blog-lhub-accordion">
+      <div class="blog-lhub-acc-header" onclick="toggleLHub(\'acc-ms4-body\')">
+        <span class="blog-lhub-acc-title">4. Prepare Data (Load, Explore, Transform)</span>
+        <span class="blog-lhub-acc-meta">Learning Path · 8 modules</span>
+        <span class="blog-lhub-acc-chevron" id="acc-ms4-chev">▸</span>
+      </div>
+      <div class="blog-lhub-acc-body" id="acc-ms4-body">
+        <ul class="blog-lhub-link-list">
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/get-data/2-data-files" target="_blank" rel="noopener">Get data from files</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/get-data/3-relational-data" target="_blank" rel="noopener">Get data from relational data sources</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/get-data/4-nosql-database" target="_blank" rel="noopener">Get data from a NoSQL database</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/get-data/5-online-services" target="_blank" rel="noopener">Get data from online services</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/clean-data-power-bi/6-profile-data" target="_blank" rel="noopener">Explore / Profile data in Power BI</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/clean-data-power-bi/3-data-structure" target="_blank" rel="noopener">Simplify the data structure</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/clean-data-power-bi/4-column-data-types" target="_blank" rel="noopener">Evaluate and change column data types</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/clean-data-power-bi/5-combine-tables" target="_blank" rel="noopener">Combine multiple tables into a single table</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="blog-lhub-accordion">
+      <div class="blog-lhub-acc-header" onclick="toggleLHub(\'acc-ms5-body\')">
+        <span class="blog-lhub-acc-title">5. Model Data (Fact/Dim, Relationships, DAX)</span>
+        <span class="blog-lhub-acc-meta">Learning Path · 10 modules</span>
+        <span class="blog-lhub-acc-chevron" id="acc-ms5-chev">▸</span>
+      </div>
+      <div class="blog-lhub-acc-body" id="acc-ms5-body">
+        <ul class="blog-lhub-link-list">
+          <li><a href="https://learn.microsoft.com/en-us/kusto/concepts/fact-and-dimension-tables?view=microsoft-fabric" target="_blank" rel="noopener">Fact and dimension tables</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/1-overview-power-bi" target="_blank" rel="noopener">Introduction to modeling your data</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/2-how-to-manage-data-relationships" target="_blank" rel="noopener">How to manage your data relationships</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/4-optimize-data-models" target="_blank" rel="noopener">Optimize data models</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/dax/dax-overview" target="_blank" rel="noopener">DAX overview</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/dax/dax-syntax-reference" target="_blank" rel="noopener">DAX syntax reference</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/4b-create-calculated-measures" target="_blank" rel="noopener">Create measures</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/3-create-calculated-columns" target="_blank" rel="noopener">Create calculated columns</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/model-data-power-bi/5-create-calculated-tables" target="_blank" rel="noopener">Create calculated tables</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/dax/dax-function-reference" target="_blank" rel="noopener">DAX function reference</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="blog-lhub-accordion">
+      <div class="blog-lhub-acc-header" onclick="toggleLHub(\'acc-ms6-body\')">
+        <span class="blog-lhub-acc-title">6. Visualize Data (Effective Visuals, Formatting, Layout)</span>
+        <span class="blog-lhub-acc-meta">Learning Path · 6 modules</span>
+        <span class="blog-lhub-acc-chevron" id="acc-ms6-chev">▸</span>
+      </div>
+      <div class="blog-lhub-acc-body" id="acc-ms6-body">
+        <ul class="blog-lhub-link-list">
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a" target="_blank" rel="noopener">Visualization types in Power BI</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/visuals/service-getting-started-with-color-formatting-and-axis-properties" target="_blank" rel="noopener">Get started formatting report visualizations</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/visuals/service-tips-and-tricks-for-color-formatting?tabs=powerbi-desktop" target="_blank" rel="noopener">Tips and tricks for formatting in reports</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-customize-title-background-and-legend" target="_blank" rel="noopener">Customize visualization titles, backgrounds, labels, and legends</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/visuals-in-power-bi/12-formatting" target="_blank" rel="noopener">Page layout and formatting</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/visuals-in-power-bi/4-create-slicers" target="_blank" rel="noopener">Create slicers</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="blog-lhub-accordion">
+      <div class="blog-lhub-acc-header" onclick="toggleLHub(\'acc-ms7-body\')">
+        <span class="blog-lhub-acc-title">7. Analyze with Power BI (AI, Advanced Visuals)</span>
+        <span class="blog-lhub-acc-meta">Learning Path · 8 modules</span>
+        <span class="blog-lhub-acc-chevron" id="acc-ms7-chev">▸</span>
+      </div>
+      <div class="blog-lhub-acc-body" id="acc-ms7-body">
+        <ul class="blog-lhub-link-list">
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/consumer/end-user-analyze-visuals" target="_blank" rel="noopener">Use the Analyze feature to explain fluctuations</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-smart-narrative" target="_blank" rel="noopener">Create smart narrative summaries</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-influencers?tabs=powerbi-desktop" target="_blank" rel="noopener">Create key influencers visualizations</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-decomposition-tree" target="_blank" rel="noopener">Create decomposition tree visuals</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-anomaly-detection" target="_blank" rel="noopener">Anomaly detection</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-ai-insights" target="_blank" rel="noopener">Use AI Insights in Power BI Desktop</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/consumer/end-user-q-and-a" target="_blank" rel="noopener">Q&amp;A for Power BI business users</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/consumer/end-user-q-and-a-tips" target="_blank" rel="noopener">Tips for asking questions in Power BI Q&amp;A</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="blog-lhub-accordion">
+      <div class="blog-lhub-acc-header" onclick="toggleLHub(\'acc-ms8-body\')">
+        <span class="blog-lhub-acc-title">8. Manage Power BI Environment (Workspaces, RLS)</span>
+        <span class="blog-lhub-acc-meta">Learning Path · 9 modules</span>
+        <span class="blog-lhub-acc-chevron" id="acc-ms8-chev">▸</span>
+      </div>
+      <div class="blog-lhub-acc-body" id="acc-ms8-body">
+        <ul class="blog-lhub-link-list">
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-new-workspaces" target="_blank" rel="noopener">Workspaces in Power BI</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-create-the-new-workspaces" target="_blank" rel="noopener">Create a workspace in Power BI</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-roles-new-workspaces" target="_blank" rel="noopener">Roles in workspaces in Power BI</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-modern-usage-metrics" target="_blank" rel="noopener">Monitor usage metrics in the workspaces</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/create-reports/service-dashboards" target="_blank" rel="noopener">Introduction to dashboards for Power BI designers</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/create-reports/service-dashboard-create" target="_blank" rel="noopener">Create a Power BI dashboard from a report</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/power-bi/create-reports/service-dashboards-design-tips" target="_blank" rel="noopener">Tips for designing a great Power BI dashboard</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security" target="_blank" rel="noopener">Implement row-level security (RLS)</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/fabric/security/service-admin-object-level-security?tabs=table" target="_blank" rel="noopener">Implement object-level security (OLS)</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="blog-lhub-accordion">
+      <div class="blog-lhub-acc-header" onclick="toggleLHub(\'acc-ms9-body\')">
+        <span class="blog-lhub-acc-title">9. Additional Learning</span>
+        <span class="blog-lhub-acc-meta">Learning Path · 4 modules</span>
+        <span class="blog-lhub-acc-chevron" id="acc-ms9-chev">▸</span>
+      </div>
+      <div class="blog-lhub-acc-body" id="acc-ms9-body">
+        <ul class="blog-lhub-link-list">
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/power-bi-copilot/" target="_blank" rel="noopener">Create interactive reports using Copilot for Power BI</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/clean-data-power-bi/7-advanced-editor" target="_blank" rel="noopener">Use Advanced Editor to modify M code</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/dax/dax-copilot" target="_blank" rel="noopener">Write DAX queries with Copilot</a></li>
+          <li><a href="https://learn.microsoft.com/en-us/training/modules/row-level-security-power-bi/" target="_blank" rel="noopener">Implement row-level security (RLS)</a></li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 
   <!-- ═══ SECTION 3: HANDS-ON LABS ═══ -->
