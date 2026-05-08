@@ -625,6 +625,7 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 .ai-fab-tooltip { display: none; }
 .shell { padding-top: 60px !important; }
 </style>
+<script src="js/courses-data.js"></script>
 </head>
 <body>
 <script src="js/nav.js"></script>
@@ -633,7 +634,7 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   <div style="background:#fff;border-bottom:1px solid #e8e8e4;padding:7px 20px;display:flex;align-items:center;gap:8px;font-size:12px;color:#888884;flex-shrink:0">
     <a href="courses.html" style="color:#888884;text-decoration:none;transition:color 0.1s" onmouseover="this.style.color='#0f0f0d'" onmouseout="this.style.color='#888884'">← Skillverse Library</a>
     <span>›</span>
-    <span style="color:#0f0f0d;font-weight:500">Intelligent Enterprise Dev · .NET 8 &amp; Azure AI</span>
+    <span id="breadcrumb-course-name" style="color:#0f0f0d;font-weight:500">Intelligent Enterprise Dev · .NET 8 &amp; Azure AI</span>
   </div>
 
   <nav class="mode-nav">
@@ -790,24 +791,23 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 </div>
 
 <script>
-const PHASES = [
-  { id:'p1', label:'Phase 1', title:'C# Foundations',
-    desc:'Core syntax every .NET developer must know — for absolute beginners.',
-    dot:'var(--p1)',
-    lessons:['Basic Structure of a C# Program','Data Types in C#','Variables in C#','Operators in C#','Control Flow — If, Else, Switch','Loops — For, While, Do-While','Functions in C#','String Handling in C#','User Input and Output in C#','Type Casting in C#'] },
-  { id:'p2', label:'Phase 2', title:'OOP — The Blazor Way',
-    desc:'Object-Oriented concepts Blazor uses — taught with real app context.',
-    dot:'var(--p2)',
-    lessons:['Classes and Objects in C#','Constructors in C#','Properties in C#','Encapsulation in C#','Inheritance in C#','Interfaces in C# — The Blazor Contract','Abstract Classes in C#','Polymorphism in C#','Static vs Instance Members','Exception Handling in C#','Delegates and Lambda Expressions'] },
-  { id:'p3', label:'Phase 3', title:'Blazor with .NET 8',
-    desc:'Build interactive web UIs in C# — from first component to real application.',
-    dot:'var(--p3)',
-    lessons:['What is Blazor? Server vs WebAssembly vs Auto','Setting Up a .NET 8 Blazor Project','Your First Blazor Component','Data Binding in Blazor','Event Handling in Blazor','Component Parameters and Cascading Values','Forms and Validation in Blazor','Dependency Injection in Blazor','Calling REST APIs from Blazor with HttpClient','State Management in Blazor','Routing in Blazor','Layouts and Navigation in Blazor','Lifecycle Methods — OnInitialized, OnParametersSet','JavaScript Interop in Blazor'] },
-  { id:'p4', label:'Phase 4', title:'Azure AI Integration',
-    desc:'Connect Blazor to Azure AI — intelligent chat, search, and smart features.',
-    dot:'var(--p4)',
-    lessons:['Introduction to Azure AI Services','Azure OpenAI Service — Key Concepts','Connecting Blazor to Azure OpenAI GPT-4o','Building an AI Chat UI in Blazor','Streaming Responses with Server-Sent Events','Prompt Engineering for Enterprise Apps','Azure AI Search — Semantic Search in Blazor','Azure Cognitive Services — Vision and Language','Secure API Key Management in Azure','Deploying Blazor App to Azure App Service','Putting It All Together — Intelligent Enterprise App'] }
-];
+// ── Load course from URL param ──────────────────────────────
+const _courseData = getCourseData();
+const _isKnownCourse = _courseData !== null;
+
+// Build PHASES from loaded course data
+const PHASES = _courseData
+  ? _courseData.phases.map(ph => ({
+      id: ph.colorClass,
+      label: ph.label,
+      title: ph.title,
+      desc: '',
+      colorClass: ph.colorClass,
+      bgClass: ph.colorClass + '-bg',
+      dot: ph.dot,
+      lessons: ph.lessons
+    }))
+  : [];
 
 let ALL = [];
 PHASES.forEach((ph, pi) => {
@@ -820,7 +820,9 @@ let currentIdx = -1;
 let currentMode = 'lessons';
 let currentLabId = null;
 let ADMIN_SECRET = null;
-let done = new Set(JSON.parse(localStorage.getItem('rrskv_done') || '[]'));
+const _courseStorageKey = 'rrskv_done_' +
+  (new URLSearchParams(window.location.search).get('course') || 'default');
+let done = new Set(JSON.parse(localStorage.getItem(_courseStorageKey) || '[]'));
 
 const LABS = {
   handson: [
@@ -1041,12 +1043,46 @@ function phaseStart(pi) {
   return i;
 }
 
+// ── Update home screen with loaded course data ─────────────
+function updateHomeScreen() {
+  if (!_courseData) return;
+
+  const eyebrow = document.querySelector('.home-eyebrow');
+  if (eyebrow) {
+    eyebrow.textContent = _courseData.subtitle || _courseData.title;
+  }
+
+  const title = document.querySelector('.home-title');
+  if (title) {
+    title.innerHTML = _courseData.title
+      .replace(' with ', '<br>with ')
+      .replace(' & ', '<br><em>&amp;</em>');
+  }
+
+  const desc = document.querySelector('.home-desc');
+  if (desc) desc.textContent = _courseData.description;
+
+  const statRow = document.querySelector('.home-stat-row');
+  if (statRow && _courseData.stats) {
+    statRow.innerHTML = _courseData.stats
+      .map((s, i) => i < _courseData.stats.length - 1
+        ? `<span>${s}</span><span class="stat-sep">·</span>`
+        : `<span>${s}</span>`)
+      .join('');
+  }
+
+  const modeHint = document.getElementById('mode-hint');
+  if (modeHint) {
+    modeHint.textContent = ALL.length + ' lessons across ' + PHASES.length + ' phases';
+  }
+}
+
 // ── Progress ───────────────────────────────────────────────
 function updateProgress() {
   document.getElementById('prog-tag').textContent = done.size + ' / ' + ALL.length;
 }
 function saveDone() {
-  localStorage.setItem('rrskv_done', JSON.stringify([...done]));
+  localStorage.setItem(_courseStorageKey, JSON.stringify([...done]));
   updateProgress();
 }
 
@@ -1213,21 +1249,15 @@ document.getElementById('ask-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') askDoubt();
 });
 
-// ── Init ───────────────────────────────────────────────────
-(function handleURLParams() {
-  const p = new URLSearchParams(window.location.search);
-  const courseParam = p.get('course');
-  const modeParam   = p.get('mode');
-  const labParam    = p.get('lab');
-  if (courseParam && courseParam !== 'dotnet' && courseParam !== 'net') {
-    const name = courseParam.charAt(0).toUpperCase() + courseParam.slice(1);
-    document.getElementById('main').innerHTML = `
+// ── Coming Soon template ───────────────────────────────────
+function buildComingSoonHTML(courseId) {
+  const label = courseId.toUpperCase().replace(/-/g, ' ');
+  return `
     <div style="
       display:flex;flex-direction:column;
       align-items:center;justify-content:center;
       min-height:calc(100vh - 200px);
-      padding:48px 32px;text-align:center;
-      gap:20px">
+      padding:48px 32px;text-align:center;gap:20px">
 
       <div style="
         width:72px;height:72px;border-radius:16px;
@@ -1244,25 +1274,21 @@ document.getElementById('ask-input').addEventListener('keydown', e => {
         letter-spacing:1px;text-transform:uppercase;
         color:var(--ink-3,#888884);
         font-family:var(--mono,'DM Mono',monospace)">
-        ${courseParam.toUpperCase().replace(/-/g,' ')}
+        ${label}
       </div>
 
       <div style="
         font-size:26px;font-weight:700;
-        color:var(--ink,#0f0f0d);
-        letter-spacing:-0.4px;line-height:1.2;
-        max-width:420px">
+        color:var(--ink,#0f0f0d);letter-spacing:-0.4px;
+        line-height:1.2;max-width:420px">
         This course is being<br>prepared for you
       </div>
 
       <p style="
         font-size:14px;color:var(--ink-3,#888884);
-        max-width:400px;line-height:1.75;margin:0">
-        We're building structured lessons, code examples,
-        and hands-on labs for this track.
-        The <strong style="color:var(--ink,#0f0f0d)">
-        Intelligent Enterprise Dev with .NET 8 &amp; Azure AI
-        </strong> course is live now.
+        max-width:420px;line-height:1.75;margin:0">
+        Structured lessons, code examples, and hands-on labs
+        are in development for this track. Come back soon.
       </p>
 
       <div style="
@@ -1272,10 +1298,7 @@ document.getElementById('ask-input').addEventListener('keydown', e => {
           background:var(--ink,#0f0f0d);color:white;
           border-radius:8px;padding:10px 20px;
           font-size:13.5px;font-weight:600;
-          text-decoration:none;
-          transition:background 0.15s"
-          onmouseover="this.style.background='#2d2d2b'"
-          onmouseout="this.style.background='var(--ink,#0f0f0d)'">
+          text-decoration:none">
           Open Live Course →
         </a>
         <a href="courses.html" style="
@@ -1284,10 +1307,7 @@ document.getElementById('ask-input').addEventListener('keydown', e => {
           color:var(--ink-3,#888884);
           border-radius:8px;padding:10px 20px;
           font-size:13.5px;font-weight:500;
-          text-decoration:none;
-          transition:all 0.15s"
-          onmouseover="this.style.borderColor='var(--ink-2,#3a3a38)';this.style.color='var(--ink,#0f0f0d)'"
-          onmouseout="this.style.borderColor='var(--line,#e8e8e4)';this.style.color='var(--ink-3,#888884)'">
+          text-decoration:none">
           ← Back to Library
         </a>
       </div>
@@ -1305,7 +1325,7 @@ document.getElementById('ask-input').addEventListener('keydown', e => {
         </div>
         <div style="
           display:flex;align-items:center;gap:10px;
-          text-decoration:none;cursor:pointer"
+          cursor:pointer"
           onclick="window.location.href='learn.html'">
           <div style="
             width:36px;height:36px;border-radius:8px;
@@ -1313,7 +1333,7 @@ document.getElementById('ask-input').addEventListener('keydown', e => {
             display:flex;align-items:center;
             justify-content:center;font-size:14px;
             flex-shrink:0">🚀</div>
-          <div style="text-align:left">
+          <div style="text-align:left;flex:1">
             <div style="
               font-size:13px;font-weight:600;
               color:var(--ink,#0f0f0d)">
@@ -1326,8 +1346,8 @@ document.getElementById('ask-input').addEventListener('keydown', e => {
             </div>
           </div>
           <div style="
-            margin-left:auto;font-size:11px;
-            font-weight:700;color:#2d7a4f;
+            font-size:11px;font-weight:700;
+            color:#2d7a4f;
             background:rgba(45,122,79,0.1);
             border:1px solid rgba(45,122,79,0.2);
             border-radius:20px;padding:2px 9px;
@@ -1336,8 +1356,19 @@ document.getElementById('ask-input').addEventListener('keydown', e => {
           </div>
         </div>
       </div>
-
     </div>`;
+}
+
+// ── Init ───────────────────────────────────────────────────
+(function handleURLParams() {
+  const p = new URLSearchParams(window.location.search);
+  const courseParam = p.get('course');
+  const modeParam   = p.get('mode');
+  const labParam    = p.get('lab');
+  if (courseParam &&
+      typeof COURSE_CATALOG !== 'undefined' &&
+      !COURSE_CATALOG[courseParam]) {
+    document.getElementById('main').innerHTML = buildComingSoonHTML(courseParam);
     return;
   }
   if (modeParam === 'labs') {
@@ -1351,6 +1382,11 @@ buildPhaseRows();
 buildLabsSidebar();
 buildLabsHomeList();
 updateProgress();
+updateHomeScreen();
+const bcName = document.getElementById('breadcrumb-course-name');
+if (bcName && _courseData) {
+  bcName.textContent = _courseData.subtitle || _courseData.title;
+}
 checkAdminMode();
 
 if (window._deepLinkMode === 'labs') {
@@ -1488,7 +1524,7 @@ function switchMode(mode) {
 
   const hint = document.getElementById('mode-hint');
   hint.textContent = mode === 'lessons'
-    ? '46 lessons across 4 phases'
+    ? (ALL.length + ' lessons across ' + PHASES.length + ' phases')
     : '4 hands-on labs · 3 capstone projects';
 
   const lessonsToC = document.getElementById('toc-lessons');
