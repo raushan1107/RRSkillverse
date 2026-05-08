@@ -1167,9 +1167,11 @@ async function generateLesson(lesson) {
   startLoadingSequence();
   try {
     const data = await apiPost('/api/lesson', {
-      lessonTitle: lesson.title,
-      phaseLabel:  lesson.phase.label,
-      phaseTitle:  lesson.phase.title
+      lessonTitle:  lesson.title,
+      phaseLabel:   lesson.phase.label,
+      phaseTitle:   lesson.phase.title,
+      courseId:     _courseId || 'default',
+      courseTitle:  _courseData ? _courseData.title : 'Intelligent Enterprise Development with .NET 8 & Azure AI'
     });
     const html = transformCallouts(data.content);
     stopLoadingSequence(html, (rendered) => {
@@ -1233,7 +1235,12 @@ async function askDoubt() {
   resp.classList.add('on');
   resp.innerHTML = '<span style="color:var(--ink-3)">Thinking…</span>';
   try {
-    const data = await apiPost('/api/doubt', { question: q, lessonTitle: ALL[currentIdx].title });
+    const data = await apiPost('/api/doubt', {
+      question:    q,
+      lessonTitle: ALL[currentIdx].title,
+      courseId:    _courseId || 'default',
+      courseTitle: _courseData ? _courseData.title : ''
+    });
     resp.innerHTML = data.content;
   } catch (e) {
     resp.innerHTML = '<p style="color:var(--err)">' + e.message + '</p>';

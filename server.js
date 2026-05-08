@@ -160,56 +160,188 @@ async function callAzure(messages, maxTokens) {
   return data.choices?.[0]?.message?.content || '';
 }
 
-// ── POST /api/lesson ───────────────────────────────────────
-app.post('/api/lesson', lessonLimiter, async (req, res) => {
-  const { lessonTitle, phaseLabel, phaseTitle } = req.body;
+// ── Course-aware lesson system prompt ─────────────────────
+function buildLessonSystemPrompt(courseId, courseTitle,
+  phaseLabel, phaseTitle, lessonTitle) {
 
-  if (!lessonTitle || !phaseLabel || !phaseTitle) {
-    return res.status(400).json({ error: 'Missing required fields.' });
-  }
+  const trainerIdentity = `You are Raushan Ranjan, \
+a Microsoft Certified Trainer (MCT) at Koenig Solutions, India.
+You teach with a warm, direct classroom style.
+Always start with a real-world analogy.
+Explain the WHY before the HOW.
+Use short sentences. Be practical.`;
 
-  // Sanitize — prevent prompt injection via lesson titles
-  const safeTitle = String(lessonTitle).slice(0, 120).replace(/[<>]/g, '');
-  const safePhase = String(phaseLabel).slice(0, 40).replace(/[<>]/g, '');
-  const safeModule = String(phaseTitle).slice(0, 80).replace(/[<>]/g, '');
+  const courseContextMap = {
 
-  const systemMsg = `You are Raushan Ranjan, a Microsoft Certified Trainer (MCT) at Koenig Solutions, India. Your portal "RR Skillverse" teaches C# and Blazor to beginners building intelligent enterprise applications with .NET 8 and Azure AI.
+    'default': `
+Course: Intelligent Enterprise Development with .NET 8 & Azure AI
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching C#, .NET 8, Blazor, and Azure AI integration
+to complete beginners building enterprise applications.
+Connect every concept to how Blazor or Azure AI uses it.
+Include C# code examples. Use Blazor analogies where relevant.`,
 
-TEACHING STYLE:
-- Lead with a real-world analogy before any code
-- Short, direct sentences. Warm classroom tone.
-- Always explain the WHY behind every concept
-- Connect each topic to how Blazor or enterprise apps use it
-- Include 1-2 well-commented C# code examples
+    'az204': `
+Course: AZ-204 — Developing Solutions for Microsoft Azure
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching Azure developer skills — Functions, App Service,
+Cosmos DB, Blob Storage, Key Vault, API Management, Service Bus.
+All code examples in C# unless otherwise specified.
+Connect concepts to real Azure portal actions and ARM deployments.
+No Blazor references — this is pure Azure development.`,
 
+    'pl300': `
+Course: PL-300 — Power BI Data Analyst Associate
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching Power BI from data connection to certification.
+Topics include Power Query (M language), DAX, data modeling,
+relationships, visualizations, RLS, and Power BI Service.
+No C# or Blazor — this is a business intelligence and analytics course.
+Use business data examples (sales, revenue, KPIs).
+DAX code goes in DAX code blocks, M Query in M code blocks.`,
+
+    'copilot-studio': `
+Course: Microsoft Copilot Studio Development
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching Copilot Studio — topics, actions, entities,
+Power Automate integration, authentication, and deployment.
+No C# or Blazor. Examples use Copilot Studio UI and YAML.
+Focus on conversational AI design and bot building.`,
+
+    'pl400': `
+Course: PL-400 — Microsoft Power Platform Developer
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching advanced Power Platform development —
+custom connectors, PCF controls, plugins (C#), Power Automate,
+Dataverse API, ALM, and solution architecture.
+C# is used for plugins only. Focus on Power Platform ecosystem.`,
+
+    'az900': `
+Course: AZ-900 — Introduction to Microsoft Azure
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching Azure fundamentals for beginners —
+cloud concepts, core Azure services, pricing, SLAs, compliance.
+No code examples needed — conceptual explanations with analogies.
+Use everyday analogies. Keep it simple and accessible.`,
+
+    'pl900': `
+Course: PL-900 — Introduction to Microsoft Power Platform
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching Power Platform fundamentals —
+Power BI, Power Apps, Power Automate, Copilot Studio overview.
+No code. Business-focused, no-code/low-code context.
+Use business scenarios and real-world automation examples.`,
+
+    'opengl-vulkan': `
+Course: OpenGL and VULKAN Training
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching graphics programming —
+rendering pipeline, shaders (GLSL), vertex/fragment operations,
+Vulkan API, command buffers, synchronization, and GPU programming.
+Code examples in C++ with OpenGL or Vulkan API calls.
+No Azure, no Blazor, no Power BI.`,
+
+    'qt-qml': `
+Course: Qt and QML Development
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching cross-platform desktop development with Qt —
+QML syntax, Qt Quick, signals and slots, C++ integration,
+models, views, and deployment.
+Code examples in QML and C++. No Azure or web context.`,
+
+    'csharp': `
+Course: Programming in C# (55339AC)
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching C# from fundamentals —
+syntax, OOP, collections, LINQ, async/await, exception handling.
+Pure C# focus. No Blazor, no Azure, no Power BI.
+Use console application examples for clarity.`,
+
+    'advanced-csharp': `
+Course: Advanced C#
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching advanced C# concepts —
+delegates, events, generics, reflection, parallel programming,
+memory management, Span<T>, and design patterns.
+Deep technical C# — no UI frameworks, no Azure.`,
+
+    'gh300': `
+Course: GH-300 — GitHub Copilot Fundamentals
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching GitHub Copilot for developers and organizations —
+AI-assisted coding, prompting strategies, security policies,
+business value measurement, and responsible AI use.
+Examples can use any language. Focus on Copilot features.`,
+
+  };
+
+  const courseContext = courseContextMap[courseId]
+    || `
+Course: ${courseTitle}
+Phase: ${phaseLabel} — ${phaseTitle}
+Context: Teaching ${courseTitle} in a professional
+enterprise training context.
+Use relevant examples for this specific subject area.
+Do NOT reference Blazor, Azure AI, or Power BI
+unless they are directly relevant to this course.`;
+
+  const outputFormat = `
 OUTPUT FORMAT — HTML only, no markdown:
 - <h2> for section headings
 - <h3> for sub-headings
 - <p> for paragraphs
 - <ul><li> for lists
 - <strong> for emphasis
-- <pre><code class="language-csharp">code</code></pre> for ALL code blocks
-- <analogy>text</analogy> for real-world analogy
-- <tip>text</tip> for a trainer pro tip
-- <warn>text</warn> for a common mistake warning
-- Always end with this exact quiz structure:
+- <pre><code class="language-csharp">code</code></pre>
+  for C# code (change language class to match course:
+  language-dax for DAX, language-python for Python,
+  language-cpp for C++, language-javascript for JS)
+- <analogy>text</analogy> — real-world analogy
+- <tip>text</tip> — trainer pro tip
+- <warn>text</warn> — common mistake warning
+- Always end with quiz:
 <div class="quiz-block">
   <div class="quiz-eyebrow">Quick Check</div>
-  <div class="quiz-question">question text here</div>
+  <div class="quiz-question">question here</div>
   <div class="quiz-options">
     <button class="quiz-opt" data-correct="false">option</button>
-    <button class="quiz-opt" data-correct="true">correct option</button>
+    <button class="quiz-opt" data-correct="true">correct</button>
     <button class="quiz-opt" data-correct="false">option</button>
     <button class="quiz-opt" data-correct="false">option</button>
   </div>
   <div class="quiz-fb"></div>
 </div>
 
-Keep explanation 550-800 words. End with quiz. Output HTML only — no markdown, no backticks.`;
+Keep explanation 500-700 words. End with quiz.
+HTML only — no markdown, no backticks outside code blocks.`;
+
+  return trainerIdentity + courseContext + outputFormat;
+}
+
+// ── POST /api/lesson ───────────────────────────────────────
+app.post('/api/lesson', lessonLimiter, async (req, res) => {
+  const { lessonTitle, phaseLabel, phaseTitle, courseId, courseTitle } = req.body;
+
+  if (!lessonTitle || !phaseLabel || !phaseTitle) {
+    return res.status(400).json({ error: 'Missing required fields.' });
+  }
+
+  const safeTitle      = String(lessonTitle).slice(0, 120).replace(/[<>]/g, '');
+  const safePhase      = String(phaseLabel).slice(0, 40).replace(/[<>]/g, '');
+  const safeModule     = String(phaseTitle).slice(0, 80).replace(/[<>]/g, '');
+  const safeCourseId   = courseId
+    ? String(courseId).slice(0, 40).replace(/[^a-z0-9-]/g, '')
+    : 'default';
+  const safeCourseTitle = courseTitle
+    ? String(courseTitle).slice(0, 120).replace(/[<>]/g, '')
+    : 'Intelligent Enterprise Development with .NET 8 & Azure AI';
+
+  const systemMsg = buildLessonSystemPrompt(
+    safeCourseId, safeCourseTitle, safePhase, safeModule, safeTitle);
 
   const userMsg = `Generate a complete lesson for: "${safeTitle}"
-Module: ${safePhase} — ${safeModule}
-Student goal: build Blazor enterprise apps with Azure AI.`;
+Phase: ${safePhase} — ${safeModule}
+Course: ${safeCourseTitle}`;
 
   try {
     const content = await callAzure(
@@ -225,20 +357,28 @@ Student goal: build Blazor enterprise apps with Azure AI.`;
 
 // ── POST /api/doubt ────────────────────────────────────────
 app.post('/api/doubt', doubtLimiter, async (req, res) => {
-  const { question, lessonTitle } = req.body;
+  const { question, lessonTitle, courseId, courseTitle } = req.body;
 
   if (!question || !lessonTitle) {
     return res.status(400).json({ error: 'Missing required fields.' });
   }
 
-  const safeQ = String(question).slice(0, 500);
-  const safeTitle = String(lessonTitle).slice(0, 120).replace(/[<>]/g, '');
+  const safeQ          = String(question).slice(0, 500);
+  const safeTitle      = String(lessonTitle).slice(0, 120).replace(/[<>]/g, '');
+  const safeCourseId   = courseId
+    ? String(courseId).slice(0, 40).replace(/[^a-z0-9-]/g, '')
+    : 'default';
+  const safeCourseTitle = courseTitle
+    ? String(courseTitle).slice(0, 120).replace(/[<>]/g, '')
+    : '';
+
+  const courseHint = safeCourseTitle ? ` (${safeCourseTitle})` : '';
 
   try {
     const content = await callAzure([
       {
         role: 'system',
-        content: `You are Raushan Ranjan, MCT trainer. Answer student doubts about "${safeTitle}" in simple direct language. Max 100 words. Use <p> and <code> HTML tags only.`
+        content: `You are Raushan Ranjan, MCT trainer. Answer student doubts about "${safeTitle}"${courseHint} in simple direct language. Max 150 words. Use <p> and <code> HTML tags only. Be concise and practical.`
       },
       { role: 'user', content: safeQ }
     ], 400);
