@@ -274,6 +274,18 @@
 .pcc-amount{font-size:16px;font-weight:800;color:var(--accent);letter-spacing:-0.3px;margin-bottom:4px;}
 .pcc-label{font-size:9.5px;color:var(--text-dim);line-height:1.4;}
 @media(max-width:480px){.paypal-cost-context{grid-template-columns:repeat(2,1fr);}.pcc-item:nth-child(2){border-right:none;}.pcc-item:nth-child(3){border-right:1px solid var(--border);border-top:1px solid var(--border);}.pcc-item:nth-child(4){border-top:1px solid var(--border);}}
+/* ── AI Positioning Strip ── */
+.ai-positioning-strip{background:linear-gradient(135deg,rgba(26,86,219,0.06) 0%,rgba(14,165,233,0.06) 100%);border-top:1px solid rgba(26,86,219,0.15);border-bottom:1px solid rgba(26,86,219,0.15);padding:32px 24px;}
+.ai-pos-inner{max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;}
+.ai-pos-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(26,86,219,0.1);border:1px solid rgba(26,86,219,0.25);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:#60a5fa;}
+.ai-pos-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;animation:aiPulse 2s ease-in-out infinite;}
+@keyframes aiPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(1.4);}}
+.ai-pos-title{font-size:22px;font-weight:800;color:var(--text,#e6edf3);letter-spacing:-0.3px;margin-bottom:6px;}
+.ai-pos-desc{font-size:14px;color:var(--text-muted,#848d97);line-height:1.7;max-width:640px;}
+.ai-pos-desc strong{color:var(--text,#e6edf3);}
+.ai-pos-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.ai-pos-pill{background:var(--bg2,#0d1117);border:1px solid var(--border,#30363d);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--text-muted,#848d97);}
+@media(max-width:600px){.ai-pos-title{font-size:18px;}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
@@ -327,7 +339,7 @@ window.addEventListener('load', () => {
     <div class="hero-cta-row">
       <a href="courses.html" class="btn-hero-primary">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="2" width="14" height="11" rx="2"/><path d="M5 15h6M8 13v2"/></svg>
-        Skillverse Library
+        🎓 AI Academy
       </a>
       <a href="ai-agent.html" class="btn-hero-outline">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
@@ -354,6 +366,23 @@ window.addEventListener('load', () => {
 
 <!-- ═══════════════════ MARQUEE ═════════════════════════ -->
 <div class="marquee-band"><div class="marquee-track" id="marqTrack"></div></div>
+
+<!-- ═══════════════════ AI POSITIONING ═════════════════ -->
+<div class="ai-positioning-strip">
+  <div class="ai-pos-inner">
+    <div class="ai-pos-badge"><span class="ai-pos-dot"></span>NEW · AI-Powered Learning Platform</div>
+    <div class="ai-pos-content">
+      <div class="ai-pos-title">Meet Skillverse AI Academy</div>
+      <div class="ai-pos-desc">Every lesson is <strong>AI-generated in Raushan's teaching style</strong> — simplified analogies, real enterprise examples, and instant answers from Axiom, your personal AI tutor. Not a static library. A living, breathing learning companion.</div>
+    </div>
+    <div class="ai-pos-pills">
+      <div class="ai-pos-pill">🤖 Ask Axiom anything</div>
+      <div class="ai-pos-pill">📝 Notes in Raushan's style</div>
+      <div class="ai-pos-pill">🧪 Hands-on labs</div>
+      <div class="ai-pos-pill">✅ MCT-verified</div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════ WHAT WE OFFER ══════════════════ -->
 <section class="section-wrap">
@@ -492,7 +521,7 @@ window.addEventListener('load', () => {
     <div class="site-footer-links">
       <div class="footer-link-group">
         <div class="footer-link-title">Learn</div>
-        <a href="/learn.html" class="footer-link">Skillverse Library</a>
+        <a href="/learn.html" class="footer-link">AI Academy</a>
         <a href="/blog.html" class="footer-link">Blog Articles</a>
         <a href="/labs.html" class="footer-link">Hands-on Labs</a>
         <a href="/courses.html" class="footer-link">Courses</a>

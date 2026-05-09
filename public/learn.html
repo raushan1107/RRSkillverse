@@ -1302,8 +1302,115 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   .skillverse-feature-strip { grid-template-columns: 1fr; }
   .skf-item { border-right: none !important; }
 }
+
+/* ── Course AI/MCT badges ── */
+.course-ai-footer { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.course-ai-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; background: rgba(0,102,255,0.08); border: 1px solid rgba(0,102,255,0.18); color: var(--accent); }
+.course-mct-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); color: #16a34a; }
+
+/* ── Lab Axiom box ── */
+.lab-axiom-box { background: rgba(0,102,255,0.04); border: 1px solid rgba(0,102,255,0.18); border-radius: 14px; padding: 20px 20px 16px; margin-top: 32px; }
+.lab-axiom-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.lab-axiom-icon { font-size: 28px; flex-shrink: 0; }
+.lab-axiom-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+.lab-axiom-sub { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+.lab-axiom-input { width: 100%; box-sizing: border-box; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--wash); font-size: 13px; font-family: var(--font); color: var(--ink); outline: none; resize: vertical; min-height: 60px; transition: border-color 0.15s; }
+.lab-axiom-input:focus { border-color: var(--accent); }
+.lab-axiom-btn { margin-top: 10px; padding: 9px 20px; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: var(--font); transition: opacity 0.15s; }
+.lab-axiom-btn:hover { opacity: 0.88; }
+.lab-axiom-answer { margin-top: 12px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; font-size: 13px; color: var(--ink-2); line-height: 1.7; display: none; }
+
+/* ── Lab support strip ── */
+.lab-support-strip { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.lab-support-btn { padding: 7px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--wash); font-size: 12px; font-weight: 600; color: var(--ink-3); cursor: pointer; font-family: var(--font); transition: all 0.15s; }
+.lab-support-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── Lab donation row ── */
+.lab-donate-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 16px; }
+.lab-donate-label { font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--ink-4); }
+.lab-donate-preset { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--line); background: var(--wash); font-size: 12.5px; font-weight: 600; color: var(--ink-3); cursor: pointer; font-family: var(--font); transition: all 0.15s; }
+.lab-donate-preset:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── Payment modal (dark theme) ── */
+.upi-modal-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:2000;display:none;backdrop-filter:blur(4px); }
+.upi-modal-overlay.open { display:block; }
+.upi-modal { position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.95);background:var(--bg2,#161b22);border:1px solid var(--border,#30363d);border-radius:18px;padding:28px 24px 22px;width:94%;max-width:440px;z-index:2001;display:none;flex-direction:column;gap:16px;opacity:0;transition:opacity 0.2s,transform 0.2s;max-height:92vh;overflow-y:auto; }
+.upi-modal.open { display:flex;opacity:1;transform:translate(-50%,-50%) scale(1); }
+.upi-modal-close { position:absolute;top:14px;right:14px;background:var(--bg3,#21262d);border:1px solid var(--border,#30363d);border-radius:50%;width:28px;height:28px;font-size:13px;cursor:pointer;color:var(--text-muted,#848d97);display:flex;align-items:center;justify-content:center;transition:all 0.15s; }
+.upi-modal-close:hover { background:var(--bg4,#2d333b);color:var(--text,#e6edf3); }
+.upi-modal-header { text-align:center; }
+.upi-modal-icon { font-size:32px;margin-bottom:8px; }
+.upi-modal-title { font-size:16px;font-weight:700;color:var(--text,#e6edf3);margin-bottom:4px; }
+.upi-modal-subtitle { font-size:12px;color:var(--text-muted,#848d97); }
+.pay-tabs { display:flex!important;width:100%;background:var(--bg3,#21262d);border:1px solid var(--border,#30363d);border-radius:10px;overflow:hidden;box-sizing:border-box; }
+.pay-tab { flex:1;padding:9px 8px;font-size:12px;font-weight:600;cursor:pointer;border:none;background:none;color:var(--text-muted,#848d97);font-family:inherit;transition:all 0.15s;border-right:1px solid var(--border,#30363d);white-space:nowrap;text-align:center; }
+.pay-tab:last-child { border-right:none; }
+.pay-tab:hover { color:var(--text,#e6edf3);background:var(--bg4,#2d333b); }
+.pay-tab.active { background:var(--accent,#1a56db);color:white;font-weight:700; }
+.pay-tab-content { display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box; }
+.upi-app-row { display:grid;grid-template-columns:1fr 1fr;gap:8px; }
+.upi-app-btn { display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 10px;border-radius:8px;font-size:12.5px;font-weight:600;text-decoration:none;border:1px solid var(--border,#30363d);background:var(--bg3,#21262d);color:var(--text,#e6edf3);transition:all 0.15s; }
+.upi-app-btn:hover { transform:translateY(-1px);border-color:var(--accent,#1a56db); }
+.upi-divider { display:flex;align-items:center;gap:10px;color:var(--text-dim,#6e7681);font-size:11px; }
+.upi-divider::before,.upi-divider::after { content:'';flex:1;height:1px;background:var(--border,#30363d); }
+.upi-qr-section { display:flex;flex-direction:column;align-items:center;gap:8px; }
+.upi-qr-wrap { background:white;padding:10px;border-radius:10px; }
+.upi-qr-label { font-size:11px;color:var(--text-dim,#6e7681); }
+.upi-id-row { display:flex;align-items:center;gap:8px;background:var(--bg3,#21262d);border:1px solid var(--border,#30363d);border-radius:8px;padding:9px 12px; }
+.upi-id-label { font-size:9.5px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-dim,#6e7681);flex-shrink:0; }
+.upi-id-value { font-size:12.5px;font-weight:600;color:var(--accent,#1a56db);font-family:monospace;flex:1;word-break:break-all; }
+.upi-id-copy { font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;border:1px solid var(--border,#30363d);background:var(--bg2,#0d1117);color:var(--text-muted,#848d97);cursor:pointer;transition:all 0.15s;flex-shrink:0;font-family:inherit; }
+.upi-id-copy:hover { border-color:var(--accent,#1a56db);color:var(--accent,#1a56db); }
+.upi-details-row { display:flex;background:var(--bg3,#21262d);border:1px solid var(--border,#30363d);border-radius:10px;overflow:hidden; }
+.upi-detail { flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 8px;border-right:1px solid var(--border,#30363d); }
+.upi-detail:last-child { border-right:none; }
+.upi-detail-label { font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-dim,#6e7681);margin-bottom:3px; }
+.upi-detail-value { font-size:12px;font-weight:700;color:var(--text,#e6edf3); }
+.paypal-section { display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center; }
+.paypal-btn { display:inline-flex;align-items:center;justify-content:center;padding:12px 28px;background:#0070ba;color:white;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;width:100%;transition:opacity 0.15s; }
+.paypal-btn:hover { opacity:0.88; }
+.paypal-trust-row { display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--text-dim,#6e7681);margin-top:6px; }
+.bank-section { display:flex;flex-direction:column;gap:10px; }
+.bank-header { font-size:14px;font-weight:700;color:var(--text,#e6edf3); }
+.bank-desc { font-size:12.5px;color:var(--text-muted,#848d97);line-height:1.55; }
+.bank-details { background:var(--bg3,#21262d);border:1px solid var(--border,#30363d);border-radius:10px;overflow:hidden; }
+.bank-row { display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--border,#30363d);gap:10px; }
+.bank-row:last-child { border-bottom:none; }
+.bank-label { font-size:10px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:var(--text-dim,#6e7681);flex-shrink:0;min-width:110px; }
+.bank-value { font-size:12.5px;font-weight:600;color:var(--text,#e6edf3);text-align:right;display:flex;align-items:center;gap:8px; }
+.bank-mono { font-family:monospace; }
+.bank-amount-row { display:flex;align-items:center;justify-content:space-between;background:rgba(26,86,219,0.06);border:1px solid rgba(26,86,219,0.18);border-radius:8px;padding:10px 14px;gap:10px; }
+.upi-note { font-size:11.5px;color:var(--text-muted,#848d97);line-height:1.65;text-align:center;padding:12px 16px;background:rgba(26,86,219,0.04);border:1px solid rgba(26,86,219,0.12);border-radius:8px; }
+.pay-amount-selector { background:var(--bg3,#21262d);border:1px solid var(--border,#30363d);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px; }
+.pay-amount-label { font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--text-dim,#6e7681); }
+.pay-amount-presets { display:flex;gap:6px;flex-wrap:wrap; }
+.pay-preset { padding:7px 14px;border-radius:20px;border:1px solid var(--border,#30363d);background:var(--bg2,#0d1117);color:var(--text-muted,#848d97);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s; }
+.pay-preset:hover { border-color:var(--accent,#1a56db);color:var(--accent,#1a56db); }
+.pay-preset.active { background:var(--accent,#1a56db);color:white;border-color:var(--accent,#1a56db); }
+.pay-custom-row { display:flex;align-items:center;background:var(--bg2,#0d1117);border:1px solid var(--accent,#1a56db);border-radius:8px;overflow:hidden; }
+.pay-custom-currency { padding:9px 12px;font-size:14px;font-weight:700;color:var(--accent,#1a56db);background:rgba(26,86,219,0.08);border-right:1px solid var(--border,#30363d);flex-shrink:0; }
+.pay-custom-input { flex:1;border:none;background:transparent;padding:9px 12px;font-size:15px;font-weight:600;color:var(--text,#e6edf3);font-family:inherit;outline:none;width:100%; }
+.pay-custom-input::-webkit-inner-spin-button,.pay-custom-input::-webkit-outer-spin-button { -webkit-appearance:none; }
+.pay-amount-display { font-size:13px;color:var(--text-muted,#848d97);display:flex;align-items:center;gap:6px; }
+.pay-amount-display strong { color:var(--text,#e6edf3);font-size:15px; }
+.paypal-why-usd { display:flex;align-items:flex-start;gap:8px;background:rgba(0,112,186,0.06);border:1px solid rgba(0,112,186,0.15);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text-muted,#848d97);line-height:1.6;width:100%;box-sizing:border-box; }
+.paypal-cost-context { display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--bg3,#21262d);border:1px solid var(--border,#30363d);border-radius:10px;overflow:hidden;width:100%; }
+.pcc-item { display:flex;flex-direction:column;align-items:center;padding:12px 8px;border-right:1px solid var(--border,#30363d);text-align:center;transition:background 0.15s;cursor:pointer; }
+.pcc-item:last-child { border-right:none; }
+.pcc-item:hover { background:rgba(26,86,219,0.05); }
+.pcc-highlight { background:rgba(26,86,219,0.08)!important;border-top:2px solid var(--accent,#1a56db); }
+.pcc-amount { font-size:16px;font-weight:800;color:var(--accent,#1a56db);letter-spacing:-0.3px;margin-bottom:4px; }
+.pcc-label { font-size:9.5px;color:var(--text-dim,#6e7681);line-height:1.4; }
+@media(max-width:480px){.paypal-cost-context{grid-template-columns:repeat(2,1fr);}.pcc-item:nth-child(2){border-right:none;}.pcc-item:nth-child(3){border-right:1px solid var(--border,#30363d);border-top:1px solid var(--border,#30363d);}.pcc-item:nth-child(4){border-top:1px solid var(--border,#30363d);}}
+
+/* ── Layout overrides (PART 6) ── */
+.learn-layout { display:flex;align-items:stretch;min-height:calc(100vh - 60px);width:100%;overflow:hidden; }
+.learn-sidebar { width:260px;flex-shrink:0;border-right:1px solid var(--line);overflow-y:auto;height:calc(100vh - 60px);position:sticky;top:60px; }
+.learn-main { flex:1;min-width:0;max-width:100%;padding:32px 48px;overflow-y:auto; }
+@media(max-width:1200px){.learn-main{padding:24px 32px;}}
 </style>
 <script src="js/courses-data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 <script src="js/nav.js"></script>
@@ -1357,16 +1464,14 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
           <div class="skillverse-hero">
             <div class="skillverse-hero-badge">
               <span class="sh-badge-dot"></span>
-              AI-Powered Learning · Verified by MCT
+              🤖 AI Academy · Powered by Axiom · MCT Verified
             </div>
-            <h1 class="skillverse-hero-title">Skillverse Library</h1>
+            <h1 class="skillverse-hero-title">Skillverse AI Academy</h1>
             <p class="skillverse-hero-sub">
-              Enterprise-grade courses built by a
-              <strong>Microsoft Certified Trainer</strong>
-              with 10+ years of corporate training experience.
-              Every lesson is AI-enhanced — ask questions,
-              get explanations, and run labs without leaving
-              the page.
+              Every lesson is <strong>AI-generated in Raushan's exact teaching style</strong> —
+              simplified analogies, real enterprise examples, and instant clarifications
+              from <strong>Axiom</strong>, your personal AI tutor.
+              Always current. Always free.
             </p>
             <div class="skillverse-hero-pills">
               <div class="sh-pill"><span class="sh-pill-icon">🤖</span>AI Tutor on every lesson</div>
@@ -1398,29 +1503,29 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
             <div class="skf-item">
               <div class="skf-icon">🤖</div>
               <div class="skf-content">
-                <div class="skf-title">AI Tutor on Every Lesson</div>
-                <div class="skf-desc">Ask Axiom any doubt about the lesson. Get instant answers powered by Azure GPT-4o, trained on Raushan's materials.</div>
+                <div class="skf-title">Axiom AI Tutor</div>
+                <div class="skf-desc">Ask anything. Get instant answers from Axiom, trained on Raushan's enterprise teaching style and 10+ years of MCT notes.</div>
+              </div>
+            </div>
+            <div class="skf-item">
+              <div class="skf-icon">📝</div>
+              <div class="skf-content">
+                <div class="skf-title">AI-Generated Notes</div>
+                <div class="skf-desc">Lessons written by Axiom in Raushan's voice — simplified analogies, real enterprise context, zero fluff.</div>
               </div>
             </div>
             <div class="skf-item">
               <div class="skf-icon">🧪</div>
               <div class="skf-content">
-                <div class="skf-title">Hands-on Labs Included</div>
+                <div class="skf-title">Hands-on Labs</div>
                 <div class="skf-desc">Every course includes guided labs with real Azure, .NET, and Power BI exercises — not just theory.</div>
               </div>
             </div>
             <div class="skf-item">
               <div class="skf-icon">✅</div>
               <div class="skf-content">
-                <div class="skf-title">MCT-Verified Content</div>
+                <div class="skf-title">MCT-Verified</div>
                 <div class="skf-desc">All content verified by Raushan Ranjan, Microsoft Certified Trainer with 10+ years of enterprise training globally.</div>
-              </div>
-            </div>
-            <div class="skf-item">
-              <div class="skf-icon">💬</div>
-              <div class="skf-content">
-                <div class="skf-title">Comment &amp; Discuss</div>
-                <div class="skf-desc">Every lesson has a discussion thread. Ask questions, share insights, and learn from the community.</div>
               </div>
             </div>
           </div>
@@ -1716,12 +1821,10 @@ function buildPhaseRows() {
         '<span class="phase-row-title">' + ph.label + ' — ' + ph.title + '</span>' +
       '</div>' +
       '<span class="phase-row-count">' + ph.lessons.length + ' lessons</span>' +
-      '<div class="course-card-ai-badge">' +
-        '<span>🤖 AI Tutor</span>' +
-        '<span>·</span>' +
-        '<span>🧪 Labs</span>' +
-        '<span>·</span>' +
-        '<span>✅ MCT Verified</span>' +
+      '<div class="course-ai-footer">' +
+        '<span class="course-ai-badge">🤖 Axiom AI</span>' +
+        '<span class="course-ai-badge">🧪 Labs</span>' +
+        '<span class="course-mct-badge">✅ MCT Verified</span>' +
       '</div>';
     container.appendChild(row);
   });
@@ -2294,6 +2397,7 @@ async function generateLabGuide(lab) {
 
     if (cached.cached) {
       stopLabLoading(loadingEl, renderedEl, cached.content, cached.generatedAt);
+      setTimeout(() => injectLabFooter(document.getElementById('lab-rendered'), lab), 250);
       return;
     }
 
@@ -2330,6 +2434,7 @@ async function generateLabGuide(lab) {
 
     clearInterval(interval);
     stopLabLoading(loadingEl, renderedEl, result.content, result.generatedAt);
+    setTimeout(() => injectLabFooter(document.getElementById('lab-rendered'), lab), 250);
 
   } catch (err) {
     loadingEl.style.display = 'none';
@@ -2702,6 +2807,424 @@ function openSupportModal() {
     window.open('https://rrskillverse.in/blog.html', '_blank');
   }
 }
+
+// ── Lab Footer Injection ───────────────────────────────
+function injectLabFooter(el, lab) {
+  if (!el || el.querySelector('.lab-axiom-box')) return;
+  const labTitle = lab ? lab.title : 'this lab';
+  const footer = document.createElement('div');
+  footer.innerHTML = `
+    <div class="lab-axiom-box">
+      <div class="lab-axiom-header">
+        <div class="lab-axiom-icon">🤖</div>
+        <div>
+          <div class="lab-axiom-title">Ask Axiom about this lab</div>
+          <div class="lab-axiom-sub">Powered by Azure GPT-4o · Trained on Raushan's materials</div>
+        </div>
+      </div>
+      <textarea class="lab-axiom-input" id="labAxiomQ" placeholder="e.g. What does this step do? Why do we use X here?"></textarea>
+      <button class="lab-axiom-btn" onclick="submitLabDoubt('${(labTitle).replace(/'/g,"\\'")}')">Ask Axiom →</button>
+      <div class="lab-axiom-answer" id="labAxiomA"></div>
+    </div>
+    <div class="lab-donate-row">
+      <span class="lab-donate-label">Support this lab:</span>
+      <button class="lab-donate-preset" onclick="openUPIModal(11,'☕ Support Lab','Lab Support')">₹11</button>
+      <button class="lab-donate-preset" onclick="openUPIModal(21,'☕ Support Lab','Lab Support')">₹21</button>
+      <button class="lab-donate-preset" onclick="openUPIModal(51,'☕ Support Lab','Lab Support')">₹51</button>
+      <button class="lab-donate-preset" onclick="openUPIModal(101,'☕ Support Lab','Lab Support')">₹101</button>
+    </div>
+    <div class="lab-support-strip">
+      <button class="lab-support-btn" onclick="openSupportModal()">☕ Support Raushan</button>
+      <button class="lab-support-btn" onclick="document.getElementById('lab-giscus-box').scrollIntoView({behavior:'smooth'})">💬 Comment</button>
+      <button class="lab-support-btn" onclick="window.open('mailto:raushanr1107@gmail.com?subject=Lab Feedback: ${(labTitle).replace(/'/g,"\\'")}','_blank')">✍️ Write to Raushan</button>
+    </div>
+    <div id="lab-giscus-box" style="margin-top:24px;"></div>`;
+  el.appendChild(footer);
+
+  const container = footer.querySelector('#lab-giscus-box');
+  const script = document.createElement('script');
+  script.src = 'https://giscus.app/client.js';
+  script.setAttribute('data-repo', 'raushanrj/rrskillverse-comments');
+  script.setAttribute('data-repo-id', 'R_kgDOOLHOsg');
+  script.setAttribute('data-category', 'General');
+  script.setAttribute('data-category-id', 'DIC_kwDOOLHOss4CpOtX');
+  script.setAttribute('data-mapping', 'og:title');
+  script.setAttribute('data-strict', '0');
+  script.setAttribute('data-reactions-enabled', '1');
+  script.setAttribute('data-emit-metadata', '0');
+  script.setAttribute('data-input-position', 'bottom');
+  script.setAttribute('data-theme', 'light');
+  script.setAttribute('data-lang', 'en');
+  script.setAttribute('data-loading', 'lazy');
+  script.crossOrigin = 'anonymous';
+  script.async = true;
+  container.appendChild(script);
+}
+
+async function submitLabDoubt(labTitle) {
+  const q = (document.getElementById('labAxiomQ') || {}).value || '';
+  const ansEl = document.getElementById('labAxiomA');
+  if (!q.trim() || !ansEl) return;
+  ansEl.style.display = 'block';
+  ansEl.textContent = 'Axiom is thinking…';
+  try {
+    const res = await fetch('/api/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: q, context: 'Lab: ' + labTitle })
+    });
+    const data = await res.json();
+    ansEl.textContent = data.answer || data.reply || 'No answer received.';
+  } catch (err) {
+    ansEl.textContent = 'Could not reach Axiom — please try again.';
+  }
+}
+
+// ── Payment constants ──────────────────────────────────────
+const UPI_ID      = '8285862455@idfcfirst';
+const UPI_NAME    = 'Raushan Ranjan';
+const PAYPAL_BASE = 'https://paypal.me/raushan1107';
+
+let _upiAmount    = '21';
+let _paypalAmount = '5';
+
+function buildUPILink(amount, note) {
+  return 'upi://pay?' + new URLSearchParams({
+    pa: UPI_ID, pn: UPI_NAME,
+    am: String(amount), cu: 'INR',
+    tn: note || 'RR Skillverse Support'
+  }).toString();
+}
+
+function selectUPIPreset(btn, value) {
+  document.querySelectorAll('#upiPresets .pay-preset').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const customRow = document.getElementById('upiCustomRow');
+  if (value === 'custom') { if (customRow) customRow.style.display = 'flex'; return; }
+  if (customRow) customRow.style.display = 'none';
+  setUPIAmount(value);
+}
+
+function onUPICustomAmount(val) {
+  if (val && parseFloat(val) > 0) setUPIAmount(val);
+}
+
+function setUPIAmount(amount) {
+  _upiAmount = String(amount);
+  const dispEl = document.getElementById('upiAmountDisplay');
+  const amtEl  = document.getElementById('upiAmount');
+  if (dispEl) dispEl.textContent = '₹' + amount;
+  if (amtEl)  amtEl.textContent  = '₹' + amount;
+  regenerateQR(amount);
+}
+
+function regenerateQR(amount) {
+  const qrWrap = document.getElementById('upiQRWrap');
+  if (!qrWrap) return;
+  qrWrap.innerHTML = '';
+  const note = (document.getElementById('upiModalTitle') || {}).textContent || 'RR Skillverse Support';
+  const link = buildUPILink(amount, note);
+  ['upiGpay','upiPhonepe','upiPaytm','upiGeneric'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.href = link;
+  });
+  if (typeof QRCode !== 'undefined') {
+    new QRCode(qrWrap, { text: link, width: 150, height: 150, colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
+  }
+}
+
+function selectPayPalPreset(btn, value) {
+  document.querySelectorAll('#paypalPresets .pay-preset').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const customRow = document.getElementById('paypalCustomRow');
+  if (value === 'custom') { if (customRow) customRow.style.display = 'flex'; return; }
+  if (customRow) customRow.style.display = 'none';
+  setPayPalAmount(value);
+}
+
+function onPayPalCustomAmount(val) {
+  if (val && parseFloat(val) > 0) setPayPalAmount(val);
+}
+
+function setPayPalAmount(amount) {
+  _paypalAmount = String(amount);
+  const dispEl = document.getElementById('paypalAmountDisplay');
+  const linkEl = document.getElementById('paypalLink');
+  if (dispEl) dispEl.textContent = '$' + amount;
+  if (linkEl) { linkEl.href = PAYPAL_BASE + '/' + amount; linkEl.textContent = 'Pay $' + amount + ' via PayPal →'; }
+  document.querySelectorAll('#paypalPresets .pay-preset').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === '$' + amount);
+  });
+  document.querySelectorAll('.pcc-item').forEach(item => {
+    item.classList.remove('pcc-highlight');
+    const amtEl = item.querySelector('.pcc-amount');
+    if (amtEl && amtEl.textContent === '$' + amount) item.classList.add('pcc-highlight');
+  });
+}
+
+function switchPayTab(tab, btn) {
+  document.querySelectorAll('.pay-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.pay-tab-content').forEach(c => c.style.display = 'none');
+  btn.classList.add('active');
+  const el = document.getElementById('tab-' + tab);
+  if (el) el.style.display = 'flex';
+}
+
+function openUPIModal(amount, title, note) {
+  const modal   = document.getElementById('upiModal');
+  const overlay = document.getElementById('upiModalOverlay');
+  if (!modal) return;
+  const titleEl = document.getElementById('upiModalTitle');
+  if (titleEl) titleEl.textContent = title || 'Support RR Skillverse';
+  setUPIAmount(_upiAmount || '21');
+  setPayPalAmount(_paypalAmount || '5');
+  document.querySelectorAll('.pay-tab').forEach((b,i) => b.classList.toggle('active', i === 0));
+  document.querySelectorAll('.pay-tab-content').forEach((c,i) => c.style.display = i === 0 ? 'flex' : 'none');
+  overlay.classList.add('open');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeUPIModal() {
+  const modal   = document.getElementById('upiModal');
+  const overlay = document.getElementById('upiModalOverlay');
+  if (!modal) return;
+  modal.classList.remove('open');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeUPIModal(); });
+
+function copyUPIID() {
+  copyText(UPI_ID, document.querySelector('.upi-id-copy'));
+}
+
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    if (!btn) return;
+    const orig = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
 </script>
+
+<!-- Payment Modal -->
+<div class="upi-modal-overlay" id="upiModalOverlay"
+     onclick="closeUPIModal()"></div>
+
+<div class="upi-modal" id="upiModal">
+  <button class="upi-modal-close"
+          onclick="closeUPIModal()">✕</button>
+
+  <div class="upi-modal-header">
+    <div class="upi-modal-icon">💳</div>
+    <div class="upi-modal-title" id="upiModalTitle">
+      Support RR Skillverse
+    </div>
+    <div class="upi-modal-subtitle">
+      Choose your preferred payment method
+    </div>
+  </div>
+
+  <!-- Tab buttons -->
+  <div class="pay-tabs">
+    <button class="pay-tab active"
+            onclick="switchPayTab('upi', this)">
+      🇮🇳 UPI
+    </button>
+    <button class="pay-tab"
+            onclick="switchPayTab('paypal', this)">
+      🌍 PayPal
+    </button>
+    <button class="pay-tab"
+            onclick="switchPayTab('bank', this)">
+      🏦 Bank
+    </button>
+  </div>
+
+  <!-- TAB 1: UPI -->
+  <div class="pay-tab-content" id="tab-upi">
+    <div class="pay-amount-selector" id="upiPresets" style="width:100%;box-sizing:border-box">
+      <div class="pay-amount-label">Choose amount (INR)</div>
+      <div class="pay-amount-presets">
+        <button class="pay-preset active" onclick="selectUPIPreset(this,'11')">₹11</button>
+        <button class="pay-preset" onclick="selectUPIPreset(this,'21')">₹21</button>
+        <button class="pay-preset" onclick="selectUPIPreset(this,'51')">₹51</button>
+        <button class="pay-preset" onclick="selectUPIPreset(this,'101')">₹101</button>
+        <button class="pay-preset" onclick="selectUPIPreset(this,'custom')">Custom</button>
+      </div>
+      <div class="pay-custom-row" id="upiCustomRow" style="display:none">
+        <div class="pay-custom-currency">₹</div>
+        <input type="number" class="pay-custom-input" placeholder="Enter amount" min="1" oninput="onUPICustomAmount(this.value)"/>
+      </div>
+      <div class="pay-amount-display">Paying: <strong id="upiAmountDisplay">₹21</strong></div>
+    </div>
+    <div class="upi-app-row">
+      <a class="upi-app-btn upi-gpay"
+         id="upiGpay" href="#" target="_blank"
+         rel="noopener">📱 Google Pay</a>
+      <a class="upi-app-btn upi-phonepe"
+         id="upiPhonepe" href="#" target="_blank"
+         rel="noopener">💜 PhonePe</a>
+      <a class="upi-app-btn upi-paytm"
+         id="upiPaytm" href="#" target="_blank"
+         rel="noopener">💙 Paytm</a>
+      <a class="upi-app-btn upi-generic"
+         id="upiGeneric" href="#" target="_blank"
+         rel="noopener">📲 Any UPI App</a>
+    </div>
+
+    <div class="upi-divider"><span>or scan QR</span></div>
+
+    <div class="upi-qr-section">
+      <div class="upi-qr-wrap" id="upiQRWrap"></div>
+      <div class="upi-qr-label">
+        Scan with GPay, PhonePe, or any UPI app
+      </div>
+    </div>
+
+    <div class="upi-id-row">
+      <span class="upi-id-label">UPI ID</span>
+      <span class="upi-id-value">8285862455@idfcfirst</span>
+      <button class="upi-id-copy"
+              onclick="copyUPIID()">Copy</button>
+    </div>
+
+    <div class="upi-details-row">
+      <div class="upi-detail">
+        <span class="upi-detail-label">Amount</span>
+        <span class="upi-detail-value" id="upiAmount">₹21</span>
+      </div>
+      <div class="upi-detail">
+        <span class="upi-detail-label">To</span>
+        <span class="upi-detail-value">Raushan Ranjan</span>
+      </div>
+      <div class="upi-detail">
+        <span class="upi-detail-label">Bank</span>
+        <span class="upi-detail-value">IDFC FIRST</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: PayPal -->
+  <div class="pay-tab-content" id="tab-paypal" style="display:none">
+    <div class="paypal-section">
+      <div class="pay-amount-selector" id="paypalPresets" style="width:100%;box-sizing:border-box">
+        <div class="pay-amount-label">Choose amount (USD)</div>
+        <div class="pay-amount-presets">
+          <button class="pay-preset" onclick="selectPayPalPreset(this,'2')">$2</button>
+          <button class="pay-preset active" onclick="selectPayPalPreset(this,'5')">$5</button>
+          <button class="pay-preset" onclick="selectPayPalPreset(this,'11')">$11</button>
+          <button class="pay-preset" onclick="selectPayPalPreset(this,'21')">$21</button>
+          <button class="pay-preset" onclick="selectPayPalPreset(this,'custom')">Custom</button>
+        </div>
+        <div class="pay-custom-row" id="paypalCustomRow" style="display:none">
+          <div class="pay-custom-currency">$</div>
+          <input type="number" class="pay-custom-input" placeholder="Enter amount" min="1" oninput="onPayPalCustomAmount(this.value)"/>
+        </div>
+        <div class="pay-amount-display">Paying: <strong id="paypalAmountDisplay">$5</strong></div>
+      </div>
+      <div class="paypal-why-usd">💡 PayPal charges in USD. $5 ≈ ₹420 · $11 ≈ ₹925 · $21 ≈ ₹1,750. Any amount keeps this free!</div>
+      <div class="paypal-cost-context">
+        <div class="pcc-item" onclick="setPayPalAmount('2')">
+          <div class="pcc-amount">$2</div>
+          <div class="pcc-label">Buy me a coffee</div>
+        </div>
+        <div class="pcc-item pcc-highlight" onclick="setPayPalAmount('5')">
+          <div class="pcc-amount">$5</div>
+          <div class="pcc-label">1 month of hosting</div>
+        </div>
+        <div class="pcc-item" onclick="setPayPalAmount('11')">
+          <div class="pcc-amount">$11</div>
+          <div class="pcc-label">1 lab session</div>
+        </div>
+        <div class="pcc-item" onclick="setPayPalAmount('21')">
+          <div class="pcc-amount">$21</div>
+          <div class="pcc-label">Sponsor a module</div>
+        </div>
+      </div>
+      <a class="paypal-btn" id="paypalLink" href="https://paypal.me/raushan1107/5" target="_blank" rel="noopener">Pay $5 via PayPal →</a>
+      <div class="upi-id-row" style="width:100%;box-sizing:border-box">
+        <span class="upi-id-label">Link</span>
+        <span class="upi-id-value" style="word-break:break-all">paypal.me/raushan1107</span>
+        <button class="upi-id-copy" onclick="copyText('https://paypal.me/raushan1107', this)">Copy</button>
+      </div>
+      <div class="paypal-trust-row">
+        <span>🔒 Secure</span>
+        <span>·</span>
+        <span>No account needed</span>
+        <span>·</span>
+        <span>0% platform fee</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: Bank Transfer -->
+  <div class="pay-tab-content" id="tab-bank" style="display:none">
+    <div class="bank-section">
+      <div class="bank-header">🏦 Bank Transfer Details</div>
+      <div class="bank-desc">
+        For international wire transfers (SWIFT)
+        or domestic NEFT/RTGS/IMPS.
+      </div>
+      <div class="bank-details">
+        <div class="bank-row">
+          <span class="bank-label">Account Name</span>
+          <span class="bank-value">Raushan Ranjan</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Account Number</span>
+          <span class="bank-value bank-mono">
+            10250056123
+            <button class="upi-id-copy"
+                    onclick="copyText('10250056123', this)">Copy</button>
+          </span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">IFSC Code</span>
+          <span class="bank-value bank-mono">
+            IDFB0020161
+            <button class="upi-id-copy"
+                    onclick="copyText('IDFB0020161', this)">Copy</button>
+          </span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">SWIFT Code</span>
+          <span class="bank-value bank-mono">
+            IDFBINBBMUM
+            <button class="upi-id-copy"
+                    onclick="copyText('IDFBINBBMUM', this)">Copy</button>
+          </span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Bank Name</span>
+          <span class="bank-value">IDFC FIRST Bank</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Branch</span>
+          <span class="bank-value">Greater Noida West, UP, India</span>
+        </div>
+      </div>
+      <div class="bank-amount-row">
+        <span class="bank-label">Transfer Amount</span>
+        <span class="bank-value" id="bankAmount">
+          ₹21 (or equivalent in your currency)
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Common footer note -->
+  <div class="upi-note">
+    After payment, email your screenshot to
+    <a href="mailto:raushanr1107@gmail.com">
+      raushanr1107@gmail.com
+    </a>
+    with subject <strong>"RR Skillverse Support"</strong>
+    to receive your PDF or acknowledgement.
+  </div>
+</div>
+
 </body>
 </html>

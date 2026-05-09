@@ -240,6 +240,9 @@ button { font-family: var(--font); cursor: pointer; }
   transform: translateX(-50%);
   z-index: 1000;
 }
+.nav-dropdown-wrap {
+  display: none !important;
+}
 .nav-dropdown-wrap:hover .nav-mega-menu {
   display: block !important;
 }

@@ -171,22 +171,8 @@ document.addEventListener('click', () => {
     <li><a href="index.html" data-page="index.html">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6l7-5 7 5v8a1 1 0 01-1 1H2a1 1 0 01-1-1V6z"/><path d="M6 14V9h4v5"/></svg>Home</a></li>
     <li><a href="courses.html" data-page="courses.html">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="11" rx="2"/><path d="M5 15h6M8 13v2"/></svg>Skillverse Library</a></li>
-    <li class="nav-dropdown-wrap" id="learnDropdown">
-      <button class="nav-dropdown-trigger"
-              aria-haspopup="true"
-              aria-expanded="false"
-              onclick="toggleLearnMenu(event)">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a2 2 0 01-2 2H4a2 2 0 01-2-2V3z"/><path d="M2 3l6 5 6-5"/></svg>
-        Learn
-        <svg class="nav-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none">
-          <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <div class="nav-mega-menu" id="learnMegaMenu"
-           role="menu" aria-hidden="true">
-      </div>
-    </li>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="11" rx="2"/><path d="M5 15h6M8 13v2"/></svg>🎓 AI Academy</a></li>
+    <li><a href="/blog.html" class="nav-link">📝 Blog</a></li>
     <li><a href="labs.html" data-page="labs.html">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v5L2 13h12L10 7V2"/><path d="M5 2h6"/></svg>Hands-on Labs</a></li>
     <li><a href="profile.html" data-page="profile.html">
@@ -209,8 +195,8 @@ document.addEventListener('click', () => {
 
 <div class="nav-drawer" id="navDrawer">
   <a href="index.html">🏠 Home</a>
-  <a href="courses.html">📚 Skillverse Library</a>
-  <a href="blog.html">📖 Learn</a>
+  <a href="courses.html">🎓 AI Academy</a>
+  <a href="blog.html">📝 Blog</a>
   <a href="labs.html">🧪 Hands-on Labs</a>
   <a href="profile.html">👤 About Us</a>
 </div>`;
