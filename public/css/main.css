@@ -658,7 +658,7 @@ button { font-family: var(--font); cursor: pointer; }
   .nav-drawer { display: none !important; }
 }
 
-/* ── Site Footer ── */
+/* ── Site Footer (shared across all pages) ── */
 .site-footer {
   background: var(--bg2);
   border-top: 1px solid var(--border);
