@@ -2473,13 +2473,12 @@ DIVIDE(
 
 <script>
 function toggleLHub(bodyId) {
-  const body = document.getElementById(bodyId);
+  var body = document.getElementById(bodyId);
   if (!body) return;
-  const isOpen = body.classList.contains(\'lhub-open\');
-  body.classList.toggle(\'lhub-open\', !isOpen);
+  var isOpen = body.style.display === \'block\';
   body.style.display = isOpen ? \'none\' : \'block\';
-  const chevId = bodyId.replace(\'-body\', \'-chev\');
-  const chev = document.getElementById(chevId);
+  var chevId = bodyId.replace(\'-body\', \'-chev\');
+  var chev = document.getElementById(chevId);
   if (chev) chev.textContent = isOpen ? \'▸\' : \'▾\';
 }
 document.addEventListener(\'DOMContentLoaded\', () => {
