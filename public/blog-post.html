@@ -2237,6 +2237,182 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
+
+/* ── Comments section ── */
+.post-comments-section {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.post-comments-header {
+  margin-bottom: 24px;
+}
+
+.post-comments-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+}
+
+.post-comments-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+#giscusContainer {
+  min-height: 100px;
+}
+
+#giscusContainer iframe {
+  width: 100%;
+  border: none;
+}
+
+/* ── Series progress tracker ── */
+.series-progress-tracker {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin: 28px 0;
+}
+
+.spt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.spt-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.spt-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(26,86,219,0.1);
+  border: 1px solid rgba(26,86,219,0.2);
+  border-radius: 20px;
+  padding: 2px 10px;
+}
+
+.spt-bar-wrap {
+  height: 6px;
+  background: var(--bg3);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.spt-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+.spt-items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.spt-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  text-decoration: none;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  transition: background 0.15s;
+  border: 1px solid transparent;
+}
+
+.spt-item:hover {
+  background: var(--bg3);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.spt-done {
+  color: #2d7a4f;
+}
+
+.spt-done:hover {
+  background: rgba(45,122,79,0.06);
+  border-color: rgba(45,122,79,0.2);
+}
+
+.spt-check { font-size: 13px; flex-shrink: 0; }
+.spt-label { flex: 1; }
+
+/* ── Series prev/next nav ── */
+.series-nav-prompt {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.snp-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.snp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.snp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.15s;
+  max-width: 48%;
+}
+
+.snp-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(26,86,219,0.06);
+  transform: translateY(-1px);
+}
+
+.snp-next {
+  margin-left: auto;
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .snp-row { flex-direction: column; }
+  .snp-btn { max-width: 100%; width: 100%; justify-content: center; }
+}
 </style>
 </head>
 <body>
@@ -2410,7 +2586,18 @@ function renderPost(post) {
       <a class="share-btn" id="shareWhatsApp" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
     </div>
 
-    ${buildPostNav(post)}`;
+    ${buildPostNav(post)}
+
+    <div class="post-comments-section">
+      <div class="post-comments-header">
+        <div class="post-comments-title">💬 Discussion</div>
+        <div class="post-comments-sub">
+          Sign in with GitHub to comment, ask questions,
+          or share your experience with this topic.
+        </div>
+      </div>
+      <div id="giscusContainer"></div>
+    </div>`;
 
   if (window.hljs) {
     document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
@@ -2451,6 +2638,138 @@ function renderPost(post) {
   if (tw) tw.href = 'https://twitter.com/intent/tweet?url=' + shareURL + '&text=' + shareText;
   if (li) li.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + shareURL;
   if (wa) wa.href = 'https://wa.me/?text=' + shareText + '%20' + shareURL;
+
+  // ── Series reading tracker ────────────────────────
+  const POWERBI_SERIES = [
+    { id: 'power-bi-journey-begins',              label: 'Ch 1: Journey Begins' },
+    { id: 'power-bi-first-dashboard',             label: 'Ch 2: First Dashboard' },
+    { id: 'power-bi-sharing-collaboration',       label: 'Ch 3: Sharing & Collaboration' },
+    { id: 'power-bi-advanced-features-overview',  label: 'Ch 4: Advanced Features' },
+    { id: 'power-bi-data-connectivity-modes',     label: 'Ch 4.1: Connectivity Modes' },
+    { id: 'power-bi-data-exploration-options',    label: 'Ch 4.2: Data Exploration' },
+    { id: 'power-bi-data-transformation',         label: 'Ch 4.3: Data Transformation' },
+    { id: 'power-bi-data-modeling',               label: 'Ch 4.4: Data Modeling' },
+    { id: 'power-bi-dax-basics',                  label: 'Ch 4.5: DAX Basics' }
+  ];
+
+  function markAsRead(id) {
+    const key = 'rrskv_read_' + id;
+    localStorage.setItem(key, Date.now().toString());
+  }
+
+  function hasRead(id) {
+    return !!localStorage.getItem('rrskv_read_' + id);
+  }
+
+  function buildProgressTracker() {
+    const readCount = POWERBI_SERIES.filter(p => hasRead(p.id)).length;
+    const total = POWERBI_SERIES.length;
+    const pct = Math.round((readCount / total) * 100);
+
+    const tracker = document.createElement('div');
+    tracker.className = 'series-progress-tracker';
+    tracker.innerHTML = `
+      <div class="spt-header">
+        <div class="spt-title">📚 Your Progress — Power BI Series</div>
+        <div class="spt-count">${readCount} of ${total} read</div>
+      </div>
+      <div class="spt-bar-wrap">
+        <div class="spt-bar" style="width:${pct}%"></div>
+      </div>
+      <div class="spt-items">
+        ${POWERBI_SERIES.map(p => `
+          <a href="/blog-post.html?id=${p.id}"
+             class="spt-item ${hasRead(p.id) ? 'spt-done' : ''}">
+            <span class="spt-check">${hasRead(p.id) ? '✅' : '○'}</span>
+            <span class="spt-label">${p.label}</span>
+          </a>
+        `).join('')}
+      </div>
+    `;
+
+    const postBody = document.getElementById('postBody');
+    if (postBody && postBody.firstChild) {
+      postBody.insertBefore(tracker, postBody.children[1] || postBody.firstChild);
+    }
+  }
+
+  function buildNextSeriesPrompt() {
+    const currentIdx = POWERBI_SERIES.findIndex(p => p.id === post.id);
+    if (currentIdx === -1) return;
+
+    const next = POWERBI_SERIES[currentIdx + 1];
+    const prev = POWERBI_SERIES[currentIdx - 1];
+    if (!next && !prev) return;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'series-nav-prompt';
+    wrap.innerHTML = `
+      <div class="snp-label">Power BI Series</div>
+      <div class="snp-row">
+        ${prev ? `
+          <a href="/blog-post.html?id=${prev.id}"
+             class="snp-btn snp-prev">
+            ← ${prev.label}
+          </a>` : '<div></div>'}
+        ${next ? `
+          <a href="/blog-post.html?id=${next.id}"
+             class="snp-btn snp-next">
+            ${next.label} →
+          </a>` : ''}
+      </div>
+    `;
+
+    const reactionBar = document.getElementById('reactionBar');
+    if (reactionBar) {
+      reactionBar.parentNode.insertBefore(wrap, reactionBar);
+    }
+  }
+
+  // Mark current post as read
+  markAsRead(post.id);
+
+  // If this is the Learning Hub, build the progress UI
+  if (post.id === 'power-bi-learning-hub') {
+    buildProgressTracker();
+  }
+
+  // Show series prev/next nav for Power BI series posts
+  buildNextSeriesPrompt();
+
+  // Load Giscus comments
+  loadGiscus(post.id);
+}
+
+// NOTE FOR RAUSHAN:
+// To activate Giscus comments:
+// 1. Go to https://github.com/raushan1107/RRSkillverse
+// 2. Enable Discussions in repo Settings → Features
+// 3. Create a Discussion category called "Blog Comments"
+// 4. Go to https://giscus.app and fill in your repo details
+// 5. Copy the data-repo-id and data-category-id values
+// 6. Replace REPO_ID_PLACEHOLDER and CATEGORY_ID_PLACEHOLDER above
+function loadGiscus(postId) {
+  const container = document.getElementById('giscusContainer');
+  if (!container) return;
+
+  const script = document.createElement('script');
+  script.src = 'https://giscus.app/client.js';
+  script.setAttribute('data-repo', 'raushan1107/RRSkillverse');
+  script.setAttribute('data-repo-id', 'REPO_ID_PLACEHOLDER');
+  script.setAttribute('data-category', 'Blog Comments');
+  script.setAttribute('data-category-id', 'CATEGORY_ID_PLACEHOLDER');
+  script.setAttribute('data-mapping', 'specific');
+  script.setAttribute('data-term', postId);
+  script.setAttribute('data-strict', '0');
+  script.setAttribute('data-reactions-enabled', '1');
+  script.setAttribute('data-emit-metadata', '0');
+  script.setAttribute('data-input-position', 'top');
+  script.setAttribute('data-theme', 'dark');
+  script.setAttribute('data-lang', 'en');
+  script.setAttribute('data-loading', 'lazy');
+  script.crossOrigin = 'anonymous';
+  script.async = true;
+  container.appendChild(script);
 }
 
 // ── Prev / Next navigation ──────────────────────────
