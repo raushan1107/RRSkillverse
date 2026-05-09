@@ -612,6 +612,9 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #3fb950; flex-shrink: 0; }
 .nav-hamburger { display: none; }
 .nav-drawer { display: none; }
+.nav-mega-menu { display: none !important; }
+.nav-dropdown-wrap:hover .nav-mega-menu { display: block !important; }
+.nav-dropdown-wrap.open .nav-mega-menu { display: block !important; }
 .ai-fab {
   position: fixed; bottom: 24px; right: 24px;
   width: 48px; height: 48px; border-radius: 50%;

@@ -226,6 +226,7 @@ button { font-family: var(--font); cursor: pointer; }
 
 /* ── Mega menu panel ─────────────────────────────────── */
 .nav-mega-menu {
+  display: none !important;
   position: absolute;
   top: calc(100% + 12px);
   left: 50%;
@@ -236,18 +237,14 @@ button { font-family: var(--font); cursor: pointer; }
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.5),
               0 4px 16px rgba(0,0,0,0.3);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(-50%) translateY(-8px);
-  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  transform: translateX(-50%);
   z-index: 1000;
-  pointer-events: none;
+}
+.nav-dropdown-wrap:hover .nav-mega-menu {
+  display: block !important;
 }
 .nav-dropdown-wrap.open .nav-mega-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-  pointer-events: auto;
+  display: block !important;
 }
 
 /* ── Inner layout ────────────────────────────────────── */
@@ -707,6 +704,182 @@ button { font-family: var(--font); cursor: pointer; }
 @media (min-width: 769px) {
   .nav-hamburger { display: none; }
   .nav-drawer { display: none !important; }
+}
+
+/* ── Site Footer ── */
+.site-footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  margin-top: 60px;
+}
+.site-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 52px 64px 40px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 64px;
+}
+.site-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.site-footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.footer-logo-mark {
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+}
+.footer-brand-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+.footer-brand-tagline {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.3px;
+}
+.footer-brand-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 380px;
+}
+.footer-social-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.footer-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.footer-social-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.site-footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.footer-link-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-link-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.footer-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+  line-height: 1.5;
+}
+.footer-link:hover {
+  color: var(--accent);
+}
+.site-footer-bottom {
+  border-top: 1px solid var(--border);
+  padding: 16px 64px;
+}
+.footer-bottom-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.footer-copyright {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.footer-bottom-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.footer-badge {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+@media (max-width: 1024px) {
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 36px 32px;
+  }
+  .site-footer-bottom {
+    padding: 14px 32px;
+  }
+}
+@media (max-width: 768px) {
+  .site-footer-inner {
+    padding: 28px 20px;
+    gap: 28px;
+  }
+  .site-footer-links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .site-footer-bottom {
+    padding: 14px 20px;
+  }
+  .footer-bottom-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .footer-brand-desc {
+    max-width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .site-footer-links {
+    grid-template-columns: 1fr;
+  }
 }
 
 .chat-agent-sub {
