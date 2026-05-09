@@ -199,7 +199,61 @@
   .hero-stat-item{padding:0 14px;}
   .cta-section,.site-footer{padding-left:20px;padding-right:20px;}
 }
+/* ── Support Strip ── */
+.support-strip{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;}
+.support-strip-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.support-strip-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:5px;letter-spacing:-0.2px;}
+.support-strip-sub{font-size:13px;color:var(--text-muted);line-height:1.6;max-width:460px;}
+.support-strip-btns{display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0;}
+.support-strip-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:var(--font);white-space:nowrap;}
+.support-strip-upi{background:var(--bg3);color:var(--text);border:1px solid var(--border);}
+.support-strip-upi:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px);}
+.support-strip-paypal{background:#0070ba;color:white;}
+.support-strip-paypal:hover{opacity:0.88;transform:translateY(-1px);}
+.support-strip-bank{background:var(--bg3);color:var(--text);border:1px solid var(--border);}
+.support-strip-bank:hover{border-color:#2d7a4f;color:#2d7a4f;transform:translateY(-1px);}
+@media(max-width:768px){
+  .support-strip{padding:22px 20px;}
+  .support-strip-inner{flex-direction:column;gap:16px;}
+  .support-strip-btns{width:100%;}
+  .support-strip-btn{flex:1;justify-content:center;}
+}
+/* ── Payment Modal ── */
+.upi-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:1100;opacity:0;pointer-events:none;transition:opacity .2s;}
+.upi-modal-overlay.open{opacity:1;pointer-events:all;}
+.upi-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%);width:min(480px,94vw);background:var(--bg2,#161b22);border:1px solid var(--border,#30363d);border-radius:18px;padding:28px 28px 24px;z-index:1101;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.upi-modal.open{opacity:1;pointer-events:all;transform:translate(-50%,-50%);}
+.upi-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--text-muted,#848d97);font-size:18px;cursor:pointer;padding:4px 8px;border-radius:6px;}
+.upi-modal-close:hover{color:var(--text,#e6edf3);background:var(--bg3,#21262d);}
+.upi-modal-header{text-align:center;margin-bottom:18px;}
+.upi-modal-icon{font-size:32px;margin-bottom:8px;}
+.upi-modal-title{font-size:17px;font-weight:700;color:var(--text,#e6edf3);margin-bottom:4px;}
+.upi-modal-subtitle{font-size:13px;color:var(--text-muted,#848d97);}
+.pay-tabs{display:flex;gap:6px;margin-bottom:18px;background:var(--bg3,#21262d);border-radius:10px;padding:4px;}
+.pay-tab{flex:1;padding:8px 4px;border:none;background:none;color:var(--text-muted,#848d97);border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit;}
+.pay-tab.active{background:var(--bg2,#161b22);color:var(--text,#e6edf3);box-shadow:0 1px 4px rgba(0,0,0,.3);}
+.pay-tab-content{flex-direction:column;align-items:center;gap:14px;}
+.upi-qr-wrap{width:160px;height:160px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;padding:8px;}
+.upi-apps{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.upi-app-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;background:var(--bg3,#21262d);border:1px solid var(--border,#30363d);border-radius:9px;color:var(--text,#e6edf3);text-decoration:none;font-size:12px;font-weight:600;transition:all .15s;}
+.upi-app-btn:hover{border-color:var(--accent,#1a56db);color:var(--accent,#1a56db);transform:translateY(-1px);}
+.upi-id-row{display:flex;align-items:center;gap:8px;background:var(--bg3,#21262d);border:1px solid var(--border,#30363d);border-radius:9px;padding:10px 14px;width:100%;box-sizing:border-box;}
+.upi-id-label{font-size:11px;color:var(--text-muted,#848d97);flex-shrink:0;}
+.upi-id-val{font-size:13px;font-weight:700;color:var(--text,#e6edf3);flex:1;font-family:monospace;}
+.upi-id-copy{padding:4px 10px;background:var(--bg4,#2d333b);border:1px solid var(--border,#30363d);border-radius:6px;color:var(--text,#e6edf3);font-size:11px;font-weight:600;cursor:pointer;}
+.upi-amount-row{font-size:13px;color:var(--text-muted,#848d97);text-align:center;}
+.upi-amount-row strong{color:var(--accent,#1a56db);font-size:15px;}
+.upi-note{font-size:11px;color:var(--text-dim,#6e7681);text-align:center;margin-top:6px;}
+.paypal-logo{font-size:36px;}
+.paypal-desc{font-size:13px;color:var(--text-muted,#848d97);text-align:center;}
+.paypal-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:#0070ba;color:white;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;transition:opacity .15s;}
+.paypal-btn:hover{opacity:0.88;}
+.bank-table{width:100%;border-collapse:collapse;}
+.bank-table td{padding:8px 10px;font-size:13px;border-bottom:1px solid var(--border,#30363d);}
+.bank-table td:first-child{color:var(--text-muted,#848d97);width:44%;font-size:12px;}
+.bank-table td:last-child{color:var(--text,#e6edf3);font-weight:600;font-family:monospace;display:flex;align-items:center;gap:8px;justify-content:space-between;}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 <div id="wake-splash" style="position:fixed;inset:0;background:#0d1117;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px;transition:opacity 0.5s ease">
@@ -362,6 +416,30 @@ window.addEventListener('load', () => {
     <a href="courses.html"  class="btn btn-accent btn-lg">Browse All Courses</a>
     <a href="ai-agent.html" class="btn btn-secondary btn-lg">Chat with AI Agent</a>
     <a href="profile.html"  class="btn btn-ghost btn-lg">Meet the Trainer</a>
+  </div>
+</section>
+
+<!-- ── Support Strip ── -->
+<section class="support-strip">
+  <div class="support-strip-inner">
+    <div class="support-strip-left">
+      <div class="support-strip-title">☕ Support Free Learning</div>
+      <div class="support-strip-sub">All content on RR Skillverse is completely free. If it helped you, consider buying a chai!</div>
+    </div>
+    <div class="support-strip-btns">
+      <button class="support-strip-btn support-strip-upi"
+              onclick="openUPIModal(51, '☕ Support RR Skillverse', 'RR Skillverse Support')">
+        🇮🇳 UPI — ₹51
+      </button>
+      <a class="support-strip-btn support-strip-paypal"
+         href="https://paypal.me/raushan1107/10" target="_blank" rel="noopener">
+        🌍 PayPal
+      </a>
+      <button class="support-strip-btn support-strip-bank"
+              onclick="openUPIModal(51, '🏦 Bank Transfer', 'RR Skillverse Support'); setTimeout(()=>{ const t=document.querySelectorAll('.pay-tab')[2]; if(t)t.click(); },100)">
+        🏦 Bank Transfer
+      </button>
+    </div>
   </div>
 </section>
 
@@ -580,6 +658,140 @@ function buildScrollRows() {
 }
 
 buildScrollRows();
+
+const UPI_ID      = '8285862455@idfcfirst';
+const UPI_NAME    = 'Raushan Ranjan';
+const PAYPAL_LINK = 'https://paypal.me/raushan1107';
+
+function buildUPILink(amount, note) {
+  return 'upi://pay?' + new URLSearchParams({
+    pa: UPI_ID, pn: UPI_NAME,
+    am: String(amount), cu: 'INR', tn: note
+  }).toString();
+}
+
+function switchPayTab(tab, btn) {
+  document.querySelectorAll('.pay-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.pay-tab-content').forEach(c => c.style.display = 'none');
+  btn.classList.add('active');
+  document.getElementById('tab-' + tab).style.display = 'flex';
+}
+
+function openUPIModal(amount, title, note) {
+  const modal   = document.getElementById('upiModal');
+  const overlay = document.getElementById('upiModalOverlay');
+  if (!modal) return;
+  const upiLink = buildUPILink(amount, note);
+  const titleEl = document.getElementById('upiModalTitle');
+  const amtEl   = document.getElementById('upiAmount');
+  const pAmtEl  = document.getElementById('paypalAmount');
+  const bAmtEl  = document.getElementById('bankAmount');
+  if (titleEl) titleEl.textContent = title;
+  if (amtEl)   amtEl.textContent   = '₹' + amount;
+  if (pAmtEl)  pAmtEl.textContent  = amount;
+  if (bAmtEl)  bAmtEl.textContent  = '₹' + amount + ' (or equivalent in your currency)';
+  ['upiGpay','upiPhonepe','upiPaytm','upiGeneric'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.href = upiLink;
+  });
+  const ppEl = document.getElementById('paypalLink');
+  if (ppEl) ppEl.href = PAYPAL_LINK + '/' + amount;
+  const qrWrap = document.getElementById('upiQRWrap');
+  if (qrWrap) {
+    qrWrap.innerHTML = '';
+    if (typeof QRCode !== 'undefined') {
+      new QRCode(qrWrap, { text: upiLink, width: 150, height: 150,
+        colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
+    }
+  }
+  document.querySelectorAll('.pay-tab').forEach((b, i) => b.classList.toggle('active', i === 0));
+  document.querySelectorAll('.pay-tab-content').forEach((c, i) => c.style.display = i === 0 ? 'flex' : 'none');
+  overlay.classList.add('open');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeUPIModal() {
+  const modal   = document.getElementById('upiModal');
+  const overlay = document.getElementById('upiModalOverlay');
+  if (!modal) return;
+  modal.classList.remove('open');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeUPIModal(); });
+
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    if (!btn) return;
+    const orig = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
 </script>
+
+<!-- Payment Modal -->
+<div class="upi-modal-overlay" id="upiModalOverlay" onclick="closeUPIModal()"></div>
+<div class="upi-modal" id="upiModal">
+  <button class="upi-modal-close" onclick="closeUPIModal()">✕</button>
+  <div class="upi-modal-header">
+    <div class="upi-modal-icon">💳</div>
+    <div class="upi-modal-title" id="upiModalTitle">Support RR Skillverse</div>
+    <div class="upi-modal-subtitle">Choose your preferred payment method</div>
+  </div>
+  <div class="pay-tabs">
+    <button class="pay-tab active" onclick="switchPayTab('upi', this)">🇮🇳 UPI</button>
+    <button class="pay-tab" onclick="switchPayTab('paypal', this)">🌍 PayPal</button>
+    <button class="pay-tab" onclick="switchPayTab('bank', this)">🏦 Bank</button>
+  </div>
+
+  <!-- TAB 1: UPI -->
+  <div class="pay-tab-content" id="tab-upi" style="display:flex">
+    <div class="upi-qr-wrap" id="upiQRWrap"></div>
+    <div class="upi-apps">
+      <a class="upi-app-btn" id="upiGpay" href="#" target="_blank">📱 GPay</a>
+      <a class="upi-app-btn" id="upiPhonepe" href="#" target="_blank">💜 PhonePe</a>
+      <a class="upi-app-btn" id="upiPaytm" href="#" target="_blank">💙 Paytm</a>
+      <a class="upi-app-btn" id="upiGeneric" href="#" target="_blank">🔗 Any UPI App</a>
+    </div>
+    <div class="upi-id-row">
+      <span class="upi-id-label">UPI ID</span>
+      <span class="upi-id-val">8285862455@idfcfirst</span>
+      <button class="upi-id-copy" onclick="copyText('8285862455@idfcfirst', this)">Copy</button>
+    </div>
+    <div class="upi-amount-row">Amount: <strong id="upiAmount">₹51</strong></div>
+  </div>
+
+  <!-- TAB 2: PayPal -->
+  <div class="pay-tab-content" id="tab-paypal" style="display:none">
+    <div class="paypal-logo">🌍</div>
+    <div class="paypal-desc">Pay securely via PayPal — supports international cards &amp; wallets</div>
+    <a class="paypal-btn" id="paypalLink" href="https://paypal.me/raushan1107/51" target="_blank" rel="noopener">
+      Pay $<span id="paypalAmount">51</span> via PayPal
+    </a>
+    <div class="upi-id-row">
+      <span class="upi-id-label">PayPal.me</span>
+      <span class="upi-id-val">paypal.me/raushan1107</span>
+      <button class="upi-id-copy" onclick="copyText('https://paypal.me/raushan1107', this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- TAB 3: Bank Transfer -->
+  <div class="pay-tab-content" id="tab-bank" style="display:none">
+    <div class="upi-amount-row">Transfer: <strong id="bankAmount">₹51 (or equivalent)</strong></div>
+    <table class="bank-table">
+      <tr><td>Account Name</td><td>Raushan Ranjan</td></tr>
+      <tr><td>Account Number</td><td>10250056123 <button class="upi-id-copy" onclick="copyText('10250056123', this)">Copy</button></td></tr>
+      <tr><td>IFSC Code</td><td>IDFB0020161 <button class="upi-id-copy" onclick="copyText('IDFB0020161', this)">Copy</button></td></tr>
+      <tr><td>SWIFT Code</td><td>IDFBINBBMUM <button class="upi-id-copy" onclick="copyText('IDFBINBBMUM', this)">Copy</button></td></tr>
+      <tr><td>Bank</td><td>IDFC FIRST Bank</td></tr>
+      <tr><td>Branch</td><td>Greater Noida West, UP, India</td></tr>
+    </table>
+  </div>
+
+  <p class="upi-note">All payments go directly to MCT Raushan Ranjan · No platform fees</p>
+</div>
 </body>
 </html>
