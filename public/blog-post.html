@@ -2618,6 +2618,31 @@
 const postId = new URLSearchParams(window.location.search).get('id');
 const post   = BLOG_POSTS.find(p => p.id === postId);
 
+// ── Learning Hub accordion toggle ──────────────
+function toggleLHub(bodyId) {
+  const body = document.getElementById(bodyId);
+  if (!body) return;
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  const chevId = bodyId.replace('-body', '-chev');
+  const chev = document.getElementById(chevId);
+  if (chev) chev.textContent = isOpen ? '▸' : '▾';
+}
+
+// ── Learning Hub sub-list toggle ───────────────
+function toggleLHubSub(bodyId) {
+  toggleLHub(bodyId);
+}
+
+// ── Hide all Learning Hub accordions on load ───
+function initLHubAccordions() {
+  document.querySelectorAll(
+    '.blog-lhub-acc-body, .blog-lhub-sub-list'
+  ).forEach(el => {
+    el.style.display = 'none';
+  });
+}
+
 if (!post) {
   document.getElementById('postArticle').innerHTML = `
     <div style="text-align:center;padding:80px 0">
@@ -2823,6 +2848,11 @@ function renderPost(post) {
   // Restore reactions and wire share buttons after DOM renders
   restoreReactions();
   initShareButtons(post);
+
+  // Init Learning Hub accordions if this is the hub post
+  if (post.id === 'power-bi-learning-hub') {
+    setTimeout(initLHubAccordions, 50);
+  }
 
   // ── Series reading tracker ────────────────────────
   const POWERBI_SERIES = [

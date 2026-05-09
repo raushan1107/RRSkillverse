@@ -2471,21 +2471,6 @@ DIVIDE(
 
 </div>
 
-<script>
-function toggleLHub(bodyId) {
-  var body = document.getElementById(bodyId);
-  if (!body) return;
-  var isOpen = body.style.display === \'block\';
-  body.style.display = isOpen ? \'none\' : \'block\';
-  var chevId = bodyId.replace(\'-body\', \'-chev\');
-  var chev = document.getElementById(chevId);
-  if (chev) chev.textContent = isOpen ? \'▸\' : \'▾\';
-}
-document.addEventListener(\'DOMContentLoaded\', () => {
-  document.querySelectorAll(\'.blog-lhub-acc-body, .blog-lhub-sub-list\')
-    .forEach(el => { el.style.display = \'none\'; });
-});
-<\/script>
     `
   },
 
