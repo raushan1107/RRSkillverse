@@ -999,6 +999,306 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   color: var(--ink-3);
   font-weight: 600;
 }
+
+/* ── Lesson header ── */
+.lesson-header-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.lesson-phase-pill {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(0,102,255,0.1);
+  border: 1px solid rgba(0,102,255,0.2);
+  border-radius: 20px;
+  padding: 3px 12px;
+}
+.lesson-header-meta {
+  font-size: 12px;
+  color: var(--ink-3);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.lesson-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+/* ── Axiom promo banner ── */
+.axiom-promo-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(0,102,255,0.07), rgba(0,102,255,0.03));
+  border: 1px solid rgba(0,102,255,0.2);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.axiom-promo-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+}
+.axiom-promo-icon { font-size: 28px; flex-shrink: 0; }
+.axiom-promo-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.axiom-promo-sub { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; }
+.axiom-promo-btn {
+  padding: 10px 20px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.axiom-promo-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ── Generating / loading state ── */
+.lesson-generating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  gap: 14px;
+  text-align: center;
+}
+.lesson-gen-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spinLesson 0.8s linear infinite;
+}
+@keyframes spinLesson { to { transform: rotate(360deg); } }
+.lesson-gen-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+.lesson-gen-sub { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 300px; }
+
+/* ── Error state ── */
+.lesson-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px;
+  gap: 12px;
+  text-align: center;
+}
+.lesson-error-icon { font-size: 36px; }
+.lesson-error-title { font-size: 16px; font-weight: 700; color: var(--ink); }
+.lesson-error-sub { font-size: 13px; color: var(--ink-3); line-height: 1.6; max-width: 360px; }
+.lesson-error-retry {
+  padding: 10px 22px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font);
+  margin-top: 8px;
+  transition: opacity 0.15s;
+}
+.lesson-error-retry:hover { opacity: 0.85; }
+
+/* ── MCT verified bar ── */
+.lesson-verified-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(42,122,82,0.05);
+  border: 1px solid rgba(42,122,82,0.18);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 32px 0 24px;
+}
+.lesson-verified-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+.lesson-verified-badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: var(--p1);
+  background: rgba(42,122,82,0.1);
+  border: 1px solid rgba(42,122,82,0.22);
+  border-radius: 20px;
+  padding: 3px 12px;
+  white-space: nowrap;
+}
+.lesson-verified-text { font-size: 12.5px; color: var(--ink-3); line-height: 1.55; flex: 1; }
+.lesson-verified-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(42,122,82,0.3);
+  flex-shrink: 0;
+}
+
+/* ── Ask a doubt ── */
+.lesson-ask-section {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin: 24px 0;
+}
+.lesson-ask-header { margin-bottom: 16px; }
+.lesson-ask-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+.lesson-ask-sub { font-size: 12.5px; color: var(--ink-3); line-height: 1.55; }
+.lesson-ask-input-row { display: flex; gap: 10px; }
+.lesson-ask-input {
+  flex: 1;
+  background: var(--wash);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 11px 16px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+  font-family: var(--font);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.lesson-ask-input:focus { border-color: var(--accent); }
+.lesson-ask-input::placeholder { color: var(--ink-4); }
+.lesson-ask-btn {
+  padding: 11px 22px;
+  background: var(--ink);
+  color: white;
+  border: none;
+  border-radius: 9px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.lesson-ask-btn:hover { opacity: 0.82; }
+.lesson-ask-response {
+  margin-top: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+.doubt-loading { font-size: 13px; color: var(--ink-3); font-style: italic; }
+.doubt-answer { display: flex; flex-direction: column; gap: 8px; }
+.doubt-answer-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.doubt-answer-text { font-size: 14px; color: var(--ink-2); line-height: 1.75; }
+.doubt-error { font-size: 13px; color: var(--err); }
+
+/* ── Lesson footer strip ── */
+.lesson-footer-strip {
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 24px 0;
+}
+.lesson-footer-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.lesson-footer-item:hover { background: var(--wash); color: var(--ink-2); }
+.lesson-footer-support:hover { background: rgba(0,102,255,0.05); color: var(--accent); }
+.lesson-footer-divider { width: 1px; height: 40px; background: var(--line); flex-shrink: 0; }
+
+/* ── Comments section ── */
+.lesson-comments-section {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.lesson-comments-title { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.lesson-comments-sub { font-size: 13px; color: var(--ink-3); margin-bottom: 20px; line-height: 1.6; }
+
+/* ── Mobile adjustments for new lesson layout ── */
+@media (max-width: 768px) {
+  .lesson-title { font-size: 22px !important; }
+  .axiom-promo-banner { flex-direction: column; }
+  .axiom-promo-btn { width: 100%; text-align: center; }
+  .lesson-ask-input-row { flex-direction: column; }
+  .lesson-ask-btn { width: 100%; }
+  .lesson-footer-item { font-size: 11.5px; gap: 4px; }
+  .lesson-footer-item span:last-child { display: none; }
+  .lesson-footer-item span:first-child { font-size: 18px; }
+}
+
+/* ── Feature strip ── */
+.skillverse-feature-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  margin-bottom: 32px;
+}
+.skf-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 24px 20px;
+  border-right: 1px solid var(--line);
+  transition: background 0.15s;
+}
+.skf-item:last-child { border-right: none; }
+.skf-item:hover { background: var(--wash); }
+.skf-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+.skf-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+.skf-desc { font-size: 12px; color: var(--ink-3); line-height: 1.65; }
+@media (max-width: 900px) {
+  .skillverse-feature-strip { grid-template-columns: repeat(2, 1fr); }
+  .skf-item:nth-child(2) { border-right: none; }
+  .skf-item:nth-child(3) { border-right: 1px solid var(--line); }
+}
+@media (max-width: 560px) {
+  .skillverse-feature-strip { grid-template-columns: 1fr; }
+  .skf-item { border-right: none !important; }
+}
 </style>
 <script src="js/courses-data.js"></script>
 </head>
@@ -1090,6 +1390,38 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
               </div>
             </div>
           </div>
+
+          <div class="skillverse-feature-strip">
+            <div class="skf-item">
+              <div class="skf-icon">🤖</div>
+              <div class="skf-content">
+                <div class="skf-title">AI Tutor on Every Lesson</div>
+                <div class="skf-desc">Ask Axiom any doubt about the lesson. Get instant answers powered by Azure GPT-4o, trained on Raushan's materials.</div>
+              </div>
+            </div>
+            <div class="skf-item">
+              <div class="skf-icon">🧪</div>
+              <div class="skf-content">
+                <div class="skf-title">Hands-on Labs Included</div>
+                <div class="skf-desc">Every course includes guided labs with real Azure, .NET, and Power BI exercises — not just theory.</div>
+              </div>
+            </div>
+            <div class="skf-item">
+              <div class="skf-icon">✅</div>
+              <div class="skf-content">
+                <div class="skf-title">MCT-Verified Content</div>
+                <div class="skf-desc">All content verified by Raushan Ranjan, Microsoft Certified Trainer with 10+ years of enterprise training globally.</div>
+              </div>
+            </div>
+            <div class="skf-item">
+              <div class="skf-icon">💬</div>
+              <div class="skf-content">
+                <div class="skf-title">Comment &amp; Discuss</div>
+                <div class="skf-desc">Every lesson has a discussion thread. Ask questions, share insights, and learn from the community.</div>
+              </div>
+            </div>
+          </div>
+
           <div class="phase-rows" id="phase-rows"></div>
           <button class="btn-start" onclick="goFirst()">Begin Learning →</button>
           <hr class="home-divider">
@@ -1127,31 +1459,7 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
             <span>›</span>
             <span id="bc-lesson"></span>
           </div>
-          <!-- B3 — accent rule anchors the eye -->
-          <div class="lesson-rule"></div>
-          <div class="lesson-phase-tag" id="phase-tag"></div>
-          <h1 class="lesson-title" id="lesson-title">Loading…</h1>
-          <div class="lesson-meta-row">
-            <span id="meta-phase-name"></span>
-            <span>~8 min read</span>
-            <span>RR Simplified · Azure GPT-4o</span>
-          </div>
-          <div class="lesson-body">
-            <!-- Part A — loading state -->
-            <div id="lesson-loading" style="display:none">
-              <span class="loading-dot"></span>
-              <span id="loading-msg">Preparing lesson...</span>
-            </div>
-            <div id="lesson-rendered"></div>
-          </div>
-          <div class="ask-section">
-            <div class="ask-label">Ask a Doubt</div>
-            <div class="ask-row">
-              <input class="ask-input" type="text" id="ask-input" placeholder="Type your question about this topic…" />
-              <button class="ask-btn" id="ask-btn" onclick="askDoubt()">Ask →</button>
-            </div>
-            <div class="ask-response" id="ask-resp"></div>
-          </div>
+          <div id="lesson-inner"></div>
           <div class="lesson-footer">
             <button class="btn-nav" id="btn-prev" onclick="go(-1)">← Previous</button>
             <button class="btn-done" id="btn-done" onclick="toggleDone()">Mark complete</button>
@@ -1230,6 +1538,8 @@ let currentIdx = -1;
 let currentMode = 'lessons';
 let currentLabId = null;
 let ADMIN_SECRET = null;
+let _currentLesson = null;
+let _currentCourse = null;
 const _courseStorageKey = 'rrskv_done_' + _courseId;
 let done = new Set(JSON.parse(localStorage.getItem(_courseStorageKey) || '[]'));
 
@@ -1499,17 +1809,97 @@ function toggleDone() {
 function loadLesson(idx) {
   currentIdx = idx;
   const lesson = ALL[idx], ph = lesson.phase;
+  _currentLesson = lesson;
+  _currentCourse = _courseData;
 
   showLesson();
 
   document.getElementById('bc-phase').textContent  = ph.label + ' · ' + ph.title;
   document.getElementById('bc-lesson').textContent = lesson.title;
-  document.getElementById('lesson-title').textContent = lesson.title;
-  document.getElementById('meta-phase-name').textContent = ph.title;
 
-  const tag = document.getElementById('phase-tag');
-  tag.textContent = ph.label + ' — ' + ph.title;
-  tag.className = 'lesson-phase-tag ph-' + ph.id;
+  // Inject new lesson template
+  document.getElementById('lesson-inner').innerHTML = `
+    <div class="lesson-header-bar">
+      <div class="lesson-phase-pill">${ph.label} · ${ph.title}</div>
+      <div class="lesson-header-meta">
+        <span>~8 min read</span>
+        <span>·</span>
+        <span>RR Simplified · Azure GPT-4o</span>
+      </div>
+    </div>
+
+    <h1 class="lesson-title">${lesson.title}</h1>
+
+    <div class="axiom-promo-banner">
+      <div class="axiom-promo-left">
+        <div class="axiom-promo-icon">🤖</div>
+        <div>
+          <div class="axiom-promo-title">Ask Axiom — Your AI Tutor</div>
+          <div class="axiom-promo-sub">Got a doubt about this lesson? Ask Axiom, the AI trained on Raushan's courses. Get instant, context-aware answers.</div>
+        </div>
+      </div>
+      <button class="axiom-promo-btn" onclick="focusAskDoubt()">Ask a Question →</button>
+    </div>
+
+    <div class="lesson-body lesson-rendered" id="lessonContent">
+      <div class="lesson-generating">
+        <div class="lesson-gen-spinner"></div>
+        <div class="lesson-gen-title">Generating with AI...</div>
+        <div class="lesson-gen-sub">Axiom is compiling this lesson using Azure GPT-4o</div>
+      </div>
+    </div>
+
+    <div class="lesson-verified-bar">
+      <div class="lesson-verified-left">
+        <span class="lesson-verified-badge">✅ MCT Verified</span>
+        <span class="lesson-verified-text">Content verified by Raushan Ranjan, Microsoft Certified Trainer with 10+ years enterprise training experience.</span>
+      </div>
+      <img src="https://rrskillverse.in/assets/raushan-avatar.jpg"
+           onerror="this.style.display='none'"
+           class="lesson-verified-avatar"
+           alt="Raushan Ranjan MCT"/>
+    </div>
+
+    <div class="lesson-ask-section" id="askDoubtSection">
+      <div class="lesson-ask-header">
+        <div class="lesson-ask-title">💬 Ask a Doubt</div>
+        <div class="lesson-ask-sub">Powered by Axiom AI — trained on Raushan's enterprise course materials</div>
+      </div>
+      <div class="lesson-ask-input-row">
+        <input type="text"
+               id="lessonDoubtInput"
+               class="lesson-ask-input"
+               placeholder="Type your question about this topic..."
+               onkeydown="if(event.key==='Enter')submitDoubt()"/>
+        <button class="lesson-ask-btn" onclick="submitDoubt()">Ask →</button>
+      </div>
+      <div class="lesson-ask-response" id="lessonDoubtResponse" style="display:none"></div>
+    </div>
+
+    <div class="lesson-footer-strip">
+      <div class="lesson-footer-item lesson-footer-support"
+           onclick="openSupportModal()">
+        <span>☕</span>
+        <span>Support this free library</span>
+      </div>
+      <div class="lesson-footer-divider"></div>
+      <div class="lesson-footer-item" onclick="scrollToComments()">
+        <span>💬</span>
+        <span>Leave a comment</span>
+      </div>
+      <div class="lesson-footer-divider"></div>
+      <a class="lesson-footer-item" href="mailto:raushanr1107@gmail.com">
+        <span>✉️</span>
+        <span>Write to Raushan</span>
+      </a>
+    </div>
+
+    <div class="lesson-comments-section" id="lessonComments">
+      <div class="lesson-comments-title">💬 Discussion</div>
+      <div class="lesson-comments-sub">Ask questions, share your experience, or help others learning this topic. Sign in with GitHub to comment.</div>
+      <div id="lessonGiscusContainer"></div>
+    </div>
+  `;
 
   // B8 — set initial done button state with check-char markup
   const db = document.getElementById('btn-done');
@@ -1528,60 +1918,103 @@ function loadLesson(idx) {
   const a = document.getElementById('tl-' + idx);
   if (a) { a.classList.add('active'); a.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
 
-  document.getElementById('ask-input').value = '';
-  document.getElementById('ask-resp').classList.remove('on');
-  document.getElementById('ask-resp').innerHTML = '';
   document.getElementById('main').scrollTo(0, 0);
 
-  generateLesson(lesson);
+  loadLessonContent(lesson, _courseData);
+  loadLessonGiscus(lesson.title);
 }
 
-// ── Lesson generation (Part A) ─────────────────────────────
-async function generateLesson(lesson) {
-  startLoadingSequence();
-  try {
-    const data = await apiPost('/api/lesson', {
-      lessonTitle:  lesson.title,
-      phaseLabel:   lesson.phase.label,
-      phaseTitle:   lesson.phase.title,
-      courseId:     _courseId || 'default',
-      courseTitle:  _courseData ? _courseData.title : 'Intelligent Enterprise Development with .NET 8 & Azure AI'
-    });
-    const html = transformCallouts(data.content);
-    stopLoadingSequence(html, (rendered) => {
-      // Attach hljs and quiz handlers after content is in DOM
-      rendered.querySelectorAll('pre code').forEach(block => {
-        hljs.highlightElement(block);
-        const pre = block.closest('pre');
-        const hdr = document.createElement('div');
-        hdr.className = 'code-header';
-        hdr.innerHTML = '<span class="code-lang">C# · Example</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>'; /* B6 */
-        pre.insertBefore(hdr, pre.firstChild);
-      });
-      rendered.querySelectorAll('.quiz-opt').forEach(btn => {
-        btn.addEventListener('click', function () {
-          const block = this.closest('.quiz-block');
-          block.querySelectorAll('.quiz-opt').forEach(b => b.classList.add('reveal'));
-          const fb = block.querySelector('.quiz-fb');
-          if (this.dataset.correct === 'true') {
-            this.classList.add('correct');
-            fb.textContent = '✓ Correct — well done!';
-            fb.className = 'quiz-fb ok';
-          } else {
-            this.classList.add('wrong');
-            block.querySelector('[data-correct="true"]')?.classList.add('correct');
-            fb.textContent = '✗ Not quite — the highlighted option is correct.';
-            fb.className = 'quiz-fb fail';
-          }
-        });
-      });
-    });
-  } catch (err) {
-    stopLoadingSequence(
-      '<div class="error-state"><strong>Could not generate lesson.</strong>' + err.message + '</div>',
-      null
-    );
+// ── Lesson content loading (PART 1) ───────────────────────
+async function loadLessonContent(lesson, course) {
+  const contentEl = document.getElementById('lessonContent');
+  if (!contentEl) return;
+
+  // If lesson has pre-written content, show it immediately
+  if (lesson.content && lesson.content.trim().length > 50) {
+    contentEl.innerHTML = transformCallouts(lesson.content);
+    attachContentHandlers(contentEl);
+    return;
   }
+
+  // Show spinner
+  contentEl.innerHTML = `
+    <div class="lesson-generating">
+      <div class="lesson-gen-spinner"></div>
+      <div class="lesson-gen-title">Generating lesson with AI...</div>
+      <div class="lesson-gen-sub">Axiom is compiling this lesson using Azure GPT-4o · Usually takes 5–10 seconds</div>
+    </div>`;
+
+  try {
+    const response = await fetch('/api/lesson', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        lessonTitle: lesson.title,
+        phaseLabel:  lesson.phase.label,
+        phaseTitle:  lesson.phase.title,
+        courseId:    _courseId || 'default',
+        courseTitle: course ? course.title : 'Intelligent Enterprise Development with .NET 8 & Azure AI'
+      })
+    });
+
+    if (!response.ok) throw new Error('API ' + response.status);
+
+    const data = await response.json();
+    if (data.content) {
+      contentEl.innerHTML = transformCallouts(data.content);
+      attachContentHandlers(contentEl);
+    } else {
+      throw new Error('No content in response');
+    }
+  } catch (err) {
+    console.error('Lesson load error:', err);
+    const errMsg = err.message.includes('401') || err.message.includes('403')
+      ? 'Authentication error — please sign in to access AI lessons.'
+      : err.message.includes('429')
+      ? 'Too many requests — please wait a moment and try again.'
+      : 'Check your internet connection and try again.';
+    contentEl.innerHTML = `
+      <div class="lesson-error">
+        <div class="lesson-error-icon">⚠️</div>
+        <div class="lesson-error-title">Could not load this lesson right now</div>
+        <div class="lesson-error-sub">${errMsg}</div>
+        <button class="lesson-error-retry" onclick="retryLesson()">↺ Try Again</button>
+      </div>`;
+  }
+}
+
+function attachContentHandlers(el) {
+  el.querySelectorAll('pre code').forEach(block => {
+    hljs.highlightElement(block);
+    const pre = block.closest('pre');
+    if (!pre.querySelector('.code-header')) {
+      const hdr = document.createElement('div');
+      hdr.className = 'code-header';
+      hdr.innerHTML = '<span class="code-lang">C# · Example</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>';
+      pre.insertBefore(hdr, pre.firstChild);
+    }
+  });
+  el.querySelectorAll('.quiz-opt').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const block = this.closest('.quiz-block');
+      block.querySelectorAll('.quiz-opt').forEach(b => b.classList.add('reveal'));
+      const fb = block.querySelector('.quiz-fb');
+      if (this.dataset.correct === 'true') {
+        this.classList.add('correct');
+        fb.textContent = '✓ Correct — well done!';
+        fb.className = 'quiz-fb ok';
+      } else {
+        this.classList.add('wrong');
+        block.querySelector('[data-correct="true"]')?.classList.add('correct');
+        fb.textContent = '✗ Not quite — the highlighted option is correct.';
+        fb.className = 'quiz-fb fail';
+      }
+    });
+  });
+}
+
+function retryLesson() {
+  if (_currentLesson) loadLessonContent(_currentLesson, _currentCourse);
 }
 
 function transformCallouts(html) {
@@ -1630,9 +2063,7 @@ document.getElementById('search').addEventListener('input', function () {
   });
 });
 
-document.getElementById('ask-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') askDoubt();
-});
+// (lesson doubt input keydown handled inline via onkeydown in dynamically rendered template)
 
 // ── Coming Soon template ───────────────────────────────────
 function buildComingSoonHTML(courseId) {
@@ -2194,6 +2625,78 @@ async function regenLab() {
     if (lab) generateLabGuide(lab);
   } catch (e) {
     alert('Regenerate failed: ' + e.message);
+  }
+}
+
+// ── Lesson helper functions ────────────────────────────────
+function focusAskDoubt() {
+  const input = document.getElementById('lessonDoubtInput');
+  if (input) {
+    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => input.focus(), 400);
+  }
+}
+
+function scrollToComments() {
+  const el = document.getElementById('lessonComments');
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+async function submitDoubt() {
+  const input = document.getElementById('lessonDoubtInput');
+  const responseEl = document.getElementById('lessonDoubtResponse');
+  if (!input || !responseEl) return;
+  const q = input.value.trim();
+  if (!q) return;
+
+  responseEl.style.display = 'block';
+  responseEl.innerHTML = '<div class="doubt-loading">🤖 Axiom is thinking...</div>';
+
+  try {
+    const res = await apiPost('/api/doubt', {
+      question:    q,
+      lessonTitle: _currentLesson ? _currentLesson.title : '',
+      courseId:    _courseId || 'default',
+      courseTitle: _currentCourse ? _currentCourse.title : ''
+    });
+    responseEl.innerHTML =
+      '<div class="doubt-answer">' +
+      '<div class="doubt-answer-label">🤖 Axiom</div>' +
+      '<div class="doubt-answer-text">' +
+      (res.content || res.answer || 'No response') +
+      '</div></div>';
+    input.value = '';
+  } catch (e) {
+    responseEl.innerHTML = '<div class="doubt-error">Could not reach Axiom. Try again.</div>';
+  }
+}
+
+function loadLessonGiscus(lessonTitle) {
+  const container = document.getElementById('lessonGiscusContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  const script = document.createElement('script');
+  script.src = 'https://giscus.app/client.js';
+  script.setAttribute('data-repo', 'raushan1107/RRSkillverse');
+  script.setAttribute('data-repo-id', 'R_kgDOSXq5Dw');
+  script.setAttribute('data-category', 'Blog Comments');
+  script.setAttribute('data-category-id', 'DIC_kwDOSXq5D84C8oWk');
+  script.setAttribute('data-mapping', 'specific');
+  script.setAttribute('data-term', lessonTitle || 'lesson');
+  script.setAttribute('data-reactions-enabled', '1');
+  script.setAttribute('data-theme', 'light');
+  script.setAttribute('data-lang', 'en');
+  script.setAttribute('data-loading', 'lazy');
+  script.crossOrigin = 'anonymous';
+  script.async = true;
+  container.appendChild(script);
+}
+
+function openSupportModal() {
+  if (typeof openUPIModal === 'function') {
+    openUPIModal(21, '☕ Support RR Skillverse', 'RR Skillverse Support');
+  } else {
+    window.open('https://rrskillverse.in/blog.html', '_blank');
   }
 }
 </script>
