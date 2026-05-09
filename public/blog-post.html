@@ -3316,8 +3316,56 @@ function fmtDate(str) {
   });
 }
 
-function renderPost(post) {
+function updateOGTags(post) {
+  const base = 'https://rrskillverse.in';
+  const url  = base + '/blog-post.html?id=' + post.id;
+  const desc = (post.excerpt || '')
+    .replace(/<[^>]*>/g, '')
+    .substring(0, 160);
+  const ogImage = base + '/images/og-default.svg';
+
   document.title = post.title + ' — RR Skillverse';
+
+  function setMeta(property, content, isName) {
+    const attr = isName ? 'name' : 'property';
+    let el = document.querySelector('meta[' + attr + '="' + property + '"]');
+    if (!el) {
+      el = document.createElement('meta');
+      el.setAttribute(attr, property);
+      document.head.appendChild(el);
+    }
+    el.setAttribute('content', content);
+  }
+
+  setMeta('og:title',        post.title);
+  setMeta('og:description',  desc);
+  setMeta('og:url',          url);
+  setMeta('og:type',         'article');
+  setMeta('og:image',        ogImage);
+  setMeta('og:image:width',  '1200');
+  setMeta('og:image:height', '630');
+  setMeta('og:site_name',    'RR Skillverse');
+
+  setMeta('twitter:card',        'summary_large_image', true);
+  setMeta('twitter:title',       post.title, true);
+  setMeta('twitter:description', desc, true);
+  setMeta('twitter:image',       ogImage, true);
+  setMeta('twitter:site',        '@RRSkillverse', true);
+
+  setMeta('article:author',         'Raushan Ranjan', true);
+  setMeta('article:published_time', post.published, true);
+
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    document.head.appendChild(canonical);
+  }
+  canonical.href = url;
+}
+
+function renderPost(post) {
+  updateOGTags(post);
 
   let progressBar = document.getElementById('readingProgress');
   if (!progressBar) {

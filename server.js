@@ -39,6 +39,12 @@ app.use(express.json());
 // Serve static frontend
 app.use(express.static(path.join(__dirname, 'public')));
 
+// TODO: Add dynamic OG image generation
+// Route: GET /og-image?id=post-id
+// Use canvas or puppeteer to generate
+// a 1200x630 PNG with post title and
+// RR Skillverse branding
+
 // ── Rate limiting ──────────────────────────────────────────
 // Max 30 lesson requests per IP per 10 minutes
 const lessonLimiter = rateLimit({
