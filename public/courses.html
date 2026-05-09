@@ -309,6 +309,17 @@
 .paypal-flexible-note{font-size:12px;color:var(--text-muted,#848d97);text-align:center;margin-top:4px;line-height:1.5;}
 .paypal-trust-row{display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--text-dim,#6e7681);margin-top:6px;}
 .paypal-section{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 0;}
+/* ── PayPal why USD note ── */
+.paypal-why-usd{display:flex;align-items:flex-start;gap:8px;background:rgba(0,112,186,0.06);border:1px solid rgba(0,112,186,0.15);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text-muted);line-height:1.6;width:100%;box-sizing:border-box;}
+/* ── Cost context grid ── */
+.paypal-cost-context{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;width:100%;}
+.pcc-item{display:flex;flex-direction:column;align-items:center;padding:12px 8px;border-right:1px solid var(--border);text-align:center;transition:background 0.15s;cursor:pointer;}
+.pcc-item:last-child{border-right:none;}
+.pcc-item:hover{background:rgba(26,86,219,0.05);}
+.pcc-highlight{background:rgba(26,86,219,0.08)!important;border-top:2px solid var(--accent);}
+.pcc-amount{font-size:16px;font-weight:800;color:var(--accent);letter-spacing:-0.3px;margin-bottom:4px;}
+.pcc-label{font-size:9.5px;color:var(--text-dim);line-height:1.4;}
+@media(max-width:480px){.paypal-cost-context{grid-template-columns:repeat(2,1fr);}.pcc-item:nth-child(2){border-right:none;}.pcc-item:nth-child(3){border-right:1px solid var(--border);border-top:1px solid var(--border);}.pcc-item:nth-child(4){border-top:1px solid var(--border);}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
@@ -980,7 +991,8 @@ const UPI_ID      = '8285862455@idfcfirst';
 const UPI_NAME    = 'Raushan Ranjan';
 const PAYPAL_BASE = 'https://paypal.me/raushan1107';
 
-let _payAmount = '21';
+let _upiAmount    = '21';
+let _paypalAmount = '5';
 
 function buildUPILink(amount, note) {
   return 'upi://pay?' + new URLSearchParams({
@@ -990,34 +1002,25 @@ function buildUPILink(amount, note) {
   }).toString();
 }
 
-function selectPreset(btn, value) {
-  document.querySelectorAll('.pay-preset').forEach(b => b.classList.remove('active'));
+function selectUPIPreset(btn, value) {
+  document.querySelectorAll('#upiPresets .pay-preset').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const customRow = document.getElementById('payCustomRow');
-  if (value === 'custom') {
-    if (customRow) customRow.style.display = 'flex';
-    return;
-  }
+  const customRow = document.getElementById('upiCustomRow');
+  if (value === 'custom') { if (customRow) customRow.style.display = 'flex'; return; }
   if (customRow) customRow.style.display = 'none';
-  updatePayAmount(value);
+  setUPIAmount(value);
 }
 
-function onCustomAmount(val) {
-  const v = String(val).trim();
-  if (v && parseFloat(v) > 0) updatePayAmount(v);
+function onUPICustomAmount(val) {
+  if (val && parseFloat(val) > 0) setUPIAmount(val);
 }
 
-function updatePayAmount(amount) {
-  _payAmount = amount;
-  const formatted    = '₹' + amount;
-  const displayEl    = document.getElementById('payAmountDisplay');
-  const upiAmtEl     = document.getElementById('upiAmount');
-  const ppDisplayEl  = document.getElementById('paypalAmountDisplay');
-  const bankAmtEl    = document.getElementById('bankAmount');
-  if (displayEl)   displayEl.textContent   = formatted;
-  if (upiAmtEl)    upiAmtEl.textContent    = formatted;
-  if (ppDisplayEl) ppDisplayEl.textContent = 'Equivalent to ' + formatted + ' in your currency';
-  if (bankAmtEl)   bankAmtEl.textContent   = formatted + ' (or equivalent in your currency)';
+function setUPIAmount(amount) {
+  _upiAmount = String(amount);
+  const dispEl = document.getElementById('upiAmountDisplay');
+  const amtEl  = document.getElementById('upiAmount');
+  if (dispEl) dispEl.textContent = '₹' + amount;
+  if (amtEl)  amtEl.textContent  = '₹' + amount;
   regenerateQR(amount);
 }
 
@@ -1025,19 +1028,42 @@ function regenerateQR(amount) {
   const qrWrap = document.getElementById('upiQRWrap');
   if (!qrWrap) return;
   qrWrap.innerHTML = '';
-  const titleEl = document.getElementById('upiModalTitle');
-  const note = titleEl ? titleEl.textContent : 'RR Skillverse Support';
-  const upiLink = buildUPILink(amount, note);
-  if (typeof QRCode !== 'undefined') {
-    new QRCode(qrWrap, {
-      text: upiLink, width: 150, height: 150,
-      colorDark: '#000000', colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.M
-    });
-  }
+  const note = (document.getElementById('upiModalTitle') || {}).textContent || 'RR Skillverse Support';
+  const link = buildUPILink(amount, note);
   ['upiGpay','upiPhonepe','upiPaytm','upiGeneric'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.href = upiLink;
+    const el = document.getElementById(id); if (el) el.href = link;
+  });
+  if (typeof QRCode !== 'undefined') {
+    new QRCode(qrWrap, { text: link, width: 150, height: 150, colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
+  }
+}
+
+function selectPayPalPreset(btn, value) {
+  document.querySelectorAll('#paypalPresets .pay-preset').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const customRow = document.getElementById('paypalCustomRow');
+  if (value === 'custom') { if (customRow) customRow.style.display = 'flex'; return; }
+  if (customRow) customRow.style.display = 'none';
+  setPayPalAmount(value);
+}
+
+function onPayPalCustomAmount(val) {
+  if (val && parseFloat(val) > 0) setPayPalAmount(val);
+}
+
+function setPayPalAmount(amount) {
+  _paypalAmount = String(amount);
+  const dispEl = document.getElementById('paypalAmountDisplay');
+  const linkEl = document.getElementById('paypalLink');
+  if (dispEl) dispEl.textContent = '$' + amount;
+  if (linkEl) { linkEl.href = PAYPAL_BASE + '/' + amount; linkEl.textContent = 'Pay $' + amount + ' via PayPal →'; }
+  document.querySelectorAll('#paypalPresets .pay-preset').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === '$' + amount);
+  });
+  document.querySelectorAll('.pcc-item').forEach(item => {
+    item.classList.remove('pcc-highlight');
+    const amtEl = item.querySelector('.pcc-amount');
+    if (amtEl && amtEl.textContent === '$' + amount) item.classList.add('pcc-highlight');
   });
 }
 
@@ -1053,23 +1079,12 @@ function openUPIModal(amount, title, note) {
   const modal   = document.getElementById('upiModal');
   const overlay = document.getElementById('upiModalOverlay');
   if (!modal) return;
-  _payAmount = String(amount);
   const titleEl = document.getElementById('upiModalTitle');
-  if (titleEl) titleEl.textContent = title;
-  document.querySelectorAll('.pay-preset').forEach(b => b.classList.remove('active'));
-  const matchingPreset = Array.from(document.querySelectorAll('.pay-preset'))
-    .find(b => b.textContent.trim() === '₹' + amount);
-  if (matchingPreset) {
-    matchingPreset.classList.add('active');
-  } else {
-    const first = document.querySelector('.pay-preset');
-    if (first) first.classList.add('active');
-  }
-  const customRow = document.getElementById('payCustomRow');
-  if (customRow) customRow.style.display = 'none';
-  updatePayAmount(amount);
-  document.querySelectorAll('.pay-tab').forEach((b, i) => b.classList.toggle('active', i === 0));
-  document.querySelectorAll('.pay-tab-content').forEach((c, i) => c.style.display = i === 0 ? 'flex' : 'none');
+  if (titleEl) titleEl.textContent = title || 'Support RR Skillverse';
+  setUPIAmount(_upiAmount || '21');
+  setPayPalAmount(_paypalAmount || '5');
+  document.querySelectorAll('.pay-tab').forEach((b,i) => b.classList.toggle('active', i === 0));
+  document.querySelectorAll('.pay-tab-content').forEach((c,i) => c.style.display = i === 0 ? 'flex' : 'none');
   overlay.classList.add('open');
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1116,25 +1131,6 @@ function copyText(text, btn) {
     <div class="upi-modal-icon">💳</div>
     <div class="upi-modal-title" id="upiModalTitle">Support RR Skillverse</div>
     <div class="upi-modal-subtitle">Choose your preferred payment method</div>
-    <div class="pay-amount-selector">
-      <div class="pay-amount-label">Choose or enter amount</div>
-      <div class="pay-amount-presets">
-        <button class="pay-preset active" onclick="selectPreset(this, '11')">₹11</button>
-        <button class="pay-preset" onclick="selectPreset(this, '21')">₹21</button>
-        <button class="pay-preset" onclick="selectPreset(this, '51')">₹51</button>
-        <button class="pay-preset" onclick="selectPreset(this, '101')">₹101</button>
-        <button class="pay-preset" onclick="selectPreset(this, 'custom')">Custom</button>
-      </div>
-      <div class="pay-custom-row" id="payCustomRow" style="display:none">
-        <div class="pay-custom-currency" id="payCurrencySymbol">₹</div>
-        <input type="number" id="payCustomInput" class="pay-custom-input"
-               placeholder="Enter amount" min="1" oninput="onCustomAmount(this.value)"/>
-      </div>
-      <div class="pay-amount-display">
-        Paying: <strong id="payAmountDisplay">₹21</strong>
-        <span class="pay-amount-note" id="payAmountNote">· Any amount is appreciated ☕</span>
-      </div>
-    </div>
   </div>
   <div class="pay-tabs">
     <button class="pay-tab active" onclick="switchPayTab('upi', this)">🇮🇳 UPI</button>
@@ -1144,6 +1140,21 @@ function copyText(text, btn) {
 
   <!-- TAB 1: UPI -->
   <div class="pay-tab-content" id="tab-upi" style="display:flex">
+    <div class="pay-amount-selector" id="upiPresets" style="width:100%;box-sizing:border-box">
+      <div class="pay-amount-label">Choose amount (INR)</div>
+      <div class="pay-amount-presets">
+        <button class="pay-preset active" onclick="selectUPIPreset(this,'11')">₹11</button>
+        <button class="pay-preset" onclick="selectUPIPreset(this,'21')">₹21</button>
+        <button class="pay-preset" onclick="selectUPIPreset(this,'51')">₹51</button>
+        <button class="pay-preset" onclick="selectUPIPreset(this,'101')">₹101</button>
+        <button class="pay-preset" onclick="selectUPIPreset(this,'custom')">Custom</button>
+      </div>
+      <div class="pay-custom-row" id="upiCustomRow" style="display:none">
+        <div class="pay-custom-currency">₹</div>
+        <input type="number" class="pay-custom-input" placeholder="Enter amount" min="1" oninput="onUPICustomAmount(this.value)"/>
+      </div>
+      <div class="pay-amount-display">Paying: <strong id="upiAmountDisplay">₹21</strong></div>
+    </div>
     <div class="upi-qr-wrap" id="upiQRWrap"></div>
     <div class="upi-apps">
       <a class="upi-app-btn" id="upiGpay" href="#" target="_blank">📱 GPay</a>
@@ -1162,15 +1173,41 @@ function copyText(text, btn) {
   <!-- TAB 2: PayPal -->
   <div class="pay-tab-content" id="tab-paypal" style="display:none">
     <div class="paypal-section">
-      <div class="paypal-logo">💙 PayPal</div>
-      <div class="paypal-desc">Pay in your local currency — USD, EUR, GBP, SGD, AUD, or any PayPal-supported currency. Accepted worldwide.</div>
-      <div class="paypal-amount-note">
-        <span id="paypalAmountDisplay">Equivalent to ₹21 in your currency</span>
+      <div class="pay-amount-selector" id="paypalPresets" style="width:100%;box-sizing:border-box">
+        <div class="pay-amount-label">Choose amount (USD)</div>
+        <div class="pay-amount-presets">
+          <button class="pay-preset" onclick="selectPayPalPreset(this,'2')">$2</button>
+          <button class="pay-preset active" onclick="selectPayPalPreset(this,'5')">$5</button>
+          <button class="pay-preset" onclick="selectPayPalPreset(this,'11')">$11</button>
+          <button class="pay-preset" onclick="selectPayPalPreset(this,'21')">$21</button>
+          <button class="pay-preset" onclick="selectPayPalPreset(this,'custom')">Custom</button>
+        </div>
+        <div class="pay-custom-row" id="paypalCustomRow" style="display:none">
+          <div class="pay-custom-currency">$</div>
+          <input type="number" class="pay-custom-input" placeholder="Enter amount" min="1" oninput="onPayPalCustomAmount(this.value)"/>
+        </div>
+        <div class="pay-amount-display">Paying: <strong id="paypalAmountDisplay">$5</strong></div>
       </div>
-      <a class="paypal-btn" id="paypalLink" href="https://paypal.me/raushan1107" target="_blank" rel="noopener">
-        Pay via PayPal — Any Amount →
-      </a>
-      <div class="paypal-flexible-note">💡 PayPal will ask you to enter the amount in your local currency. Pay whatever you feel is right — even $1 helps keep this free.</div>
+      <div class="paypal-why-usd">💡 PayPal charges in USD. $5 ≈ ₹420 · $11 ≈ ₹925 · $21 ≈ ₹1,750. Any amount keeps this free!</div>
+      <div class="paypal-cost-context">
+        <div class="pcc-item" onclick="setPayPalAmount('2')">
+          <div class="pcc-amount">$2</div>
+          <div class="pcc-label">Buy me a coffee</div>
+        </div>
+        <div class="pcc-item pcc-highlight" onclick="setPayPalAmount('5')">
+          <div class="pcc-amount">$5</div>
+          <div class="pcc-label">1 month of hosting</div>
+        </div>
+        <div class="pcc-item" onclick="setPayPalAmount('11')">
+          <div class="pcc-amount">$11</div>
+          <div class="pcc-label">1 lab session</div>
+        </div>
+        <div class="pcc-item" onclick="setPayPalAmount('21')">
+          <div class="pcc-amount">$21</div>
+          <div class="pcc-label">Sponsor a module</div>
+        </div>
+      </div>
+      <a class="paypal-btn" id="paypalLink" href="https://paypal.me/raushan1107/5" target="_blank" rel="noopener">Pay $5 via PayPal →</a>
       <div class="upi-id-row" style="width:100%;box-sizing:border-box">
         <span class="upi-id-label">Link</span>
         <span class="upi-id-val">paypal.me/raushan1107</span>
