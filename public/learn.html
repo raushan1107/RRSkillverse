@@ -660,6 +660,345 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   font-size: 11px;
   color: var(--ink-3, #888884);
 }
+
+/* ═══════════════════════════════════════
+   LEARN.HTML — MOBILE RESPONSIVE FIXES
+═══════════════════════════════════════ */
+
+/* ── Course detail layout ── */
+@media (max-width: 768px) {
+
+  .learn-sidebar {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 80vw;
+    max-width: 320px;
+    height: calc(100vh - 60px);
+    background: var(--wash);
+    border-right: 1px solid var(--line);
+    z-index: 500;
+    overflow-y: auto;
+    padding: 16px;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.3);
+    transition: transform 0.25s ease;
+    transform: translateX(-100%);
+  }
+
+  .learn-sidebar.drawer-open {
+    display: block;
+    transform: translateX(0);
+  }
+
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 499;
+    backdrop-filter: blur(2px);
+  }
+  .sidebar-backdrop.open { display: block; }
+
+  .learn-main {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 16px !important;
+  }
+
+  .learn-layout {
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+
+  .learn-breadcrumb {
+    font-size: 11px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .learn-course-title {
+    font-size: 22px !important;
+    line-height: 1.2 !important;
+  }
+
+  .learn-phase-card {
+    padding: 14px !important;
+  }
+
+  .learn-content {
+    padding: 16px !important;
+    font-size: 14px !important;
+    line-height: 1.75 !important;
+  }
+
+  .learn-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .learn-tabs::-webkit-scrollbar { display: none; }
+
+  .learn-lesson-count {
+    font-size: 11px !important;
+  }
+
+  .sidebar-toggle-btn {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--wash);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink-3);
+    cursor: pointer;
+    margin-bottom: 16px;
+    font-family: var(--font);
+    transition: all 0.15s;
+  }
+  .sidebar-toggle-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar-toggle-btn { display: none !important; }
+  .sidebar-backdrop { display: none !important; }
+}
+
+/* ── Course index (grid of courses) ── */
+@media (max-width: 768px) {
+
+  .courses-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 0 16px !important;
+  }
+
+  .course-card {
+    padding: 16px !important;
+  }
+
+  .course-card-title {
+    font-size: 15px !important;
+  }
+
+  .course-card-meta {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .learn-hero {
+    padding: 28px 16px !important;
+  }
+
+  .learn-hero-title {
+    font-size: 24px !important;
+    line-height: 1.2 !important;
+  }
+
+  .learn-hero-sub {
+    font-size: 13px !important;
+  }
+
+  .learn-category-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 0 16px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    display: flex;
+    gap: 8px;
+  }
+  .learn-category-tabs::-webkit-scrollbar { display: none; }
+
+  .learn-category-tab {
+    flex-shrink: 0;
+  }
+}
+
+/* ── Skillverse Library Hero ── */
+.skillverse-hero {
+  background: linear-gradient(135deg,
+    rgba(0,102,255,0.06) 0%,
+    rgba(0,102,255,0.02) 50%,
+    rgba(112,72,160,0.04) 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 40px 0 32px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.skillverse-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0,102,255,0.07), transparent 70%);
+  pointer-events: none;
+}
+
+.skillverse-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(0,102,255,0.08);
+  border: 1px solid rgba(0,102,255,0.2);
+  border-radius: 20px;
+  padding: 5px 14px;
+  margin-bottom: 18px;
+}
+
+.sh-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: shPulse 2s ease-in-out infinite;
+}
+
+@keyframes shPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.skillverse-hero-title {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.skillverse-hero-sub {
+  font-size: 15px;
+  color: var(--ink-3);
+  line-height: 1.75;
+  max-width: 560px;
+  margin-bottom: 24px;
+}
+
+.skillverse-hero-sub strong {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+.skillverse-hero-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.sh-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-3);
+  transition: all 0.15s;
+}
+
+.sh-pill:hover {
+  border-color: var(--accent);
+  color: var(--ink-2);
+  transform: translateY(-1px);
+}
+
+.sh-pill-icon { font-size: 14px; }
+
+.skillverse-hero-stats {
+  display: flex;
+  gap: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 480px;
+}
+
+.sh-stat {
+  flex: 1;
+  padding: 14px 16px;
+  text-align: center;
+  border-right: 1px solid var(--line);
+  transition: background 0.15s;
+}
+
+.sh-stat:last-child { border-right: none; }
+.sh-stat:hover { background: var(--wash); }
+
+.sh-stat-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.sh-stat-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+@media (max-width: 768px) {
+  .skillverse-hero { padding: 28px 0 20px; }
+  .skillverse-hero-title { font-size: 26px !important; }
+  .skillverse-hero-sub { font-size: 13.5px !important; }
+  .skillverse-hero-pills { gap: 7px; }
+  .sh-pill { font-size: 11.5px; padding: 6px 11px; }
+  .skillverse-hero-stats { max-width: 100%; }
+  .sh-stat-num { font-size: 18px; }
+}
+
+/* ── Course Card AI Badge ── */
+.course-card-ai-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--ink-4);
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.course-card-ai-badge span { color: var(--ink-4); }
+
+.course-card-ai-badge span:first-child,
+.course-card-ai-badge span:nth-child(3),
+.course-card-ai-badge span:nth-child(5) {
+  color: var(--ink-3);
+  font-weight: 600;
+}
 </style>
 <script src="js/courses-data.js"></script>
 </head>
@@ -685,9 +1024,11 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
     </div>
   </nav>
 
-  <div class="body-wrap">
+  <div class="body-wrap learn-layout">
 
-    <nav class="sidebar" id="sidebar">
+    <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeLearnSidebar()"></div>
+
+    <nav class="sidebar learn-sidebar" id="sidebar">
       <div class="sidebar-top">
         <!-- B7 — SVG search icon -->
         <div class="search-wrap">
@@ -704,21 +1045,50 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
       <div class="toc-scroll" id="toc-labs" style="display:none"></div>
     </nav>
 
-    <main class="main" id="main">
+    <main class="main learn-main" id="main">
       <div class="main-inner">
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn" onclick="toggleLearnSidebar()">☰ Lessons &amp; Phases</button>
 
         <!-- HOME ─────────────────────────────────────────── -->
         <div class="home-view" id="home">
-          <div class="home-eyebrow">MCT Edition · Koenig Solutions</div>
-          <h1 class="home-title">Intelligent Enterprise Development<br>with .NET 8 &amp; Azure AI</h1>
-          <p class="home-desc">A zero-to-production path — from first C# line to a Blazor app powered by Azure AI. Taught the way a trainer explains it.</p>
-          <!-- B5 — stats row -->
-          <div class="home-stat-row">
-            <span>46 lessons</span>
-            <span class="stat-sep">·</span>
-            <span>4 phases</span>
-            <span class="stat-sep">·</span>
-            <span>Zero to Azure AI</span>
+          <div class="skillverse-hero">
+            <div class="skillverse-hero-badge">
+              <span class="sh-badge-dot"></span>
+              AI-Powered Learning · Verified by MCT
+            </div>
+            <h1 class="skillverse-hero-title">Skillverse Library</h1>
+            <p class="skillverse-hero-sub">
+              Enterprise-grade courses built by a
+              <strong>Microsoft Certified Trainer</strong>
+              with 10+ years of corporate training experience.
+              Every lesson is AI-enhanced — ask questions,
+              get explanations, and run labs without leaving
+              the page.
+            </p>
+            <div class="skillverse-hero-pills">
+              <div class="sh-pill"><span class="sh-pill-icon">🤖</span>AI Tutor on every lesson</div>
+              <div class="sh-pill"><span class="sh-pill-icon">🧪</span>Hands-on labs included</div>
+              <div class="sh-pill"><span class="sh-pill-icon">✅</span>MCT-verified content</div>
+              <div class="sh-pill"><span class="sh-pill-icon">🎯</span>Exam-aligned curriculum</div>
+            </div>
+            <div class="skillverse-hero-stats">
+              <div class="sh-stat">
+                <div class="sh-stat-num">40+</div>
+                <div class="sh-stat-label">Courses</div>
+              </div>
+              <div class="sh-stat">
+                <div class="sh-stat-num">500+</div>
+                <div class="sh-stat-label">Lessons</div>
+              </div>
+              <div class="sh-stat">
+                <div class="sh-stat-num">10+</div>
+                <div class="sh-stat-label">Years MCT</div>
+              </div>
+              <div class="sh-stat">
+                <div class="sh-stat-num">3200+</div>
+                <div class="sh-stat-label">Trained</div>
+              </div>
+            </div>
           </div>
           <div class="phase-rows" id="phase-rows"></div>
           <button class="btn-start" onclick="goFirst()">Begin Learning →</button>
@@ -1008,7 +1378,10 @@ function buildSidebar() {
         '<span class="lesson-idx">' + String(li + 1).padStart(2, '0') + '</span>' +
         '<span class="lesson-title-text">' + title + '</span>' +
         '<span class="lesson-check">✓</span>';
-      el.onclick = () => loadLesson(idx);
+      el.onclick = () => {
+        loadLesson(idx);
+        if (window.innerWidth <= 768) closeLearnSidebar();
+      };
       block.appendChild(el);
     });
 
@@ -1029,7 +1402,14 @@ function buildPhaseRows() {
         '<div class="phase-dot" style="background:' + ph.dot + '"></div>' +
         '<span class="phase-row-title">' + ph.label + ' — ' + ph.title + '</span>' +
       '</div>' +
-      '<span class="phase-row-count">' + ph.lessons.length + ' lessons</span>';
+      '<span class="phase-row-count">' + ph.lessons.length + ' lessons</span>' +
+      '<div class="course-card-ai-badge">' +
+        '<span>🤖 AI Tutor</span>' +
+        '<span>·</span>' +
+        '<span>🧪 Labs</span>' +
+        '<span>·</span>' +
+        '<span>✅ MCT Verified</span>' +
+      '</div>';
     container.appendChild(row);
   });
 }
@@ -1670,7 +2050,10 @@ function buildLabsSidebar() {
     el.id = 'tl-lab-' + lab.id;
     el.innerHTML = '<span class="lesson-idx">' + lab.code + '</span>' +
       '<span class="lesson-title-text">' + lab.title + '</span>';
-    el.onclick = () => loadLab(lab.id);
+    el.onclick = () => {
+      loadLab(lab.id);
+      if (window.innerWidth <= 768) closeLearnSidebar();
+    };
     toc.appendChild(el);
   });
 
@@ -1685,9 +2068,35 @@ function buildLabsSidebar() {
     el.id = 'tl-lab-' + cap.id;
     el.innerHTML = '<span class="lesson-idx">' + cap.code + '</span>' +
       '<span class="lesson-title-text">' + cap.title + '</span>';
-    el.onclick = () => loadLab(cap.id);
+    el.onclick = () => {
+      loadLab(cap.id);
+      if (window.innerWidth <= 768) closeLearnSidebar();
+    };
     toc.appendChild(el);
   });
+}
+
+// ── Mobile sidebar toggle ──────────────────────────────
+function toggleLearnSidebar() {
+  const sidebar  = document.querySelector('.learn-sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  const btn      = document.getElementById('sidebarToggleBtn');
+  if (!sidebar) return;
+  const isOpen = sidebar.classList.contains('drawer-open');
+  sidebar.classList.toggle('drawer-open', !isOpen);
+  backdrop && backdrop.classList.toggle('open', !isOpen);
+  if (btn) btn.textContent = isOpen
+    ? '☰ Lessons & Phases'
+    : '✕ Close Lessons';
+}
+
+function closeLearnSidebar() {
+  const sidebar  = document.querySelector('.learn-sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  const btn      = document.getElementById('sidebarToggleBtn');
+  sidebar  && sidebar.classList.remove('drawer-open');
+  backdrop && backdrop.classList.remove('open');
+  if (btn) btn.textContent = '☰ Lessons & Phases';
 }
 
 // ── Build labs home lists ──────────────────────────────────
