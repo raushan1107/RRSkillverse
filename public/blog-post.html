@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/main.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"/>
 <script src="js/blog-data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 
 /* ── Post layout ── */
@@ -2584,6 +2585,225 @@
   background: rgba(26,86,219,0.06);
 }
 .post-share-btn.copied { border-color: #22c55e; color: #22c55e; }
+
+/* ── UPI Payment Modal ── */
+.upi-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 2000;
+  display: none;
+  backdrop-filter: blur(4px);
+}
+.upi-modal-overlay.open { display: block; }
+
+.upi-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px 28px 24px;
+  width: 92%;
+  max-width: 420px;
+  z-index: 2001;
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.upi-modal.open {
+  display: flex;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.upi-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.upi-modal-close:hover {
+  background: var(--bg4);
+  color: var(--text);
+}
+
+.upi-modal-header { text-align: center; }
+.upi-modal-icon { font-size: 36px; margin-bottom: 8px; }
+.upi-modal-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+.upi-modal-subtitle {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.upi-app-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.upi-app-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text);
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.upi-app-btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+.upi-gpay:hover    { border-color: #4285f4; color: #4285f4; }
+.upi-phonepe:hover { border-color: #6739b7; color: #6739b7; }
+.upi-paytm:hover   { border-color: #002970; color: #5599ff; }
+.upi-generic:hover { border-color: var(--accent); }
+
+.upi-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-dim);
+  font-size: 11px;
+}
+.upi-divider::before,
+.upi-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.upi-qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.upi-qr-wrap {
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.upi-qr-wrap canvas,
+.upi-qr-wrap img { display: block; border-radius: 4px; }
+.upi-qr-label { font-size: 11.5px; color: var(--text-dim); }
+
+.upi-id-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.upi-id-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+.upi-id-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  font-family: var(--mono);
+  flex: 1;
+}
+.upi-id-copy {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.upi-id-copy:hover { border-color: var(--accent); color: var(--accent); }
+
+.upi-details-row {
+  display: flex;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.upi-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 8px;
+  border-right: 1px solid var(--border);
+}
+.upi-detail:last-child { border-right: none; }
+.upi-detail-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+.upi-detail-value {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.upi-note {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  text-align: center;
+  padding: 12px 16px;
+  background: rgba(26,86,219,0.05);
+  border: 1px solid rgba(26,86,219,0.15);
+  border-radius: 8px;
+}
+.upi-note a { color: var(--accent); text-decoration: none; }
+.upi-note strong { color: var(--text); }
+
+@media (max-width: 480px) {
+  .upi-modal { padding: 22px 18px 20px; }
+  .upi-app-row { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
@@ -2607,6 +2827,104 @@
     <!-- SIDEBAR -->
     <aside class="post-sidebar" id="postSidebar"></aside>
 
+  </div>
+
+  <!-- UPI Payment Modal -->
+  <div class="upi-modal-overlay" id="upiModalOverlay"
+       onclick="closeUPIModal()">
+  </div>
+
+  <div class="upi-modal" id="upiModal">
+    <button class="upi-modal-close"
+            onclick="closeUPIModal()">✕</button>
+
+    <div class="upi-modal-header">
+      <div class="upi-modal-icon">☕</div>
+      <div class="upi-modal-title" id="upiModalTitle">
+        Support RR Skillverse
+      </div>
+      <div class="upi-modal-subtitle">
+        Pay directly via UPI — GPay, PhonePe, Paytm,
+        or any UPI app
+      </div>
+    </div>
+
+    <!-- UPI Buttons -->
+    <div class="upi-app-row">
+      <a class="upi-app-btn upi-gpay"
+         id="upiGpay" href="#" target="_blank"
+         rel="noopener">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Google_Pay_Logo.svg/32px-Google_Pay_Logo.svg.png"
+             alt="GPay" width="20" height="20"
+             onerror="this.style.display='none'"/>
+        Google Pay
+      </a>
+      <a class="upi-app-btn upi-phonepe"
+         id="upiPhonepe" href="#" target="_blank"
+         rel="noopener">
+        💜 PhonePe
+      </a>
+      <a class="upi-app-btn upi-paytm"
+         id="upiPaytm" href="#" target="_blank"
+         rel="noopener">
+        💙 Paytm
+      </a>
+      <a class="upi-app-btn upi-generic"
+         id="upiGeneric" href="#" target="_blank"
+         rel="noopener">
+        📱 Any UPI App
+      </a>
+    </div>
+
+    <!-- Divider -->
+    <div class="upi-divider">
+      <span>or scan QR code</span>
+    </div>
+
+    <!-- QR Code display -->
+    <div class="upi-qr-section">
+      <div class="upi-qr-wrap" id="upiQRWrap">
+        <!-- QR rendered by qrcode.js -->
+      </div>
+      <div class="upi-qr-label">
+        Scan with any UPI app
+      </div>
+    </div>
+
+    <!-- UPI ID copy -->
+    <div class="upi-id-row">
+      <span class="upi-id-label">UPI ID</span>
+      <span class="upi-id-value">8285862455@idfcfirst</span>
+      <button class="upi-id-copy"
+              onclick="copyUPIID()">Copy</button>
+    </div>
+
+    <!-- Amount and name -->
+    <div class="upi-details-row">
+      <div class="upi-detail">
+        <span class="upi-detail-label">Amount</span>
+        <span class="upi-detail-value"
+              id="upiAmount">₹21</span>
+      </div>
+      <div class="upi-detail">
+        <span class="upi-detail-label">To</span>
+        <span class="upi-detail-value">Raushan Ranjan</span>
+      </div>
+      <div class="upi-detail">
+        <span class="upi-detail-label">Bank</span>
+        <span class="upi-detail-value">IDFC FIRST</span>
+      </div>
+    </div>
+
+    <!-- After payment note -->
+    <div class="upi-note">
+      After payment, email your screenshot to
+      <a href="mailto:raushanr1107@gmail.com">
+        raushanr1107@gmail.com
+      </a>
+      with subject <strong>"Blog Support"</strong>
+      to receive your PDF.
+    </div>
   </div>
 
 </div>
@@ -2703,12 +3021,93 @@ function copyLink() {
   });
 }
 
+const UPI_ID   = '8285862455@idfcfirst';
+const UPI_NAME = 'Raushan Ranjan';
+const UPI_NOTE_SUPPORT = 'RR Skillverse Blog Support';
+const UPI_NOTE_PDF     = 'RR Skillverse PDF Download';
+let   upiQRInstance    = null;
+
+function buildUPILink(amount, note) {
+  const base = 'upi://pay';
+  const params = new URLSearchParams({
+    pa: UPI_ID,
+    pn: UPI_NAME,
+    am: String(amount),
+    cu: 'INR',
+    tn: note
+  });
+  return base + '?' + params.toString();
+}
+
+function openUPIModal(amount, title, note) {
+  const modal   = document.getElementById('upiModal');
+  const overlay = document.getElementById('upiModalOverlay');
+  const amtEl   = document.getElementById('upiAmount');
+  const titleEl = document.getElementById('upiModalTitle');
+  const qrWrap  = document.getElementById('upiQRWrap');
+  if (!modal) return;
+
+  const upiLink = buildUPILink(amount, note);
+
+  if (amtEl)   amtEl.textContent   = '₹' + amount;
+  if (titleEl) titleEl.textContent = title;
+
+  document.getElementById('upiGpay').href    = upiLink;
+  document.getElementById('upiPhonepe').href = upiLink;
+  document.getElementById('upiPaytm').href   = upiLink;
+  document.getElementById('upiGeneric').href = upiLink;
+
+  if (qrWrap) {
+    qrWrap.innerHTML = '';
+    upiQRInstance = new QRCode(qrWrap, {
+      text: upiLink,
+      width: 160,
+      height: 160,
+      colorDark: '#000000',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  }
+
+  overlay.classList.add('open');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeUPIModal() {
+  const modal   = document.getElementById('upiModal');
+  const overlay = document.getElementById('upiModalOverlay');
+  if (!modal) return;
+  modal.classList.remove('open');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeUPIModal();
+});
+
 function showSupportModal(amount) {
-  alert('Thank you for your support!\n\nPlease send ₹' + amount + ' via UPI to:\nraushan.ranjan@upi\n\nOr visit: https://buymeacoffee.com/raushanranjan');
+  const labels = {
+    '11': '💛 Token of Appreciation',
+    '21': '☕ Buy a Chai',
+    '51': '🎯 Support the Series'
+  };
+  const title = labels[amount] || 'Support RR Skillverse';
+  openUPIModal(amount, title, UPI_NOTE_SUPPORT);
 }
 
 function showPDFModal() {
-  alert('To download this article as PDF:\n1. Press Ctrl+P (or Cmd+P on Mac)\n2. Choose "Save as PDF"\n3. Click Save\n\nOr email raushan.ranjan@koenig-solutions.com for a clean PDF copy.');
+  openUPIModal(21, '📄 Download PDF — ₹21', UPI_NOTE_PDF);
+}
+
+function copyUPIID() {
+  navigator.clipboard.writeText(UPI_ID).then(() => {
+    const btn = document.querySelector('.upi-id-copy');
+    if (!btn) return;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
 }
 
 function initShareButtons(post) {
