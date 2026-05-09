@@ -482,10 +482,10 @@ window.addEventListener('load', () => {
               onclick="openUPIModal(51, '☕ Support RR Skillverse', 'RR Skillverse Support')">
         🇮🇳 UPI — ₹51
       </button>
-      <a class="support-strip-btn support-strip-paypal"
-         href="https://paypal.me/raushan1107/10" target="_blank" rel="noopener">
+      <button class="support-strip-btn support-strip-paypal"
+              onclick="openUPIModal(5, '🌍 Support via PayPal', 'RR Skillverse Support'); setTimeout(() => { const tabs = document.querySelectorAll('.pay-tab'); if (tabs[1]) tabs[1].click(); }, 150)">
         🌍 PayPal
-      </a>
+      </button>
       <button class="support-strip-btn support-strip-bank"
               onclick="openUPIModal(51, '🏦 Bank Transfer', 'RR Skillverse Support'); setTimeout(()=>{ const t=document.querySelectorAll('.pay-tab')[2]; if(t)t.click(); },100)">
         🏦 Bank Transfer
