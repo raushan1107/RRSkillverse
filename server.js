@@ -39,12 +39,6 @@ app.use(express.json());
 // Serve static frontend
 app.use(express.static(path.join(__dirname, 'public')));
 
-// TODO: Add dynamic OG image generation
-// Route: GET /og-image?id=post-id
-// Use canvas or puppeteer to generate
-// a 1200x630 PNG with post title and
-// RR Skillverse branding
-
 // ── Rate limiting ──────────────────────────────────────────
 // Max 30 lesson requests per IP per 10 minutes
 const lessonLimiter = rateLimit({
@@ -92,8 +86,8 @@ ABOUT RAUSHAN RANJAN:
   Microsoft certifications globally
 - Senior Corporate Trainer at Koenig Solutions, Noida, India
 - Founder of RR Skillverse — a personal learning platform
-- 10+ years of teaching experience
-- 2900+ professionals trained across 25+ countries
+- 11+ years of teaching experience
+- 3200+ professionals trained across 25+ countries
 - 38+ Microsoft certifications including:
   AZ-204 (Azure Developer), AZ-104 (Azure Administrator),
   PL-300 (Power BI), PL-400 (Power Platform Developer),

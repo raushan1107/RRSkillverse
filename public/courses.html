@@ -8,6 +8,11 @@
 <meta property="og:description" content="Browse all courses by MCT Raushan Ranjan. Azure, Power Platform, .NET, Blazor, AI, Data Analytics, and more."/>
 <meta property="og:image" content="https://rrskillverse.in/images/og-thumbnail.svg"/>
 <meta property="og:url" content="https://rrskillverse.in/courses.html"/>
+<meta name="description" content="47 enterprise courses on Azure, Power BI, .NET and AI — built by MCT Raushan Ranjan. AI-powered lessons, hands-on labs, free to access."/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="All Courses — RR Skillverse"/>
+<meta name="twitter:description" content="47 enterprise courses on Azure, Power BI, .NET and AI — by MCT Raushan Ranjan. AI-powered, MCT-verified, free to learn."/>
+<meta name="twitter:image" content="https://rrskillverse.in/images/og-default.svg"/>
 <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
 <link rel="apple-touch-icon" href="/images/favicon.svg"/>
 <link rel="stylesheet" href="css/main.css"/>
@@ -360,25 +365,25 @@
 
     <!-- Filter tabs -->
     <div class="course-filter-row" id="courseFilters">
-      <button class="course-filter-btn active" onclick="filterCourses('all',this)">
+      <button class="course-filter-btn active" data-cat="all" onclick="filterCourses('all',this)">
         All Courses <span class="filter-count">47</span>
       </button>
-      <button class="course-filter-btn" onclick="filterCourses('azure',this)">
+      <button class="course-filter-btn" data-cat="azure" onclick="filterCourses('azure',this)">
         ☁️ Azure &amp; Cloud <span class="filter-count">8</span>
       </button>
-      <button class="course-filter-btn" onclick="filterCourses('power',this)">
+      <button class="course-filter-btn" data-cat="power" onclick="filterCourses('power',this)">
         ⚡ Power Platform <span class="filter-count">13</span>
       </button>
-      <button class="course-filter-btn" onclick="filterCourses('copilot',this)">
+      <button class="course-filter-btn" data-cat="copilot" onclick="filterCourses('copilot',this)">
         🤖 AI &amp; Copilot <span class="filter-count">4</span>
       </button>
-      <button class="course-filter-btn" onclick="filterCourses('dotnet',this)">
+      <button class="course-filter-btn" data-cat="dotnet" onclick="filterCourses('dotnet',this)">
         🔷 .NET &amp; Blazor <span class="filter-count">11</span>
       </button>
-      <button class="course-filter-btn" onclick="filterCourses('data',this)">
+      <button class="course-filter-btn" data-cat="data" onclick="filterCourses('data',this)">
         📊 Data &amp; Analytics <span class="filter-count">3</span>
       </button>
-      <button class="course-filter-btn" onclick="filterCourses('other',this)">
+      <button class="course-filter-btn" data-cat="other" onclick="filterCourses('other',this)">
         🏗️ Other <span class="filter-count">8</span>
       </button>
     </div>
@@ -978,7 +983,30 @@ function renderCourses() {
   }).join('');
 }
 
+function updateCourseCounts() {
+  const total = COURSES_DATA.length;
+
+  const heroStat = document.querySelector('.courses-hero-stat-num');
+  if (heroStat) heroStat.textContent = total + '+';
+
+  const countMap = {};
+  COURSES_DATA.forEach(c => {
+    const cat = c.category || c.cat || 'other';
+    countMap[cat] = (countMap[cat] || 0) + 1;
+  });
+  countMap['all'] = total;
+
+  document.querySelectorAll('[data-cat]').forEach(btn => {
+    const cat = btn.dataset.cat;
+    const countEl = btn.querySelector('span');
+    if (countEl && countMap[cat] !== undefined) {
+      countEl.textContent = countMap[cat];
+    }
+  });
+}
+
 renderCourses();
+updateCourseCounts();
 
 const urlCat = new URLSearchParams(location.search).get('cat');
 if (urlCat) {

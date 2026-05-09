@@ -17,6 +17,7 @@
 <meta name="twitter:title" content="Intelligent Enterprise Dev · .NET 8 &amp; Azure AI"/>
 <meta name="twitter:description" content="C#, Blazor and Azure AI — zero to production. 46 lessons by MCT Raushan Ranjan."/>
 <meta name="twitter:image" content="https://rrskillverse.in/images/og-thumbnail.svg"/>
+<link rel="canonical" id="learnCanonical" href="https://rrskillverse.in/learn.html"/>
 <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
 <link rel="apple-touch-icon" href="/images/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1848,6 +1849,16 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 // ── Load course data ─────────────────────────────────────────
 const _courseId = new URLSearchParams(
   window.location.search).get('course') || 'default';
+
+function updateLearnCanonical(courseId) {
+  const el = document.getElementById('learnCanonical');
+  if (!el) return;
+  const base = 'https://rrskillverse.in/learn.html';
+  el.href = courseId && courseId !== 'default'
+    ? base + '?course=' + courseId
+    : base;
+}
+updateLearnCanonical(_courseId);
 
 function findCourseById(id) {
   if (!id || typeof COURSE_CATALOG === 'undefined') return null;
