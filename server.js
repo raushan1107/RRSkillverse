@@ -573,6 +573,24 @@ const agentLimiter = rateLimit({
   message: { error: 'Too many requests. Please wait.' }
 });
 
+const feedbackLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 20,
+  message: { error: 'Too many requests. Try again later.' }
+});
+
+const avatarLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 30,
+  message: { error: 'Too many requests. Try again later.' }
+});
+
+const adminLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  message: { error: 'Too many requests. Try again later.' }
+});
+
 // ── POST /api/agent/chat ───────────────────────────────────
 app.post('/api/agent/chat', agentLimiter, async (req, res) => {
   const { message, history, userId, userName } = req.body;
@@ -646,12 +664,8 @@ async function supabaseRequest(path, method = 'GET', body = null) {
 }
 
 async function saveMessage(userId, userName, userMsg, agentReply) {
-  if (!process.env.SUPABASE_URL) {
-    console.log('SUPABASE_URL not set — skipping save');
-    return;
-  }
+  if (!process.env.SUPABASE_URL) return;
   try {
-    console.log('Saving message for user:', userId);
     await supabaseRequest('agent_messages', 'POST', {
       user_id: userId,
       user_name: userName,
@@ -659,14 +673,13 @@ async function saveMessage(userId, userName, userMsg, agentReply) {
       agent_reply: agentReply,
       created_at: new Date().toISOString()
     });
-    console.log('Message saved successfully');
   } catch (e) {
     console.error('saveMessage error:', e.message);
   }
 }
 
 // ── POST /api/agent/feedback ───────────────────────────────
-app.post('/api/agent/feedback', async (req, res) => {
+app.post('/api/agent/feedback', feedbackLimiter, async (req, res) => {
   const { messageId, userId, rating, comment } = req.body;
   if (!rating) return res.status(400).json({ error: 'Rating required.' });
 
@@ -706,7 +719,7 @@ app.get('/api/agent/history', async (req, res) => {
 });
 
 // ── GET /api/admin/agent ───────────────────────────────────
-app.get('/api/admin/agent', async (req, res) => {
+app.get('/api/admin/agent', adminLimiter, async (req, res) => {
   const secret = req.headers['x-admin-secret'];
   if (!secret || secret !== process.env.ADMIN_SECRET) {
     return res.status(403).json({ error: 'Not authorized.' });
@@ -728,7 +741,7 @@ app.get('/api/admin/agent', async (req, res) => {
 });
 
 // ── GET /api/proxy-avatar ──────────────────────────────────
-app.get('/api/proxy-avatar', async (req, res) => {
+app.get('/api/proxy-avatar', avatarLimiter, async (req, res) => {
   const url = req.query.url;
   if (!url) return res.status(400).send('No URL');
 

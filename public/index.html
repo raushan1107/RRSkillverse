@@ -395,9 +395,9 @@ window.addEventListener('load', () => {
     <div class="offer-card" data-reveal><div class="offer-icon">⚡</div><div class="offer-title">Power Platform</div><div class="offer-desc">Power BI, Power Apps, Power Automate, and Copilot Studio with real-world enterprise use cases and PL-300/PL-400 certification prep.</div><div class="offer-tags"><span class="offer-tag">Power BI (PL-300)</span><span class="offer-tag">Power Apps</span><span class="offer-tag">Power Automate</span><span class="offer-tag">Copilot Studio</span></div><a href="courses.html?cat=power" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
     <div class="offer-card" data-reveal><div class="offer-icon">☁️</div><div class="offer-title">Azure & Cloud</div><div class="offer-desc">Hands-on Azure from fundamentals to developer associate — App Services, Functions, Integration, API Management, and AI Services.</div><div class="offer-tags"><span class="offer-tag">AZ-204</span><span class="offer-tag">AZ-104</span><span class="offer-tag">Azure AI</span><span class="offer-tag">Service Bus</span></div><a href="courses.html?cat=azure" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
     <div class="offer-card" data-reveal><div class="offer-icon">🔷</div><div class="offer-title">.NET & Blazor</div><div class="offer-desc">Master ASP.NET Core, C#, Blazor, Web API, Entity Framework and Microservices architecture for scalable enterprise applications.</div><div class="offer-tags"><span class="offer-tag">C# / ASP.NET</span><span class="offer-tag">Blazor</span><span class="offer-tag">Web API</span><span class="offer-tag">Microservices</span></div><a href="courses.html?cat=dotnet" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
-    <div class="offer-card" data-reveal><div class="offer-icon">🤖</div><div class="offer-title">AI & Machine Learning</div><div class="offer-desc">From Azure AI Services to TensorFlow — build intelligent applications and integrate AI into real enterprise systems.</div><div class="offer-tags"><span class="offer-tag">Azure AI</span><span class="offer-tag">TensorFlow</span><span class="offer-tag">Copilot</span><span class="offer-tag">ML Pipelines</span></div><a href="courses.html?cat=ai" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
+    <div class="offer-card" data-reveal><div class="offer-icon">🤖</div><div class="offer-title">AI & Machine Learning</div><div class="offer-desc">From Azure AI Services to TensorFlow — build intelligent applications and integrate AI into real enterprise systems.</div><div class="offer-tags"><span class="offer-tag">Azure AI</span><span class="offer-tag">TensorFlow</span><span class="offer-tag">Copilot</span><span class="offer-tag">ML Pipelines</span></div><a href="courses.html?cat=copilot" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
     <div class="offer-card" data-reveal><div class="offer-icon">📊</div><div class="offer-title">Data Analytics</div><div class="offer-desc">DAX, M Query, SQL Server, data modeling, paginated reports, and end-to-end BI solutions for business insights.</div><div class="offer-tags"><span class="offer-tag">DAX</span><span class="offer-tag">M Query</span><span class="offer-tag">SQL Server</span><span class="offer-tag">Data Modeling</span></div><a href="courses.html?cat=data" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
-    <div class="offer-card" data-reveal><div class="offer-icon">🏗️</div><div class="offer-title">System Design</div><div class="offer-desc">Scalable architecture patterns, distributed systems, caching, load balancing, and replication for senior engineers and architects.</div><div class="offer-tags"><span class="offer-tag">Distributed Systems</span><span class="offer-tag">Caching</span><span class="offer-tag">Scalability</span></div><a href="courses.html?cat=sysdesign" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
+    <div class="offer-card" data-reveal><div class="offer-icon">🏗️</div><div class="offer-title">System Design</div><div class="offer-desc">Scalable architecture patterns, distributed systems, caching, load balancing, and replication for senior engineers and architects.</div><div class="offer-tags"><span class="offer-tag">Distributed Systems</span><span class="offer-tag">Caching</span><span class="offer-tag">Scalability</span></div><a href="courses.html?cat=other" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Browse →</a></div>
   </div>
 </section>
 
@@ -479,8 +479,8 @@ window.addEventListener('load', () => {
     </div>
     <div class="support-strip-btns">
       <button class="support-strip-btn support-strip-upi"
-              onclick="openUPIModal(51, '☕ Support RR Skillverse', 'RR Skillverse Support')">
-        🇮🇳 UPI — ₹51
+              onclick="openUPIModal(11, '☕ Support RR Skillverse', 'RR Skillverse Support')">
+        🇮🇳 UPI — ₹11
       </button>
       <button class="support-strip-btn support-strip-paypal"
               onclick="openUPIModal(5, '🌍 Support via PayPal', 'RR Skillverse Support'); setTimeout(() => { const tabs = document.querySelectorAll('.pay-tab'); if (tabs[1]) tabs[1].click(); }, 150)">
@@ -529,8 +529,8 @@ window.addEventListener('load', () => {
       <div class="footer-link-group">
         <div class="footer-link-title">Technologies</div>
         <a href="/blog.html?cat=power-platform" class="footer-link">Power Platform</a>
-        <a href="/blog.html?cat=microsoft-azure" class="footer-link">Microsoft Azure</a>
-        <a href="/blog.html?cat=net-ecosystem" class="footer-link">.NET &amp; C#</a>
+        <a href="/blog.html?cat=azure" class="footer-link">Microsoft Azure</a>
+        <a href="/blog.html?cat=dotnet" class="footer-link">.NET &amp; C#</a>
         <a href="/blog.html?cat=ai-cloud" class="footer-link">AI &amp; Cloud</a>
       </div>
       <div class="footer-link-group">
@@ -595,7 +595,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 /* ── Marquee ──────────────────────────────────────────── */
-const MARQUEE = ['Azure Developer AZ-204','Power BI PL-300','MCT Certified','Power Platform Developer','CCNA · Cisco','ASP.NET Core Blazor','APIGEE API Management','TensorFlow · ML','2900+ Professionals Trained','Qt / QML Embedded','Copilot Studio','System Design','Python Programming','Data Analytics','Azure AI Services'];
+const MARQUEE = ['Azure Developer AZ-204','Power BI PL-300','MCT Certified','Power Platform Developer','CCNA · Cisco','ASP.NET Core Blazor','APIGEE API Management','TensorFlow · ML','3200+ Professionals Trained','Qt / QML Embedded','Copilot Studio','System Design','Python Programming','Data Analytics','Azure AI Services'];
 const mt = document.getElementById('marqTrack');
 if (mt) { const h = MARQUEE.map(t=>`<span class="marquee-item">${t}<span class="marquee-sep"></span></span>`).join(''); mt.innerHTML = h+h; }
 

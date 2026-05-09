@@ -109,7 +109,6 @@
     <button class="filter-btn active" id="btn-all" onclick="setFilter('all',this)">All Labs</button>
     <button class="filter-btn" id="btn-handson" onclick="setFilter('handson',this)">Hands-on</button>
     <button class="filter-btn" id="btn-capstone" onclick="setFilter('capstone',this)">Capstone</button>
-    <button class="filter-btn" id="btn-live" onclick="setFilter('live',this)">Live Now</button>
   </div>
 
   <div class="labs-section" id="labsContent">
@@ -312,8 +311,8 @@
         <div class="footer-link-group">
           <div class="footer-link-title">Technologies</div>
           <a href="/blog.html?cat=power-platform" class="footer-link">Power Platform</a>
-          <a href="/blog.html?cat=microsoft-azure" class="footer-link">Microsoft Azure</a>
-          <a href="/blog.html?cat=net-ecosystem" class="footer-link">.NET &amp; C#</a>
+          <a href="/blog.html?cat=azure" class="footer-link">Microsoft Azure</a>
+          <a href="/blog.html?cat=dotnet" class="footer-link">.NET &amp; C#</a>
           <a href="/blog.html?cat=ai-cloud" class="footer-link">AI &amp; Cloud</a>
         </div>
         <div class="footer-link-group">
@@ -358,7 +357,6 @@ function renderCards() {
     if (activeFilter === 'all') show = true;
     else if (activeFilter === 'handson' && type === 'handson') show = true;
     else if (activeFilter === 'capstone' && type === 'capstone') show = true;
-    else if (activeFilter === 'live') show = true;
     card.style.display = show ? '' : 'none';
   });
   const handsonSection = document.getElementById('handsonSection');
