@@ -416,18 +416,18 @@ const labGenLimiter = rateLimit({
 });
 
 // ── GET /api/lab/:id — check cache ─────────────────────────
-app.get('/api/lab/:id', (req, res) => {
+app.get('/api/lab/:id', async (req, res) => {
   const id = req.params.id.replace(/[^a-z0-9-]/g, '');
   const filePath = path.join(LABS_CACHE_DIR, `${id}.json`);
 
-  if (fs.existsSync(filePath)) {
-    try {
-      const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-      return res.json({ cached: true, content: data.content,
-                        generatedAt: data.generatedAt });
-    } catch {
-      // corrupted file — treat as not cached
-    }
+  try {
+    await fsPromises.access(filePath);
+    const raw = await fsPromises.readFile(filePath, 'utf8');
+    const data = JSON.parse(raw);
+    return res.json({ cached: true, content: data.content,
+                      generatedAt: data.generatedAt });
+  } catch {
+    // File doesn't exist or corrupted — treat as not cached
   }
 
   res.json({ cached: false });

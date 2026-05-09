@@ -612,9 +612,6 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #3fb950; flex-shrink: 0; }
 .nav-hamburger { display: none; }
 .nav-drawer { display: none; }
-.nav-mega-menu { display: none !important; }
-.nav-dropdown-wrap:hover .nav-mega-menu { display: block !important; }
-.nav-dropdown-wrap.open .nav-mega-menu { display: block !important; }
 .ai-fab {
   position: fixed; bottom: 24px; right: 24px;
   width: 48px; height: 48px; border-radius: 50%;
@@ -2144,69 +2141,6 @@ function togglePhase(index) {
   if (chev) chev.textContent = open ? '▸' : '▾';
 }
 
-// ── Home phase rows ────────────────────────────────────────
-function buildPhaseRows() {
-  const container = document.getElementById('phase-rows');
-  container.innerHTML = '';
-  PHASES.forEach((ph, pi) => {
-    const row = document.createElement('div');
-    row.className = 'phase-row';
-    row.onclick = () => loadLesson(phaseStart(pi));
-    row.innerHTML =
-      '<div class="phase-row-left">' +
-        '<div class="phase-dot" style="background:' + ph.dot + '"></div>' +
-        '<span class="phase-row-title">' + ph.label + ' — ' + ph.title + '</span>' +
-      '</div>' +
-      '<span class="phase-row-count">' + ph.lessons.length + ' lessons</span>' +
-      '<div class="course-ai-footer">' +
-        '<span class="course-ai-badge">🤖 Axiom AI</span>' +
-        '<span class="course-ai-badge">🧪 Labs</span>' +
-        '<span class="course-mct-badge">✅ MCT Verified</span>' +
-      '</div>';
-    container.appendChild(row);
-  });
-}
-
-function phaseStart(pi) {
-  let i = 0;
-  for (let j = 0; j < pi; j++) i += PHASES[j].lessons.length;
-  return i;
-}
-
-// ── Update home screen with loaded course data ─────────────
-function updateHomeScreen() {
-  if (!_courseData) return;
-
-  const eyebrow = document.querySelector('.home-eyebrow');
-  if (eyebrow) {
-    eyebrow.textContent = _courseData.subtitle || _courseData.title;
-  }
-
-  const title = document.querySelector('.home-title');
-  if (title) {
-    title.innerHTML = _courseData.title
-      .replace(' with ', '<br>with ')
-      .replace(' & ', '<br><em>&amp;</em>');
-  }
-
-  const desc = document.querySelector('.home-desc');
-  if (desc) desc.textContent = _courseData.description;
-
-  const statRow = document.querySelector('.home-stat-row');
-  if (statRow && _courseData.stats) {
-    statRow.innerHTML = _courseData.stats
-      .map((s, i) => i < _courseData.stats.length - 1
-        ? `<span>${s}</span><span class="stat-sep">·</span>`
-        : `<span>${s}</span>`)
-      .join('');
-  }
-
-  const modeHint = document.getElementById('mode-hint');
-  if (modeHint) {
-    modeHint.textContent = ALL.length + ' lessons across ' + PHASES.length + ' phases';
-  }
-}
-
 // ── Progress ───────────────────────────────────────────────
 function updateProgress() {
   const el = document.getElementById('prog-tag');
@@ -2473,29 +2407,6 @@ function copyCode(btn) {
     btn.textContent = 'Copied';
     setTimeout(() => btn.textContent = 'Copy', 1600);
   });
-}
-
-async function askDoubt() {
-  const input = document.getElementById('ask-input');
-  const btn   = document.getElementById('ask-btn');
-  const resp  = document.getElementById('ask-resp');
-  const q = input.value.trim();
-  if (!q || currentIdx < 0) return;
-  btn.disabled = true; btn.textContent = '…';
-  resp.classList.add('on');
-  resp.innerHTML = '<span style="color:var(--ink-3)">Thinking…</span>';
-  try {
-    const data = await apiPost('/api/doubt', {
-      question:    q,
-      lessonTitle: ALL[currentIdx].title,
-      courseId:    _courseId || 'default',
-      courseTitle: _courseData ? _courseData.title : ''
-    });
-    resp.innerHTML = data.content;
-  } catch (e) {
-    resp.innerHTML = '<p style="color:var(--err)">' + e.message + '</p>';
-  }
-  btn.disabled = false; btn.textContent = 'Ask →';
 }
 
 // ── Search ─────────────────────────────────────────────────
