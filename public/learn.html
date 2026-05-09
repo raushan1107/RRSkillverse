@@ -672,25 +672,16 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 @media (max-width: 768px) {
 
   .learn-sidebar {
-    display: none;
     position: fixed;
-    top: 60px;
-    left: 0;
-    width: 80vw;
-    max-width: 320px;
-    height: calc(100vh - 60px);
-    background: var(--wash);
-    border-right: 1px solid var(--line);
-    z-index: 500;
-    overflow-y: auto;
-    padding: 16px;
-    box-shadow: 4px 0 24px rgba(0,0,0,0.3);
+    transform: translateX(-105%);
     transition: transform 0.25s ease;
-    transform: translateX(-100%);
+    z-index: 500;
+    top: 60px;
+    height: calc(100vh - 60px);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.3);
   }
 
   .learn-sidebar.drawer-open {
-    display: block;
     transform: translateX(0);
   }
 
@@ -704,15 +695,9 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   }
   .sidebar-backdrop.open { display: block; }
 
-  .learn-main {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 16px !important;
-  }
-
-  .learn-layout {
-    flex-direction: column !important;
-    gap: 0 !important;
+  .learn-content-wrap {
+    padding: 16px 20px;
+    max-width: 100%;
   }
 
   .learn-breadcrumb {
@@ -831,61 +816,48 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 /* ── Skillverse Library Hero ── */
 .skillverse-hero {
   background: linear-gradient(135deg,
-    rgba(0,102,255,0.06) 0%,
-    rgba(0,102,255,0.02) 50%,
-    rgba(112,72,160,0.04) 100%);
-  border-bottom: 1px solid var(--line);
-  padding: 40px 0 32px;
+    rgba(26,86,219,0.07) 0%,
+    rgba(14,165,233,0.03) 60%,
+    rgba(99,102,241,0.05) 100%);
+  border-bottom: 1px solid var(--border,#e8e8e4);
+  padding: 48px 52px 40px;
   position: relative;
   overflow: hidden;
-  margin-bottom: 28px;
 }
 
 .skillverse-hero::before {
   content: '';
   position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(0,102,255,0.07), transparent 70%);
+  top: -80px;
+  right: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle,
+    rgba(26,86,219,0.08), transparent 65%);
   pointer-events: none;
 }
 
 .skillverse-hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.6px;
+  gap: 8px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
   color: var(--accent);
-  background: rgba(0,102,255,0.08);
-  border: 1px solid rgba(0,102,255,0.2);
+  background: rgba(26,86,219,0.1);
+  border: 1px solid rgba(26,86,219,0.22);
   border-radius: 20px;
   padding: 5px 14px;
   margin-bottom: 18px;
 }
 
-.sh-badge-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: shPulse 2s ease-in-out infinite;
-}
-
-@keyframes shPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
-}
-
 .skillverse-hero-title {
   font-size: 38px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--ink);
-  letter-spacing: -1px;
+  letter-spacing: -0.8px;
   line-height: 1.1;
   margin-bottom: 14px;
 }
@@ -894,57 +866,62 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   font-size: 15px;
   color: var(--ink-3);
   line-height: 1.75;
-  max-width: 560px;
-  margin-bottom: 24px;
+  max-width: 640px;
+  margin-bottom: 28px;
 }
 
 .skillverse-hero-sub strong {
-  color: var(--ink-2);
+  color: var(--ink);
   font-weight: 600;
 }
 
 .skillverse-hero-pills {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-wrap: nowrap;
   margin-bottom: 32px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.skillverse-hero-pills::-webkit-scrollbar {
+  display: none;
 }
 
 .sh-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 14px;
+  padding: 7px 16px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 20px;
   font-size: 12.5px;
   font-weight: 600;
   color: var(--ink-3);
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.15s;
 }
 
 .sh-pill:hover {
   border-color: var(--accent);
-  color: var(--ink-2);
-  transform: translateY(-1px);
+  color: var(--ink);
 }
-
-.sh-pill-icon { font-size: 14px; }
 
 .skillverse-hero-stats {
   display: flex;
-  gap: 0;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
-  max-width: 480px;
+  max-width: 520px;
 }
 
 .sh-stat {
   flex: 1;
-  padding: 14px 16px;
+  padding: 16px 20px;
   text-align: center;
   border-right: 1px solid var(--line);
   transition: background 0.15s;
@@ -954,30 +931,31 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 .sh-stat:hover { background: var(--wash); }
 
 .sh-stat-num {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 800;
   color: var(--accent);
   letter-spacing: -0.5px;
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .sh-stat-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.4px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--ink-4);
 }
 
 @media (max-width: 768px) {
-  .skillverse-hero { padding: 28px 0 20px; }
-  .skillverse-hero-title { font-size: 26px !important; }
-  .skillverse-hero-sub { font-size: 13.5px !important; }
-  .skillverse-hero-pills { gap: 7px; }
-  .sh-pill { font-size: 11.5px; padding: 6px 11px; }
+  .skillverse-hero {
+    padding: 28px 20px 24px;
+  }
+  .skillverse-hero-title { font-size: 26px; }
+  .skillverse-hero-sub { font-size: 13.5px; }
   .skillverse-hero-stats { max-width: 100%; }
-  .sh-stat-num { font-size: 18px; }
+  .sh-stat { padding: 12px 10px; }
+  .sh-stat-num { font-size: 20px; }
 }
 
 /* ── Course Card AI Badge ── */
@@ -1278,29 +1256,83 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: var(--surface);
-  margin-bottom: 32px;
+  margin: 0;
 }
+
 .skf-item {
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  padding: 24px 20px;
+  padding: 28px 24px;
   border-right: 1px solid var(--line);
   transition: background 0.15s;
+  min-width: 0;
 }
-.skf-item:last-child { border-right: none; }
-.skf-item:hover { background: var(--wash); }
-.skf-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
-.skf-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
-.skf-desc { font-size: 12px; color: var(--ink-3); line-height: 1.65; }
+
+.skf-item:last-child {
+  border-right: none;
+}
+
+.skf-item:hover {
+  background: var(--wash);
+}
+
+.skf-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  line-height: 1;
+}
+
+.skf-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.skf-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+  line-height: 1.3;
+}
+
+.skf-desc {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  line-height: 1.65;
+  word-wrap: break-word;
+}
+
 @media (max-width: 900px) {
-  .skillverse-feature-strip { grid-template-columns: repeat(2, 1fr); }
-  .skf-item:nth-child(2) { border-right: none; }
-  .skf-item:nth-child(3) { border-right: 1px solid var(--line); }
+  .skillverse-feature-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .skf-item:nth-child(2) {
+    border-right: none;
+  }
+  .skf-item:nth-child(3) {
+    border-right: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+  }
+  .skf-item:nth-child(4) {
+    border-right: none;
+    border-top: 1px solid var(--line);
+  }
 }
+
 @media (max-width: 560px) {
-  .skillverse-feature-strip { grid-template-columns: 1fr; }
-  .skf-item { border-right: none !important; }
+  .skillverse-feature-strip {
+    grid-template-columns: 1fr;
+  }
+  .skf-item {
+    border-right: none !important;
+    border-top: 1px solid var(--line);
+  }
+  .skf-item:first-child {
+    border-top: none;
+  }
 }
 
 /* ── Course AI/MCT badges ── */
@@ -1403,11 +1435,292 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 .pcc-label { font-size:9.5px;color:var(--text-dim,#6e7681);line-height:1.4; }
 @media(max-width:480px){.paypal-cost-context{grid-template-columns:repeat(2,1fr);}.pcc-item:nth-child(2){border-right:none;}.pcc-item:nth-child(3){border-right:1px solid var(--border,#30363d);border-top:1px solid var(--border,#30363d);}.pcc-item:nth-child(4){border-top:1px solid var(--border,#30363d);}}
 
-/* ── Layout overrides (PART 6) ── */
-.learn-layout { display:flex;align-items:stretch;min-height:calc(100vh - 60px);width:100%;overflow:hidden; }
-.learn-sidebar { width:260px;flex-shrink:0;border-right:1px solid var(--line);overflow-y:auto;height:calc(100vh - 60px);position:sticky;top:60px; }
-.learn-main { flex:1;min-width:0;max-width:100%;padding:32px 48px;overflow-y:auto; }
-@media(max-width:1200px){.learn-main{padding:24px 32px;}}
+/* ── Layout overrides ── */
+.main-inner { max-width: 100%; margin: 0; padding: 0; }
+
+.learn-layout {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+.learn-sidebar {
+  width: 252px;
+  min-width: 252px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--line);
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  position: sticky;
+  top: 60px;
+  background: var(--wash);
+}
+
+.learn-main {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  overflow-y: auto;
+  background: var(--wash);
+}
+
+.learn-content-wrap {
+  max-width: 860px;
+  padding: 36px 48px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .learn-content-wrap {
+    padding: 28px 32px;
+  }
+}
+
+/* ── Course intro page ── */
+.course-intro-page {
+  padding: 36px 48px;
+  max-width: 860px;
+}
+
+.course-intro-category {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.course-intro-title {
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.6px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.course-intro-desc {
+  font-size: 15px;
+  color: var(--ink-3);
+  line-height: 1.75;
+  margin-bottom: 22px;
+  max-width: 640px;
+}
+
+.course-intro-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.cim-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.cim-ai {
+  background: rgba(26,86,219,0.08);
+  border-color: rgba(26,86,219,0.2);
+  color: var(--accent);
+}
+
+.course-intro-start {
+  padding: 13px 32px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all 0.15s;
+  margin-bottom: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.course-intro-start:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(26,86,219,0.3);
+}
+
+.course-intro-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.cif-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.cif-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.cif-icon { font-size: 24px; margin-bottom: 10px; }
+
+.cif-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.cif-desc {
+  font-size: 12px;
+  color: var(--ink-3);
+  line-height: 1.65;
+}
+
+.course-intro-phases {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.cip-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 14px 20px;
+  background: var(--wash);
+  border-bottom: 1px solid var(--line);
+}
+
+.cip-phase { border-bottom: 1px solid var(--line); }
+.cip-phase:last-child { border-bottom: none; }
+
+.cip-phase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: background 0.15s;
+  gap: 12px;
+}
+
+.cip-phase-header:hover { background: var(--wash); }
+
+.cip-phase-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.cip-phase-num {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(0,102,255,0.1);
+  border: 1px solid rgba(0,102,255,0.2);
+  border-radius: 20px;
+  padding: 2px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cip-phase-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cip-phase-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.cip-count { font-size: 11.5px; color: var(--ink-3); white-space: nowrap; }
+
+.cip-chevron {
+  font-size: 12px;
+  color: var(--ink-3);
+  transition: transform 0.2s;
+}
+
+.cip-phase-lessons {
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.cip-lesson-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px 10px 32px;
+  cursor: pointer;
+  transition: background 0.12s;
+  border-bottom: 1px solid var(--line);
+}
+
+.cip-lesson-item:last-child { border-bottom: none; }
+.cip-lesson-item:hover { background: rgba(0,102,255,0.05); }
+
+.cip-lesson-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink-4);
+  font-family: var(--mono);
+  flex-shrink: 0;
+  width: 22px;
+}
+
+.cip-lesson-title {
+  flex: 1;
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
+.cip-lesson-item:hover .cip-lesson-title { color: var(--accent); }
+
+.cip-lesson-time {
+  font-size: 11px;
+  color: var(--ink-4);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .course-intro-page { padding: 20px 16px; }
+  .course-intro-title { font-size: 24px; }
+  .course-intro-desc { font-size: 13.5px; }
+  .course-intro-features { grid-template-columns: 1fr; gap: 10px; }
+}
 </style>
 <script src="js/courses-data.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -1417,7 +1730,7 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 <div class="shell">
 
   <div style="background:#fff;border-bottom:1px solid #e8e8e4;padding:7px 20px;display:flex;align-items:center;gap:8px;font-size:12px;color:#888884;flex-shrink:0">
-    <a href="courses.html" style="color:#888884;text-decoration:none;transition:color 0.1s" onmouseover="this.style.color='#0f0f0d'" onmouseout="this.style.color='#888884'">← Skillverse Library</a>
+    <a href="/learn.html" style="color:#888884;text-decoration:none;transition:color 0.1s" onmouseover="this.style.color='#0f0f0d'" onmouseout="this.style.color='#888884'">← AI Academy</a>
     <span>›</span>
     <span id="breadcrumb-course-name" style="color:#0f0f0d;font-weight:500">Intelligent Enterprise Dev · .NET 8 &amp; Azure AI</span>
   </div>
@@ -1460,85 +1773,7 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
         <button class="sidebar-toggle-btn" id="sidebarToggleBtn" onclick="toggleLearnSidebar()">☰ Lessons &amp; Phases</button>
 
         <!-- HOME ─────────────────────────────────────────── -->
-        <div class="home-view" id="home">
-          <div class="skillverse-hero">
-            <div class="skillverse-hero-badge">
-              <span class="sh-badge-dot"></span>
-              🤖 AI Academy · Powered by Axiom · MCT Verified
-            </div>
-            <h1 class="skillverse-hero-title">Skillverse AI Academy</h1>
-            <p class="skillverse-hero-sub">
-              Every lesson is <strong>AI-generated in Raushan's exact teaching style</strong> —
-              simplified analogies, real enterprise examples, and instant clarifications
-              from <strong>Axiom</strong>, your personal AI tutor.
-              Always current. Always free.
-            </p>
-            <div class="skillverse-hero-pills">
-              <div class="sh-pill"><span class="sh-pill-icon">🤖</span>AI Tutor on every lesson</div>
-              <div class="sh-pill"><span class="sh-pill-icon">🧪</span>Hands-on labs included</div>
-              <div class="sh-pill"><span class="sh-pill-icon">✅</span>MCT-verified content</div>
-              <div class="sh-pill"><span class="sh-pill-icon">🎯</span>Exam-aligned curriculum</div>
-            </div>
-            <div class="skillverse-hero-stats">
-              <div class="sh-stat">
-                <div class="sh-stat-num">40+</div>
-                <div class="sh-stat-label">Courses</div>
-              </div>
-              <div class="sh-stat">
-                <div class="sh-stat-num">500+</div>
-                <div class="sh-stat-label">Lessons</div>
-              </div>
-              <div class="sh-stat">
-                <div class="sh-stat-num">10+</div>
-                <div class="sh-stat-label">Years MCT</div>
-              </div>
-              <div class="sh-stat">
-                <div class="sh-stat-num">3200+</div>
-                <div class="sh-stat-label">Trained</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="skillverse-feature-strip">
-            <div class="skf-item">
-              <div class="skf-icon">🤖</div>
-              <div class="skf-content">
-                <div class="skf-title">Axiom AI Tutor</div>
-                <div class="skf-desc">Ask anything. Get instant answers from Axiom, trained on Raushan's enterprise teaching style and 10+ years of MCT notes.</div>
-              </div>
-            </div>
-            <div class="skf-item">
-              <div class="skf-icon">📝</div>
-              <div class="skf-content">
-                <div class="skf-title">AI-Generated Notes</div>
-                <div class="skf-desc">Lessons written by Axiom in Raushan's voice — simplified analogies, real enterprise context, zero fluff.</div>
-              </div>
-            </div>
-            <div class="skf-item">
-              <div class="skf-icon">🧪</div>
-              <div class="skf-content">
-                <div class="skf-title">Hands-on Labs</div>
-                <div class="skf-desc">Every course includes guided labs with real Azure, .NET, and Power BI exercises — not just theory.</div>
-              </div>
-            </div>
-            <div class="skf-item">
-              <div class="skf-icon">✅</div>
-              <div class="skf-content">
-                <div class="skf-title">MCT-Verified</div>
-                <div class="skf-desc">All content verified by Raushan Ranjan, Microsoft Certified Trainer with 10+ years of enterprise training globally.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="phase-rows" id="phase-rows"></div>
-          <button class="btn-start" onclick="goFirst()">Begin Learning →</button>
-          <hr class="home-divider">
-          <div class="trainer-byline">
-            <div class="trainer-byline-name">Raushan Ranjan</div>
-            <div class="trainer-byline-info">Microsoft Certified Trainer (MCT) · Senior Corporate Trainer</div>
-            <div class="trainer-byline-info">Koenig Solutions, Noida</div>
-          </div>
-        </div>
+        <div class="home-view" id="home"></div>
 
         <!-- LABS HOME ────────────────────────────────────── -->
         <div class="home-view off" id="labs-home">
@@ -1559,7 +1794,7 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
         </div>
 
         <!-- LESSON ───────────────────────────────────────── -->
-        <div class="lesson-view" id="lesson-view">
+        <div class="lesson-view learn-content-wrap" id="lesson-view">
           <div class="lesson-nav-top">
             <span class="breadcrumb-link" onclick="goHome()">Home</span>
             <span>›</span>
@@ -1576,7 +1811,7 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
         </div>
 
         <!-- LAB VIEW ─────────────────────────────────────── -->
-        <div class="lab-view" id="lab-view">
+        <div class="lab-view learn-content-wrap" id="lab-view">
           <div class="lesson-nav-top">
             <span class="breadcrumb-link" onclick="goHome()">Home</span>
             <span>›</span>
@@ -1617,8 +1852,17 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 const _courseId = new URLSearchParams(
   window.location.search).get('course') || 'default';
 
+function findCourseById(id) {
+  if (!id || typeof COURSE_CATALOG === 'undefined') return null;
+  const normalized = id.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return Object.values(COURSE_CATALOG).find(c => {
+    const cNorm = (c.id || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    return cNorm === normalized;
+  }) || null;
+}
+
 const _courseData = (typeof COURSE_CATALOG !== 'undefined')
-  ? (COURSE_CATALOG[_courseId] || null)
+  ? (findCourseById(_courseId) || null)
   : null;
 
 // Build PHASES from loaded course data
@@ -1805,6 +2049,99 @@ function buildSidebar() {
 
     toc.appendChild(block);
   });
+}
+
+// ── Course intro page ──────────────────────────────────────
+function buildCourseIntroPage() {
+  const home = document.getElementById('home');
+  if (!home || !_courseData) return;
+
+  const course = _courseData;
+  let globalIdx = 0;
+
+  const phasesHTML = (course.phases || []).map((phase, i) => {
+    const lessonItems = (phase.lessons || []).map((lessonTitle, j) => {
+      const idx = globalIdx++;
+      return `
+        <div class="cip-lesson-item" onclick="loadLesson(${idx})">
+          <span class="cip-lesson-num">${String(j+1).padStart(2,'0')}</span>
+          <span class="cip-lesson-title">${lessonTitle}</span>
+          <span class="cip-lesson-time">~8 min</span>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="cip-phase">
+        <div class="cip-phase-header" onclick="togglePhase(${i})">
+          <div class="cip-phase-left">
+            <span class="cip-phase-num">${phase.label}</span>
+            <span class="cip-phase-title">${phase.title}</span>
+          </div>
+          <div class="cip-phase-right">
+            <span class="cip-count">${(phase.lessons||[]).length} lessons</span>
+            <span class="cip-chevron" id="phase-chev-${i}">▸</span>
+          </div>
+        </div>
+        <div class="cip-phase-lessons" id="phase-body-${i}" style="display:none">
+          ${lessonItems}
+        </div>
+      </div>`;
+  }).join('');
+
+  const totalLessons = ALL.length || (course.phases || []).reduce((s, p) => s + (p.lessons||[]).length, 0);
+  const numPhases = (course.phases || []).length;
+
+  home.innerHTML = `
+    <div class="course-intro-page">
+      <div class="course-intro-header">
+        <div class="course-intro-category">${course.category || 'Course'}</div>
+        <h1 class="course-intro-title">${course.title}</h1>
+        <p class="course-intro-desc">${course.description || ''}</p>
+        <div class="course-intro-meta">
+          <span class="cim-pill">📚 ${totalLessons} lessons</span>
+          <span class="cim-pill">🗂️ ${numPhases} phases</span>
+          <span class="cim-pill">🎯 ${course.level || 'Intermediate'}</span>
+          <span class="cim-pill cim-ai">🤖 Axiom AI included</span>
+        </div>
+        <button class="course-intro-start" onclick="startFirstLesson()">
+          Start Learning →
+        </button>
+      </div>
+      <div class="course-intro-features">
+        <div class="cif-card">
+          <div class="cif-icon">🤖</div>
+          <div class="cif-title">Axiom AI Tutor</div>
+          <div class="cif-desc">Ask any doubt mid-lesson. Get instant answers in Raushan's teaching style.</div>
+        </div>
+        <div class="cif-card">
+          <div class="cif-icon">📝</div>
+          <div class="cif-title">AI-Generated Notes</div>
+          <div class="cif-desc">Every lesson generated fresh using Azure GPT-4o — simplified, practical, enterprise-grade.</div>
+        </div>
+        <div class="cif-card">
+          <div class="cif-icon">🧪</div>
+          <div class="cif-title">Hands-on Labs</div>
+          <div class="cif-desc">Real exercises with Azure, Power BI, and .NET. Build while you learn.</div>
+        </div>
+      </div>
+      <div class="course-intro-phases">
+        <div class="cip-title">Course Curriculum</div>
+        ${phasesHTML}
+      </div>
+    </div>`;
+}
+
+function startFirstLesson() {
+  goFirst();
+}
+
+function togglePhase(index) {
+  const body = document.getElementById('phase-body-' + index);
+  const chev = document.getElementById('phase-chev-' + index);
+  if (!body) return;
+  const open = body.style.display === 'block';
+  body.style.display = open ? 'none' : 'block';
+  if (chev) chev.textContent = open ? '▸' : '▾';
 }
 
 // ── Home phase rows ────────────────────────────────────────
@@ -2287,10 +2624,9 @@ function buildComingSoonHTML(courseId) {
   const courseId = params.get('course') || 'default';
   const el = document.getElementById('breadcrumb-course-name');
   if (!el) return;
-  if (typeof COURSE_CATALOG !== 'undefined' &&
-      COURSE_CATALOG[courseId]) {
-    el.textContent = COURSE_CATALOG[courseId].subtitle
-      || COURSE_CATALOG[courseId].title;
+  const courseData = findCourseById(courseId);
+  if (courseData) {
+    el.textContent = courseData.subtitle || courseData.title;
   } else if (courseId === 'default' || !params.get('course')) {
     el.textContent = 'Intelligent Enterprise Dev · .NET 8 & Azure AI';
   } else {
@@ -2307,9 +2643,8 @@ try {
     // No param = default course, proceed normally
     if (!courseId) return;
 
-    // Course found in catalog = proceed normally
-    if (typeof COURSE_CATALOG !== 'undefined' &&
-        COURSE_CATALOG[courseId]) {
+    // Course found in catalog (case/hyphen-insensitive) = proceed normally
+    if (findCourseById(courseId)) {
       return;
     }
 
@@ -2333,11 +2668,12 @@ try {
   }
 
   buildSidebar();
-  buildPhaseRows();
+  buildCourseIntroPage();
   buildLabsSidebar();
   buildLabsHomeList();
   updateProgress();
-  updateHomeScreen();
+  const _modeHint = document.getElementById('mode-hint');
+  if (_modeHint) _modeHint.textContent = ALL.length + ' lessons across ' + PHASES.length + ' phases';
   checkAdminMode();
 
   if (window._deepLinkMode === 'labs') {
