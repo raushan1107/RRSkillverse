@@ -1323,6 +1323,26 @@ button.lesson-footer-item {
 }
 .lesson-comments-title { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
 .lesson-comments-sub { font-size: 13px; color: var(--ink-3); margin-bottom: 20px; line-height: 1.6; }
+.giscus-loading {
+  font-size: 13px;
+  color: var(--ink-3);
+  padding: 14px 0;
+}
+.giscus-fallback {
+  display: none;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  color: var(--ink-3);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.giscus-fallback a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
 
 /* ── Mobile adjustments for new lesson layout ── */
 @media (max-width: 768px) {
@@ -3458,10 +3478,11 @@ async function submitDoubt() {
   }
 }
 
-function loadLessonGiscus(lessonTitle) {
-  const container = document.getElementById('lessonGiscusContainer');
+function loadGiscusComments(container, term, options = {}) {
   if (!container) return;
-  container.innerHTML = '';
+  const fallbackId = options.fallbackId || '';
+  container.innerHTML = '<div class="giscus-loading">Loading discussion...</div>';
+
   const script = document.createElement('script');
   script.src = 'https://giscus.app/client.js';
   script.setAttribute('data-repo', 'raushan1107/RRSkillverse');
@@ -3469,14 +3490,53 @@ function loadLessonGiscus(lessonTitle) {
   script.setAttribute('data-category', 'Blog Comments');
   script.setAttribute('data-category-id', 'DIC_kwDOSXq5D84C8oWk');
   script.setAttribute('data-mapping', 'specific');
-  script.setAttribute('data-term', lessonTitle || 'lesson');
+  script.setAttribute('data-term', term || 'lesson');
+  script.setAttribute('data-strict', '0');
   script.setAttribute('data-reactions-enabled', '1');
+  script.setAttribute('data-emit-metadata', '0');
+  script.setAttribute('data-input-position', 'bottom');
   script.setAttribute('data-theme', 'light');
   script.setAttribute('data-lang', 'en');
-  script.setAttribute('data-loading', 'lazy');
-  script.crossOrigin = 'anonymous';
+  if (options.lazy) script.setAttribute('data-loading', 'lazy');
+  script.setAttribute('crossorigin', 'anonymous');
   script.async = true;
   container.appendChild(script);
+
+  window.setTimeout(() => {
+    if (!container.querySelector('iframe.giscus-frame')) {
+      const loading = container.querySelector('.giscus-loading');
+      if (loading) loading.textContent = 'Discussion is still loading. If it does not appear, your browser may be blocking the GitHub comments widget.';
+      if (fallbackId) {
+        const fallback = document.getElementById(fallbackId);
+        if (fallback) fallback.style.display = 'block';
+      }
+    }
+  }, 5000);
+}
+
+function loadLessonGiscus(lessonTitle) {
+  loadGiscusComments(
+    document.getElementById('lessonGiscusContainer'),
+    lessonTitle || 'lesson',
+    { lazy: true }
+  );
+}
+
+function loadLabGiscus(labTitle) {
+  loadGiscusComments(
+    document.getElementById('labGiscusContainer'),
+    'Lab: ' + (labTitle || 'lab'),
+    { fallbackId: 'labGiscusFallback' }
+  );
+}
+
+function scrollToLabComments(labTitle) {
+  const el = document.getElementById('lab-giscus-box');
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const container = document.getElementById('labGiscusContainer');
+  if (container && !container.querySelector('iframe.giscus-frame')) {
+    loadLabGiscus(labTitle);
+  }
 }
 
 function openSupportModal(tab = 'upi') {
@@ -3530,7 +3590,7 @@ function injectLabFooter(el, lab) {
         </div>
       </div>
       <div class="lesson-footer-divider"></div>
-      <div class="lesson-footer-item" onclick="document.getElementById('lab-giscus-box').scrollIntoView({behavior:'smooth'})">
+      <div class="lesson-footer-item" onclick="scrollToLabComments('${(labTitle).replace(/'/g,"\\'")}')">
         <span>💬</span>
         <span>Comment</span>
       </div>
@@ -3544,27 +3604,13 @@ function injectLabFooter(el, lab) {
       <div class="lesson-comments-title">💬 Discussion</div>
       <div class="lesson-comments-sub">Ask questions, share your lab result, or help others build through this exercise.</div>
       <div id="labGiscusContainer"></div>
+      <div class="giscus-fallback" id="labGiscusFallback">
+        Comments are powered by GitHub Discussions. If the widget is blocked, open
+        <a href="https://github.com/raushan1107/RRSkillverse/discussions" target="_blank" rel="noopener">RR Skillverse Discussions</a>.
+      </div>
     </section>`;
   el.appendChild(footer);
-
-  const container = footer.querySelector('#labGiscusContainer');
-  const script = document.createElement('script');
-  script.src = 'https://giscus.app/client.js';
-  script.setAttribute('data-repo', 'raushan1107/RRSkillverse');
-  script.setAttribute('data-repo-id', 'R_kgDOSXq5Dw');
-  script.setAttribute('data-category', 'Blog Comments');
-  script.setAttribute('data-category-id', 'DIC_kwDOSXq5D84C8oWk');
-  script.setAttribute('data-mapping', 'specific');
-  script.setAttribute('data-term', 'Lab: ' + labTitle);
-  script.setAttribute('data-reactions-enabled', '1');
-  script.setAttribute('data-emit-metadata', '0');
-  script.setAttribute('data-input-position', 'bottom');
-  script.setAttribute('data-theme', 'light');
-  script.setAttribute('data-lang', 'en');
-  script.setAttribute('data-loading', 'lazy');
-  script.crossOrigin = 'anonymous';
-  script.async = true;
-  container.appendChild(script);
+  loadLabGiscus(labTitle);
 }
 
 async function submitLabDoubt(labTitle) {
