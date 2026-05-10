@@ -1353,6 +1353,8 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 
 /* ── Lab support strip ── */
 .lab-support-strip { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.lab-support-label { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--ink-2); margin-right: 4px; }
+.lab-support-options { display: inline-flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .lab-support-btn { padding: 7px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--wash); font-size: 12px; font-weight: 600; color: var(--ink-3); cursor: pointer; font-family: var(--font); transition: all 0.15s; }
 .lab-support-btn:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -2441,11 +2443,18 @@ function loadLesson(idx) {
     </div>
 
     <div class="lesson-footer-strip">
-      <div class="lesson-footer-item lesson-footer-support"
-           onclick="openSupportModal()">
-        <span>☕</span>
-        <span>Support this free library</span>
-      </div>
+      <div class="lesson-footer-item lesson-footer-support lesson-footer-support-wrap">
+  <div class="lesson-footer-support-label">
+    <span>☕</span>
+    <span>Support this free library</span>
+  </div>
+
+  <div class="lesson-footer-support-options">
+    <button type="button" onclick="openSupportModal('upi')">🇮🇳 UPI</button>
+    <button type="button" onclick="openSupportModal('paypal')">🌍 PayPal</button>
+    <button type="button" onclick="openSupportModal('bank')">🏦 Bank Transfer</button>
+  </div>
+</div>
       <div class="lesson-footer-divider"></div>
       <div class="lesson-footer-item" onclick="scrollToComments()">
         <span>💬</span>
@@ -3234,9 +3243,14 @@ function loadLessonGiscus(lessonTitle) {
   container.appendChild(script);
 }
 
-function openSupportModal() {
+function openSupportModal(tab = 'upi') {
   if (typeof openUPIModal === 'function') {
     openUPIModal(21, '☕ Support RR Skillverse', 'RR Skillverse Support');
+    requestAnimationFrame(() => {
+      const tabIndex = { upi: 0, paypal: 1, bank: 2 }[tab] || 0;
+      const targetTab = document.querySelectorAll('.pay-tab')[tabIndex];
+      if (targetTab) targetTab.click();
+    });
   } else {
     window.open('https://rrskillverse.in/blog.html', '_blank');
   }
@@ -3268,7 +3282,15 @@ function injectLabFooter(el, lab) {
       <button class="lab-donate-preset" onclick="openUPIModal(101,'☕ Support Lab','Lab Support')">₹101</button>
     </div>
     <div class="lab-support-strip">
-      <button class="lab-support-btn" onclick="openSupportModal()">☕ Support Raushan</button>
+      <div class="lab-support-label">
+        <span>☕</span>
+        <span>Support Raushan</span>
+      </div>
+      <div class="lab-support-options">
+        <button type="button" class="lab-support-btn" onclick="openSupportModal('upi')">🇮🇳 UPI</button>
+        <button type="button" class="lab-support-btn" onclick="openSupportModal('paypal')">🌍 PayPal</button>
+        <button type="button" class="lab-support-btn" onclick="openSupportModal('bank')">🏦 Bank Transfer</button>
+      </div>
       <button class="lab-support-btn" onclick="document.getElementById('lab-giscus-box').scrollIntoView({behavior:'smooth'})">💬 Comment</button>
       <button class="lab-support-btn" onclick="window.open('mailto:raushanr1107@gmail.com?subject=Lab Feedback: ${(labTitle).replace(/'/g,"\\'")}','_blank')">✍️ Write to Raushan</button>
     </div>

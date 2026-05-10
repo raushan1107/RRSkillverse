@@ -841,3 +841,39 @@ button { font-family: var(--font); cursor: pointer; }
   margin-top: 1px;
   margin-bottom: 2px;
 }
+
+.lesson-footer-support-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.lesson-footer-support-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.lesson-footer-support-options {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.lesson-footer-support-options button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-3);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.lesson-footer-support-options button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
