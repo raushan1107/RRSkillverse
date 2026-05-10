@@ -52,7 +52,8 @@
 
 html, body { height: 100%; }
 body { font-family: var(--font); background: var(--wash); color: var(--ink-2); font-size: 14.5px; line-height: 1.75; }
-.shell { display: flex; flex-direction: column; height: 100vh; padding-top: 60px; }
+.shell { display: flex; flex-direction: column; min-height: 100vh; padding-top: 60px; }
+.site-footer { display: block; }
 
 /* ── HEADER ──────────────────────────────────────────────── */
 .header {
@@ -523,6 +524,31 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   color: var(--ink-3);
   padding-top: 24px;
 }
+.labs-home-page {
+  max-width: 860px;
+  padding: 36px 48px 72px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.labs-home-page .home-title {
+  max-width: 620px;
+}
+.labs-home-page .home-desc {
+  max-width: 640px;
+}
+.labs-home-page .home-stat-row {
+  flex-wrap: wrap;
+}
+.labs-home-start {
+  margin-bottom: 32px;
+}
+.labs-list-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 10px;
+}
 .phase-row-right {
   display: flex; align-items: center;
   gap: 12px; margin-left: auto;
@@ -625,7 +651,65 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 }
 .ai-fab:hover { transform: scale(1.08); }
 .ai-fab-tooltip { display: none; }
-.shell { padding-top: 60px !important; }
+.shell { min-height: 100vh; height: auto !important; padding-top: 60px !important; }
+
+@media (max-width: 768px) {
+  .topnav {
+    padding: 0 14px;
+  }
+  .nav-brand {
+    margin-right: 0;
+  }
+  .nav-links,
+  .nav-right {
+    display: none !important;
+  }
+  .nav-hamburger {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    color: #e6edf3;
+    font-size: 20px;
+    border-radius: 6px;
+    z-index: 1300;
+  }
+  .nav-drawer {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex !important;
+    flex-direction: column;
+    gap: 4px;
+    padding: 18px;
+    background: rgba(13,17,23,0.98);
+    z-index: 1200;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+  .nav-drawer.open {
+    transform: translateX(0);
+  }
+  .nav-drawer a {
+    color: #c9d1d9;
+    text-decoration: none;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .nav-drawer a:hover,
+  .nav-drawer a.active {
+    background: #21262d;
+    color: #fff;
+  }
+}
 
 /* ── LAB DOWNLOAD BAR (PL-300 sample data) ───────────────── */
 .lab-download-bar {
@@ -1225,6 +1309,11 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 .lesson-footer-item:hover { background: var(--wash); color: var(--ink-2); }
 .lesson-footer-support:hover { background: rgba(0,102,255,0.05); color: var(--accent); }
 .lesson-footer-divider { width: 1px; height: 40px; background: var(--line); flex-shrink: 0; }
+button.lesson-footer-item {
+  border: none;
+  background: transparent;
+  font-family: var(--font);
+}
 
 /* ── Comments section ── */
 .lesson-comments-section {
@@ -1242,9 +1331,38 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   .axiom-promo-btn { width: 100%; text-align: center; }
   .lesson-ask-input-row { flex-direction: column; }
   .lesson-ask-btn { width: 100%; }
-  .lesson-footer-item { font-size: 11.5px; gap: 4px; }
-  .lesson-footer-item span:last-child { display: none; }
-  .lesson-footer-item span:first-child { font-size: 18px; }
+  .lesson-footer-strip {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+    gap: 10px;
+  }
+  .lesson-footer-divider {
+    width: 100%;
+    height: 1px;
+  }
+  .lesson-footer-item {
+    flex: none;
+    width: 100%;
+    min-height: 42px;
+    justify-content: center;
+    font-size: 12px;
+    gap: 6px;
+  }
+  .lesson-footer-support-wrap {
+    align-items: stretch;
+  }
+  .lesson-footer-support-label {
+    justify-content: center;
+  }
+  .lesson-footer-support-options {
+    width: 100%;
+    justify-content: center;
+  }
+  .lesson-footer-support-options button {
+    flex: 1 1 96px;
+    min-height: 34px;
+  }
 }
 
 /* ── Feature strip ── */
@@ -1353,6 +1471,7 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
 
 /* ── Lab support strip ── */
 .lab-support-strip { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.lesson-footer-strip.lab-support-strip { gap: 0; padding-top: 0; border: 1px solid var(--line); }
 .lab-support-label { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--ink-2); margin-right: 4px; }
 .lab-support-options { display: inline-flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .lab-support-btn { padding: 7px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--wash); font-size: 12px; font-weight: 600; color: var(--ink-3); cursor: pointer; font-family: var(--font); transition: all 0.15s; }
@@ -1443,8 +1562,8 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   display: flex;
   align-items: stretch;
   width: 100%;
-  min-height: calc(100vh - 60px);
-  overflow: hidden;
+  min-height: calc(100vh - 136px);
+  overflow: visible;
 }
 
 .learn-sidebar {
@@ -1463,7 +1582,7 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   flex: 1;
   min-width: 0;
   width: 100%;
-  overflow-y: auto;
+  overflow-y: visible;
   background: var(--wash);
 }
 
@@ -1751,6 +1870,9 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
     justify-content: center !important;
     padding: 12px 20px !important;
   }
+  .labs-home-start {
+    margin-bottom: 28px;
+  }
   .course-intro-features {
     grid-template-columns: 1fr !important;
     gap: 8px !important;
@@ -1776,17 +1898,98 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
     overflow-x: hidden !important;
     box-sizing: border-box !important;
   }
+  .labs-home-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 16px 16px 72px !important;
+    overflow-x: hidden !important;
+  }
+  .labs-home-page .home-eyebrow {
+    font-size: 10px;
+    word-break: break-word;
+  }
+  .labs-home-page .home-title {
+    font-size: 28px !important;
+    line-height: 1.12 !important;
+    word-break: break-word;
+  }
+  .labs-home-page .home-desc {
+    font-size: 13.5px;
+    max-width: 100%;
+  }
+  .labs-home-page .home-stat-row {
+    align-items: flex-start;
+    gap: 8px 10px;
+    line-height: 1.5;
+  }
+  .labs-home-page .stat-sep {
+    display: none;
+  }
+  .learn-layout {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: visible !important;
+  }
+  .learn-sidebar {
+    position: fixed !important;
+    top: 60px !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: min(82vw, 300px) !important;
+    min-width: 0 !important;
+    max-width: 300px !important;
+    height: calc(100vh - 60px) !important;
+    transform: translateX(-105%) !important;
+    transition: transform 0.25s ease !important;
+    z-index: 500 !important;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.28) !important;
+  }
+  .learn-sidebar.drawer-open {
+    transform: translateX(0) !important;
+  }
+  .sidebar-backdrop {
+    z-index: 499 !important;
+  }
+  .main-inner {
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+  }
+  .mode-nav {
+    padding: 0 12px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .mode-tab {
+    flex: 0 0 auto;
+    padding: 0 12px !important;
+  }
+  .mode-nav-right {
+    display: none !important;
+  }
   .lab-list-item {
+    align-items: flex-start;
     padding: 12px 14px;
+    gap: 10px;
+  }
+  .lab-list-left {
+    align-items: flex-start;
+    gap: 8px;
   }
   .lab-list-title {
     font-size: 12.5px;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
   }
   .lab-list-time {
     display: none;
   }
   .lab-list-right {
     gap: 6px;
+    padding-top: 1px;
   }
 }
 
@@ -1897,6 +2100,31 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
   border-bottom: 1px solid var(--line, #e5e7eb);
   background: var(--wash, #f9fafb);
 }
+
+@media (max-width: 768px) {
+  .lab-list-item {
+    align-items: flex-start;
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .lab-list-left {
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .lab-list-title {
+    font-size: 12.5px;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  .lab-list-time {
+    display: none;
+  }
+  .lab-list-right {
+    gap: 6px;
+    padding-top: 1px;
+  }
+}
 </style>
 <script src="js/courses-data.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -1952,7 +2180,7 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
         <div class="home-view" id="home"></div>
 
         <!-- LABS HOME ────────────────────────────────────── -->
-        <div class="home-view off" id="labs-home">
+        <div class="home-view off labs-home-page" id="labs-home">
           <div class="home-eyebrow">Hands-on Practice · RR Skillverse</div>
           <h1 class="home-title">Labs &amp;<br>Capstone Projects</h1>
           <p class="home-desc">Apply what you learn immediately. Each lab ties directly to a learning phase. Capstones are full-scope builds — you deploy something real.</p>
@@ -1963,10 +2191,13 @@ body { font-family: var(--font); background: var(--wash); color: var(--ink-2); f
             <span class="stat-sep">·</span>
             <span>Build from day one</span>
           </div>
+          <button class="course-intro-start labs-home-start" onclick="startFirstLab()">
+            Start Hands-on Lab →
+          </button>
           <div class="home-section-title" style="margin-bottom:0">Hands-on Labs</div>
-          <div id="labs-list"></div>
+          <div class="labs-list-panel" id="labs-list"></div>
           <div class="home-section-title" style="margin-top:32px;margin-bottom:0">Capstone Projects</div>
-          <div id="capstone-list"></div>
+          <div class="labs-list-panel" id="capstone-list"></div>
         </div>
 
         <!-- LESSON ───────────────────────────────────────── -->
@@ -2491,7 +2722,7 @@ function loadLesson(idx) {
   const a = document.getElementById('tl-' + idx);
   if (a) { a.classList.add('active'); a.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
 
-  document.getElementById('main').scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
   loadLessonContent(lesson, _courseData);
   loadLessonGiscus(lesson.title);
@@ -2970,7 +3201,7 @@ function showLessonsHome() {
   const labView = document.getElementById('lab-view');
   if (labView) labView.classList.remove('on');
   document.querySelectorAll('.toc-lesson').forEach(el => el.classList.remove('active'));
-  document.getElementById('main').scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   currentIdx = -1;
 }
 
@@ -2980,7 +3211,12 @@ function showLabsHome() {
   document.getElementById('lesson-view').classList.remove('on');
   const labView = document.getElementById('lab-view');
   if (labView) labView.classList.remove('on');
-  document.getElementById('main').scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function startFirstLab() {
+  const firstLab = (LABS.handson && LABS.handson[0]) || (LABS.capstone && LABS.capstone[0]);
+  if (firstLab) loadLab(firstLab.id);
 }
 
 // ── Load a lab ─────────────────────────────────────────────
@@ -3001,7 +3237,7 @@ function loadLab(id) {
   const tocEl = document.getElementById('tl-lab-' + id);
   if (tocEl) { tocEl.classList.add('active'); tocEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
 
-  document.getElementById('main').scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   generateLabGuide(lab);
 }
 
@@ -3281,31 +3517,45 @@ function injectLabFooter(el, lab) {
       <button class="lab-donate-preset" onclick="openUPIModal(51,'☕ Support Lab','Lab Support')">₹51</button>
       <button class="lab-donate-preset" onclick="openUPIModal(101,'☕ Support Lab','Lab Support')">₹101</button>
     </div>
-    <div class="lab-support-strip">
-      <div class="lab-support-label">
-        <span>☕</span>
-        <span>Support Raushan</span>
+    <div class="lesson-footer-strip lab-support-strip">
+      <div class="lesson-footer-item lesson-footer-support lesson-footer-support-wrap">
+        <div class="lesson-footer-support-label">
+          <span>☕</span>
+          <span>Support Raushan</span>
+        </div>
+        <div class="lesson-footer-support-options">
+          <button type="button" onclick="openSupportModal('upi')">🇮🇳 UPI</button>
+          <button type="button" onclick="openSupportModal('paypal')">🌍 PayPal</button>
+          <button type="button" onclick="openSupportModal('bank')">🏦 Bank Transfer</button>
+        </div>
       </div>
-      <div class="lab-support-options">
-        <button type="button" class="lab-support-btn" onclick="openSupportModal('upi')">🇮🇳 UPI</button>
-        <button type="button" class="lab-support-btn" onclick="openSupportModal('paypal')">🌍 PayPal</button>
-        <button type="button" class="lab-support-btn" onclick="openSupportModal('bank')">🏦 Bank Transfer</button>
+      <div class="lesson-footer-divider"></div>
+      <div class="lesson-footer-item" onclick="document.getElementById('lab-giscus-box').scrollIntoView({behavior:'smooth'})">
+        <span>💬</span>
+        <span>Comment</span>
       </div>
-      <button class="lab-support-btn" onclick="document.getElementById('lab-giscus-box').scrollIntoView({behavior:'smooth'})">💬 Comment</button>
-      <button class="lab-support-btn" onclick="window.open('mailto:raushanr1107@gmail.com?subject=Lab Feedback: ${(labTitle).replace(/'/g,"\\'")}','_blank')">✍️ Write to Raushan</button>
+      <div class="lesson-footer-divider"></div>
+      <button type="button" class="lesson-footer-item" onclick="window.open('mailto:raushanr1107@gmail.com?subject=Lab Feedback: ${(labTitle).replace(/'/g,"\\'")}','_blank')">
+        <span>✍️</span>
+        <span>Write to Raushan</span>
+      </button>
     </div>
-    <div id="lab-giscus-box" style="margin-top:24px;"></div>`;
+    <section class="lesson-comments-section" id="lab-giscus-box">
+      <div class="lesson-comments-title">💬 Discussion</div>
+      <div class="lesson-comments-sub">Ask questions, share your lab result, or help others build through this exercise.</div>
+      <div id="labGiscusContainer"></div>
+    </section>`;
   el.appendChild(footer);
 
-  const container = footer.querySelector('#lab-giscus-box');
+  const container = footer.querySelector('#labGiscusContainer');
   const script = document.createElement('script');
   script.src = 'https://giscus.app/client.js';
-  script.setAttribute('data-repo', 'raushanrj/rrskillverse-comments');
-  script.setAttribute('data-repo-id', 'R_kgDOOLHOsg');
-  script.setAttribute('data-category', 'General');
-  script.setAttribute('data-category-id', 'DIC_kwDOOLHOss4CpOtX');
-  script.setAttribute('data-mapping', 'og:title');
-  script.setAttribute('data-strict', '0');
+  script.setAttribute('data-repo', 'raushan1107/RRSkillverse');
+  script.setAttribute('data-repo-id', 'R_kgDOSXq5Dw');
+  script.setAttribute('data-category', 'Blog Comments');
+  script.setAttribute('data-category-id', 'DIC_kwDOSXq5D84C8oWk');
+  script.setAttribute('data-mapping', 'specific');
+  script.setAttribute('data-term', 'Lab: ' + labTitle);
   script.setAttribute('data-reactions-enabled', '1');
   script.setAttribute('data-emit-metadata', '0');
   script.setAttribute('data-input-position', 'bottom');

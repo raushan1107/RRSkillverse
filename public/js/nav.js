@@ -45,6 +45,7 @@
   <a href="blog.html">📝 Blogs</a>
   <a href="labs.html">🧪 Hands-on Labs</a>
   <a href="profile.html">👤 About Us</a>
+  <a href="ai-agent.html">💬 AI Agent</a>
 </div>`;
   // Only inject if placeholder exists
   const placeholder = document.getElementById('navPlaceholder');
