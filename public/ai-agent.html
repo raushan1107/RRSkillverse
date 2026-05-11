@@ -20,6 +20,7 @@
 <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
 <link rel="apple-touch-icon" href="/images/favicon.svg"/>
 <link rel="stylesheet" href="css/main.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 /* FIX 1 — prevent horizontal scroll */
 html, body {
@@ -633,6 +634,9 @@ html, body {
 const SUPABASE_URL = 'https://oekmyrfqietuqmrwklcs.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9la215cmZxaWV0dXFtcndrbGNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjU2NTYsImV4cCI6MjA5MzgwMTY1Nn0.p5jBl7x_YXYOVhjeOyFaoqrKRZcdf6cdxTK2vCSxsjo';
 
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+
 // ── State ────────────────────────────────────────────────────
 let currentUser = null;
 let chatHistory = [];
@@ -700,17 +704,13 @@ function renderWelcome() {
 
 // ── Auth ──────────────────────────────────────────────────────
 async function signInWithGoogle() {
-  try {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: 'https://rrskillverse.in/ai-agent.html'
-      }
-    });
-    if (error) throw error;
-  } catch (err) {
-    console.error('Sign in error:', err);
-  }
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: 'https://rrskillverse.in/ai-agent.html'
+    }
+  });
+  if (error) console.error('Sign in error:', error);
 }
 
 async function signOut() {
