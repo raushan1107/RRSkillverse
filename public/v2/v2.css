@@ -460,7 +460,7 @@ button { font-family: var(--font); cursor: pointer; }
    SECTIONS
 ═══════════════════════════════════════════════════════════ */
 .v2-section { padding: 64px 0; background: var(--page-bg); }
-.v2-section-alt { background: var(--surface-2); }
+.v2-section-alt { background: var(--surface-2); padding: 72px 0; }
 .v2-section-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 .v2-section-header {
   display: flex;
@@ -642,6 +642,7 @@ button { font-family: var(--font); cursor: pointer; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+  width: 100%;
 }
 .v2-testi-card {
   background: var(--surface);
@@ -652,6 +653,8 @@ button { font-family: var(--font); cursor: pointer; }
   display: flex;
   flex-direction: column;
   gap: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 .v2-testi-stars { color: #f59e0b; font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; }
 .v2-testi-quote { font-size: 13.5px; color: var(--ink-2); line-height: 1.72; font-style: italic; flex: 1; margin-bottom: 16px; }
@@ -668,6 +671,9 @@ button { font-family: var(--font); cursor: pointer; }
   padding: 56px 0;
 }
 .v2-axiom-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1853,4 +1859,91 @@ button { font-family: var(--font); cursor: pointer; }
   .v2-axiom-promo { flex-direction: column; gap: 12px; }
   .v2-ask-doubt-input-row { flex-direction: column; }
   .v2-lesson-footer-strip { flex-wrap: wrap; }
+}
+
+/* ── Missing class aliases & supplemental rules ─────────── */
+
+/* Hero accent text */
+.v2-hero-accent { color: #60b3ff; }
+
+/* Instructor card photo/info (index hero card) */
+.v2-instructor-photo {
+  height: 200px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+}
+.v2-instructor-photo img { width: 100%; height: 100%; object-fit: cover; }
+.v2-instructor-info { padding: 20px 22px; }
+.v2-instructor-name { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.v2-instructor-role { font-size: 12px; font-weight: 600; color: var(--blue); }
+
+/* Featured card (alias for v2-featured-course) */
+.v2-featured-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--r-2xl);
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 40px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+.v2-featured-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); border-color: var(--blue); }
+.v2-featured-main { min-width: 0; }
+.v2-featured-title { font-size: clamp(20px, 2.5vw, 26px); font-weight: 800; color: var(--ink); letter-spacing: -0.4px; line-height: 1.2; margin-bottom: 12px; }
+.v2-featured-desc { font-size: 14px; color: var(--ink-3); line-height: 1.75; margin-bottom: 16px; }
+.v2-featured-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; font-size: 12px; color: var(--ink-3); }
+.v2-featured-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.v2-featured-phases { display: flex; flex-direction: column; gap: 10px; }
+
+/* Domain grid alias */
+.v2-domain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.v2-domain-desc { font-size: 12px; color: var(--ink-3); line-height: 1.5; margin-top: 4px; }
+
+/* Testimonial text/tag aliases */
+.v2-testi-text { font-size: 13.5px; color: var(--ink-2); line-height: 1.72; font-style: italic; flex: 1; margin-bottom: 16px; }
+.v2-testi-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: var(--blue-light);
+  color: var(--blue);
+  border: 1px solid rgba(0,120,212,0.2);
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* Live badge alias */
+.v2-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  background: var(--live-bg);
+  color: var(--live);
+  border: 1px solid rgba(22,163,74,0.25);
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .v2-featured-card { grid-template-columns: 1fr; }
+  .v2-domain-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .v2-domain-grid { grid-template-columns: 1fr; }
 }
