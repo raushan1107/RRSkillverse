@@ -2504,7 +2504,921 @@ DIVIDE(
       <p>Coming soon — full article being imported.</p>
     `,
     featured: false
-  }
+  },
+
+  {
+  id: 'github-copilot-complete-guide-2026',
+  title: 'GitHub Copilot — The Definitive Guide (2026): Every Feature, Plan, Setup & Integration',
+  category: 'ai-cloud',
+  topic: 'ai-ml',
+  tags: ['GitHub Copilot', 'AI Coding', 'VS Code', 'Visual Studio', 'JetBrains', 'Agent Mode', 'AI Credits', 'Copilot Chat', 'Salesforce', 'GitHub Actions', 'Developer Tools', 'Copilot CLI'],
+  published: '2026-05-11',
+  updated: '2026-05-11',
+  readTime: '18 min',
+  excerpt: 'The most complete GitHub Copilot guide written for 2026 — covering every plan, every feature, the new AI Credits billing model, step-by-step setup for VS Code, Visual Studio, JetBrains, Xcode, Neovim, Salesforce and more, real use cases it solves, licensing, security, enterprise governance, and practical tips from MCT Raushan Ranjan.',
+  featured: false,
+  content: `
+<div class="blog-story">
+
+  <p class="blog-intro-quote">"I assigned a GitHub issue to Copilot before lunch. By the time I finished eating, there was a pull request waiting for my review."</p>
+
+  <p>That is not an exaggeration. That is GitHub Copilot in 2026 — an AI that has evolved from a glorified autocomplete into a fully autonomous background developer. This guide covers everything: what it is, what it costs, how tokens and credits work, how to set it up in every major IDE and tool, every single feature explained plainly, real-world use cases, enterprise licensing, security, and practical tips that will make you a more productive developer from day one.</p>
+
+  <!-- ════════════════════════════════════
+       SECTION 1 — WHAT IS GITHUB COPILOT
+  ════════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🤖 What Is GitHub Copilot?</h2>
+    <p>GitHub Copilot is an <strong>AI-powered coding assistant</strong> built by GitHub (a Microsoft subsidiary). It integrates directly into your development environment — IDE, terminal, browser, and mobile — and helps you write, review, and ship code faster.</p>
+    <p>It was launched in 2021 as a technical preview powered by OpenAI Codex. By 2026 it has expanded into a multi-model, multi-agent platform. Here is the full timeline of how it grew:</p>
+
+    <div class="blog-steps-pipeline">
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">2021</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Technical Preview</div>
+          <div class="blog-pipeline-desc">Inline code completions powered by OpenAI Codex. Single-line and function-level suggestions only.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">2022</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">General Availability</div>
+          <div class="blog-pipeline-desc">First commercially available AI coding assistant. Individual and Business plans launched.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">2023</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Copilot Chat Added</div>
+          <div class="blog-pipeline-desc">Conversational AI added to the IDE. Enterprise plan launched with knowledge base and org-level governance.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">2024</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Multi-model + Agent Mode Preview</div>
+          <div class="blog-pipeline-desc">Model choice introduced (GPT-4o, Claude, Gemini). Agent mode and coding agent previewed.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step blog-pipeline-step-done">
+        <div class="blog-pipeline-num blog-pipeline-num-done">2026</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Full Agentic Platform</div>
+          <div class="blog-pipeline-desc">Agent mode GA on VS Code and JetBrains. Cloud agent issue-to-PR. Agentic code review. MCP support. GitHub Spark. Usage-based AI Credits billing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 2 — LICENSING
+  ════════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>📋 Licensing — What You Need to Know Before You Start</h2>
+    <p>GitHub Copilot is a <strong>commercial product</strong>. Here is how licensing works across different types of users:</p>
+
+    <div class="blog-transform-grid">
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">👤</span>
+        <div>
+          <div class="blog-transform-name">Individual Developer</div>
+          <div class="blog-transform-desc">Purchase directly from github.com/features/copilot. Licence is tied to your personal GitHub account. Managed in your GitHub billing settings.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🎓</span>
+        <div>
+          <div class="blog-transform-name">Students (Free)</div>
+          <div class="blog-transform-desc">Verified students get Copilot Pro features at no cost via the GitHub Student Developer Pack. Apply at education.github.com. Must verify student status annually.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔓</span>
+        <div>
+          <div class="blog-transform-name">Open Source Maintainers (Free)</div>
+          <div class="blog-transform-desc">Maintainers of popular open source projects may qualify for free Copilot access. Apply through GitHub's open source program.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🏢</span>
+        <div>
+          <div class="blog-transform-name">Organisation / Business</div>
+          <div class="blog-transform-desc">Licences are purchased per seat and managed by org owners in GitHub org settings. Admins assign licences to specific members. Billing is per user per month.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🏛️</span>
+        <div>
+          <div class="blog-transform-name">Enterprise</div>
+          <div class="blog-transform-desc">Licences are managed at the enterprise account level. Enterprise owners can allocate licences to specific organisations within the enterprise. Includes IP indemnity coverage.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📜</span>
+        <div>
+          <div class="blog-transform-name">IP Indemnity (Enterprise only)</div>
+          <div class="blog-transform-desc">GitHub offers intellectual property indemnification for Enterprise customers — meaning GitHub will defend you if a third party claims Copilot's output infringes their copyright. Not available on Free, Pro, or Business plans.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-fact-pill blog-fact-pill-orange">
+      <span class="blog-fact-label">⚠️ Data Training Policy</span>
+      On <strong>Free and Pro</strong> plans, GitHub may use your prompts and suggestions to improve the model by default. You can opt out in Settings → Copilot → Policies. On <strong>Business and Enterprise</strong> plans, your code is <strong>never used for training</strong> — this is contractually guaranteed and enabled by default.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 3 — PLANS & PRICING
+  ════════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-info">
+    <h2>💳 Plans &amp; Pricing — Full 2026 Breakdown</h2>
+    <p>As of <strong>June 1, 2026</strong>, all GitHub Copilot plans move from counting "premium requests" to <strong>usage-based billing via AI Credits</strong>. The monthly price stays the same — but what you get per dollar is now metered by actual token consumption.</p>
+
+    <div class="blog-comparison-table">
+      <div class="blog-table-header">
+        <div class="blog-table-cell blog-table-feature">Plan</div>
+        <div class="blog-table-cell">Monthly Price</div>
+        <div class="blog-table-cell">AI Credits Included</div>
+        <div class="blog-table-cell">Best For</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Free</div>
+        <div class="blog-table-cell">$0</div>
+        <div class="blog-table-cell">Limited allowance</div>
+        <div class="blog-table-cell">Evaluating Copilot</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Student</div>
+        <div class="blog-table-cell">$0 (verified)</div>
+        <div class="blog-table-cell">Pro-equivalent</div>
+        <div class="blog-table-cell">Enrolled students</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Pro</div>
+        <div class="blog-table-cell">$10 / month</div>
+        <div class="blog-table-cell">$10 in AI Credits</div>
+        <div class="blog-table-cell">Individual devs</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Pro+</div>
+        <div class="blog-table-cell">$39 / month</div>
+        <div class="blog-table-cell">$39 in AI Credits</div>
+        <div class="blog-table-cell">Power users, agents</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Business</div>
+        <div class="blog-table-cell">$19 / user / month</div>
+        <div class="blog-table-cell">$19 per user (pooled)</div>
+        <div class="blog-table-cell">Teams &amp; organisations</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Enterprise</div>
+        <div class="blog-table-cell">$39 / user / month</div>
+        <div class="blog-table-cell">$39 per user (pooled)</div>
+        <div class="blog-table-cell">Large orgs, compliance</div>
+      </div>
+    </div>
+
+    <p style="margin-top:16px;font-size:13px;color:var(--text-muted)">Annual plans are also available at a discount. Users on existing annual plans continue on request-based billing until their plan expires, then transition to AI Credits billing.</p>
+
+    <div class="blog-fact-pill">
+      <span class="blog-fact-label">📌 Key Differences — Pro vs Pro+</span>
+      Pro+ gives <strong>5x more premium AI Credits</strong> than Pro, access to the most powerful models including Claude Opus 4.7, and exclusive access to <strong>GitHub Spark</strong> (the natural language app builder). If you use agent mode heavily or want the best models, Pro+ is worth it.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 4 — TOKENS & AI CREDITS
+  ════════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>🪙 Tokens &amp; AI Credits — How the Billing Actually Works</h2>
+    <p>This is where most people get confused. Understanding it means no surprise bills and smarter usage of your plan.</p>
+
+    <div class="blog-transform-grid">
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">→</span>
+        <div>
+          <div class="blog-transform-name">Input Tokens</div>
+          <div class="blog-transform-desc">Everything sent TO the model — your code in the editor, your chat message, the files open in your workspace, conversation history, custom instructions, and any MCP context. Larger open files = more input tokens.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">←</span>
+        <div>
+          <div class="blog-transform-name">Output Tokens</div>
+          <div class="blog-transform-desc">Everything the model generates BACK — code suggestions, chat responses, review comments, agent plans. Longer outputs cost more. Asking for a 500-line refactor costs more than a one-liner fix.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">♻️</span>
+        <div>
+          <div class="blog-transform-name">Cached Tokens</div>
+          <div class="blog-transform-desc">Context the model reuses from earlier in the same session — billed at a significantly lower rate. Long agentic sessions become cheaper over time as the model reuses previously seen context.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔢</span>
+        <div>
+          <div class="blog-transform-name">Model Multipliers</div>
+          <div class="blog-transform-desc">Not all tokens cost the same. GPT-4o Mini costs fewer credits per token than GPT-4o. Claude Opus costs more than Claude Sonnet. The model picker lets you choose cost vs capability for each task.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-fact-pill blog-fact-pill-green">
+      <span class="blog-fact-label">✅ What Is Always Unlimited (Never Consumes Credits)</span>
+      <strong>Inline code completions</strong> and <strong>Next Edit Suggestions</strong> are unlimited on Pro and above — they never consume AI Credits, no matter how many you trigger. Credits are only consumed by: Copilot Chat, Agent Mode, Code Review, Cloud Agent, Copilot CLI, and PR Summaries.
+    </div>
+
+    <div class="blog-fact-pill blog-fact-pill-orange">
+      <span class="blog-fact-label">⚠️ What Consumes the Most Credits</span>
+      Agent Mode on complex multi-file tasks, Cloud Agent issue-to-PR workflows, and Agentic Code Review consume the most credits — especially when using premium models. Monitor usage in GitHub Billing settings. Business and Enterprise plans can set budget alerts and spending limits per user or team.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 5 — ALL FEATURES
+  ════════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🔧 Every GitHub Copilot Feature — Fully Explained</h2>
+    <p>Here is a complete reference of every feature available in GitHub Copilot as of May 2026, with a plain explanation of what it does, when to use it, and which plans include it.</p>
+
+    <div class="blog-transform-grid">
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">⌨️</span>
+        <div>
+          <div class="blog-transform-name">Inline Code Completions</div>
+          <div class="blog-transform-desc">As you type, Copilot suggests the next line or entire block. Press <strong>Tab</strong> to accept, <strong>Escape</strong> to dismiss, <strong>Alt+]</strong> to cycle alternatives. Reads your cursor context, open files, and comments. Available in all supported IDEs. Unlimited on Pro+. <em>Plans: All</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">➡️</span>
+        <div>
+          <div class="blog-transform-name">Next Edit Suggestions (NES)</div>
+          <div class="blog-transform-desc">Predicts the LOCATION and CONTENT of your next edit based on what you just changed. Example: you rename a variable — NES jumps to every reference and suggests updating it. Available in VS Code, Xcode, Eclipse. Unlimited. <em>Plans: Pro+</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">💬</span>
+        <div>
+          <div class="blog-transform-name">Copilot Chat (IDE)</div>
+          <div class="blog-transform-desc">A full conversational interface inside your IDE. Ask "Explain this function", "What does this regex do?", "Write a unit test for this class", "Why is this throwing a null reference?". Consumes AI Credits. Supports slash commands (/explain, /fix, /tests, /doc). <em>Plans: All (limited on Free)</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📍</span>
+        <div>
+          <div class="blog-transform-name">Inline Chat</div>
+          <div class="blog-transform-desc">Press Ctrl+I / ⌘I in VS Code to open a chat input directly in the editor at your cursor. Describe a change and Copilot applies it in place — no panel switching. Best for targeted refactors, adding error handling, or explaining a specific block without leaving your code. <em>Plans: Pro+</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🤖</span>
+        <div>
+          <div class="blog-transform-name">Agent Mode (IDE)</div>
+          <div class="blog-transform-desc">Switch the Chat panel from "Ask" to "Agent" and give Copilot a goal rather than a question. It plans the approach, determines which files to edit, makes the changes, runs terminal commands (npm install, pytest, dotnet build), reads the output, and self-corrects. GA on VS Code and JetBrains since March 2026. Consumes AI Credits heavily. <em>Plans: Pro+</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">☁️</span>
+        <div>
+          <div class="blog-transform-name">Cloud Agent / Coding Agent</div>
+          <div class="blog-transform-desc">Assign any GitHub issue to Copilot and walk away. The agent works autonomously in an ephemeral GitHub Actions environment — researches the repository, creates an implementation plan, writes code, runs tests, runs security scans, and opens a draft pull request. You review and merge. Consumes both AI Credits and GitHub Actions minutes. <em>Plans: Pro, Pro+, Business, Enterprise</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔍</span>
+        <div>
+          <div class="blog-transform-name">AI Code Review</div>
+          <div class="blog-transform-desc">Copilot reviews pull requests using FULL project context — not just the changed lines. It understands how the change relates to the rest of the codebase. Can suggest specific line fixes which you accept with one click. Can trigger the Cloud Agent to auto-fix its own suggestions and open a new PR. Runs on GitHub Actions. <em>Plans: Pro+, Business, Enterprise</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📝</span>
+        <div>
+          <div class="blog-transform-name">PR Summaries</div>
+          <div class="blog-transform-desc">Auto-generates a structured description for a pull request — what changed, which files were affected, what the reviewer should focus on. Saves 5–10 minutes per PR. Editable before publishing. Available directly on github.com when creating or editing a PR. <em>Plans: Pro+, Business, Enterprise</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🖥️</span>
+        <div>
+          <div class="blog-transform-name">Copilot CLI</div>
+          <div class="blog-transform-desc">AI in your terminal. Install via <code>gh extension install github/gh-copilot</code> then run <code>gh copilot suggest</code> or <code>gh copilot explain</code>. Describe a shell task in plain English, get a suggested command with explanation, confirm to execute. Works with bash, zsh, PowerShell, and fish. Also accessible from Windows Terminal Canary. <em>Plans: Pro+</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🛡️</span>
+        <div>
+          <div class="blog-transform-name">Security Scanning (in Cloud Agent)</div>
+          <div class="blog-transform-desc">The Cloud Agent automatically runs code scanning (SAST), secret scanning, and dependency vulnerability checks on the code it generates — before opening the pull request. If it finds a committed API key or a known CVE in a dependency, it flags and fixes it. This is normally a GitHub Advanced Security feature — it is included free within the Cloud Agent. <em>Plans: Pro+, Business, Enterprise</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🧠</span>
+        <div>
+          <div class="blog-transform-name">Agentic Memory</div>
+          <div class="blog-transform-desc">Copilot deduces and stores useful facts about a repository over time — preferred patterns, architecture decisions, naming conventions. This memory is used by the Code Review agent and Cloud Agent to generate more accurate, context-aware output on subsequent runs. Enable in repository settings. <em>Plans: Pro+</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">✨</span>
+        <div>
+          <div class="blog-transform-name">GitHub Spark</div>
+          <div class="blog-transform-desc">Describe an application in plain English. Spark generates working code with a live preview. Open in a GitHub Codespace for full agent mode access. Example: "A web app where team members submit their weekly wins and a manager sees a summary dashboard." Produces a deployable prototype. <em>Plans: Pro+ and Enterprise only</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📄</span>
+        <div>
+          <div class="blog-transform-name">Custom Instructions</div>
+          <div class="blog-transform-desc">Create <code>.github/copilot-instructions.md</code> in your repository. This file is automatically injected as context for all Copilot interactions in that repo — chat, agent mode, code review. Use it to enforce coding standards, preferred libraries, language requirements, or review rules without repeating them in every prompt. <em>Plans: All</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📁</span>
+        <div>
+          <div class="blog-transform-name">Prompt Files</div>
+          <div class="blog-transform-desc">Reusable Markdown files stored in your workspace that act as pre-written prompts. You can reference them in chat instead of retyping complex instructions. Great for: standard code review checklists, test generation templates, documentation formats, or domain-specific prompting strategies. <em>Plans: Pro+</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔌</span>
+        <div>
+          <div class="blog-transform-name">MCP Server Integration</div>
+          <div class="blog-transform-desc">Connect Copilot to external tools via Model Context Protocol. Supported in VS Code agent mode, the Cloud Agent, and Copilot Chat. Connect to: databases (query schema and rows), Jira (read issues), Linear (manage tasks), Slack (read conversation context), Figma (read design specs), and any custom MCP server you build. <em>Plans: Pro+, Business, Enterprise</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">👥</span>
+        <div>
+          <div class="blog-transform-name">Custom Agents</div>
+          <div class="blog-transform-desc">Create specialised agent personas by placing a Markdown file under <code>.github/agents/</code>. Define the agent's purpose, tools it can access, MCP servers it connects to, and specific instructions. Examples: a "Performance Optimizer" agent that benchmarks before and after every change, a "Security Reviewer" that checks against your org's security checklist. Shareable across your entire org. <em>Plans: Enterprise</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔢</span>
+        <div>
+          <div class="blog-transform-name">Model Picker</div>
+          <div class="blog-transform-desc">Choose which AI model powers each task. Options include GPT-4o, GPT-4o Mini, GPT-4.1, Claude Sonnet, Claude Opus 4.7, Gemini 1.5 Pro, and more. Different models have different cost-per-token rates. Use lightweight models for quick completions; use premium models for complex reasoning, large refactors, or architectural decisions. <em>Plans: Pro (subset), Pro+ (all models)</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📱</span>
+        <div>
+          <div class="blog-transform-name">GitHub Mobile</div>
+          <div class="blog-transform-desc">Copilot Chat is available in the GitHub mobile app on iOS and Android. Review agent output, chat about code issues, and continue agent sessions started on desktop. Pro and Business also get Bing search and public repo code search in mobile. Enterprise gets organisation knowledge base access. <em>Plans: All</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📊</span>
+        <div>
+          <div class="blog-transform-name">Usage Analytics (Business/Enterprise)</div>
+          <div class="blog-transform-desc">Organisation and enterprise owners get dashboards showing: who is using Copilot, which features they use most, acceptance rates for suggestions, AI Credit consumption per user, and team-level adoption metrics. Use this to identify underutilised licences, drive adoption, and justify ROI to leadership. <em>Plans: Business, Enterprise</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔒</span>
+        <div>
+          <div class="blog-transform-name">Policy Management (Business/Enterprise)</div>
+          <div class="blog-transform-desc">Admins can control: which AI models users can access, whether Copilot can access the public internet, which MCP servers are allowed, whether the Chat panel is enabled, and which IDE extensions can use Copilot. Enforced at the org or enterprise level. <em>Plans: Business, Enterprise</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🗂️</span>
+        <div>
+          <div class="blog-transform-name">Knowledge Bases (Enterprise)</div>
+          <div class="blog-transform-desc">Index your organisation's internal documentation, wikis, architecture docs, and code repositories into a searchable knowledge base. Copilot Chat (in GitHub.com) can reference this when answering questions — giving answers grounded in YOUR organisation's specific context rather than generic knowledge. <em>Plans: Enterprise only</em></div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔎</span>
+        <div>
+          <div class="blog-transform-name">Autofix (Code Security)</div>
+          <div class="blog-transform-desc">When GitHub Advanced Security detects a vulnerability, Copilot Autofix generates a suggested code fix with an explanation of why the original code was vulnerable. Available on all public repositories for free. Included in GitHub Advanced Security for private repositories. <em>Plans: Free for public repos; Advanced Security for private</em></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 6 — SETUP BY IDE
+  ════════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>⚙️ Setup Guide — Every Supported IDE &amp; Surface</h2>
+    <p>Here is the complete setup process for every environment where GitHub Copilot works.</p>
+
+    <div class="blog-profiling-grid">
+
+      <div class="blog-profiling-card">
+        <div class="blog-profiling-card-header">
+          <span class="blog-profiling-icon">📘</span>
+          <span class="blog-profiling-title">VS Code (Recommended)</span>
+        </div>
+        <div class="blog-profiling-card-body">
+          <ol style="padding-left:16px;margin:0;font-size:13px;color:var(--text-muted);line-height:1.7">
+            <li>Open VS Code → Extensions panel (Ctrl+Shift+X)</li>
+            <li>Search "GitHub Copilot" → Install the extension</li>
+            <li>Search "GitHub Copilot Chat" → Install it too</li>
+            <li>A GitHub sign-in prompt appears in the bottom bar → Click it → Authorise in browser</li>
+            <li>The Copilot icon in the status bar turns green = active</li>
+            <li>Open any file and start typing → suggestions appear in grey</li>
+            <li>Open Chat with Ctrl+Alt+I (Windows/Linux) or ⌃⌘I (Mac)</li>
+            <li>Run /init in Chat to create custom instructions for your project</li>
+          </ol>
+          <div class="blog-profiling-use-case">
+            <span class="blog-profiling-use-label">Key Settings</span>
+            VS Code settings → search "copilot" → configure: enable/disable per language, NES on/off, inline chat position, model preference.
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-profiling-card">
+        <div class="blog-profiling-card-header">
+          <span class="blog-profiling-icon">🔷</span>
+          <span class="blog-profiling-title">Visual Studio (2022+)</span>
+        </div>
+        <div class="blog-profiling-card-body">
+          <ol style="padding-left:16px;margin:0;font-size:13px;color:var(--text-muted);line-height:1.7">
+            <li>Open Visual Studio 2022 → Extensions menu → Manage Extensions</li>
+            <li>Search "GitHub Copilot" in the Online tab → Download and Install</li>
+            <li>Restart Visual Studio when prompted</li>
+            <li>Go to Tools → Options → GitHub Copilot → Sign in with GitHub</li>
+            <li>Copilot icon appears in the top-right toolbar</li>
+            <li>Chat panel opens via View → GitHub Copilot Chat</li>
+          </ol>
+          <div class="blog-profiling-use-case">
+            <span class="blog-profiling-use-label">Best For</span>
+            C#, VB.NET, C++, F#, ASP.NET Core, WinForms, WPF, MAUI development.
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-profiling-card">
+        <div class="blog-profiling-card-header">
+          <span class="blog-profiling-icon">🟣</span>
+          <span class="blog-profiling-title">JetBrains IDEs</span>
+        </div>
+        <div class="blog-profiling-card-body">
+          <ol style="padding-left:16px;margin:0;font-size:13px;color:var(--text-muted);line-height:1.7">
+            <li>Open any JetBrains IDE (IntelliJ, PyCharm, WebStorm, GoLand, Rider, etc.)</li>
+            <li>Go to Settings → Plugins → search "GitHub Copilot" → Install</li>
+            <li>Restart the IDE</li>
+            <li>A GitHub Copilot widget appears in the status bar → Click to sign in</li>
+            <li>Authorise in browser → return to IDE</li>
+            <li>Chat panel: right-click in editor → GitHub Copilot → Open Chat</li>
+            <li>Agent mode: available in the Chat panel dropdown since March 2026</li>
+          </ol>
+          <div class="blog-profiling-use-case">
+            <span class="blog-profiling-use-label">Agent Mode Note</span>
+            Agent mode on JetBrains became generally available March 2026 — previously VS Code only.
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-profiling-card">
+        <div class="blog-profiling-card-header">
+          <span class="blog-profiling-icon">🍎</span>
+          <span class="blog-profiling-title">Xcode (macOS)</span>
+        </div>
+        <div class="blog-profiling-card-body">
+          <ol style="padding-left:16px;margin:0;font-size:13px;color:var(--text-muted);line-height:1.7">
+            <li>Download GitHub Copilot for Xcode from github.com/github/CopilotForXcode</li>
+            <li>Open the downloaded app → follow the setup wizard</li>
+            <li>Grant necessary macOS accessibility permissions when prompted</li>
+            <li>Sign in with GitHub account</li>
+            <li>Open Xcode → Editor menu → GitHub Copilot → Enable</li>
+            <li>Suggestions appear as you type Swift or Objective-C code</li>
+            <li>Chat and Code Review available from the Copilot menu</li>
+          </ol>
+          <div class="blog-profiling-use-case">
+            <span class="blog-profiling-use-label">Requires</span>
+            Version 0.41.0 or later for code review support. macOS 13 Ventura or later.
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-profiling-card">
+        <div class="blog-profiling-card-header">
+          <span class="blog-profiling-icon">⬛</span>
+          <span class="blog-profiling-title">Vim / Neovim</span>
+        </div>
+        <div class="blog-profiling-card-body">
+          <ol style="padding-left:16px;margin:0;font-size:13px;color:var(--text-muted);line-height:1.7">
+            <li>Ensure Node.js 18+ is installed on your system</li>
+            <li>Install the plugin: using vim-plug add <code>Plug 'github/copilot.vim'</code> to your .vimrc or init.vim</li>
+            <li>Run :PlugInstall in Vim</li>
+            <li>Run :Copilot setup — follow the device activation flow in your browser</li>
+            <li>Suggestions appear as ghost text — Tab to accept</li>
+            <li>For Neovim: use the copilot.lua plugin for a native Lua integration with additional configuration options</li>
+          </ol>
+          <div class="blog-profiling-use-case">
+            <span class="blog-profiling-use-label">Note</span>
+            Chat is not available in Vim/Neovim. Inline completions only.
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-profiling-card">
+        <div class="blog-profiling-card-header">
+          <span class="blog-profiling-icon">🗄️</span>
+          <span class="blog-profiling-title">Azure Data Studio</span>
+        </div>
+        <div class="blog-profiling-card-body">
+          <ol style="padding-left:16px;margin:0;font-size:13px;color:var(--text-muted);line-height:1.7">
+            <li>Open Azure Data Studio → Extensions (Ctrl+Shift+X)</li>
+            <li>Search "GitHub Copilot" → Install</li>
+            <li>Sign in with GitHub when prompted</li>
+            <li>Copilot provides SQL completions, T-SQL suggestions, and query explanations</li>
+            <li>Chat available for asking data-related questions</li>
+          </ol>
+          <div class="blog-profiling-use-case">
+            <span class="blog-profiling-use-label">Best For</span>
+            SQL development, database querying, stored procedure writing, query optimisation.
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-profiling-card blog-profiling-card-full">
+        <div class="blog-profiling-card-header">
+          <span class="blog-profiling-icon">☁️</span>
+          <span class="blog-profiling-title">Salesforce (VS Code + Salesforce Extension Pack)</span>
+        </div>
+        <div class="blog-profiling-card-body">
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:10px">GitHub Copilot integrates with Salesforce development via the Salesforce Extension Pack in VS Code. This is the recommended approach for Apex, LWC, and Visualforce development.</p>
+          <ol style="padding-left:16px;margin:0;font-size:13px;color:var(--text-muted);line-height:1.7">
+            <li>Install VS Code and set up the Salesforce Extension Pack (Salesforce CLI + Salesforce Extensions for VS Code)</li>
+            <li>Install GitHub Copilot and GitHub Copilot Chat extensions in VS Code</li>
+            <li>Sign in to both GitHub (for Copilot) and Salesforce org (for the extension pack) separately</li>
+            <li>Copilot automatically understands Apex syntax, SOQL queries, Lightning Web Component structure, Aura Component syntax, and Visualforce markup</li>
+            <li>Open any .cls (Apex) or .js/.html (LWC) file — completions appear as you type</li>
+            <li>Use Chat to ask Salesforce-specific questions: "Write a trigger that prevents duplicate Account records based on phone number", "Create an LWC that displays a custom datatable with server-side pagination"</li>
+            <li>Use Agent Mode for larger Salesforce tasks: "Create a complete LWC component with Apex controller, test class, and metadata XML for a case management dashboard"</li>
+          </ol>
+          <div class="blog-profiling-use-case">
+            <span class="blog-profiling-use-label">Copilot Understands in Salesforce Context</span>
+            Apex classes, triggers, test classes (@isTest), SOQL and SOSL queries, LWC (JS + HTML + CSS + XML), Aura components, Visualforce pages, Flow metadata, Custom Object schema (when files are open), Platform Event structures, and Salesforce CLI commands.
+          </div>
+          <div class="blog-fact-pill blog-fact-pill-orange" style="margin-top:12px">
+            <span class="blog-fact-label">⚠️ Important Note for Salesforce Developers</span>
+            Copilot does not have live access to your org's schema by default. For best results, keep the relevant metadata XML files and object definition files open in your VS Code workspace so Copilot can read them as context. You can also describe your object schema in your <code>.github/copilot-instructions.md</code> file.
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-profiling-card blog-profiling-card-full">
+        <div class="blog-profiling-card-header">
+          <span class="blog-profiling-icon">💻</span>
+          <span class="blog-profiling-title">Copilot CLI — Terminal Setup</span>
+        </div>
+        <div class="blog-profiling-card-body">
+          <ol style="padding-left:16px;margin:0;font-size:13px;color:var(--text-muted);line-height:1.7">
+            <li>Ensure GitHub CLI is installed: <code>gh --version</code> (install from cli.github.com if not)</li>
+            <li>Authenticate: <code>gh auth login</code></li>
+            <li>Install the Copilot extension: <code>gh extension install github/gh-copilot</code></li>
+            <li>Verify: <code>gh copilot --help</code></li>
+            <li>Suggest a command: <code>gh copilot suggest "list all running docker containers and show their port mappings"</code></li>
+            <li>Explain a command: <code>gh copilot explain "awk '{print $2}' /var/log/nginx/access.log | sort | uniq -c | sort -rn | head -20"</code></li>
+          </ol>
+          <div class="blog-profiling-use-case">
+            <span class="blog-profiling-use-label">Shell Alias Tip</span>
+            Add <code>alias cops='gh copilot suggest'</code> and <code>alias cope='gh copilot explain'</code> to your ~/.bashrc or ~/.zshrc for faster access.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 7 — USE CASES
+  ════════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>💡 Real-World Use Cases — Problems Copilot Solves</h2>
+    <p>GitHub Copilot is not just for writing new code. Here are the real situations where it delivers the most value:</p>
+
+    <div class="blog-transform-grid">
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">⚡</span>
+        <div>
+          <div class="blog-transform-name">Boilerplate Elimination</div>
+          <div class="blog-transform-desc">Writing CRUD routes, form handlers, API clients, test setup, dependency injection registration, entity configurations, migration files, Dockerfile templates — Copilot writes all of this from a single comment or function signature. What used to take 20 minutes takes 30 seconds.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🐛</span>
+        <div>
+          <div class="blog-transform-name">Debugging Unfamiliar Code</div>
+          <div class="blog-transform-desc">Select a confusing block of legacy code → right-click → Explain This. Copilot gives a plain English walkthrough of what it does, what data it expects, and what it returns. No more 45 minutes reading someone else's nested ternaries.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🧪</span>
+        <div>
+          <div class="blog-transform-name">Test Generation</div>
+          <div class="blog-transform-desc">Select any function → /tests in Chat → Copilot generates unit tests covering happy path, edge cases, and error conditions. Works for Jest, xUnit, NUnit, pytest, JUnit, Mocha, and most popular frameworks. Dramatically increases test coverage with minimal effort.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📚</span>
+        <div>
+          <div class="blog-transform-name">Documentation Generation</div>
+          <div class="blog-transform-desc">Select a function, class, or module → /doc in Chat → generates JSDoc, XML doc comments, or Markdown documentation. Consistent, complete documentation for every public API member without the pain of writing it manually.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔄</span>
+        <div>
+          <div class="blog-transform-name">Language and Framework Migration</div>
+          <div class="blog-transform-desc">Migrating from JavaScript to TypeScript? jQuery to React? .NET Framework to .NET 8? Python 2 to 3? Give Copilot the old code in Chat and ask it to rewrite for the new target. Review the output — it handles most of the mechanical conversion work, leaving you to focus on business logic decisions.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📊</span>
+        <div>
+          <div class="blog-transform-name">SQL and Data Query Writing</div>
+          <div class="blog-transform-desc">Describe what data you need in plain English inside a SQL comment: <code>-- get top 10 customers by revenue in Q1 2026 who placed more than 3 orders</code>. Copilot writes the query. Works for T-SQL, PostgreSQL, MySQL, SQLite, SOQL (Salesforce), KQL (Azure), and BigQuery.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔧</span>
+        <div>
+          <div class="blog-transform-name">Refactoring and Code Quality</div>
+          <div class="blog-transform-desc">Select any code smell → Ask Copilot to refactor for readability, extract a method, apply a design pattern, reduce cyclomatic complexity, or convert to async/await. The Cloud Agent can run automated tests after each refactor to verify behaviour is preserved.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔐</span>
+        <div>
+          <div class="blog-transform-name">Security Vulnerability Remediation</div>
+          <div class="blog-transform-desc">Copilot Autofix triggers whenever GitHub Advanced Security finds a vulnerability — it generates a suggested fix with a plain-language explanation of the root cause. Security alerts that used to sit unresolved for weeks get fixed in minutes.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📦</span>
+        <div>
+          <div class="blog-transform-name">DevOps and Infrastructure as Code</div>
+          <div class="blog-transform-desc">Writing GitHub Actions workflows, Kubernetes manifests, Terraform modules, Bicep templates, Docker Compose files, Ansible playbooks, or Azure Pipelines YAML. Describe the pipeline in plain English — Copilot writes the YAML. Use the CLI extension to troubleshoot pipeline failures from the terminal.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🌐</span>
+        <div>
+          <div class="blog-transform-name">API Integration</div>
+          <div class="blog-transform-desc">Need to call a REST API? Describe what you need — "fetch the current weather for a given city using the OpenWeatherMap API, handle rate limiting and retry on 429" — and Copilot writes the complete client code with error handling, typed response models, and retry logic.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🧹</span>
+        <div>
+          <div class="blog-transform-name">Technical Debt Reduction</div>
+          <div class="blog-transform-desc">Assign a "clean up X module" issue to the Cloud Agent. It analyses the module, makes targeted improvements (removing dead code, standardising naming, fixing obvious bugs, adding missing tests), reviews its own changes, and opens a PR. Systematic debt reduction without burning a sprint on it.</div>
+        </div>
+      </div>
+
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🎓</span>
+        <div>
+          <div class="blog-transform-name">Learning New Technologies</div>
+          <div class="blog-transform-desc">Starting with a technology you don't know? Ask Copilot in Chat: "I'm new to Rust. Show me how to read a CSV file, parse each row, and write matching records to a new file." It generates working code AND explains every step. Faster than documentation, more interactive than a tutorial.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 8 — SECURITY & ENTERPRISE
+  ════════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🔒 Security, Privacy &amp; Enterprise Governance</h2>
+    <p>These are the questions enterprise teams ask before deploying Copilot at scale. Here are the factual answers.</p>
+
+    <div class="blog-transform-grid">
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔏</span>
+        <div>
+          <div class="blog-transform-name">Is my code sent to the cloud?</div>
+          <div class="blog-transform-desc">Yes — snippets of your code (the context window around your cursor) are sent to GitHub's servers to generate suggestions. On Business and Enterprise plans, this data is not stored after the response is returned and is never used for training. On Free and Pro, prompts may be retained — you can opt out in settings.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🚫</span>
+        <div>
+          <div class="blog-transform-name">Excluding sensitive files</div>
+          <div class="blog-transform-desc">Create a <code>.copilotignore</code> file (same syntax as .gitignore) to prevent specific files from being sent as context. Use this for: environment config files, secrets files, proprietary algorithm implementations, PII-containing data files, and internal price lists or salary data.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📋</span>
+        <div>
+          <div class="blog-transform-name">Audit Logs</div>
+          <div class="blog-transform-desc">Enterprise plans provide detailed audit logs of all Copilot activity — who used which feature, when, which model, and what type of request. Essential for security compliance, SOC 2 audits, and internal governance reviews.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🌐</span>
+        <div>
+          <div class="blog-transform-name">Proxy and Firewall Considerations</div>
+          <div class="blog-transform-desc">Copilot communicates with GitHub's servers over HTTPS (port 443). If your organisation uses a proxy or firewall, ensure <code>copilot.github.com</code>, <code>api.github.com</code>, and <code>default.exp-tas.com</code> are whitelisted. Certificate inspection proxies may require additional certificate trust configuration in the extension settings.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 9 — PRACTICAL TIPS
+  ════════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>💡 Practical Tips from the Trainer's Desk</h2>
+    <p>These are the tips I give to developers in enterprise Copilot training sessions. They make a measurable difference.</p>
+
+    <div class="blog-steps-pipeline">
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">01</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Write the comment first, then the function signature</div>
+          <div class="blog-pipeline-desc">Copilot gives dramatically better completions when it sees both a comment describing the intent AND the function signature. Example: <code>// validates that an email address is syntactically correct and not a disposable domain</code> then <code>function isValidEmail(email: string): boolean {</code> — Copilot will write the entire implementation correctly.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">·</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">02</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Keep relevant files open in your editor</div>
+          <div class="blog-pipeline-desc">Copilot reads ALL open tabs as context — not just your current file. Before working on a feature, open the related model, interface, service, and test files. This gives Copilot the full picture and results in suggestions that match your actual codebase patterns rather than generic examples.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">·</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">03</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Use @workspace for codebase-wide questions in VS Code</div>
+          <div class="blog-pipeline-desc">Prefix your chat message with <code>@workspace</code> to ask questions that span your entire project: "@workspace Where is the authentication middleware registered?", "@workspace Which services implement the INotificationService interface?", "@workspace Find all places where we directly query the database without using the repository pattern."</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">·</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">04</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Write detailed GitHub issues for the Cloud Agent</div>
+          <div class="blog-pipeline-desc">The Cloud Agent is only as good as the issue you give it. A good issue includes: what the problem is, which files or modules are likely involved, what the expected behaviour should be, any constraints (must not break existing tests, must follow our coding standards), and acceptance criteria. A one-line issue produces a mediocre PR. A detailed issue produces a review-ready PR.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">·</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">05</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Use copilot-instructions.md to encode team standards</div>
+          <div class="blog-pipeline-desc">Put your team's coding rules in .github/copilot-instructions.md so every developer on the team benefits automatically. Include: preferred libraries (use Zod not Joi for validation), naming conventions, error handling patterns, testing requirements (every new function needs a corresponding test), and anything reviewers consistently flag. This file is injected into every Copilot interaction in your repo.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">·</div>
+      <div class="blog-pipeline-step blog-pipeline-step-done">
+        <div class="blog-pipeline-num blog-pipeline-num-done">06</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Review Copilot output as you would any junior developer's code</div>
+          <div class="blog-pipeline-desc">Copilot is fast, but it is not infallible. It can produce code that compiles but has subtle logic errors, uses deprecated APIs, or misses an edge case. Treat its output as a strong first draft from a smart junior developer — worth reviewing, not blindly accepting. Run your tests. Read the diff. The goal is to ship correct code faster, not to skip the review step.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 10 — SUMMARY
+  ════════════════════════════════════ -->
+
+  <div class="blog-summary">
+    <h2>📌 Complete Summary — GitHub Copilot 2026</h2>
+    <ul style="padding-left:18px;margin-top:10px">
+      <li style="margin-bottom:9px"><strong>Licensing:</strong> Free (2,000 completions/mo), Pro ($10), Pro+ ($39), Business ($19/user), Enterprise ($39/user). Students and OSS maintainers may qualify for free Pro access.</li>
+      <li style="margin-bottom:9px"><strong>AI Credits:</strong> 1 credit = $0.01. Charged for Chat, Agent Mode, Code Review, Cloud Agent, CLI, PR Summaries. Inline completions are always unlimited on paid plans.</li>
+      <li style="margin-bottom:9px"><strong>Setup:</strong> Available in VS Code, Visual Studio, all JetBrains IDEs, Xcode, Vim/Neovim, Azure Data Studio, and via VS Code for Salesforce development. Install the extension → sign in → use.</li>
+      <li style="margin-bottom:9px"><strong>Key Features:</strong> Inline completions, NES, Chat, Inline Chat, Agent Mode, Cloud Agent, Code Review, PR Summaries, CLI, Security Scanning, Agentic Memory, GitHub Spark, Custom Instructions, MCP, Model Picker, Knowledge Bases (Enterprise).</li>
+      <li style="margin-bottom:9px"><strong>Top Use Cases:</strong> Boilerplate, tests, docs, debugging, refactoring, migration, SQL, security fixes, IaC, API clients, tech debt reduction, learning.</li>
+      <li style="margin-bottom:9px"><strong>Security:</strong> Business/Enterprise — code never used for training, no retention after response, audit logs, policy controls, .copilotignore support, IP indemnity (Enterprise only).</li>
+      <li style="margin-bottom:9px"><strong>Best Practice:</strong> Comment-first coding, open relevant files, @workspace in Chat, detailed issues for Cloud Agent, team standards in copilot-instructions.md, always review output.</li>
+    </ul>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 11 — EXERCISE
+  ════════════════════════════════════ -->
+
+  <div class="blog-exercise">
+    <h2>🧠 Hands-On Challenge — 7 Tasks to Master Copilot This Week</h2>
+    <p>Complete one task per day and by the end of the week you will have used every major Copilot feature:</p>
+    <ol class="blog-exercise-steps">
+      <li>
+        <strong>Day 1 — Setup &amp; First Completion</strong><br/>
+        Install Copilot in VS Code. Write a comment describing a function you need. Let Copilot generate it. Test it. Verify it works as expected.
+      </li>
+      <li>
+        <strong>Day 2 — Chat for Explanation &amp; Debugging</strong><br/>
+        Find a piece of code in any project you have access to that you find hard to understand. Select it → /explain. Then introduce a deliberate bug → select the buggy code → /fix. Compare what Copilot suggests versus what the actual fix should be.
+      </li>
+      <li>
+        <strong>Day 3 — Test Generation</strong><br/>
+        Pick any function in your codebase that has no tests. Open it in VS Code. Use Copilot Chat → /tests. Review the generated tests, run them, and fix any that need adjustment. Aim for at least 80% pass rate without manual changes.
+      </li>
+      <li>
+        <strong>Day 4 — Agent Mode Multi-File Task</strong><br/>
+        Give Agent Mode a real task that spans multiple files — for example: "Add server-side pagination to the user list endpoint. The API should accept page and pageSize query parameters and return totalCount in the response. Update the controller, service, repository, and any affected tests."
+      </li>
+      <li>
+        <strong>Day 5 — Copilot CLI</strong><br/>
+        Install the CLI extension. Use it to: (1) suggest a command to find all files modified in the last 7 days, (2) explain a complex command you found online, (3) generate a one-liner to count lines of code by file extension in your project.
+      </li>
+      <li>
+        <strong>Day 6 — Cloud Agent Issue-to-PR</strong><br/>
+        Write a detailed GitHub issue for a small bug or small feature in any repository you own. Include: description, relevant file paths, expected behaviour, acceptance criteria. Assign it to Copilot. Review the resulting pull request.
+      </li>
+      <li>
+        <strong>Day 7 — Custom Instructions</strong><br/>
+        Create <code>.github/copilot-instructions.md</code> in your project. Add at least five team standards: preferred error handling pattern, naming conventions, required test coverage, preferred libraries, and code review rules. Then do any coding task and verify Copilot follows the instructions automatically.
+      </li>
+    </ol>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 12 — RESOURCES
+  ════════════════════════════════════ -->
+
+  <div class="blog-mslearn">
+    <div class="blog-mslearn-title">📚 Official Resources</div>
+    <ul class="blog-mslearn-links">
+      <li><a href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot — Plans, pricing, and sign-up</a></li>
+      <li><a href="https://docs.github.com/en/copilot/get-started/features" target="_blank" rel="noopener">All GitHub Copilot features — official documentation</a></li>
+      <li><a href="https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing" target="_blank" rel="noopener">AI Credits and model pricing reference</a></li>
+      <li><a href="https://code.visualstudio.com/docs/copilot/overview" target="_blank" rel="noopener">GitHub Copilot in VS Code — setup and usage guide</a></li>
+      <li><a href="https://docs.github.com/copilot/concepts/agents/coding-agent/about-coding-agent" target="_blank" rel="noopener">GitHub Copilot Cloud Agent — concepts and usage</a></li>
+      <li><a href="https://docs.github.com/en/copilot/concepts/agents/code-review" target="_blank" rel="noopener">GitHub Copilot Code Review — agentic capabilities</a></li>
+      <li><a href="https://github.blog/ai-and-ml/github-copilot/whats-new-with-github-copilot-coding-agent/" target="_blank" rel="noopener">What is new with GitHub Copilot Coding Agent (2026)</a></li>
+      <li><a href="https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot" target="_blank" rel="noopener">Custom instructions for GitHub Copilot</a></li>
+      <li><a href="https://github.com/github/gh-copilot" target="_blank" rel="noopener">GitHub Copilot CLI extension</a></li>
+      <li><a href="https://github.com/github/CopilotForXcode" target="_blank" rel="noopener">GitHub Copilot for Xcode</a></li>
+    </ul>
+  </div>
+
+  <div class="blog-next-chapter">
+    <span class="blog-next-label">MCT Note</span>
+    <span class="blog-next-title">
+      Written by Raushan Ranjan, MCT and Senior Corporate Trainer at Koenig Solutions, from real enterprise GitHub Copilot training sessions. If your team is evaluating or rolling out Copilot at scale, feel free to reach out via LinkedIn or email.
+    </span>
+  </div>
+
+</div>
+  `
+}
 
 ];
 
