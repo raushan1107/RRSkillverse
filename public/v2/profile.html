@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Raushan Ranjan — RR Skillverse</title>
+<meta name="description" content="From RR Education in 2014 to RR Skillverse — the journey of MCT Raushan Ranjan and 3200+ trained professionals across 25+ countries."/>
+<meta property="og:title" content="About Raushan Ranjan · MCT — RR Skillverse"/>
+<meta property="og:description" content="Microsoft Certified Trainer. 3200+ professionals trained. 25+ countries. Enterprise-grade skills, trainer-quality content."/>
+<meta property="og:image" content="https://rrskillverse.in/images/og-thumbnail.svg"/>
+<link rel="icon" type="image/svg+xml" href="../images/favicon.svg"/>
+<link rel="stylesheet" href="v2.css"/>
+<style>
+
+/* ── Page shell ── */
+.profile-shell { padding-top: var(--nav-h); }
+
+/* ── Profile hero ── */
+.v2-profile-hero {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 64px 64px 56px;
+}
+.profile-hero-inner { max-width: 960px; margin: 0 auto; }
+.v2-profile-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.v2-profile-eyebrow::before {
+  content: '';
+  width: 20px; height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+.v2-profile-hero h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+.v2-profile-hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+.v2-profile-hero-sub {
+  font-size: 15px;
+  color: var(--text-3);
+  max-width: 580px;
+  line-height: 1.8;
+}
+
+/* ── Instructor section ── */
+.v2-instructor-section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 52px 64px;
+  border-bottom: 1px solid var(--border);
+}
+.v2-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.v2-section-label::before { content: ''; width: 16px; height: 1.5px; background: currentColor; border-radius: 1px; }
+.v2-instructor-card {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+.v2-instructor-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.v2-instructor-avatar-wrap {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+.v2-instructor-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 6px rgba(59,130,246,0.12), 0 0 0 12px rgba(59,130,246,0.05);
+}
+.v2-instructor-avatar-fallback {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #0ea5e9);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 44px; font-weight: 800; color: white;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 6px rgba(59,130,246,0.12);
+}
+.v2-mct-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+.v2-instructor-right { flex: 1; }
+.v2-instructor-name {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.4px;
+  margin-bottom: 4px;
+}
+.v2-instructor-title {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-bottom: 16px;
+}
+.v2-instructor-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.v2-instructor-tag {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--bg3);
+  color: var(--text-4);
+  border: 1px solid var(--border);
+}
+.v2-instructor-bio {
+  font-size: 14px;
+  color: var(--text-3);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.v2-instructor-quote {
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: rgba(59,130,246,0.06);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  font-size: 13.5px;
+  color: var(--text-3);
+  font-style: italic;
+  line-height: 1.7;
+}
+.v2-instructor-quote strong { color: var(--text); font-style: normal; }
+.v2-instructor-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* ── Credential stats ── */
+.v2-cred-stats {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 52px 64px;
+  border-bottom: 1px solid var(--border);
+}
+.v2-cred-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin-top: 8px;
+}
+.v2-cred-item {
+  background: var(--bg2);
+  padding: 28px 20px;
+  text-align: center;
+  transition: background 0.15s;
+}
+.v2-cred-item:hover { background: var(--bg3); }
+.v2-cred-num {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.8px;
+  line-height: 1;
+  font-family: var(--mono);
+  margin-bottom: 6px;
+}
+.v2-cred-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+
+/* ── Timeline ── */
+.v2-timeline-section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 52px 64px;
+  border-bottom: 1px solid var(--border);
+}
+.v2-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 10px;
+  max-width: 640px;
+}
+.v2-timeline-item {
+  display: flex;
+  gap: 22px;
+  padding-bottom: 32px;
+  position: relative;
+}
+.v2-timeline-item:last-child { padding-bottom: 0; }
+.v2-timeline-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+.v2-timeline-year {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--mono);
+  color: var(--accent);
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: 20px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+.v2-timeline-line {
+  width: 1px;
+  flex: 1;
+  background: var(--border);
+  margin-top: 8px;
+}
+.v2-timeline-item:last-child .v2-timeline-line { display: none; }
+.v2-timeline-content { padding-top: 2px; }
+.v2-timeline-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+.v2-timeline-desc {
+  font-size: 13px;
+  color: var(--text-4);
+  line-height: 1.7;
+}
+
+/* ── What we teach ── */
+.v2-offer-section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 52px 64px;
+  border-bottom: 1px solid var(--border);
+}
+.v2-section-h2 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--text);
+  margin-bottom: 22px;
+  line-height: 1.2;
+}
+.v2-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.v2-value-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 20px 22px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.v2-value-card:hover { border-color: var(--border-md); transform: translateY(-2px); }
+.v2-value-icon { font-size: 22px; margin-bottom: 10px; }
+.v2-value-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.v2-value-desc { font-size: 12px; color: var(--text-4); line-height: 1.65; }
+
+/* ── Featured reviews ── */
+.v2-reviews-section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 52px 64px;
+  border-bottom: 1px solid var(--border);
+}
+.v2-reviews-sub {
+  font-size: 14px;
+  color: var(--text-4);
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+.v2-feat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.v2-feat-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.v2-feat-card:hover { border-color: var(--border-md); transform: translateY(-2px); }
+.v2-feat-stars { color: var(--gold); font-size: 12px; letter-spacing: 2px; }
+.v2-feat-course {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+  color: var(--accent); text-transform: uppercase;
+}
+.v2-feat-quote {
+  font-size: 13px; color: var(--text-3); line-height: 1.78;
+  font-style: italic; flex: 1;
+}
+.v2-feat-person {
+  display: flex; align-items: center; gap: 10px;
+  padding-top: 12px; border-top: 1px solid var(--border);
+}
+.v2-feat-av {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; color: white; flex-shrink: 0;
+}
+.v2-feat-name { font-size: 12px; font-weight: 700; color: var(--text); }
+.v2-feat-loc { font-size: 10px; color: var(--text-4); margin-top: 2px; }
+
+.v2-feat-grid-sm {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.v2-feat-card-sm {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 8px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.v2-feat-card-sm:hover { border-color: var(--border-md); transform: translateY(-2px); }
+.v2-feat-stars-sm { color: var(--gold); font-size: 10px; letter-spacing: 1.5px; }
+.v2-feat-quote-sm { font-size: 12.5px; color: var(--text-3); line-height: 1.72; font-style: italic; flex: 1; }
+.v2-feat-person-sm { display: flex; align-items: center; gap: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+.v2-feat-av-sm { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-2), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 800; color: white; flex-shrink: 0; }
+.v2-feat-name-sm { font-size: 11px; font-weight: 700; color: var(--text); }
+.v2-feat-loc-sm { font-size: 9px; color: var(--text-4); margin-top: 1px; }
+
+/* ── Countries ── */
+.v2-countries-strip {
+  margin-top: 32px;
+  padding: 18px 22px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.v2-countries-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+  text-transform: uppercase; color: var(--text-4); white-space: nowrap; flex-shrink: 0;
+}
+.v2-countries-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.v2-country-pill {
+  font-size: 11px; color: var(--text-3);
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 20px; padding: 3px 10px;
+}
+
+/* ── CTA ── */
+.v2-profile-cta {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 64px;
+  text-align: center;
+}
+.v2-profile-cta h2 {
+  font-size: 26px; font-weight: 800; color: var(--text);
+  letter-spacing: -0.4px; margin-bottom: 12px;
+}
+.v2-profile-cta p { font-size: 14px; color: var(--text-4); margin-bottom: 28px; }
+.v2-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .v2-profile-hero, .v2-instructor-section, .v2-cred-stats, .v2-timeline-section,
+  .v2-offer-section, .v2-reviews-section, .v2-profile-cta {
+    padding-left: 24px; padding-right: 24px;
+  }
+  .v2-cred-grid { grid-template-columns: repeat(2, 1fr); }
+  .v2-values-grid, .v2-feat-grid, .v2-feat-grid-sm { grid-template-columns: 1fr 1fr; }
+  .v2-instructor-card { flex-direction: column; align-items: center; text-align: center; }
+  .v2-instructor-tags { justify-content: center; }
+  .v2-instructor-links { justify-content: center; }
+}
+@media (max-width: 600px) {
+  .v2-values-grid, .v2-feat-grid, .v2-feat-grid-sm { grid-template-columns: 1fr; }
+  .v2-cred-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ TOPNAV ═══════ -->
+<nav class="v2-topnav">
+  <a class="v2-nav-brand" href="index.html">
+    <div class="v2-nav-logo">RR</div>
+    <div>
+      <div class="v2-nav-brand-name">RR Skillverse</div>
+      <div class="v2-nav-brand-sub">by Raushan Ranjan · MCT</div>
+    </div>
+  </a>
+  <div class="v2-nav-links" id="navLinks">
+    <a href="index.html" class="v2-nav-link">Home</a>
+    <a href="courses.html" class="v2-nav-link">Courses</a>
+    <a href="learn.html" class="v2-nav-link">Learn</a>
+    <a href="profile.html" class="v2-nav-link active">About</a>
+  </div>
+  <div class="v2-nav-right">
+    <a href="../ai-agent.html" class="v2-nav-cta">⚡ Axiom AI</a>
+  </div>
+  <button class="v2-nav-hamburger" id="navHamburger" onclick="toggleDrawer()" aria-label="Menu">☰</button>
+</nav>
+<div class="v2-nav-drawer" id="navDrawer">
+  <a href="index.html" class="v2-drawer-link">Home</a>
+  <a href="courses.html" class="v2-drawer-link">Courses</a>
+  <a href="learn.html" class="v2-drawer-link">Learn</a>
+  <a href="profile.html" class="v2-drawer-link active">About</a>
+  <a href="../ai-agent.html" class="v2-drawer-link" style="color:var(--accent)">⚡ Axiom AI</a>
+</div>
+
+<div class="profile-shell">
+
+  <!-- ═══ HERO ═══ -->
+  <div class="v2-profile-hero">
+    <div class="profile-hero-inner">
+      <div class="v2-profile-eyebrow">Our Story</div>
+      <h1>Built for <em>real learners</em>,<br>by a real trainer.</h1>
+      <p class="v2-profile-hero-sub">
+        From a single student in 2014 to 3200+ professionals
+        trained across 25+ countries — RR Skillverse is the
+        learning platform built from years of enterprise
+        training experience.
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ CREDENTIAL STATS ═══ -->
+  <div class="v2-cred-stats">
+    <div class="v2-cred-grid">
+      <div class="v2-cred-item">
+        <div class="v2-cred-num">3200+</div>
+        <div class="v2-cred-label">Professionals Trained</div>
+      </div>
+      <div class="v2-cred-item">
+        <div class="v2-cred-num">500+</div>
+        <div class="v2-cred-label">Sessions Delivered</div>
+      </div>
+      <div class="v2-cred-item">
+        <div class="v2-cred-num">25+</div>
+        <div class="v2-cred-label">Countries Reached</div>
+      </div>
+      <div class="v2-cred-item">
+        <div class="v2-cred-num">★ 4.9</div>
+        <div class="v2-cred-label">Average Rating</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ INSTRUCTOR / FOUNDER ═══ -->
+  <div class="v2-instructor-section">
+    <div class="v2-section-label">Founder &amp; Educator</div>
+    <h2 style="font-size:24px;font-weight:800;letter-spacing:-0.4px;color:var(--text);margin-bottom:28px">Meet Raushan Ranjan</h2>
+    <div class="v2-instructor-card">
+      <div class="v2-instructor-left">
+        <div class="v2-instructor-avatar-wrap">
+          <img
+            src="../images/raushanranjan.jpg"
+            class="v2-instructor-avatar"
+            alt="Raushan Ranjan"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="v2-instructor-avatar-fallback" style="display:none">RR</div>
+        </div>
+        <div class="v2-mct-badge">✦ MCT Verified</div>
+      </div>
+      <div class="v2-instructor-right">
+        <div class="v2-instructor-name">Raushan Ranjan</div>
+        <div class="v2-instructor-title">
+          Microsoft Certified Trainer (MCT) · Iconic Trainer · Koenig Solutions
+        </div>
+        <div class="v2-instructor-tags">
+          <span class="v2-instructor-tag">Azure Developer AZ-204</span>
+          <span class="v2-instructor-tag">Power BI PL-300</span>
+          <span class="v2-instructor-tag">Power Platform PL-400</span>
+          <span class="v2-instructor-tag">.NET &amp; Blazor</span>
+          <span class="v2-instructor-tag">Azure AI</span>
+          <span class="v2-instructor-tag">Python</span>
+          <span class="v2-instructor-tag">Qt/QML</span>
+          <span class="v2-instructor-tag">System Design</span>
+          <span class="v2-instructor-tag">Apigee API Management</span>
+        </div>
+        <p class="v2-instructor-bio">
+          I'm like a photon in the famous double-slit
+          experiment — a curious and adventurous spirit,
+          always exploring new ideas and perspectives.
+          My passion for science and the mysteries of the
+          universe drives me to constantly seek a deeper
+          understanding of the world around me.
+        </p>
+        <p class="v2-instructor-bio">
+          Whether you're a student, job seeker, or working
+          professional — this is your learning space to
+          <strong style="color:var(--text)">Learn. Build. Grow.</strong>
+        </p>
+        <div class="v2-instructor-quote">
+          <strong>Bachho ka Bhavisya hoga Raushan.</strong><br>
+          Every concept I teach is rooted in real enterprise
+          experience — not just theory. My goal is to make
+          you job-ready and confident, not just certified.
+        </div>
+        <div class="v2-instructor-links">
+          <a href="https://www.linkedin.com/in/raushanranjan/" target="_blank" rel="noopener" class="btn-v2-primary" style="font-size:13px;padding:9px 20px">Connect on LinkedIn →</a>
+          <a href="https://raushan-ranjan.azurewebsites.net" target="_blank" rel="noopener" class="btn-v2-ghost" style="font-size:13px;padding:9px 20px">View Portfolio →</a>
+          <a href="https://www.youtube.com/@rrskillverse" target="_blank" rel="noopener" class="btn-v2-ghost" style="font-size:13px;padding:9px 20px">YouTube Channel →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ JOURNEY / TIMELINE ═══ -->
+  <div class="v2-timeline-section">
+    <div class="v2-section-label">Our Journey</div>
+    <h2 class="v2-section-h2">From one student to<br>a global community.</h2>
+    <p style="font-size:14px;color:var(--text-3);line-height:1.75;max-width:580px;margin-bottom:32px">
+      Our story began in <strong style="color:var(--text)">2014</strong> as
+      <strong style="color:var(--text)">RR Education</strong> — with just one student
+      and a vision to transform learning. In <strong style="color:var(--text)">2025</strong>, we proudly
+      rebranded as <strong style="color:var(--text)">RR Skillverse</strong>.
+    </p>
+    <div class="v2-timeline">
+      <div class="v2-timeline-item">
+        <div class="v2-timeline-left">
+          <div class="v2-timeline-year">2014</div>
+          <div class="v2-timeline-line"></div>
+        </div>
+        <div class="v2-timeline-content">
+          <div class="v2-timeline-title">RR Education Founded</div>
+          <div class="v2-timeline-desc">Started with one student and a vision to make quality tech education accessible.</div>
+        </div>
+      </div>
+      <div class="v2-timeline-item">
+        <div class="v2-timeline-left">
+          <div class="v2-timeline-year">2016</div>
+          <div class="v2-timeline-line"></div>
+        </div>
+        <div class="v2-timeline-content">
+          <div class="v2-timeline-title">Microsoft Certified Trainer (MCT)</div>
+          <div class="v2-timeline-desc">Achieved MCT certification — one of Microsoft's most prestigious training credentials globally.</div>
+        </div>
+      </div>
+      <div class="v2-timeline-item">
+        <div class="v2-timeline-left">
+          <div class="v2-timeline-year">2019</div>
+          <div class="v2-timeline-line"></div>
+        </div>
+        <div class="v2-timeline-content">
+          <div class="v2-timeline-title">Joined Koenig Solutions</div>
+          <div class="v2-timeline-desc">Became Iconic Trainer at Koenig Solutions, Delhi — training enterprise clients across the globe.</div>
+        </div>
+      </div>
+      <div class="v2-timeline-item">
+        <div class="v2-timeline-left">
+          <div class="v2-timeline-year">2023</div>
+          <div class="v2-timeline-line"></div>
+        </div>
+        <div class="v2-timeline-content">
+          <div class="v2-timeline-title">2000+ Professionals Trained</div>
+          <div class="v2-timeline-desc">Crossed 2000 professionals trained across Azure, Power Platform, .NET, AI, and more — spanning 20+ countries.</div>
+        </div>
+      </div>
+      <div class="v2-timeline-item">
+        <div class="v2-timeline-left">
+          <div class="v2-timeline-year">2025</div>
+          <div class="v2-timeline-line"></div>
+        </div>
+        <div class="v2-timeline-content">
+          <div class="v2-timeline-title">RR Skillverse Launched</div>
+          <div class="v2-timeline-desc">Rebranded and launched RR Skillverse — a full AI-powered learning platform with courses, labs, and Axiom AI assistant.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ WHAT WE TEACH ═══ -->
+  <div class="v2-offer-section">
+    <div class="v2-section-label">What We Offer</div>
+    <h2 class="v2-section-h2">Enterprise-grade skills,<br>trainer-quality content.</h2>
+    <div class="v2-values-grid">
+      <div class="v2-value-card">
+        <div class="v2-value-icon">☁️</div>
+        <div class="v2-value-title">Azure &amp; Cloud</div>
+        <div class="v2-value-desc">AZ-204, AZ-104, Azure AI Services, App Services, Functions, Service Bus, API Management and more.</div>
+      </div>
+      <div class="v2-value-card">
+        <div class="v2-value-icon">⚡</div>
+        <div class="v2-value-title">Power Platform</div>
+        <div class="v2-value-desc">Power BI (PL-300), Power Apps, Power Automate, Copilot Studio — from fundamentals to advanced DAX.</div>
+      </div>
+      <div class="v2-value-card">
+        <div class="v2-value-icon">🔷</div>
+        <div class="v2-value-title">.NET &amp; Blazor</div>
+        <div class="v2-value-desc">C#, ASP.NET Core, Blazor, Web API, Entity Framework, Microservices — zero to enterprise-grade.</div>
+      </div>
+      <div class="v2-value-card">
+        <div class="v2-value-icon">🤖</div>
+        <div class="v2-value-title">AI &amp; Machine Learning</div>
+        <div class="v2-value-desc">Azure OpenAI, TensorFlow, Copilot integration, ML pipelines and intelligent application development.</div>
+      </div>
+      <div class="v2-value-card">
+        <div class="v2-value-icon">📊</div>
+        <div class="v2-value-title">Data Analytics</div>
+        <div class="v2-value-desc">DAX, M Query, SQL Server, data modeling, paginated reports and end-to-end BI solutions.</div>
+      </div>
+      <div class="v2-value-card">
+        <div class="v2-value-icon">🏗️</div>
+        <div class="v2-value-title">System Design</div>
+        <div class="v2-value-desc">Scalable architecture, distributed systems, caching, load balancing and replication patterns.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FEATURED REVIEWS ═══ -->
+  <div class="v2-reviews-section">
+    <div class="v2-section-label">Featured Reviews</div>
+    <h2 class="v2-section-h2">What learners say,<br>in their own words.</h2>
+    <p class="v2-reviews-sub">Selected from 500+ training sessions delivered across 25+ countries. Every rating: Excellent.</p>
+
+    <!-- Hero 3 ── -->
+    <div class="v2-feat-grid">
+      <div class="v2-feat-card">
+        <div class="v2-feat-stars">★★★★★</div>
+        <div class="v2-feat-course">ASP.NET Blazor · Germany</div>
+        <blockquote class="v2-feat-quote">"The trainer, Raushan Ranjan, provided expert guidance throughout the entire course. He was always friendly, open to questions and explained complex topics in an understandable way. His helpful manner and excellent cooperation during exercises were particularly positive. It was a very enjoyable and informative training course with a dedicated and highly skilled trainer."</blockquote>
+        <div class="v2-feat-person">
+          <div class="v2-feat-av">EL</div>
+          <div>
+            <div class="v2-feat-name">Elena Muatocuene</div>
+            <div class="v2-feat-loc">Germany · Feb 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v2-feat-card">
+        <div class="v2-feat-stars">★★★★★</div>
+        <div class="v2-feat-course">OpenGL &amp; Vulkan · United States</div>
+        <blockquote class="v2-feat-quote">"You made me understand why before showing how. Your demos actually made sense. Most importantly, you never let confusion slide — you would trace through errors until the lesson was clear. You built entire new demos on the spot when students asked. That flexibility while keeping everything structured and logical is rare. One of the best tutors I have had."</blockquote>
+        <div class="v2-feat-person">
+          <div class="v2-feat-av">JC</div>
+          <div>
+            <div class="v2-feat-name">Jose Cahue</div>
+            <div class="v2-feat-loc">United States · Apr 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v2-feat-card">
+        <div class="v2-feat-stars">★★★★★</div>
+        <div class="v2-feat-course">AZ-204 · India</div>
+        <blockquote class="v2-feat-quote">"Your way of teaching is truly something special. Everything is so clear, structured, and easy to follow, and the way you explain even complex topics makes them feel simple and logical. The way you answer every question — big or small — with so much patience and a full heart makes the learning environment feel very comfortable."</blockquote>
+        <div class="v2-feat-person">
+          <div class="v2-feat-av">PP</div>
+          <div>
+            <div class="v2-feat-name">Prajakta Petkar</div>
+            <div class="v2-feat-loc">India · Dec 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary ── -->
+    <div class="v2-feat-grid-sm" style="margin-top:14px">
+      <div class="v2-feat-card-sm">
+        <div class="v2-feat-stars-sm">★★★★★</div>
+        <div class="v2-feat-quote-sm">"The sessions were well-structured, engaging, and easy to follow. The trainer demonstrated strong subject-matter expertise. What stood out was his ability to simplify technical topics and ensure participants remained engaged."</div>
+        <div class="v2-feat-person-sm">
+          <div class="v2-feat-av-sm">BP</div>
+          <div><div class="v2-feat-name-sm">Bhavesh Parikh</div><div class="v2-feat-loc-sm">India · Copilot Studio · Mar 2026</div></div>
+        </div>
+      </div>
+      <div class="v2-feat-card-sm">
+        <div class="v2-feat-stars-sm">★★★★★</div>
+        <div class="v2-feat-quote-sm">"The trainer was very helpful throughout the session and demonstrated a strong understanding of Microsoft tools. He effectively linked the content to real-time, practical examples relevant to our day-to-day work. He was also responsive to questions and provided clear, practical explanations."</div>
+        <div class="v2-feat-person-sm">
+          <div class="v2-feat-av-sm">SK</div>
+          <div><div class="v2-feat-name-sm">Sunita Kumar</div><div class="v2-feat-loc-sm">India · Power BI · Jan 2026</div></div>
+        </div>
+      </div>
+      <div class="v2-feat-card-sm">
+        <div class="v2-feat-stars-sm">★★★★★</div>
+        <div class="v2-feat-quote-sm">"Raushan has an amazing ability to break down complex concepts and make them easy to understand. The course was very well organized, and each topic was explained with practical examples. I feel much more confident now."</div>
+        <div class="v2-feat-person-sm">
+          <div class="v2-feat-av-sm">AM</div>
+          <div><div class="v2-feat-name-sm">Ahmed Mohammed</div><div class="v2-feat-loc-sm">UAE · Azure AI · Feb 2026</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Countries ── -->
+    <div class="v2-countries-strip">
+      <div class="v2-countries-label">25+ Countries</div>
+      <div class="v2-countries-list">
+        <span class="v2-country-pill">🇮🇳 India</span>
+        <span class="v2-country-pill">🇩🇪 Germany</span>
+        <span class="v2-country-pill">🇺🇸 USA</span>
+        <span class="v2-country-pill">🇦🇪 UAE</span>
+        <span class="v2-country-pill">🇸🇬 Singapore</span>
+        <span class="v2-country-pill">🇬🇧 UK</span>
+        <span class="v2-country-pill">🇦🇺 Australia</span>
+        <span class="v2-country-pill">🇨🇦 Canada</span>
+        <span class="v2-country-pill">🇸🇦 Saudi Arabia</span>
+        <span class="v2-country-pill">🇳🇿 New Zealand</span>
+        <span class="v2-country-pill">+ 15 more</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CTA ═══ -->
+  <div class="v2-profile-cta">
+    <h2>Ready to start learning?</h2>
+    <p>Join 3200+ professionals who have levelled up their enterprise skills with Raushan.</p>
+    <div class="v2-cta-btns">
+      <a href="courses.html" class="btn-v2-primary">Browse 47 Courses →</a>
+      <a href="../ai-agent.html" class="btn-v2-ghost">⚡ Try Axiom AI</a>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="v2-footer">
+    <div class="v2-footer-inner">
+      <div class="v2-footer-brand">
+        <div class="v2-nav-logo" style="width:24px;height:24px;font-size:10px">RR</div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text)">RR Skillverse</div>
+          <div style="font-size:11px;color:var(--text-4)">by Raushan Ranjan · MCT</div>
+        </div>
+      </div>
+      <div class="v2-footer-links">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="learn.html">Learn</a>
+        <a href="profile.html">About</a>
+        <a href="../ai-agent.html">Axiom AI</a>
+        <a href="mailto:raushanr1107@gmail.com">Contact</a>
+      </div>
+      <div style="font-size:11px;color:var(--text-4)">© 2025 RR Skillverse</div>
+    </div>
+  </footer>
+
+</div><!-- end .profile-shell -->
+
+<a href="../ai-agent.html" class="v2-fab" title="Ask Axiom AI">⚡</a>
+
+<script>
+function toggleDrawer() {
+  document.getElementById('navDrawer').classList.toggle('open');
+}
+</script>
+</body>
+</html>
