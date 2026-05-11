@@ -634,8 +634,7 @@ html, body {
 const SUPABASE_URL = 'https://oekmyrfqietuqmrwklcs.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9la215cmZxaWV0dXFtcndrbGNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjU2NTYsImV4cCI6MjA5MzgwMTY1Nn0.p5jBl7x_YXYOVhjeOyFaoqrKRZcdf6cdxTK2vCSxsjo';
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
+const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ── State ────────────────────────────────────────────────────
 let currentUser = null;
@@ -704,7 +703,7 @@ function renderWelcome() {
 
 // ── Auth ──────────────────────────────────────────────────────
 async function signInWithGoogle() {
-  const { error } = await supabase.auth.signInWithOAuth({
+  const { error } = await sbClient.auth.signInWithOAuth({
     provider: 'google',
     options: {
       redirectTo: 'https://rrskillverse.in/ai-agent.html'
