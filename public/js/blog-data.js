@@ -3418,6 +3418,701 @@ DIVIDE(
 
 </div>
   `
+},
+
+  {
+  id: 'copilot-studio-raushan-smart-agent',
+  title: 'Raushan and the Rise of the Smart Agent — A Story-Based Guide to Copilot Studio',
+  category: 'power-platform',
+  topic: 'copilot-studio',
+  tags: ['Copilot Studio', 'PL-200', 'Power Virtual Agents', 'Chatbot', 'Microsoft Teams', 'Power Automate', 'NLU', 'AI Agent', 'Beginners'],
+  published: '2026-05-12',
+  updated: '2026-05-12',
+  readTime: '14 min',
+  excerpt: 'Raushan was the go-to person at his company for every employee query — password resets, leave applications, policy questions. Exhausted by repetition, he decided to build a smart agent using Microsoft Copilot Studio. Follow his journey from zero to a fully deployed Teams bot — covering agent fundamentals, topics, entities, variables, Power Automate integration, NLU training, testing, and deployment.',
+  featured: false,
+  content: `
+<div class="blog-story">
+
+  <p class="blog-intro-quote">"I need a virtual assistant who can take care of all these questions — day or night. I'll build one with Copilot Studio."</p>
+
+  <p>Raushan, an IT professional at a mid-sized company, was always the go-to person for employee queries.
+  "How do I reset my password?" "Can you help me apply for leave?" "Where is the project update form?"
+  Day after day, the same questions. Tired but determined, he decided it was time to build something smarter.</p>
+
+  <p>This is the story of how Raushan built <strong>SmartHelpBot</strong> — a fully deployed Microsoft Teams
+  agent — starting from nothing. Every chapter below maps to a real concept in
+  <strong>Microsoft Copilot Studio</strong> (formerly Power Virtual Agents).</p>
+
+  <!-- ════════════════════════
+       CHAPTER 1
+  ════════════════════════ -->
+
+  <div class="blog-callout blog-callout-info">
+    <h2>📖 Chapter 1: The Quest Begins — "Why Not Just Automate?"</h2>
+    <p>Raushan sat at his desk, surrounded by an ever-growing backlog of Outlook notifications.
+    Every message was an employee asking something he had answered a hundred times before.</p>
+    <p>He opened his notebook and wrote down the ten most common questions he received every week:</p>
+    <ul>
+      <li>How do I reset my Active Directory password?</li>
+      <li>What is the leave application process?</li>
+      <li>Where do I submit an IT support ticket?</li>
+      <li>What is the WFH policy?</li>
+      <li>How do I connect to the VPN?</li>
+      <li>Where is the onboarding document for new joiners?</li>
+      <li>How do I request access to a shared drive?</li>
+      <li>What are the office timings?</li>
+      <li>Who do I contact for payroll queries?</li>
+      <li>How do I book a meeting room?</li>
+    </ul>
+    <p>"Every single one of these," he said to himself, "could be answered by a bot. Instantly. At 2am if needed.
+    Without me being involved."</p>
+    <p>That was the moment Raushan decided to build <strong>SmartHelpBot</strong> using
+    <strong>Microsoft Copilot Studio</strong>.</p>
+
+    <div class="blog-fact-pill blog-fact-pill-green">
+      <span class="blog-fact-label">💡 What Is Copilot Studio?</span>
+      Microsoft Copilot Studio is a low-code platform for building, testing, and deploying
+      conversational AI agents (chatbots). It combines a visual topic designer, built-in
+      Natural Language Understanding, Generative AI grounding, Power Automate integration,
+      and one-click publishing to Teams, websites, and other channels — all without writing
+      traditional code.
+    </div>
+  </div>
+
+  <!-- ════════════════════════
+       CHAPTER 2
+  ════════════════════════ -->
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>🤖 Chapter 2: Giving Birth to an Agent — Agent Fundamentals</h2>
+    <p>Raushan opened <strong>make.microsoft.com</strong>, navigated to Copilot Studio, and clicked
+    <strong>Create a Copilot</strong>. A blank canvas appeared — waiting for him to give it life.</p>
+    <p>He filled in the agent fundamentals:</p>
+
+    <div class="blog-steps-pipeline">
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">①</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Name</div>
+          <div class="blog-pipeline-desc">SmartHelpBot — something friendly but professional.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">②</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Icon</div>
+          <div class="blog-pipeline-desc">A robot emoji 🤖 — instantly recognisable as a bot, not a human.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">③</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Description</div>
+          <div class="blog-pipeline-desc">"Assists employees with IT support and HR queries 24/7."</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">④</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Instructions</div>
+          <div class="blog-pipeline-desc">"Respond politely and concisely. Guide users step by step.
+          If unsure, escalate to a human agent. Never make up answers."</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step blog-pipeline-step-done">
+        <div class="blog-pipeline-num blog-pipeline-num-done">⑤</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Language</div>
+          <div class="blog-pipeline-desc">English — with plans to add Hindi later for regional staff.</div>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="blog-quote">
+      "The Instructions field is like your agent's personality and values — what it should do,
+      what it should never do, and how it should treat users."
+    </blockquote>
+
+    <div class="blog-fact-pill">
+      <span class="blog-fact-label">📌 Key Concept — Agent Fundamentals</span>
+      The Name, Description, and Instructions together define your agent's identity. Instructions
+      are particularly important — they act as a system prompt that guides the agent's behaviour
+      across every conversation. Be specific: list what the bot should and should not do.
+    </div>
+  </div>
+
+  <!-- ════════════════════════
+       CHAPTER 3
+  ════════════════════════ -->
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🧠 Chapter 3: Teaching the Bot to Think — Agent Capabilities &amp; Knowledge Sources</h2>
+    <p>A bot without knowledge is a bot that can only say "I don't know." Raushan knew he needed
+    to fill SmartHelpBot's brain with the right information from the right places.</p>
+    <p>He navigated to the <strong>Knowledge</strong> section and connected three sources:</p>
+
+    <div class="blog-transform-grid">
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🌐</span>
+        <div>
+          <div class="blog-transform-name">SharePoint Site</div>
+          <div class="blog-transform-desc">Linked the company's internal HR SharePoint site. The bot
+          can now search and retrieve answers from all HR pages — leave policies, benefits, onboarding guides.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📄</span>
+        <div>
+          <div class="blog-transform-name">PDF Document</div>
+          <div class="blog-transform-desc">Uploaded the IT Support Policy PDF. Any question about
+          support procedures is now grounded in the official document — not guessed.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🗄️</span>
+        <div>
+          <div class="blog-transform-name">Dataverse</div>
+          <div class="blog-transform-desc">Connected the IT ticket history table in Dataverse.
+          The bot can look up whether an employee has an open ticket already before creating a new one.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🤖</span>
+        <div>
+          <div class="blog-transform-name">Generative AI (Enabled)</div>
+          <div class="blog-transform-desc">With this on, the agent uses Azure OpenAI to answer questions
+          even when no specific topic has been created — grounded to the connected knowledge sources only.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Raushan typed into the test panel: <em>"What is the leave policy?"</em></p>
+    <p>SmartHelpBot responded with a clear, accurate answer — pulled directly from the HR SharePoint page
+    and the uploaded PDF. No hallucination. No guessing.</p>
+
+    <div class="blog-fact-pill blog-fact-pill-green">
+      <span class="blog-fact-label">💡 Grounding vs Hallucination</span>
+      When Generative AI is enabled WITH knowledge sources, the bot grounds its answers in those
+      documents — it can only answer from what you gave it. Without knowledge sources, a generative
+      bot might make things up. Always connect specific, trusted knowledge sources for enterprise use.
+    </div>
+  </div>
+
+  <!-- ════════════════════════
+       CHAPTER 4
+  ════════════════════════ -->
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>💬 Chapter 4: Let's Talk Topics — Structuring Conversations</h2>
+    <p>"Generative AI can answer questions," Raushan thought, "but for guided workflows — like applying
+    for leave — I need structured conversations. That's what Topics are for."</p>
+
+    <p>He learned the anatomy of a Topic:</p>
+
+    <div class="blog-comparison-table">
+      <div class="blog-table-header">
+        <div class="blog-table-cell blog-table-feature">Part</div>
+        <div class="blog-table-cell">What It Does</div>
+        <div class="blog-table-cell">Example</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Trigger Phrases</div>
+        <div class="blog-table-cell">Phrases that activate the topic</div>
+        <div class="blog-table-cell">"Apply for leave", "I need time off"</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Question Nodes</div>
+        <div class="blog-table-cell">Bot asks the user for information</div>
+        <div class="blog-table-cell">"What type of leave do you need?"</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Message Nodes</div>
+        <div class="blog-table-cell">Bot sends a message or confirmation</div>
+        <div class="blog-table-cell">"Your leave request has been submitted."</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Action Nodes</div>
+        <div class="blog-table-cell">Bot calls a Power Automate flow</div>
+        <div class="blog-table-cell">Logs request to SharePoint</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">System Topics</div>
+        <div class="blog-table-cell">Built-in topics provided by Copilot Studio</div>
+        <div class="blog-table-cell">Greeting, Fallback, End of Conversation</div>
+      </div>
+    </div>
+
+    <p>Raushan built his first custom topic: <strong>"Apply for Leave"</strong></p>
+    <ul>
+      <li>Trigger phrases: "I want leave", "Need time off", "Apply for leave", "Take a day off"</li>
+      <li>Question node 1: "What type of leave? (Sick / Casual / Maternity / Paternity)"</li>
+      <li>Question node 2: "From which date?"</li>
+      <li>Question node 3: "Until which date?"</li>
+      <li>Message node: "Thank you! Your request for {leaveType} leave from {leaveStart} to {leaveEnd} has been submitted."</li>
+      <li>Action node: Calls a Power Automate flow to log the request</li>
+    </ul>
+
+    <blockquote class="blog-quote">
+      "Topics are the backbone of your agent. Think of each topic as one specific conversation
+      the bot knows how to have — one skill in its repertoire."
+    </blockquote>
+  </div>
+
+  <!-- ════════════════════════
+       CHAPTER 5
+  ════════════════════════ -->
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>🔀 Chapter 5: Smart Conversations — Conditions &amp; Adaptive Cards</h2>
+    <p>"What if someone wants sick leave versus casual leave?" Raushan realised. "The process is
+    different. Sick leave needs a doctor's note. Casual leave just needs dates. The bot needs to branch."</p>
+    <p>He added <strong>Condition Nodes</strong> to his Apply for Leave topic:</p>
+
+    <div class="blog-steps-pipeline">
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">If</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Leave Type = "Sick"</div>
+          <div class="blog-pipeline-desc">Ask: "Please upload a doctor's note or provide the certificate number."
+          Then proceed with submission.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">Else If</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Leave Type = "Casual"</div>
+          <div class="blog-pipeline-desc">Skip the doctor's note. Ask only for dates. Proceed to submission.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step blog-pipeline-step-done">
+        <div class="blog-pipeline-num blog-pipeline-num-done">Else</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Any Other Leave Type</div>
+          <div class="blog-pipeline-desc">Redirect to HR contact: "For this leave type, please contact HR directly at hr@company.com."</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Then Raushan added an <strong>Adaptive Card</strong> to show a visual confirmation summary
+    before submission — displaying leave type, dates, and a Confirm / Cancel button pair.
+    Much better than a plain text message.</p>
+
+    <div class="blog-fact-pill">
+      <span class="blog-fact-label">📌 Adaptive Cards</span>
+      Adaptive Cards are JSON-based UI components that render beautifully in Microsoft Teams,
+      Outlook, and the web chat widget. Use them for: confirmation summaries, form-like inputs,
+      approval buttons, and rich information displays. Design them at adaptivecards.io.
+    </div>
+  </div>
+
+  <!-- ════════════════════════
+       CHAPTER 6
+  ════════════════════════ -->
+
+  <div class="blog-callout blog-callout-info">
+    <h2>📦 Chapter 6: Knowing More — Variables &amp; Entities</h2>
+    <p>"The bot collects data from the user," Raushan noted, "but how does it remember that data
+    within the conversation and pass it to other nodes?" The answer was <strong>Variables</strong>
+    and <strong>Entities</strong>.</p>
+
+    <div class="blog-transform-grid">
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🏷️</span>
+        <div>
+          <div class="blog-transform-name">Prebuilt Entities</div>
+          <div class="blog-transform-desc">Ready-made data recognisers built into Copilot Studio.
+          Copilot Studio automatically extracts dates, times, emails, phone numbers, and numbers
+          from user input — you don't need to build this logic yourself.
+          Example: If user types "next Monday", the Date entity extracts the actual date value.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🔧</span>
+        <div>
+          <div class="blog-transform-name">Custom Entities</div>
+          <div class="blog-transform-desc">You define the allowed values.
+          Raushan created a <strong>LeaveType</strong> entity with values:
+          Sick, Casual, Maternity, Paternity, Unpaid.
+          When the bot asks "What type of leave?", it matches the user's answer
+          to one of these values — even if they say "sick day" instead of "sick".</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📝</span>
+        <div>
+          <div class="blog-transform-name">Variables</div>
+          <div class="blog-transform-desc">Storage containers within a conversation.
+          Every question node stores its answer in a variable.
+          Raushan's variables: <strong>userEmail</strong>, <strong>leaveType</strong>,
+          <strong>leaveStart</strong>, <strong>leaveEnd</strong>.
+          These are then passed to the Power Automate flow and used in confirmation messages.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🌍</span>
+        <div>
+          <div class="blog-transform-name">Global vs Topic Variables</div>
+          <div class="blog-transform-desc">Topic variables exist only within a single topic conversation.
+          Global variables persist across topics — useful when you need to pass the user's
+          authenticated email from a Greeting topic to every other topic in the bot.</div>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="blog-quote">
+      "Entities are the categories — what TYPE of thing you're capturing.
+      Variables are the containers — WHERE you store what the user actually said."
+    </blockquote>
+  </div>
+
+  <!-- ════════════════════════
+       CHAPTER 7
+  ════════════════════════ -->
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>⚡ Chapter 7: Automation — When SmartHelpBot Takes Real Action</h2>
+    <p>"A bot that only talks is just a fancy FAQ," Raushan said. "I want SmartHelpBot to actually
+    <em>do things</em> — submit requests, send emails, create records."</p>
+    <p>He built a <strong>Power Automate Flow</strong> triggered by Copilot Studio:</p>
+
+    <div class="blog-steps-pipeline">
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">1</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Trigger: When Copilot Studio calls this flow</div>
+          <div class="blog-pipeline-desc">Input parameters defined: userEmail (text), leaveType (text),
+          leaveStart (date), leaveEnd (date).</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">2</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Create item in SharePoint List</div>
+          <div class="blog-pipeline-desc">Writes a new row to the "Leave Requests" SharePoint list
+          with all four input values plus the current timestamp.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">3</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Send an email to HR</div>
+          <div class="blog-pipeline-desc">Uses the Office 365 connector to email
+          hr@company.com with a formatted summary of the leave request.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step blog-pipeline-step-done">
+        <div class="blog-pipeline-num blog-pipeline-num-done">4</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Return confirmation to the bot</div>
+          <div class="blog-pipeline-desc">Flow returns a "requestId" output variable back to Copilot Studio,
+          which the bot then displays: "Your request ID is REQ-0042. HR will respond within 24 hours."</div>
+        </div>
+      </div>
+    </div>
+
+    <p>He connected this flow in the topic using a <strong>Call an Action</strong> node,
+    mapped the variables to the flow's input parameters, and captured the output requestId
+    into a new variable to display to the user.</p>
+
+    <div class="blog-fact-pill blog-fact-pill-green">
+      <span class="blog-fact-label">💡 What Flows Can Do</span>
+      Power Automate flows called from Copilot Studio can: create SharePoint items, send emails,
+      create Teams messages, call REST APIs, write to Dataverse, trigger approvals, send SMS,
+      update Excel rows, create calendar events, and much more — connecting your bot to
+      virtually any system your organisation uses.
+    </div>
+  </div>
+
+  <!-- ════════════════════════
+       CHAPTER 8
+  ════════════════════════ -->
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>🗣️ Chapter 8: Making the Bot Learn — NLU &amp; Training</h2>
+    <p>"Users never type exactly what I expect," Raushan discovered during early testing.
+    Someone typed "wanna take off tomorrow" — the bot had no idea what to do with that.</p>
+    <p>He dug into <strong>Natural Language Understanding (NLU)</strong>:</p>
+
+    <div class="blog-transform-grid">
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🎯</span>
+        <div>
+          <div class="blog-transform-name">Add More Trigger Phrases</div>
+          <div class="blog-transform-desc">For "Apply for Leave" he added:
+          "wanna take off", "need a day off", "sick today", "apply sick leave",
+          "want to go on leave", "holiday request", "day off tomorrow".
+          The more variants, the better the NLU matching.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📊</span>
+        <div>
+          <div class="blog-transform-name">Topic Priority</div>
+          <div class="blog-transform-desc">When multiple topics might match a user's message,
+          Copilot Studio uses priority to decide which one triggers first.
+          Raushan set "Apply for Leave" higher priority than the Fallback topic.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🐛</span>
+        <div>
+          <div class="blog-transform-name">Debug Mode</div>
+          <div class="blog-transform-desc">In the Test Panel, enabling Debug Mode shows exactly which topic
+          was triggered for each user input, what the NLU confidence score was, and which
+          variables were populated at each step. Essential for diagnosing misroutes.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🧪</span>
+        <div>
+          <div class="blog-transform-name">Generative Answers Fallback</div>
+          <div class="blog-transform-desc">When no topic matches AND generative AI is enabled,
+          the bot falls back to generative answers grounded in your knowledge sources.
+          This dramatically reduces "I don't understand" responses for questions
+          you haven't explicitly built topics for.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════
+       CHAPTER 9
+  ════════════════════════ -->
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🧪 Chapter 9: Testing the Bot Like a Pro</h2>
+    <p>Before going live, Raushan spent a full day in the Test Panel — systematically
+    breaking his own bot to find its weak spots.</p>
+    <p>His testing checklist:</p>
+
+    <div class="blog-steps-pipeline">
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">①</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Happy Path Testing</div>
+          <div class="blog-pipeline-desc">Simulate the perfect user — types exactly the expected trigger phrase,
+          answers every question correctly, completes the flow without interruption. Verify the SharePoint
+          record is created and HR email is sent.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">②</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Variant Phrase Testing</div>
+          <div class="blog-pipeline-desc">Try every trigger phrase variant and confirm the correct topic fires.
+          Use Debug Mode to verify NLU confidence scores are above 0.8 for all primary phrases.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">③</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Edge Case Testing</div>
+          <div class="blog-pipeline-desc">Test unexpected inputs: invalid dates ("February 30th"),
+          gibberish text, empty responses, extremely long answers, special characters.
+          Verify graceful handling in every case.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">④</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Fallback Testing</div>
+          <div class="blog-pipeline-desc">Type something completely unrelated to any topic.
+          Verify the Fallback topic triggers, provides a helpful message, and offers
+          to escalate to a human agent if needed.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step blog-pipeline-step-done">
+        <div class="blog-pipeline-num blog-pipeline-num-done">⑤</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Variable Value Inspection</div>
+          <div class="blog-pipeline-desc">At each step, use the variable inspector in the Test Panel
+          to confirm that leaveType, leaveStart, leaveEnd, and userEmail are storing the correct values
+          before they are passed to the Power Automate flow.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════
+       CHAPTER 10
+  ════════════════════════ -->
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>🚀 Chapter 10: Time to Shine — Deployment</h2>
+    <p>SmartHelpBot had passed every test. Raushan was ready to share it with the world —
+    or at least, his company's 300 employees.</p>
+    <p>He clicked <strong>Publish</strong>. Then chose his deployment channels:</p>
+
+    <div class="blog-transform-grid">
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">💜</span>
+        <div>
+          <div class="blog-transform-name">Microsoft Teams</div>
+          <div class="blog-transform-desc">The primary channel. Raushan added the bot to Teams as an app.
+          Employees could now chat with SmartHelpBot directly in Teams — the tool they already used
+          all day. No new system to learn.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🌐</span>
+        <div>
+          <div class="blog-transform-name">Demo Website / Web Chat Widget</div>
+          <div class="blog-transform-desc">Copilot Studio generated an embeddable chat widget
+          that Raushan added to the company intranet homepage. Employees on the intranet
+          could chat without opening Teams.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">👥</span>
+        <div>
+          <div class="blog-transform-name">Shared with Colleague</div>
+          <div class="blog-transform-desc">Raushan gave his colleague Anika co-owner access
+          so she could monitor conversations, add topics, and update knowledge sources
+          without needing Raushan for every change.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📊</span>
+        <div>
+          <div class="blog-transform-name">Analytics Dashboard</div>
+          <div class="blog-transform-desc">After one week, Raushan checked the built-in analytics:
+          247 conversations, 91% resolution rate without human escalation, most common topic:
+          "Leave Application". Average conversation duration: 2 minutes 14 seconds.</div>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="blog-quote">
+      "Week 1: 247 conversations handled by SmartHelpBot. That's 247 emails I didn't have to answer."
+    </blockquote>
+  </div>
+
+  <!-- ════════════════════════
+       FINAL CHAPTER
+  ════════════════════════ -->
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>🎓 Final Chapter: The Legacy of a Maker</h2>
+    <p>Three months after SmartHelpBot went live, Raushan's manager called him into a meeting.</p>
+    <p>"IT ticket volume is down 34%. HR query time is down 58%. What did you do?"</p>
+    <p>Raushan explained the bot. His manager asked him to present it to the leadership team.
+    A week later, Raushan was running a Copilot Studio workshop for five other teams —
+    each of them building their own agents for their own domains.</p>
+    <p>He became the company's <strong>Copilot Studio champion</strong>.</p>
+    <p>And it started with one afternoon, one question, and one decision: <em>"Why not just automate this?"</em></p>
+  </div>
+
+  <!-- ════════════════════════
+       SUMMARY
+  ════════════════════════ -->
+
+  <div class="blog-summary">
+    <h2>📌 Complete Summary — What Raushan (and You) Learned</h2>
+    <ul style="padding-left:18px;margin-top:10px">
+      <li style="margin-bottom:8px"><strong>Agent Fundamentals:</strong> Name, description, instructions, language — define the bot's identity and behaviour before anything else.</li>
+      <li style="margin-bottom:8px"><strong>Knowledge Sources:</strong> SharePoint, PDFs, Dataverse, websites — ground the agent in your organisation's actual information.</li>
+      <li style="margin-bottom:8px"><strong>Generative AI:</strong> Enable it for open-ended questions; always pair with knowledge sources to prevent hallucination.</li>
+      <li style="margin-bottom:8px"><strong>Topics:</strong> The structured conversations — trigger phrases activate them, question/message/action nodes build the flow.</li>
+      <li style="margin-bottom:8px"><strong>Conditions:</strong> Branch conversations based on user answers — different paths for sick vs casual leave, new vs returning customer, etc.</li>
+      <li style="margin-bottom:8px"><strong>Adaptive Cards:</strong> Rich UI components for Teams — use for confirmations, summaries, approval buttons.</li>
+      <li style="margin-bottom:8px"><strong>Entities &amp; Variables:</strong> Entities define what type of data to capture; variables store the actual values and pass them between nodes and flows.</li>
+      <li style="margin-bottom:8px"><strong>Power Automate:</strong> Connect the bot to real systems — SharePoint, email, Dataverse, Teams, REST APIs.</li>
+      <li style="margin-bottom:8px"><strong>NLU &amp; Training:</strong> Add many trigger phrase variants; use debug mode; rely on generative fallback for uncovered questions.</li>
+      <li style="margin-bottom:8px"><strong>Testing:</strong> Happy path, variant phrases, edge cases, fallback, variable inspection — test all five before publishing.</li>
+      <li style="margin-bottom:8px"><strong>Deployment:</strong> Publish to Teams, web chat, or other channels; share ownership; monitor with built-in analytics.</li>
+    </ul>
+  </div>
+
+  <!-- ════════════════════════
+       EXERCISE
+  ════════════════════════ -->
+
+  <div class="blog-exercise">
+    <h2>🧠 Build Your Own SmartHelpBot — 7-Day Challenge</h2>
+    <p>Follow Raushan's path and build your own agent in one week:</p>
+    <ol class="blog-exercise-steps">
+      <li>
+        <strong>Day 1 — Create your agent</strong><br/>
+        Go to make.microsoft.com → Copilot Studio → Create. Set a name, description, and
+        detailed instructions. Connect at least one knowledge source (a SharePoint page or a PDF).
+        Test a question against it in the Test Panel.
+      </li>
+      <li>
+        <strong>Day 2 — Build your first topic</strong><br/>
+        Choose a repetitive query in your context (leave, IT support, course registration, product FAQ).
+        Create a topic with at least 5 trigger phrase variants, 3 question nodes, and a confirmation message node.
+      </li>
+      <li>
+        <strong>Day 3 — Add conditions</strong><br/>
+        Add at least one condition branch to your topic. Different path based on the user's answer.
+        Test both branches in the Test Panel.
+      </li>
+      <li>
+        <strong>Day 4 — Add a Power Automate Flow</strong><br/>
+        Build a flow that receives variables from your bot and writes a record somewhere —
+        SharePoint list, Excel table, or Dataverse. Connect it via Call an Action. Test end-to-end.
+      </li>
+      <li>
+        <strong>Day 5 — Create custom entities and global variables</strong><br/>
+        Build a custom entity for a category relevant to your domain. Store the authenticated
+        user's email in a global variable so every topic can access it.
+      </li>
+      <li>
+        <strong>Day 6 — Test like Raushan</strong><br/>
+        Run all five test types: happy path, variant phrases, edge cases, fallback, variable inspection.
+        Fix every issue you find. Enable debug mode and verify NLU confidence scores.
+      </li>
+      <li>
+        <strong>Day 7 — Publish and share</strong><br/>
+        Publish to Teams or the demo website. Share access with one colleague.
+        Check the analytics dashboard after 24 hours.
+      </li>
+    </ol>
+  </div>
+
+  <!-- ════════════════════════
+       RESOURCES
+  ════════════════════════ -->
+
+  <div class="blog-mslearn">
+    <div class="blog-mslearn-title">📚 Official Resources to Go Deeper</div>
+    <ul class="blog-mslearn-links">
+      <li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio" target="_blank" rel="noopener">What is Microsoft Copilot Studio — official overview</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-create-edit-topics" target="_blank" rel="noopener">Create and edit topics in Copilot Studio</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-entities-slot-filling" target="_blank" rel="noopener">Entities and slot filling in Copilot Studio</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-flow" target="_blank" rel="noopener">Use Power Automate flows with Copilot Studio</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-fundamentals-publish-channels" target="_blank" rel="noopener">Publish your agent to channels</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-summary" target="_blank" rel="noopener">Copilot Studio analytics and usage reporting</a></li>
+      <li><a href="https://adaptivecards.io" target="_blank" rel="noopener">Adaptive Cards designer — adaptivecards.io</a></li>
+    </ul>
+  </div>
+
+  <div class="blog-next-chapter">
+    <span class="blog-next-label">MCT Note</span>
+    <span class="blog-next-title">
+      Written by Raushan Ranjan, MCT and Senior Corporate Trainer at Koenig Solutions,
+      from real Copilot Studio enterprise training sessions. This story-based format
+      mirrors the actual PL-200 / PL-100 learning path concepts — feel free to use it
+      as a study companion for the Microsoft certification.
+    </span>
+  </div>
+
+</div>
+  `
 }
 
 ];
