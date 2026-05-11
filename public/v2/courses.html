@@ -3,352 +3,326 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Skillverse Library — All Courses · RR Skillverse</title>
-<meta name="description" content="47 enterprise courses on Azure, Power BI, .NET and AI — built by MCT Raushan Ranjan. AI-powered lessons, hands-on labs, free to access."/>
-<meta property="og:title" content="Skillverse Library — All Courses · RR Skillverse"/>
-<meta property="og:image" content="https://rrskillverse.in/images/og-thumbnail.svg"/>
-<link rel="icon" type="image/svg+xml" href="../images/favicon.svg"/>
-<link rel="apple-touch-icon" href="../images/favicon.svg"/>
-<link rel="stylesheet" href="../css/main.css"/>
-<link rel="stylesheet" href="v2.css"/>
-<style>
-/* ── Courses page layout ── */
-.v2-courses-layout {
-  display: flex;
-  gap: 24px;
-  padding: 32px 40px 64px;
-  max-width: 1400px;
-}
-.v2-courses-main { flex: 1; min-width: 0; }
-.v2-courses-header {
-  padding: 48px 40px 32px;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg,rgba(59,130,246,0.04) 0%,transparent 100%);
-}
-.v2-courses-eyebrow {
-  font-size: 10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
-  color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:8px;
-}
-.v2-courses-eyebrow::before { content:'';width:20px;height:1.5px;background:var(--accent);border-radius:1px; }
-.v2-courses-h1 { font-size:clamp(24px,4vw,40px);font-weight:800;letter-spacing:-0.6px;color:var(--text);margin-bottom:8px; }
-.v2-courses-h1 em { font-style:italic;color:var(--accent);font-weight:400; }
-.v2-courses-sub { font-size:14px;color:var(--text-3);line-height:1.7;max-width:540px; }
-/* ── Course card internals ── */
-.v2-cc-header { display:flex;align-items:center;justify-content:space-between; }
-.v2-cc-icon { font-size:22px;line-height:1; }
-.v2-cc-sessions { font-size:9px;color:var(--text-4);font-family:var(--mono);background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:2px 8px; }
-.v2-cc-code { font-size:9.5px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--accent);font-family:var(--mono); }
-.v2-cc-title { font-size:13.5px;font-weight:700;color:var(--text);line-height:1.35; }
-.v2-cc-desc { font-size:12px;color:var(--text-3);line-height:1.65;flex:1; }
-.v2-cc-tags { display:flex;flex-wrap:wrap;gap:5px; }
-.v2-cc-tag { font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:var(--bg3);color:var(--text-4);border:1px solid var(--border); }
-.v2-cc-footer { display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border);margin-top:2px; }
-.v2-cc-level { font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;border:1px solid; }
-.v2-cc-cta { font-size:11px;font-weight:700;color:var(--accent);opacity:0;transition:opacity 0.15s; }
-.v2-course-card:hover .v2-cc-cta { opacity:1; }
-.v2-cc-live-strip { margin:6px -22px -20px;padding:8px 22px;background:rgba(34,197,94,0.08);border-top:1px solid rgba(34,197,94,0.15);font-size:10px;font-weight:600;color:var(--green);display:flex;align-items:center;gap:6px; }
-/* ── Course grid ── */
-.v2-course-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
-/* ── Empty state ── */
-.v2-empty { display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;color:var(--text-4);text-align:center;grid-column:1/-1; }
-@media(max-width:1200px) { .v2-course-grid{grid-template-columns:repeat(2,1fr);} }
-@media(max-width:1000px) { .v2-courses-layout{flex-direction:column;} .v2-filter-panel{position:relative;top:0;width:100%;} }
-@media(max-width:700px) { .v2-course-grid{grid-template-columns:1fr;} .v2-courses-layout{padding:20px;} .v2-courses-header{padding:32px 20px 24px;} }
-</style>
+<title>Courses — RR Skillverse</title>
+<meta name="description" content="Browse all courses by MCT Raushan Ranjan. Azure, Power Platform, .NET, Blazor, AI, Data Analytics, and more."/>
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
+<link rel="stylesheet" href="/v2/v2.css"/>
 </head>
 <body>
-<!-- ── V2 TOPNAV ── -->
-<nav class="v2-topnav">
-  <a href="index.html" class="v2-nav-brand">
-    <div class="v2-nav-logo">RR</div>
-    <div class="v2-nav-brand-text">
-      <div class="v2-nav-brand-name">RR Skillverse</div>
-      <div class="v2-nav-brand-sub">Learning Platform</div>
+<script src="/v2/nav-v2.js"></script>
+
+<!-- ── COURSES HERO ─────────────────────────────────────────── -->
+<section class="v2-courses-hero">
+  <div class="v2-courses-hero-inner">
+    <div>
+      <div class="v2-eyebrow" style="color:var(--blue);justify-content:flex-start">Course Library</div>
+      <h1 class="v2-courses-hero-title">All Courses</h1>
+      <p class="v2-courses-hero-sub">
+        Enterprise-grade Microsoft technology training by MCT Raushan Ranjan.
+        AI-powered lessons, hands-on labs, globally recognised certifications.
+      </p>
     </div>
-  </a>
-  <ul class="v2-nav-items">
-    <li><a href="index.html" class="v2-nav-link">Home</a></li>
-    <li><a href="courses.html" class="v2-nav-link active">🎓 AI Academy</a></li>
-    <li><a href="../blog.html" class="v2-nav-link">📝 Blogs</a></li>
-    <li><a href="../labs.html" class="v2-nav-link">🧪 Labs</a></li>
-    <li><a href="profile.html" class="v2-nav-link">About Us</a></li>
-    <li><a href="../ai-agent.html" class="v2-nav-link">⚡ AI Agent</a></li>
-  </ul>
-  <div class="v2-nav-right">
-    <div class="v2-nav-live-pill"><div class="v2-nav-live-dot"></div>LIVE</div>
-    <a href="profile.html" class="v2-nav-avatar" title="Raushan Ranjan">
-      <img src="../images/raushanranjan.jpg" alt="RR" onerror="this.style.display='none';this.parentElement.textContent='RR'"/>
-    </a>
+    <div class="v2-courses-hero-stats">
+      <div class="v2-courses-hero-stat">
+        <span class="v2-courses-hero-stat-num" id="totalCount">48+</span>
+        <span class="v2-courses-hero-stat-label">Courses</span>
+      </div>
+      <div class="v2-courses-hero-stat">
+        <span class="v2-courses-hero-stat-num">3200+</span>
+        <span class="v2-courses-hero-stat-label">Trained</span>
+      </div>
+      <div class="v2-courses-hero-stat">
+        <span class="v2-courses-hero-stat-num">25+</span>
+        <span class="v2-courses-hero-stat-label">Countries</span>
+      </div>
+      <div class="v2-courses-hero-stat">
+        <span class="v2-courses-hero-stat-num">MCT</span>
+        <span class="v2-courses-hero-stat-label">Certified</span>
+      </div>
+    </div>
   </div>
-  <button class="v2-nav-hamburger" id="v2Hamburger">☰</button>
-</nav>
-<div class="v2-nav-drawer" id="v2Drawer">
-  <a href="index.html">🏠 Home</a>
-  <a href="courses.html">🎓 AI Academy</a>
-  <a href="../blog.html">📝 Blogs</a>
-  <a href="../labs.html">🧪 Hands-on Labs</a>
-  <a href="profile.html">👤 About Us</a>
-  <a href="../ai-agent.html">💬 AI Agent</a>
-</div>
+</section>
 
-<div class="v2-page-body">
-
-<!-- Header -->
-<div class="v2-courses-header">
-  <div class="v2-courses-eyebrow">Skillverse Library</div>
-  <h1 class="v2-courses-h1">All <em>Courses</em></h1>
-  <p class="v2-courses-sub">47 courses across 6 domains — delivered to 3200+ professionals in 25+ countries. Click any course to explore AI-powered lessons and hands-on labs.</p>
-</div>
-
-<!-- 2-panel layout -->
+<!-- ── COURSES LAYOUT ────────────────────────────────────────── -->
 <div class="v2-courses-layout">
 
-  <!-- Left filter panel -->
+  <!-- Filter Sidebar -->
   <aside class="v2-filter-panel">
-    <div class="v2-filter-panel-title">Library</div>
-    <div class="v2-filter-panel-count" id="filterPanelCount">47</div>
-    <div style="font-size:10px;color:var(--text-4);margin-top:-8px;margin-bottom:12px">courses</div>
-    <div class="v2-filter-divider"></div>
-    <div class="v2-filter-item active" data-cat="all" onclick="filterCourses('all',this)">
-      <span class="v2-filter-icon">📚</span>
-      <span class="v2-filter-label">All Courses</span>
-      <span class="v2-filter-count">47</span>
+    <div class="v2-filter-section">
+      <div class="v2-filter-label">Search</div>
+      <div class="v2-filter-search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input id="courseSearch" type="text" placeholder="Search courses…" oninput="renderCourses()"/>
+      </div>
     </div>
-    <div class="v2-filter-item" data-cat="azure" onclick="filterCourses('azure',this)">
-      <span class="v2-filter-icon">☁️</span>
-      <span class="v2-filter-label">Azure &amp; Cloud</span>
-      <span class="v2-filter-count">8</span>
+    <div class="v2-filter-section">
+      <div class="v2-filter-label">Category</div>
+      <button class="v2-filter-btn active" onclick="setFilter('all',this)">All Courses <span id="cnt-all">48</span></button>
+      <button class="v2-filter-btn" onclick="setFilter('azure',this)">Microsoft Azure <span id="cnt-azure">0</span></button>
+      <button class="v2-filter-btn" onclick="setFilter('power',this)">Power Platform <span id="cnt-power">0</span></button>
+      <button class="v2-filter-btn" onclick="setFilter('copilot',this)">Copilot Studio <span id="cnt-copilot">0</span></button>
+      <button class="v2-filter-btn" onclick="setFilter('dotnet',this)">. NET &amp; Blazor <span id="cnt-dotnet">0</span></button>
+      <button class="v2-filter-btn" onclick="setFilter('data',this)">Data &amp; Analytics <span id="cnt-data">0</span></button>
+      <button class="v2-filter-btn" onclick="setFilter('other',this)">Specialised Tech <span id="cnt-other">0</span></button>
     </div>
-    <div class="v2-filter-item" data-cat="power" onclick="filterCourses('power',this)">
-      <span class="v2-filter-icon">⚡</span>
-      <span class="v2-filter-label">Power Platform</span>
-      <span class="v2-filter-count">13</span>
+    <div class="v2-filter-section">
+      <div class="v2-filter-label">Level</div>
+      <button class="v2-filter-btn active" onclick="setLevel('all',this)">All Levels</button>
+      <button class="v2-filter-btn" onclick="setLevel('Beginner',this)">Beginner</button>
+      <button class="v2-filter-btn" onclick="setLevel('Intermediate',this)">Intermediate</button>
+      <button class="v2-filter-btn" onclick="setLevel('Advanced',this)">Advanced</button>
     </div>
-    <div class="v2-filter-item" data-cat="copilot" onclick="filterCourses('copilot',this)">
-      <span class="v2-filter-icon">🤖</span>
-      <span class="v2-filter-label">AI &amp; Copilot</span>
-      <span class="v2-filter-count">4</span>
+    <div class="v2-filter-section">
+      <div class="v2-filter-label">Availability</div>
+      <label class="v2-filter-check">
+        <input type="checkbox" id="liveOnly" onchange="renderCourses()"/>
+        Live courses only
+      </label>
     </div>
-    <div class="v2-filter-item" data-cat="dotnet" onclick="filterCourses('dotnet',this)">
-      <span class="v2-filter-icon">🔷</span>
-      <span class="v2-filter-label">.NET &amp; Blazor</span>
-      <span class="v2-filter-count">11</span>
-    </div>
-    <div class="v2-filter-item" data-cat="data" onclick="filterCourses('data',this)">
-      <span class="v2-filter-icon">📊</span>
-      <span class="v2-filter-label">Data &amp; Analytics</span>
-      <span class="v2-filter-count">3</span>
-    </div>
-    <div class="v2-filter-item" data-cat="other" onclick="filterCourses('other',this)">
-      <span class="v2-filter-icon">🏗️</span>
-      <span class="v2-filter-label">Other</span>
-      <span class="v2-filter-count">8</span>
+    <div class="v2-filter-section">
+      <div class="v2-filter-label">Sort by</div>
+      <select id="sortBy" onchange="renderCourses()" class="v2-filter-select">
+        <option value="default">Relevance</option>
+        <option value="sessions">Most Taught</option>
+        <option value="title">A–Z</option>
+      </select>
     </div>
   </aside>
 
-  <!-- Right panel -->
-  <div class="v2-courses-main">
-    <div class="v2-search-row">
-      <input type="text" id="courseSearch" class="v2-search-input"
-             placeholder="Search 47 courses…"
-             oninput="searchCourses(this.value)"/>
-      <select class="v2-sort-select" id="courseSort" onchange="sortCourses(this.value)">
-        <option value="sessions">Most Sessions</option>
-        <option value="level">Level</option>
-        <option value="alpha">A–Z</option>
-      </select>
+  <!-- Course Grid -->
+  <main class="v2-courses-main">
+    <div class="v2-courses-toolbar">
+      <span class="v2-courses-count" id="resultCount">Showing all courses</span>
+      <div class="v2-courses-view-toggle">
+        <button class="v2-view-btn active" onclick="setView('grid',this)" title="Grid view">⊞</button>
+        <button class="v2-view-btn" onclick="setView('list',this)" title="List view">☰</button>
+      </div>
     </div>
-    <div class="v2-course-grid" id="courseGrid"></div>
-  </div>
+    <div class="v2-courses-grid" id="courseGrid"></div>
+  </main>
 
 </div>
 
-<!-- Footer -->
+<!-- ── FOOTER ────────────────────────────────────────────────── -->
 <footer class="v2-footer">
-  <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-    <a href="index.html" class="v2-footer-brand">
-      <div class="v2-footer-mark">RR</div>
-      <div class="v2-footer-name">RR Skillverse</div>
-    </a>
-    <span class="v2-footer-copy">© 2026 · MCT Raushan Ranjan</span>
+  <div class="v2-footer-inner">
+    <div class="v2-footer-brand">
+      <div class="v2-footer-logo">RR Skillverse</div>
+      <p class="v2-footer-tagline">Professional Microsoft technology training by MCT Raushan Ranjan.</p>
+    </div>
+    <div class="v2-footer-links">
+      <div class="v2-footer-col">
+        <div class="v2-footer-col-title">Domains</div>
+        <a href="/v2/courses.html?cat=azure">Azure</a>
+        <a href="/v2/courses.html?cat=power">Power Platform</a>
+        <a href="/v2/courses.html?cat=dotnet">.NET &amp; Blazor</a>
+        <a href="/v2/courses.html?cat=copilot">Copilot Studio</a>
+      </div>
+      <div class="v2-footer-col">
+        <div class="v2-footer-col-title">Platform</div>
+        <a href="/v2/index.html">Home</a>
+        <a href="/v2/learn.html">Learn</a>
+        <a href="/v2/profile.html">Instructor</a>
+      </div>
+    </div>
   </div>
-  <nav class="v2-footer-nav">
-    <a href="index.html" class="v2-footer-link">Home</a>
-    <a href="../blog.html" class="v2-footer-link">Blog</a>
-    <a href="../labs.html" class="v2-footer-link">Labs</a>
-    <a href="profile.html" class="v2-footer-link">About</a>
-    <a href="../ai-agent.html" class="v2-footer-link">AI Agent</a>
-  </nav>
+  <div class="v2-footer-bottom">
+    <span>© 2025 RR Skillverse. All rights reserved.</span>
+  </div>
 </footer>
 
-</div><!-- /v2-page-body -->
-
-<a href="../ai-agent.html" class="v2-fab" title="Ask Axiom AI">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-  </svg>
-</a>
-
 <script>
-/* ── Nav hamburger ── */
-(function() {
-  const btn = document.getElementById('v2Hamburger');
-  const drawer = document.getElementById('v2Drawer');
-  btn.addEventListener('click', () => {
-    const open = drawer.classList.toggle('open');
-    btn.textContent = open ? '✕' : '☰';
-  });
-  document.addEventListener('click', e => {
-    if (drawer.classList.contains('open') && !drawer.contains(e.target) && !btn.contains(e.target)) {
-      drawer.classList.remove('open'); btn.textContent = '☰';
-    }
-  });
-})();
-
 const COURSES_DATA = [
-  { id:'az-204', cat:'azure', icon:'☁️', title:'AZ-204: Developing Solutions for Microsoft Azure', short:'AZ-204', desc:'Build cloud-native solutions — Functions, Blob Storage, Cosmos DB, API Management, and secure Azure deployments.', tags:['Azure','Developer','Certification'], level:'Intermediate', sessions:'15+', live:true, link:'learn.html?course=az204' },
-  { id:'az-305', cat:'azure', icon:'☁️', title:'AZ-305: Designing Microsoft Azure Infrastructure Solutions', short:'AZ-305', desc:'Design scalable, secure, and reliable Azure infrastructure — networking, governance, identity, and monitoring.', tags:['Azure','Architecture','Certification'], level:'Advanced', sessions:'2+', live:false, link:'learn.html?course=az305' },
-  { id:'az-900', cat:'azure', icon:'☁️', title:'AZ-900: Introduction to Microsoft Azure', short:'AZ-900', desc:'Azure fundamentals — cloud concepts, core services, pricing, SLAs, and the Azure value proposition.', tags:['Azure','Fundamentals','Certification'], level:'Beginner', sessions:'5+', live:false, link:'learn.html?course=az900' },
-  { id:'azure-integration', cat:'azure', icon:'🔗', title:'Azure Integration Services', short:'Azure Integration', desc:'Logic Apps, Service Bus, API Management, Event Grid — enterprise-grade integration patterns on Azure.', tags:['Azure','Integration','Enterprise'], level:'Advanced', sessions:'6+', live:false, link:'learn.html?course=azure-integration' },
-  { id:'az-2006', cat:'azure', icon:'⚙️', title:'AZ-2006: Automate Azure Load Testing with GitHub Actions', short:'AZ-2006', desc:'Automate performance testing pipelines using Azure Load Testing integrated with GitHub Actions CI/CD.', tags:['Azure','DevOps','Testing'], level:'Intermediate', sessions:'2+', live:false, link:'learn.html?course=az2006' },
-  { id:'ai-901', cat:'azure', icon:'🧠', title:'AI-901: Introduction to AI in Azure', short:'AI-901', desc:'Azure AI Services overview — Computer Vision, NLP, Speech, and responsible AI principles.', tags:['Azure','AI','Fundamentals'], level:'Beginner', sessions:'2+', live:false, link:'learn.html?course=ai901' },
-  { id:'apigee', cat:'azure', icon:'🌐', title:'Developing APIs with Google Cloud Apigee', short:'Apigee', desc:'Design, secure, and manage APIs using Google Cloud Apigee — proxies, policies, analytics, and monetization.', tags:['API','Google Cloud','Enterprise'], level:'Advanced', sessions:'5+', live:false, link:'learn.html?course=apigee' },
-  { id:'apigee-hybrid', cat:'azure', icon:'🌐', title:'Managing Apigee API Platform for Hybrid Cloud', short:'Apigee Hybrid', desc:'Manage Apigee in hybrid cloud environments — runtime configuration, security, and operational management.', tags:['API','Hybrid Cloud','Enterprise'], level:'Advanced', sessions:'2+', live:false, link:'learn.html?course=apigee-hybrid' },
-  { id:'pl-300', cat:'power', icon:'📊', title:'PL-300: Design and Manage Analytics Solutions Using Power BI', short:'PL-300', desc:'Complete Power BI — data modeling, DAX, relationships, reports, dashboards, RLS, and deployment pipelines.', tags:['Power BI','Analytics','Certification'], level:'Intermediate', sessions:'30+', live:true, link:'learn.html?course=pl300' },
-  { id:'pl-400', cat:'power', icon:'⚡', title:'PL-400: Microsoft Power Platform Developer', short:'PL-400', desc:'Advanced Power Platform development — custom connectors, plugins, PCF controls, ALM, and pro-code extensions.', tags:['Power Platform','Developer','Certification'], level:'Advanced', sessions:'6+', live:false, link:'learn.html?course=pl400' },
-  { id:'pl-200', cat:'power', icon:'⚡', title:'PL-200: Microsoft Power Platform Functional Consultant', short:'PL-200', desc:'Configure Power Platform solutions — Power Apps, Power Automate, Power Virtual Agents, and Dataverse.', tags:['Power Platform','Consultant','Certification'], level:'Intermediate', sessions:'4+', live:false, link:'learn.html?course=pl200' },
-  { id:'pl-600', cat:'power', icon:'⚡', title:'PL-600: Microsoft Power Platform Solution Architect', short:'PL-600', desc:'Architect enterprise Power Platform solutions — fit analysis, solution design, security, and governance.', tags:['Power Platform','Architecture','Certification'], level:'Advanced', sessions:'2+', live:false, link:'learn.html?course=pl600' },
-  { id:'pl-900', cat:'power', icon:'⚡', title:'PL-900: Introduction to Microsoft Power Platform', short:'PL-900', desc:'Power Platform fundamentals — Power BI, Power Apps, Power Automate, and Copilot Studio overview.', tags:['Power Platform','Fundamentals','Certification'], level:'Beginner', sessions:'3+', live:false, link:'learn.html?course=pl900' },
-  { id:'pl-7003', cat:'power', icon:'📱', title:'PL-7003: Model-Driven Apps with Power Apps and Dataverse', short:'PL-7003', desc:'Create and manage model-driven apps — Dataverse tables, forms, views, business rules, and security roles.', tags:['Power Apps','Dataverse','Low-Code'], level:'Intermediate', sessions:'2+', live:false, link:'learn.html?course=pl7003' },
-  { id:'intro-powerbi', cat:'power', icon:'📊', title:'Introduction to Power BI', short:'Intro Power BI', desc:'Beginner-friendly Power BI — connecting data, building reports, and sharing dashboards for business decisions.', tags:['Power BI','Beginner','Analytics'], level:'Beginner', sessions:'6+', live:false, link:'learn.html?course=intro-powerbi' },
-  { id:'powerbi-advanced', cat:'power', icon:'📊', title:'Power BI Advanced', short:'Power BI Advanced', desc:'Advanced DAX, M Query, performance optimization, row-level security, and enterprise deployment strategies.', tags:['Power BI','Advanced','DAX'], level:'Advanced', sessions:'5+', live:false, link:'learn.html?course=powerbi-advanced' },
-  { id:'powerbi-embedding', cat:'power', icon:'📊', title:'Power BI Advanced with Embedding', short:'Power BI Embedding', desc:'Embed Power BI reports in custom applications using REST APIs, service principals, and the Power BI SDK.', tags:['Power BI','Embedding','Developer'], level:'Advanced', sessions:'3+', live:false, link:'learn.html?course=powerbi-embedding' },
-  { id:'powerbi-embedding-aspnet', cat:'power', icon:'📊', title:'Power BI Embedding in ASP.NET Core', short:'Power BI + ASP.NET', desc:'Build Power BI-integrated web applications using ASP.NET Core — authentication, embed tokens, and UI.', tags:['Power BI','ASP.NET','Developer'], level:'Advanced', sessions:'2+', live:false, link:'learn.html?course=powerbi-aspnet' },
-  { id:'powerbi-superuser', cat:'power', icon:'📊', title:'Microsoft Power BI Super User (55400AC)', short:'Power BI Super User', desc:'Comprehensive Power BI super-user training — advanced calculations, modeling, governance, and publishing.', tags:['Power BI','Super User','Enterprise'], level:'Intermediate', sessions:'6+', live:false, link:'learn.html?course=powerbi-superuser' },
-  { id:'bi-data-mining', cat:'power', icon:'📊', title:'Business Intelligence and Data Mining with Power BI', short:'BI & Data Mining', desc:'BI concepts, data mining techniques, and Power BI implementation for enterprise business intelligence.', tags:['Power BI','BI','Data Mining'], level:'Intermediate', sessions:'3+', live:false, link:'learn.html?course=bi-datamining' },
-  { id:'create-apps-automation', cat:'power', icon:'⚡', title:'Create Apps and Automation with Power Platform', short:'Apps & Automation', desc:'Hands-on Power Apps and Power Automate — build canvas apps, flows, and automated business processes.', tags:['Power Apps','Power Automate','Low-Code'], level:'Beginner', sessions:'3+', live:false, link:'learn.html?course=apps-automation' },
-  { id:'pl-7008', cat:'copilot', icon:'🤖', title:'PL-7008: Create and Extend Custom Copilots in Copilot Studio', short:'PL-7008', desc:'Build enterprise copilots — custom topics, adaptive cards, plugin actions, and Microsoft 365 integration.', tags:['Copilot Studio','AI Agents','Enterprise'], level:'Intermediate', sessions:'10+', live:false, link:'learn.html?course=pl7008' },
-  { id:'dw-104', cat:'copilot', icon:'🤖', title:'DW-104: Build and Extend Agents with Microsoft 365 Agents', short:'DW-104', desc:'Pro-code agent development using Microsoft 365 Agents SDK — extend Copilot with custom capabilities.', tags:['M365 Agents','Pro-Code','Copilot'], level:'Advanced', sessions:'5+', live:false, link:'learn.html?course=dw104' },
-  { id:'dw-102', cat:'copilot', icon:'🤖', title:'DW-102: Build Enterprise-Ready Agents with Copilot Studio', short:'DW-102', desc:'Enterprise agent architecture — authentication, knowledge sources, orchestration, and monitoring.', tags:['Copilot Studio','Enterprise','Agents'], level:'Advanced', sessions:'2+', live:false, link:'learn.html?course=dw102' },
-  { id:'create-copilots', cat:'copilot', icon:'🤖', title:'Create Copilots with Copilot Studio', short:'Create Copilots', desc:'Beginner-friendly Copilot Studio — build your first copilot, add topics, test, and publish.', tags:['Copilot Studio','Beginner','No-Code'], level:'Beginner', sessions:'4+', live:false, link:'learn.html?course=create-copilots' },
-  { id:'intelligent-enterprise', cat:'dotnet', icon:'🚀', title:'Intelligent Enterprise Development with .NET 8 & Azure AI', short:'.NET 8 & Azure AI', desc:'C# foundations to Blazor to Azure AI — the complete path to building intelligent enterprise applications.', tags:['.NET 8','Blazor','Azure AI','Flagship'], level:'Beginner → Advanced', sessions:'3+', live:true, link:'learn.html?course=default' },
-  { id:'blazor-net8', cat:'dotnet', icon:'🔷', title:'Blazor Development with .NET 8', short:'Blazor .NET 8', desc:'Modern Blazor — server, WebAssembly, and Auto render modes with .NET 8 features and best practices.', tags:['Blazor','.NET 8','Web'], level:'Intermediate', sessions:'3+', live:false, link:'learn.html?course=blazor-net8' },
-  { id:'build-blazor', cat:'dotnet', icon:'🔷', title:'Build Web Applications with ASP.NET Blazor', short:'ASP.NET Blazor', desc:'Components, data binding, forms, dependency injection, API calls, and deploying Blazor applications.', tags:['Blazor','ASP.NET','Web'], level:'Intermediate', sessions:'5+', live:false, link:'learn.html?course=blazor' },
-  { id:'blazor-net6', cat:'dotnet', icon:'🔷', title:'Blazor Application Development Using .NET 6', short:'Blazor .NET 6', desc:'Blazor fundamentals with .NET 6 — component lifecycle, routing, state management, and authentication.', tags:['Blazor','.NET 6','Web'], level:'Intermediate', sessions:'2+', live:false, link:'learn.html?course=blazor-net6' },
-  { id:'csharp-programming', cat:'dotnet', icon:'🔷', title:'Programming in C# (55339AC)', short:'C# Programming', desc:'Complete C# from syntax to OOP — classes, interfaces, LINQ, async/await, and real-world application patterns.', tags:['C#','.NET','Foundation'], level:'Beginner', sessions:'6+', live:false, link:'learn.html?course=csharp' },
-  { id:'advanced-csharp', cat:'dotnet', icon:'🔷', title:'Advanced C#', short:'Advanced C#', desc:'Deep C# — delegates, events, LINQ internals, parallel programming, memory management, and design patterns.', tags:['C#','Advanced','.NET'], level:'Advanced', sessions:'2+', live:false, link:'learn.html?course=advanced-csharp' },
-  { id:'aspnet-mvc', cat:'dotnet', icon:'🔷', title:'Developing ASP.NET Core MVC Web Applications', short:'ASP.NET MVC', desc:'Build MVC web applications with ASP.NET Core — routing, controllers, views, authentication, and EF Core.', tags:['ASP.NET','MVC','Web'], level:'Intermediate', sessions:'3+', live:false, link:'learn.html?course=aspnet-mvc' },
-  { id:'aspnet-core', cat:'dotnet', icon:'🔷', title:'55340AC: Developing ASP.NET Core Web Applications', short:'ASP.NET Core', desc:'ASP.NET Core from the ground up — middleware, Razor Pages, Web API, dependency injection, and deployment.', tags:['ASP.NET Core','Web API','.NET'], level:'Intermediate', sessions:'4+', live:false, link:'learn.html?course=aspnet-core' },
-  { id:'clean-architecture', cat:'dotnet', icon:'🏗️', title:'ASP.NET REST API: Clean Architecture & DDD with .NET 8', short:'Clean Architecture', desc:'Build maintainable APIs using Clean Architecture, Domain-Driven Design, CQRS, and MediatR in .NET 8.', tags:['ASP.NET','Clean Architecture','DDD'], level:'Advanced', sessions:'2+', live:false, link:'learn.html?course=clean-arch' },
-  { id:'intro-dotnet', cat:'dotnet', icon:'🔷', title:'Introduction to .NET Programming', short:'Intro .NET', desc:'.NET ecosystem overview — runtime, SDK, CLI, project structure, NuGet, and your first .NET application.', tags:['.NET','Beginner','Foundation'], level:'Beginner', sessions:'3+', live:false, link:'learn.html?course=intro-dotnet' },
-  { id:'wpf', cat:'dotnet', icon:'🖥️', title:'Microsoft Windows Presentation Foundation (WPF)', short:'WPF', desc:'Desktop application development with WPF — XAML, MVVM pattern, data binding, controls, and animations.', tags:['WPF','.NET','Desktop'], level:'Intermediate', sessions:'2+', live:false, link:'learn.html?course=wpf' },
-  { id:'ms-900', cat:'data', icon:'📋', title:'MS-900: Microsoft 365 Fundamentals', short:'MS-900', desc:'Microsoft 365 core concepts — productivity, collaboration, security, compliance, and licensing options.', tags:['Microsoft 365','Fundamentals','Certification'], level:'Beginner', sessions:'2+', live:false, link:'learn.html?course=ms900' },
-  { id:'comptia-data', cat:'data', icon:'📊', title:'CompTIA Data+ DA0-001', short:'CompTIA Data+', desc:'Data concepts, data mining, analysis, visualization, and governance for the CompTIA Data+ certification.', tags:['Data Analytics','CompTIA','Certification'], level:'Intermediate', sessions:'3+', live:false, link:'learn.html?course=data-plus' },
-  { id:'m365-security', cat:'data', icon:'🔐', title:'M365 Security & Compliance Deep Dive', short:'M365 Security', desc:'Advanced Microsoft 365 security — Defender, Purview, Conditional Access, DLP, and compliance strategies.', tags:['M365','Security','Compliance'], level:'Advanced', sessions:'2+', live:false, link:'learn.html?course=m365-security' },
-  { id:'opengl-vulkan', cat:'other', icon:'🎮', title:'OpenGL and Vulkan Training', short:'OpenGL & Vulkan', desc:'Graphics programming fundamentals — rendering pipeline, shaders, buffers, and real-time graphics with Vulkan.', tags:['OpenGL','Vulkan','Graphics'], level:'Advanced', sessions:'2+', live:false, link:'learn.html?course=opengl-vulkan' },
-  { id:'qt-qml', cat:'other', icon:'🖥️', title:'QT and QML Associate', short:'Qt/QML', desc:'Cross-platform application development with Qt — QML, C++ integration, signals, slots, and deployment.', tags:['Qt','QML','Embedded'], level:'Intermediate', sessions:'3+', live:false, link:'learn.html?course=qt-qml' },
-  { id:'advanced-cpp', cat:'other', icon:'⚙️', title:'Advanced C++', short:'Advanced C++', desc:'Modern C++ — templates, move semantics, smart pointers, concurrency, STL, and performance optimization.', tags:['C++','Advanced','Systems'], level:'Advanced', sessions:'2+', live:false, link:'learn.html?course=advanced-cpp' },
-  { id:'sc-900', cat:'other', icon:'🔐', title:'SC-900: Introduction to Microsoft Security, Compliance & Identity', short:'SC-900', desc:'Security, compliance, and identity fundamentals with Microsoft — Zero Trust, Defender, and Purview.', tags:['Security','Microsoft','Certification'], level:'Beginner', sessions:'2+', live:false, link:'learn.html?course=sc900' },
-  { id:'gh-300', cat:'other', icon:'🐙', title:'GH-300: GitHub Copilot Fundamentals', short:'GH-300', desc:'GitHub Copilot for developers and organizations — AI-assisted coding, security, policies, and ROI measurement.', tags:['GitHub','Copilot','AI Coding'], level:'Beginner', sessions:'4+', live:false, link:'learn.html?course=gh300' },
-  { id:'azure-for-devs', cat:'other', icon:'☁️', title:'Azure for Developers', short:'Azure for Devs', desc:'Practical Azure development — App Service, Functions, Storage, SQL, and deployment from a developer lens.', tags:['Azure','Developer','Practical'], level:'Intermediate', sessions:'2+', live:false, link:'learn.html?course=azure-devs' },
-  { id:'cisco-qos', cat:'other', icon:'🌐', title:'Implementing Cisco QoS v2.5', short:'Cisco QoS', desc:'Network quality of service — classification, marking, queuing, shaping, and Cisco QoS policy implementation.', tags:['Cisco','Networking','QoS'], level:'Advanced', sessions:'2+', live:false, link:'learn.html?course=cisco-qos' },
-  { id:'az204-exam-prep', cat:'other', icon:'⚡', title:'AZ-204 Exam Prep', short:'AZ-204 Exam Prep', desc:'Focused exam preparation for AZ-204 — key topics, practice scenarios, and exam strategy.', tags:['Azure','Exam Prep','Certification'], level:'Intermediate', sessions:'3+', live:false, link:'learn.html?course=az204-prep' }
+  {id:'az-204',cat:'azure',icon:'☁️',title:'AZ-204: Developing Solutions for Microsoft Azure',short:'AZ-204',desc:'Build cloud-native solutions — Functions, Blob Storage, Cosmos DB, API Management, and secure Azure deployments.',tags:['Azure','Developer','Certification'],level:'Intermediate',sessions:'15+',live:true,link:'/v2/learn.html?course=az204'},
+  {id:'az-305',cat:'azure',icon:'☁️',title:'AZ-305: Designing Microsoft Azure Infrastructure Solutions',short:'AZ-305',desc:'Design scalable, secure, and reliable Azure infrastructure — networking, governance, identity, and monitoring.',tags:['Azure','Architecture','Certification'],level:'Advanced',sessions:'2+',live:false,link:'/v2/learn.html?course=az305'},
+  {id:'az-900',cat:'azure',icon:'☁️',title:'AZ-900: Introduction to Microsoft Azure',short:'AZ-900',desc:'Azure fundamentals — cloud concepts, core services, pricing, SLAs, and the Azure value proposition.',tags:['Azure','Fundamentals','Certification'],level:'Beginner',sessions:'5+',live:false,link:'/v2/learn.html?course=az900'},
+  {id:'azure-integration',cat:'azure',icon:'🔗',title:'Azure Integration Services',short:'Azure Integration',desc:'Logic Apps, Service Bus, API Management, Event Grid — enterprise-grade integration patterns on Azure.',tags:['Azure','Integration','Enterprise'],level:'Advanced',sessions:'6+',live:false,link:'/v2/learn.html?course=azure-integration'},
+  {id:'az-2006',cat:'azure',icon:'⚙️',title:'AZ-2006: Automate Azure Load Testing with GitHub Actions',short:'AZ-2006',desc:'Automate performance testing pipelines using Azure Load Testing integrated with GitHub Actions CI/CD.',tags:['Azure','DevOps','Testing'],level:'Intermediate',sessions:'2+',live:false,link:'/v2/learn.html?course=az2006'},
+  {id:'ai-901',cat:'azure',icon:'🧠',title:'AI-901: Introduction to AI in Azure',short:'AI-901',desc:'Azure AI Services overview — Computer Vision, NLP, Speech, and responsible AI principles.',tags:['Azure','AI','Fundamentals'],level:'Beginner',sessions:'2+',live:false,link:'/v2/learn.html?course=ai901'},
+  {id:'apigee',cat:'azure',icon:'🌐',title:'Developing APIs with Google Cloud Apigee',short:'Apigee',desc:'Design, secure, and manage APIs using Google Cloud Apigee — proxies, policies, analytics, and monetization.',tags:['API','Google Cloud','Enterprise'],level:'Advanced',sessions:'5+',live:false,link:'/v2/learn.html?course=apigee'},
+  {id:'apigee-hybrid',cat:'azure',icon:'🌐',title:'Managing Apigee API Platform for Hybrid Cloud',short:'Apigee Hybrid',desc:'Manage Apigee in hybrid cloud environments — runtime configuration, security, and operational management.',tags:['API','Hybrid Cloud','Enterprise'],level:'Advanced',sessions:'2+',live:false,link:'/v2/learn.html?course=apigee-hybrid'},
+  {id:'pl-300',cat:'power',icon:'📊',title:'PL-300: Design and Manage Analytics Solutions Using Power BI',short:'PL-300',desc:'Complete Power BI — data modeling, DAX, relationships, reports, dashboards, RLS, and deployment pipelines.',tags:['Power BI','Analytics','Certification'],level:'Intermediate',sessions:'30+',live:true,link:'/v2/learn.html?course=pl300'},
+  {id:'pl-400',cat:'power',icon:'⚡',title:'PL-400: Microsoft Power Platform Developer',short:'PL-400',desc:'Advanced Power Platform development — custom connectors, plugins, PCF controls, ALM, and pro-code extensions.',tags:['Power Platform','Developer','Certification'],level:'Advanced',sessions:'6+',live:false,link:'/v2/learn.html?course=pl400'},
+  {id:'pl-200',cat:'power',icon:'⚡',title:'PL-200: Microsoft Power Platform Functional Consultant',short:'PL-200',desc:'Configure Power Platform solutions — Power Apps, Power Automate, Power Virtual Agents, and Dataverse.',tags:['Power Platform','Consultant','Certification'],level:'Intermediate',sessions:'4+',live:false,link:'/v2/learn.html?course=pl200'},
+  {id:'pl-600',cat:'power',icon:'⚡',title:'PL-600: Microsoft Power Platform Solution Architect',short:'PL-600',desc:'Architect enterprise Power Platform solutions — fit analysis, solution design, security, and governance.',tags:['Power Platform','Architecture','Certification'],level:'Advanced',sessions:'2+',live:false,link:'/v2/learn.html?course=pl600'},
+  {id:'pl-900',cat:'power',icon:'⚡',title:'PL-900: Introduction to Microsoft Power Platform',short:'PL-900',desc:'Power Platform fundamentals — Power BI, Power Apps, Power Automate, and Copilot Studio overview.',tags:['Power Platform','Fundamentals','Certification'],level:'Beginner',sessions:'3+',live:false,link:'/v2/learn.html?course=pl900'},
+  {id:'pl-7003',cat:'power',icon:'📱',title:'PL-7003: Model-Driven Apps with Power Apps and Dataverse',short:'PL-7003',desc:'Create and manage model-driven apps — Dataverse tables, forms, views, business rules, and security roles.',tags:['Power Apps','Dataverse','Low-Code'],level:'Intermediate',sessions:'2+',live:false,link:'/v2/learn.html?course=pl7003'},
+  {id:'intro-powerbi',cat:'power',icon:'📊',title:'Introduction to Power BI',short:'Intro Power BI',desc:'Beginner-friendly Power BI — connecting data, building reports, and sharing dashboards for business decisions.',tags:['Power BI','Beginner','Analytics'],level:'Beginner',sessions:'6+',live:false,link:'/v2/learn.html?course=intro-powerbi'},
+  {id:'powerbi-advanced',cat:'power',icon:'📊',title:'Power BI Advanced',short:'Power BI Advanced',desc:'Advanced DAX, M Query, performance optimization, row-level security, and enterprise deployment strategies.',tags:['Power BI','Advanced','DAX'],level:'Advanced',sessions:'5+',live:false,link:'/v2/learn.html?course=powerbi-advanced'},
+  {id:'powerbi-embedding',cat:'power',icon:'📊',title:'Power BI Advanced with Embedding',short:'Power BI Embedding',desc:'Embed Power BI reports in custom applications using REST APIs, service principals, and the Power BI SDK.',tags:['Power BI','Embedding','Developer'],level:'Advanced',sessions:'3+',live:false,link:'/v2/learn.html?course=powerbi-embedding'},
+  {id:'powerbi-embedding-aspnet',cat:'power',icon:'📊',title:'Power BI Embedding in ASP.NET Core',short:'Power BI + ASP.NET',desc:'Build Power BI-integrated web applications using ASP.NET Core — authentication, embed tokens, and UI.',tags:['Power BI','ASP.NET','Developer'],level:'Advanced',sessions:'2+',live:false,link:'/v2/learn.html?course=powerbi-aspnet'},
+  {id:'powerbi-superuser',cat:'power',icon:'📊',title:'Microsoft Power BI Super User (55400AC)',short:'Power BI Super User',desc:'Comprehensive Power BI super-user training — advanced calculations, modeling, governance, and publishing.',tags:['Power BI','Super User','Enterprise'],level:'Intermediate',sessions:'6+',live:false,link:'/v2/learn.html?course=powerbi-superuser'},
+  {id:'bi-data-mining',cat:'power',icon:'📊',title:'Business Intelligence and Data Mining with Power BI',short:'BI & Data Mining',desc:'BI concepts, data mining techniques, and Power BI implementation for enterprise business intelligence.',tags:['Power BI','BI','Data Mining'],level:'Intermediate',sessions:'3+',live:false,link:'/v2/learn.html?course=bi-datamining'},
+  {id:'create-apps-automation',cat:'power',icon:'⚡',title:'Create Apps and Automation with Power Platform',short:'Apps & Automation',desc:'Hands-on Power Apps and Power Automate — build canvas apps, flows, and automated business processes.',tags:['Power Apps','Power Automate','Low-Code'],level:'Beginner',sessions:'3+',live:false,link:'/v2/learn.html?course=apps-automation'},
+  {id:'pl-7008',cat:'copilot',icon:'🤖',title:'PL-7008: Create and Extend Custom Copilots in Copilot Studio',short:'PL-7008',desc:'Build enterprise copilots — custom topics, adaptive cards, plugin actions, and Microsoft 365 integration.',tags:['Copilot Studio','AI Agents','Enterprise'],level:'Intermediate',sessions:'10+',live:false,link:'/v2/learn.html?course=pl7008'},
+  {id:'dw-104',cat:'copilot',icon:'🤖',title:'DW-104: Build and Extend Agents with Microsoft 365 Agents',short:'DW-104',desc:'Pro-code agent development using Microsoft 365 Agents SDK — extend Copilot with custom capabilities.',tags:['M365 Agents','Pro-Code','Copilot'],level:'Advanced',sessions:'5+',live:false,link:'/v2/learn.html?course=dw104'},
+  {id:'dw-102',cat:'copilot',icon:'🤖',title:'DW-102: Build Enterprise-Ready Agents with Copilot Studio',short:'DW-102',desc:'Enterprise agent architecture — authentication, knowledge sources, orchestration, and monitoring.',tags:['Copilot Studio','Enterprise','Agents'],level:'Advanced',sessions:'2+',live:false,link:'/v2/learn.html?course=dw102'},
+  {id:'create-copilots',cat:'copilot',icon:'🤖',title:'Create Copilots with Copilot Studio',short:'Create Copilots',desc:'Beginner-friendly Copilot Studio — build your first copilot, add topics, test, and publish.',tags:['Copilot Studio','Beginner','No-Code'],level:'Beginner',sessions:'4+',live:false,link:'/v2/learn.html?course=create-copilots'},
+  {id:'intelligent-enterprise',cat:'dotnet',icon:'🚀',title:'Intelligent Enterprise Development with .NET 8 & Azure AI',short:'.NET 8 & Azure AI',desc:'C# foundations to Blazor to Azure AI — the complete path to building intelligent enterprise applications.',tags:['.NET 8','Blazor','Azure AI','Flagship'],level:'Beginner → Advanced',sessions:'3+',live:true,link:'/v2/learn.html?course=default'},
+  {id:'blazor-net8',cat:'dotnet',icon:'🔷',title:'Blazor Development with .NET 8',short:'Blazor .NET 8',desc:'Modern Blazor — server, WebAssembly, and Auto render modes with .NET 8 features and best practices.',tags:['Blazor','.NET 8','Web'],level:'Intermediate',sessions:'3+',live:false,link:'/v2/learn.html?course=blazor-net8'},
+  {id:'build-blazor',cat:'dotnet',icon:'🔷',title:'Build Web Applications with ASP.NET Blazor',short:'ASP.NET Blazor',desc:'Components, data binding, forms, dependency injection, API calls, and deploying Blazor applications.',tags:['Blazor','ASP.NET','Web'],level:'Intermediate',sessions:'5+',live:false,link:'/v2/learn.html?course=blazor'},
+  {id:'blazor-net6',cat:'dotnet',icon:'🔷',title:'Blazor Application Development Using .NET 6',short:'Blazor .NET 6',desc:'Blazor fundamentals with .NET 6 — component lifecycle, routing, state management, and authentication.',tags:['Blazor','.NET 6','Web'],level:'Intermediate',sessions:'2+',live:false,link:'/v2/learn.html?course=blazor-net6'},
+  {id:'csharp-programming',cat:'dotnet',icon:'🔷',title:'Programming in C# (55339AC)',short:'C# Programming',desc:'Complete C# from syntax to OOP — classes, interfaces, LINQ, async/await, and real-world application patterns.',tags:['C#','.NET','Foundation'],level:'Beginner',sessions:'6+',live:false,link:'/v2/learn.html?course=csharp'},
+  {id:'advanced-csharp',cat:'dotnet',icon:'🔷',title:'Advanced C#',short:'Advanced C#',desc:'Deep C# — delegates, events, LINQ internals, parallel programming, memory management, and design patterns.',tags:['C#','Advanced','.NET'],level:'Advanced',sessions:'2+',live:false,link:'/v2/learn.html?course=advanced-csharp'},
+  {id:'aspnet-mvc',cat:'dotnet',icon:'🔷',title:'Developing ASP.NET Core MVC Web Applications',short:'ASP.NET MVC',desc:'Build MVC web applications with ASP.NET Core — routing, controllers, views, authentication, and EF Core.',tags:['ASP.NET','MVC','Web'],level:'Intermediate',sessions:'3+',live:false,link:'/v2/learn.html?course=aspnet-mvc'},
+  {id:'aspnet-core',cat:'dotnet',icon:'🔷',title:'55340AC: Developing ASP.NET Core Web Applications',short:'ASP.NET Core',desc:'ASP.NET Core from the ground up — middleware, Razor Pages, Web API, dependency injection, and deployment.',tags:['ASP.NET Core','Web API','.NET'],level:'Intermediate',sessions:'4+',live:false,link:'/v2/learn.html?course=aspnet-core'},
+  {id:'clean-architecture',cat:'dotnet',icon:'🏗️',title:'ASP.NET REST API: Clean Architecture & DDD with .NET 8',short:'Clean Architecture',desc:'Build maintainable APIs using Clean Architecture, Domain-Driven Design, CQRS, and MediatR in .NET 8.',tags:['ASP.NET','Clean Architecture','DDD'],level:'Advanced',sessions:'2+',live:false,link:'/v2/learn.html?course=clean-arch'},
+  {id:'intro-dotnet',cat:'dotnet',icon:'🔷',title:'Introduction to .NET Programming',short:'Intro .NET',desc:'.NET ecosystem overview — runtime, SDK, CLI, project structure, NuGet, and your first .NET application.',tags:['.NET','Beginner','Foundation'],level:'Beginner',sessions:'3+',live:false,link:'/v2/learn.html?course=intro-dotnet'},
+  {id:'wpf',cat:'dotnet',icon:'🖥️',title:'Microsoft Windows Presentation Foundation (WPF)',short:'WPF',desc:'Desktop application development with WPF — XAML, MVVM pattern, data binding, controls, and animations.',tags:['WPF','.NET','Desktop'],level:'Intermediate',sessions:'2+',live:false,link:'/v2/learn.html?course=wpf'},
+  {id:'ms-900',cat:'data',icon:'📋',title:'MS-900: Microsoft 365 Fundamentals',short:'MS-900',desc:'Microsoft 365 core concepts — productivity, collaboration, security, compliance, and licensing options.',tags:['Microsoft 365','Fundamentals','Certification'],level:'Beginner',sessions:'2+',live:false,link:'/v2/learn.html?course=ms900'},
+  {id:'comptia-data',cat:'data',icon:'📊',title:'CompTIA Data+ DA0-001',short:'CompTIA Data+',desc:'Data concepts, data mining, analysis, visualization, and governance for the CompTIA Data+ certification.',tags:['Data Analytics','CompTIA','Certification'],level:'Intermediate',sessions:'3+',live:false,link:'/v2/learn.html?course=data-plus'},
+  {id:'m365-security',cat:'data',icon:'🔐',title:'M365 Security & Compliance Deep Dive',short:'M365 Security',desc:'Advanced Microsoft 365 security — Defender, Purview, Conditional Access, DLP, and compliance strategies.',tags:['M365','Security','Compliance'],level:'Advanced',sessions:'2+',live:false,link:'/v2/learn.html?course=m365-security'},
+  {id:'opengl-vulkan',cat:'other',icon:'🎮',title:'OpenGL and Vulkan Training',short:'OpenGL & Vulkan',desc:'Graphics programming fundamentals — rendering pipeline, shaders, buffers, and real-time graphics with Vulkan.',tags:['OpenGL','Vulkan','Graphics'],level:'Advanced',sessions:'2+',live:false,link:'/v2/learn.html?course=opengl-vulkan'},
+  {id:'qt-qml',cat:'other',icon:'🖥️',title:'QT and QML Associate',short:'Qt/QML',desc:'Cross-platform application development with Qt — QML, C++ integration, signals, slots, and deployment.',tags:['Qt','QML','Embedded'],level:'Intermediate',sessions:'3+',live:false,link:'/v2/learn.html?course=qt-qml'},
+  {id:'advanced-cpp',cat:'other',icon:'⚙️',title:'Advanced C++',short:'Advanced C++',desc:'Modern C++ — templates, move semantics, smart pointers, concurrency, STL, and performance optimization.',tags:['C++','Advanced','Systems'],level:'Advanced',sessions:'2+',live:false,link:'/v2/learn.html?course=advanced-cpp'},
+  {id:'sc-900',cat:'other',icon:'🔐',title:'SC-900: Introduction to Microsoft Security, Compliance & Identity',short:'SC-900',desc:'Security, compliance, and identity fundamentals with Microsoft — Zero Trust, Defender, and Purview.',tags:['Security','Microsoft','Certification'],level:'Beginner',sessions:'2+',live:false,link:'/v2/learn.html?course=sc900'},
+  {id:'gh-300',cat:'other',icon:'🐙',title:'GH-300: GitHub Copilot Fundamentals',short:'GH-300',desc:'GitHub Copilot for developers and organizations — AI-assisted coding, security, policies, and ROI measurement.',tags:['GitHub','Copilot','AI Coding'],level:'Beginner',sessions:'4+',live:false,link:'/v2/learn.html?course=gh300'},
+  {id:'azure-for-devs',cat:'other',icon:'☁️',title:'Azure for Developers',short:'Azure for Devs',desc:'Practical Azure development — App Service, Functions, Storage, SQL, and deployment from a developer lens.',tags:['Azure','Developer','Practical'],level:'Intermediate',sessions:'2+',live:false,link:'/v2/learn.html?course=azure-devs'},
+  {id:'cisco-qos',cat:'other',icon:'🌐',title:'Implementing Cisco QoS v2.5',short:'Cisco QoS',desc:'Network quality of service — classification, marking, queuing, shaping, and Cisco QoS policy implementation.',tags:['Cisco','Networking','QoS'],level:'Advanced',sessions:'2+',live:false,link:'/v2/learn.html?course=cisco-qos'},
+  {id:'az204-exam-prep',cat:'other',icon:'⚡',title:'AZ-204 Exam Prep',short:'AZ-204 Exam Prep',desc:'Focused exam preparation for AZ-204 — key topics, practice scenarios, and exam strategy.',tags:['Azure','Exam Prep','Certification'],level:'Intermediate',sessions:'3+',live:false,link:'/v2/learn.html?course=az204-prep'},
 ];
 
-const levelColor = { 'Beginner':'#22c55e','Intermediate':'#f59e0b','Advanced':'#a855f7','Beginner → Advanced':'#3b82f6' };
-const catAccent = { 'azure':'#3b82f6','power':'#f59e0b','copilot':'#a855f7','dotnet':'#14b8a6','data':'#22c55e','other':'#71717a' };
-
 let activeFilter = 'all';
-let searchTerm = '';
-let sortMode = 'sessions';
+let activeLevel  = 'all';
+let currentView  = 'grid';
 
-function filterCourses(cat, el) {
+const levelColor = {
+  'Beginner':           {color:'#16a34a',bg:'#f0fdf4'},
+  'Intermediate':       {color:'#d97706',bg:'#fffbeb'},
+  'Advanced':           {color:'#7c3aed',bg:'#fdf4ff'},
+  'Beginner → Advanced':{color:'#0078d4',bg:'#eff6ff'}
+};
+
+function setFilter(cat, btn) {
   activeFilter = cat;
-  document.querySelectorAll('.v2-filter-item').forEach(i => i.classList.remove('active'));
-  el.classList.add('active');
+  document.querySelectorAll('.v2-filter-btn[onclick*="setFilter"]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
   renderCourses();
 }
 
-function searchCourses(val) {
-  searchTerm = val.toLowerCase().trim();
+function setLevel(lvl, btn) {
+  activeLevel = lvl;
+  document.querySelectorAll('.v2-filter-btn[onclick*="setLevel"]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
   renderCourses();
 }
 
-function sortCourses(val) {
-  sortMode = val;
-  renderCourses();
+function setView(v, btn) {
+  currentView = v;
+  document.querySelectorAll('.v2-view-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const grid = document.getElementById('courseGrid');
+  grid.className = v === 'list' ? 'v2-courses-grid v2-courses-list' : 'v2-courses-grid';
 }
 
 function renderCourses() {
-  const grid = document.getElementById('courseGrid');
-  const countEl = document.getElementById('filterPanelCount');
-  if (!grid) return;
+  const grid   = document.getElementById('courseGrid');
+  const search = (document.getElementById('courseSearch').value || '').toLowerCase();
+  const liveOnly = document.getElementById('liveOnly').checked;
+  const sortBy   = document.getElementById('sortBy').value;
 
-  let data = activeFilter === 'all' ? COURSES_DATA : COURSES_DATA.filter(c => c.cat === activeFilter);
-  if (searchTerm) {
-    data = data.filter(c =>
-      c.title.toLowerCase().includes(searchTerm) ||
-      c.short.toLowerCase().includes(searchTerm) ||
-      c.desc.toLowerCase().includes(searchTerm) ||
-      c.tags.some(t => t.toLowerCase().includes(searchTerm))
-    );
-  }
+  let data = COURSES_DATA.filter(c => {
+    if (activeFilter !== 'all' && c.cat !== activeFilter) return false;
+    if (activeLevel  !== 'all' && !c.level.includes(activeLevel)) return false;
+    if (liveOnly && !c.live) return false;
+    if (search) {
+      const hay = (c.title + c.short + c.desc + c.tags.join(' ')).toLowerCase();
+      if (!hay.includes(search)) return false;
+    }
+    return true;
+  });
 
-  if (sortMode === 'sessions') {
-    data = [...data].sort((a,b) => {
+  if (sortBy === 'sessions') {
+    data = [...data].sort((a, b) => {
       if (a.live && !b.live) return -1;
       if (!a.live && b.live) return 1;
-      return (parseInt(b.sessions)||0) - (parseInt(a.sessions)||0);
+      return parseInt(b.sessions) - parseInt(a.sessions);
     });
-  } else if (sortMode === 'level') {
-    const order = {'Beginner':0,'Intermediate':1,'Advanced':2,'Beginner → Advanced':3};
-    data = [...data].sort((a,b) => (order[a.level]||0) - (order[b.level]||0));
-  } else if (sortMode === 'alpha') {
-    data = [...data].sort((a,b) => a.title.localeCompare(b.title));
+  } else if (sortBy === 'title') {
+    data = [...data].sort((a, b) => a.title.localeCompare(b.title));
+  } else {
+    data = [...data].sort((a, b) => {
+      if (a.live && !b.live) return -1;
+      if (!a.live && b.live) return 1;
+      return parseInt(b.sessions) - parseInt(a.sessions);
+    });
   }
 
-  if (countEl) countEl.textContent = data.length;
-  document.getElementById('courseSearch').placeholder = `Search ${data.length} courses…`;
+  const cnt = document.getElementById('resultCount');
+  cnt.textContent = data.length === COURSES_DATA.length
+    ? `Showing all ${COURSES_DATA.length} courses`
+    : `${data.length} course${data.length !== 1 ? 's' : ''} found`;
 
   if (!data.length) {
-    grid.innerHTML = '<div class="v2-empty"><p style="font-size:14px">No courses match your search.</p></div>';
+    grid.innerHTML = '<div class="v2-courses-empty">No courses match your filters. <button onclick="resetFilters()" style="color:var(--blue);background:none;border:none;cursor:pointer;text-decoration:underline">Clear filters</button></div>';
     return;
   }
 
-  const accent = catAccent[activeFilter] || '#3b82f6';
   grid.innerHTML = data.map(c => {
-    const color = levelColor[c.level] || '#888';
-    const cardAccent = catAccent[c.cat] || '#3b82f6';
-    return `<div class="v2-course-card${c.live?' live':''}" style="--card-accent:${cardAccent}" onclick="window.location.href='${c.link}'">
-      <div class="v2-cc-header">
-        <span class="v2-cc-icon">${c.icon}</span>
-        <div style="display:flex;align-items:center;gap:6px">
-          ${c.live?`<span style="font-size:9px;font-weight:800;letter-spacing:0.5px;padding:2px 8px;border-radius:20px;background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,0.25)">● LIVE</span>`:''}
-          <span class="v2-cc-sessions">${c.sessions} sessions</span>
+    const lc = levelColor[c.level] || {color:'#888',bg:'#f8fafc'};
+    return `<article class="v2-course-card${c.live ? ' v2-course-live' : ''}" onclick="window.location.href='${c.link}'">
+      <div class="v2-course-card-top">
+        <span class="v2-course-icon">${c.icon}</span>
+        <div class="v2-course-badges">
+          ${c.live ? '<span class="v2-live-badge">LIVE</span>' : ''}
+          <span class="v2-course-sessions">${c.sessions} sessions</span>
         </div>
       </div>
-      <div class="v2-cc-code">${c.short}</div>
-      <div class="v2-cc-title">${c.title}</div>
-      <div class="v2-cc-desc">${c.desc}</div>
-      <div class="v2-cc-tags">${c.tags.slice(0,3).map(t=>`<span class="v2-cc-tag">${t}</span>`).join('')}</div>
-      <div class="v2-cc-footer">
-        <span class="v2-cc-level" style="color:${color};border-color:${color}40;background:${color}12">${c.level}</span>
-        <span class="v2-cc-cta">${c.live?'Open Course →':'View Details →'}</span>
+      <div class="v2-course-short">${c.short}</div>
+      <h3 class="v2-course-title">${c.title}</h3>
+      <p class="v2-course-desc">${c.desc}</p>
+      <div class="v2-course-tags">${c.tags.slice(0,3).map(t=>`<span class="v2-course-tag">${t}</span>`).join('')}</div>
+      <div class="v2-course-footer">
+        <span class="v2-course-level" style="color:${lc.color};background:${lc.bg}">${c.level}</span>
+        <span class="v2-course-cta">${c.live ? 'Open Course →' : 'View Details →'}</span>
       </div>
-      ${c.live?`<div class="v2-cc-live-strip"><span>✓</span>AI-powered lessons · Labs included · Live now</div>`:''}
-    </div>`;
+      ${c.live ? '<div class="v2-course-live-bar">✓ AI-powered lessons · Labs included · Live now</div>' : ''}
+    </article>`;
   }).join('');
 }
 
-/* Init */
+function resetFilters() {
+  activeFilter = 'all';
+  activeLevel  = 'all';
+  document.getElementById('courseSearch').value = '';
+  document.getElementById('liveOnly').checked = false;
+  document.getElementById('sortBy').value = 'default';
+  document.querySelectorAll('.v2-filter-btn').forEach((b,i) => {
+    b.classList.toggle('active', i === 0 || i === 7);
+  });
+  renderCourses();
+}
+
+function updateCounts() {
+  const cats = ['azure','power','copilot','dotnet','data','other'];
+  cats.forEach(cat => {
+    const el = document.getElementById('cnt-' + cat);
+    if (el) el.textContent = COURSES_DATA.filter(c => c.cat === cat).length;
+  });
+  const allEl = document.getElementById('cnt-all');
+  if (allEl) allEl.textContent = COURSES_DATA.length;
+  const totalEl = document.getElementById('totalCount');
+  if (totalEl) totalEl.textContent = COURSES_DATA.length + '+';
+}
+
+// Init
+updateCounts();
 renderCourses();
 
-/* URL param */
-const urlCat = new URLSearchParams(location.search).get('cat');
-if (urlCat) {
-  const el = document.querySelector(`.v2-filter-item[data-cat="${urlCat}"]`);
-  if (el) filterCourses(urlCat, el);
-}
+// URL param handling
+(function () {
+  const params = new URLSearchParams(location.search);
+  const cat = params.get('cat');
+  const q   = params.get('q');
+  if (cat) {
+    const btn = document.querySelector(`.v2-filter-btn[onclick*="'${cat}'"]`);
+    if (btn) setFilter(cat, btn);
+  }
+  if (q) {
+    document.getElementById('courseSearch').value = q;
+    renderCourses();
+  }
+})();
 </script>
 </body>
 </html>

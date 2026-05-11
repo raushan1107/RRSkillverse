@@ -1,1098 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RR Skillverse · Learn</title>
-<meta name="description" content="AI-powered learning portal. 54 lessons, 5 phases, hands-on labs. By MCT Raushan Ranjan."/>
-<link rel="icon" type="image/svg+xml" href="../images/favicon.svg"/>
-<link rel="stylesheet" href="v2.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title id="pageTitle">Learn — RR Skillverse</title>
+<meta name="description" content="AI-powered lessons by MCT Raushan Ranjan. Azure, .NET, Blazor, Power BI, Copilot Studio."/>
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
+<link rel="stylesheet" href="/v2/v2.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<style>
-/* ── Page shell ── */
-.learn-shell {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding-top: var(--nav-h);
-}
-
-/* ── Breadcrumb bar ── */
-.learn-breadcrumb-bar {
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  padding: 0 20px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--text-4);
-  flex-shrink: 0;
-  position: sticky;
-  top: var(--nav-h);
-  z-index: 50;
-}
-.learn-breadcrumb-bar a { color: var(--text-4); transition: color 0.1s; }
-.learn-breadcrumb-bar a:hover { color: var(--text-2); }
-#breadcrumb-course-name { color: var(--text-2); font-weight: 500; }
-
-/* ── Mode control (segmented, iOS-style) ── */
-.v2-mode-bar {
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  padding: 0 20px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-  position: sticky;
-  top: calc(var(--nav-h) + 38px);
-  z-index: 49;
-}
-.v2-mode-seg {
-  display: flex;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  padding: 2px;
-  gap: 2px;
-}
-.v2-mode-btn {
-  height: 28px;
-  padding: 0 14px;
-  background: none;
-  border: none;
-  border-radius: 7px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-4);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.v2-mode-btn.active {
-  background: var(--bg4);
-  color: var(--text);
-  box-shadow: var(--shadow-sm);
-}
-.v2-mode-hint {
-  margin-left: auto;
-  font-size: 11px;
-  color: var(--text-4);
-  font-family: var(--mono);
-}
-
-/* ── Layout ── */
-.learn-layout {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
-  min-height: 0;
-  height: calc(100vh - var(--nav-h) - 38px - 44px);
-}
-
-/* ── Sidebar ── */
-.v2-learn-sidebar {
-  width: 260px;
-  min-width: 260px;
-  flex-shrink: 0;
-  background: var(--bg2);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  height: 100%;
-  position: sticky;
-  top: calc(var(--nav-h) + 38px + 44px);
-}
-.v2-sidebar-top {
-  padding: 12px;
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-}
-.v2-sidebar-progress-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-.v2-sidebar-prog-label { font-size: 10px; color: var(--text-4); font-family: var(--mono); }
-.v2-sidebar-prog-val { font-size: 10px; color: var(--accent); font-family: var(--mono); }
-.v2-sidebar-prog-bar {
-  height: 2px;
-  background: var(--bg4);
-  border-radius: 2px;
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-.v2-sidebar-prog-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 2px;
-  transition: width 0.3s ease;
-}
-.v2-sidebar-search {
-  width: 100%;
-  height: 32px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 0 10px;
-  font-family: var(--font);
-  font-size: 12px;
-  color: var(--text-2);
-  outline: none;
-  transition: border-color 0.1s;
-}
-.v2-sidebar-search:focus { border-color: var(--border-md); }
-.v2-sidebar-search::placeholder { color: var(--text-4); }
-
-.v2-toc-scroll {
-  flex: 1;
-  overflow-y: auto;
-  padding-bottom: 24px;
-}
-.v2-phase-block { margin-bottom: 4px; }
-.v2-phase-label {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 14px 12px 5px;
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--text-4);
-  user-select: none;
-}
-.v2-phase-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.v2-lesson-row {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  padding: 5px 12px 5px 22px;
-  font-size: 12.5px;
-  color: var(--text-4);
-  cursor: pointer;
-  border-left: 2px solid transparent;
-  transition: color 0.1s, border-color 0.1s, background 0.1s;
-  line-height: 1.4;
-}
-.v2-lesson-row:hover { color: var(--text-2); background: rgba(255,255,255,0.03); }
-.v2-lesson-row.active { color: var(--accent); border-left-color: var(--accent); background: rgba(59,130,246,0.06); }
-.v2-lesson-row.done .v2-lesson-num { color: var(--green); }
-.v2-lesson-num { font-family: var(--mono); font-size: 10px; color: var(--text-4); flex-shrink: 0; }
-.v2-lesson-title-text { flex: 1; }
-.v2-lesson-check { font-size: 10px; color: transparent; flex-shrink: 0; transition: color 0.1s; }
-.v2-lesson-row.done .v2-lesson-check { color: var(--green); }
-
-/* ── Main area ── */
-.v2-learn-main {
-  flex: 1;
-  overflow-y: auto;
-  min-height: 0;
-  background: var(--bg);
-}
-
-/* ── Mobile sidebar toggle ── */
-.sidebar-toggle-btn {
-  display: none;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-3);
-  cursor: pointer;
-  margin: 16px 20px 0;
-  font-family: var(--font);
-  transition: all 0.15s;
-}
-.sidebar-toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-.sidebar-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  z-index: 499;
-  backdrop-filter: blur(2px);
-}
-.sidebar-backdrop.open { display: block; }
-
-/* ── Home / course intro page ── */
-.v2-course-intro {
-  max-width: 740px;
-  margin: 0 auto;
-  padding: 40px 32px 80px;
-}
-.v2-intro-eyebrow {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 14px;
-}
-.v2-intro-title {
-  font-size: clamp(24px, 3vw, 34px);
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--text);
-  line-height: 1.15;
-  margin-bottom: 14px;
-}
-.v2-intro-desc {
-  font-size: 14px;
-  color: var(--text-3);
-  line-height: 1.75;
-  max-width: 580px;
-  margin-bottom: 22px;
-}
-.v2-intro-meta {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-.v2-meta-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 12px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-3);
-}
-.v2-meta-pill.ai {
-  background: rgba(59,130,246,0.08);
-  border-color: rgba(59,130,246,0.2);
-  color: var(--accent);
-}
-.v2-intro-start-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 28px;
-  background: var(--accent);
-  color: white;
-  border: none;
-  border-radius: var(--r-md);
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-bottom: 36px;
-  transition: all 0.15s;
-}
-.v2-intro-start-btn:hover {
-  background: var(--accent-2);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(59,130,246,0.3);
-}
-.v2-feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 36px;
-}
-.v2-feature-card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  padding: 18px;
-  transition: border-color 0.15s, transform 0.15s;
-}
-.v2-feature-card:hover { border-color: var(--border-md); transform: translateY(-2px); }
-.v2-fc-icon { font-size: 22px; margin-bottom: 10px; }
-.v2-fc-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
-.v2-fc-desc { font-size: 11.5px; color: var(--text-4); line-height: 1.65; }
-.v2-curriculum {
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-}
-.v2-cur-header {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--text-4);
-  padding: 12px 18px;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-}
-.v2-cur-phase { border-bottom: 1px solid var(--border); }
-.v2-cur-phase:last-child { border-bottom: none; }
-.v2-cur-ph-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 18px;
-  cursor: pointer;
-  transition: background 0.12s;
-  gap: 10px;
-}
-.v2-cur-ph-header:hover { background: rgba(255,255,255,0.03); }
-.v2-cur-ph-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
-.v2-cur-ph-num {
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: rgba(59,130,246,0.1);
-  border: 1px solid rgba(59,130,246,0.2);
-  border-radius: 20px;
-  padding: 2px 10px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.v2-cur-ph-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.v2-cur-ph-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-.v2-cur-ph-count { font-size: 11px; color: var(--text-4); white-space: nowrap; }
-.v2-cur-ph-chev { font-size: 11px; color: var(--text-4); transition: transform 0.2s; }
-.v2-cur-ph-lessons {
-  border-top: 1px solid var(--border);
-  background: var(--bg);
-}
-.v2-cur-lesson-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 18px 9px 30px;
-  cursor: pointer;
-  transition: background 0.1s;
-  border-bottom: 1px solid var(--border);
-}
-.v2-cur-lesson-item:last-child { border-bottom: none; }
-.v2-cur-lesson-item:hover { background: rgba(59,130,246,0.05); }
-.v2-cur-lesson-num {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--text-4);
-  font-family: var(--mono);
-  flex-shrink: 0;
-  width: 22px;
-}
-.v2-cur-lesson-title { flex: 1; font-size: 12.5px; color: var(--text-3); line-height: 1.4; }
-.v2-cur-lesson-item:hover .v2-cur-lesson-title { color: var(--accent); }
-.v2-cur-lesson-time { font-size: 11px; color: var(--text-4); flex-shrink: 0; }
-
-/* ── Lesson views (hidden by default) ── */
-.home-view.off { display: none; }
-.lesson-view { display: none; }
-.lesson-view.on { display: block; }
-.lab-view { display: none; }
-.lab-view.on { display: block; }
-
-/* ── Lesson content area ── */
-.v2-lesson-wrap {
-  max-width: 740px;
-  margin: 0 auto;
-  padding: 36px 32px 80px;
-}
-.v2-lesson-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 28px;
-  font-size: 12px;
-  color: var(--text-4);
-}
-.v2-bc-link { cursor: pointer; transition: color 0.1s; }
-.v2-bc-link:hover { color: var(--text-2); }
-#bc-lesson { color: var(--text-2); }
-
-/* Phase pill */
-.v2-phase-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: rgba(59,130,246,0.1);
-  border: 1px solid rgba(59,130,246,0.2);
-  border-radius: 20px;
-  padding: 3px 12px;
-  margin-bottom: 16px;
-}
-.v2-lesson-title {
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1.2;
-  color: var(--text);
-  margin-bottom: 8px;
-}
-.v2-lesson-meta-row {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  font-size: 11.5px;
-  color: var(--text-4);
-  padding-bottom: 24px;
-  margin-bottom: 28px;
-  border-bottom: 1px solid var(--border);
-}
-
-/* ── Axiom promo banner ── */
-.v2-axiom-banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  background: rgba(59,130,246,0.06);
-  border: 1px solid rgba(59,130,246,0.18);
-  border-radius: var(--r-lg);
-  padding: 14px 18px;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-}
-.v2-axiom-left { display: flex; align-items: flex-start; gap: 12px; flex: 1; }
-.v2-axiom-icon { font-size: 26px; flex-shrink: 0; }
-.v2-axiom-title { font-size: 13.5px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-.v2-axiom-sub { font-size: 12px; color: var(--text-3); line-height: 1.55; }
-.v2-axiom-cta {
-  padding: 9px 18px;
-  background: var(--accent);
-  color: white;
-  border: none;
-  border-radius: var(--r-md);
-  font-size: 12.5px;
-  font-weight: 700;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.15s;
-}
-.v2-axiom-cta:hover { background: var(--accent-2); }
-
-/* ── Lesson body / rendered content ── */
-.v2-lesson-body { }
-.lesson-generating {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 56px 24px;
-  gap: 14px;
-  text-align: center;
-}
-.lesson-gen-spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spinLesson 0.8s linear infinite;
-}
-@keyframes spinLesson { to { transform: rotate(360deg); } }
-.lesson-gen-title { font-size: 14px; font-weight: 600; color: var(--text); }
-.lesson-gen-sub { font-size: 12px; color: var(--text-4); line-height: 1.6; max-width: 280px; }
-.lesson-error { display: flex; flex-direction: column; align-items: center; padding: 48px 24px; gap: 12px; text-align: center; }
-.lesson-error-icon { font-size: 34px; }
-.lesson-error-title { font-size: 15px; font-weight: 700; color: var(--text); }
-.lesson-error-sub { font-size: 12.5px; color: var(--text-4); line-height: 1.6; max-width: 340px; }
-.lesson-error-retry { padding: 9px 22px; background: var(--accent); color: white; border: none; border-radius: var(--r-md); font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 8px; transition: opacity 0.15s; }
-.lesson-error-retry:hover { opacity: 0.85; }
-
-/* ── Rendered markdown content ── */
-.lesson-rendered h2 { font-size: 16px; font-weight: 700; color: var(--text); margin: 28px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-.lesson-rendered h3 { font-size: 11px; font-weight: 700; color: var(--text-4); text-transform: uppercase; letter-spacing: 1.1px; margin: 22px 0 8px; }
-.lesson-rendered p { font-size: 14px; color: var(--text-3); line-height: 1.8; margin-bottom: 12px; }
-.lesson-rendered strong { color: var(--text); font-weight: 600; }
-.lesson-rendered ul, .lesson-rendered ol { padding-left: 20px; margin-bottom: 14px; }
-.lesson-rendered li { font-size: 14px; color: var(--text-3); line-height: 1.75; margin-bottom: 4px; }
-.lesson-rendered code { font-family: var(--mono); font-size: 12.5px; background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--text-2); }
-.lesson-rendered pre { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 0; margin: 18px 0; overflow: hidden; }
-.code-header { display: flex; align-items: center; justify-content: space-between; padding: 7px 14px; border-bottom: 1px solid var(--border); background: var(--bg3); user-select: none; }
-.code-lang { font-size: 11px; font-family: var(--mono); color: var(--text-4); }
-.copy-btn { font-size: 11px; font-family: var(--font); color: var(--text-4); background: none; border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; cursor: pointer; transition: color 0.1s, border-color 0.1s; }
-.copy-btn:hover { color: var(--text-2); border-color: var(--border-md); }
-.lesson-rendered pre code { display: block; padding: 16px; font-size: 13px; line-height: 1.6; background: none; border: none; border-radius: 0; overflow-x: auto; color: var(--text-2); }
-.hljs { background: transparent !important; }
-
-/* ── Callouts ── */
-.callout { border-left: 3px solid; padding: 12px 16px; margin: 18px 0; background: rgba(255,255,255,0.02); border-radius: 0 6px 6px 0; }
-.callout-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-.callout p { font-size: 13.5px; color: var(--text-3); margin: 0; line-height: 1.65; }
-.callout.analogy { border-color: var(--accent); }
-.callout.analogy .callout-label { color: var(--accent); }
-.callout.tip { border-color: var(--green); }
-.callout.tip .callout-label { color: var(--green); }
-.callout.warn { border-color: var(--gold); }
-.callout.warn .callout-label { color: var(--gold); }
-
-/* ── Quiz ── */
-.quiz-block { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 22px 0; margin: 28px 0; }
-.quiz-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-4); margin-bottom: 10px; }
-.quiz-question { font-size: 14.5px; font-weight: 600; color: var(--text); margin-bottom: 14px; line-height: 1.5; }
-.quiz-options { display: flex; flex-direction: column; gap: 7px; }
-.quiz-opt { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 9px 14px; font-size: 13px; color: var(--text-3); text-align: left; cursor: pointer; font-family: var(--font); transition: border-color 0.1s; line-height: 1.4; }
-.quiz-opt:hover { border-color: var(--border-md); }
-.quiz-opt.correct { border-color: var(--green); color: var(--green); pointer-events: none; }
-.quiz-opt.wrong { border-color: #ef4444; color: #ef4444; pointer-events: none; }
-.quiz-opt.reveal { pointer-events: none; }
-.quiz-fb { margin-top: 10px; font-size: 13px; display: none; }
-.quiz-fb.ok { display: block; color: var(--green); }
-.quiz-fb.fail { display: block; color: #ef4444; }
-
-/* ── MCT verified bar ── */
-.v2-verified-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  background: rgba(34,197,94,0.04);
-  border: 1px solid rgba(34,197,94,0.15);
-  border-radius: var(--r-md);
-  padding: 12px 16px;
-  margin: 28px 0 20px;
-}
-.v2-verified-left { display: flex; align-items: center; gap: 12px; flex: 1; flex-wrap: wrap; }
-.v2-verified-badge { font-size: 11px; font-weight: 700; color: var(--green); background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 20px; padding: 3px 12px; white-space: nowrap; }
-.v2-verified-text { font-size: 12px; color: var(--text-4); line-height: 1.5; flex: 1; }
-.v2-verified-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(34,197,94,0.25); flex-shrink: 0; }
-
-/* ── Ask a doubt ── */
-.v2-ask-section {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 20px 22px;
-  margin: 22px 0;
-}
-.v2-ask-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.v2-ask-sub { font-size: 12px; color: var(--text-4); margin-bottom: 14px; }
-.v2-ask-row { display: flex; gap: 8px; }
-.v2-ask-input { flex: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-md); padding: 10px 14px; font-size: 13px; color: var(--text-2); font-family: var(--font); outline: none; transition: border-color 0.15s; }
-.v2-ask-input:focus { border-color: var(--accent); }
-.v2-ask-input::placeholder { color: var(--text-4); }
-.v2-ask-btn { padding: 10px 20px; background: var(--bg4); border: 1px solid var(--border-md); border-radius: var(--r-md); font-size: 13px; font-weight: 600; color: var(--text-2); cursor: pointer; white-space: nowrap; transition: all 0.15s; }
-.v2-ask-btn:hover { background: var(--accent); border-color: var(--accent); color: white; }
-.v2-ask-response { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 14px; display: none; }
-.v2-ask-response.on { display: block; }
-.v2-ask-response p { font-size: 13.5px; color: var(--text-3); line-height: 1.75; margin-bottom: 8px; }
-.doubt-loading { font-size: 13px; color: var(--text-4); font-style: italic; }
-.doubt-answer-label { font-size: 10px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-.doubt-error { font-size: 13px; color: #ef4444; }
-
-/* ── Lesson footer nav ── */
-.v2-lesson-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 44px;
-  padding-top: 22px;
-  border-top: 1px solid var(--border);
-}
-.v2-btn-nav {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  font-size: 13px;
-  color: var(--text-3);
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: all 0.1s;
-}
-.v2-btn-nav:hover { border-color: var(--border-md); color: var(--text); }
-.v2-btn-nav:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
-.v2-btn-nav.fwd { background: var(--accent); color: white; border-color: var(--accent); }
-.v2-btn-nav.fwd:hover { background: var(--accent-2); }
-.v2-btn-done {
-  background: none;
-  border: none;
-  font-size: 12px;
-  color: var(--text-4);
-  cursor: pointer;
-  font-family: var(--font);
-  padding: 0;
-  transition: color 0.1s;
-}
-.v2-btn-done:hover { color: var(--green); }
-.v2-btn-done.on { color: var(--green); }
-@keyframes checkpop { 0% { transform: scale(0); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
-.v2-btn-done.on .check-char { animation: checkpop 0.2s ease-out; }
-
-/* ── Support strip ── */
-.v2-support-strip {
-  display: flex;
-  align-items: center;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  overflow: hidden;
-  margin: 20px 0;
-}
-.v2-support-item {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 13px 10px;
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--text-4);
-  cursor: pointer;
-  transition: all 0.12s;
-  border: none;
-  background: transparent;
-  font-family: var(--font);
-  text-decoration: none;
-}
-.v2-support-item:hover { background: rgba(255,255,255,0.04); color: var(--text-2); }
-.v2-support-div { width: 1px; background: var(--border); align-self: stretch; flex-shrink: 0; }
-
-/* ── Comments section ── */
-.v2-comments-section { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border); }
-.v2-comments-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
-.v2-comments-sub { font-size: 12.5px; color: var(--text-4); margin-bottom: 18px; line-height: 1.6; }
-.giscus-loading { font-size: 13px; color: var(--text-4); padding: 12px 0; }
-
-/* ── Lab view ── */
-.v2-lab-wrap {
-  max-width: 740px;
-  margin: 0 auto;
-  padding: 36px 32px 80px;
-}
-
-/* ── Labs home page ── */
-.v2-labs-home {
-  max-width: 740px;
-  margin: 0 auto;
-  padding: 36px 32px 80px;
-}
-.v2-labs-home .v2-intro-title { font-size: 28px; }
-.v2-labs-list-panel {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  margin-top: 10px;
-}
-.v2-labs-section-hdr {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--text-4);
-  padding: 12px 18px 8px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg3);
-}
-.v2-lab-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 13px 18px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  transition: background 0.12s;
-  gap: 12px;
-}
-.v2-lab-item:last-child { border-bottom: none; }
-.v2-lab-item:hover { background: rgba(59,130,246,0.04); }
-.v2-lab-item:hover .v2-lab-arrow { transform: translateX(3px); color: var(--accent); }
-.v2-lab-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
-.v2-lab-num { font-size: 9.5px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--accent); background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.18); border-radius: 20px; padding: 2px 10px; white-space: nowrap; flex-shrink: 0; }
-.v2-lab-capstone-num { color: #c75c1a; background: rgba(199,92,26,0.08); border-color: rgba(199,92,26,0.2); }
-.v2-lab-title { font-size: 13px; font-weight: 500; color: var(--text-2); line-height: 1.4; }
-.v2-lab-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-.v2-lab-level { font-size: 9.5px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; border-radius: 20px; padding: 2px 9px; border: 1px solid; }
-.v2-lab-level-beg { color: #22c55e; background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.2); }
-.v2-lab-level-int { color: #f59e0b; background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); }
-.v2-lab-level-adv { color: #a855f7; background: rgba(168,85,247,0.08); border-color: rgba(168,85,247,0.2); }
-.v2-lab-time { font-size: 11px; color: var(--text-4); white-space: nowrap; }
-.v2-lab-arrow { font-size: 13px; color: var(--text-4); transition: transform 0.15s, color 0.15s; }
-
-/* ── Payment modal (dark) ── */
-.upi-modal-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:2000;display:none;backdrop-filter:blur(4px); }
-.upi-modal-overlay.open { display:block; }
-.upi-modal { position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.95);background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-xl);padding:28px 24px 22px;width:94%;max-width:440px;z-index:2001;display:none;flex-direction:column;gap:16px;opacity:0;transition:opacity 0.2s,transform 0.2s;max-height:92vh;overflow-y:auto; }
-.upi-modal.open { display:flex;opacity:1;transform:translate(-50%,-50%) scale(1); }
-.upi-modal-close { position:absolute;top:14px;right:14px;background:var(--bg3);border:1px solid var(--border);border-radius:50%;width:28px;height:28px;font-size:13px;cursor:pointer;color:var(--text-4);display:flex;align-items:center;justify-content:center;transition:all 0.15s; }
-.upi-modal-close:hover { background:var(--bg4);color:var(--text); }
-.upi-modal-header { text-align:center; }
-.upi-modal-icon { font-size:32px;margin-bottom:8px; }
-.upi-modal-title { font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px; }
-.upi-modal-subtitle { font-size:12px;color:var(--text-4); }
-.pay-tabs { display:flex!important;width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden; }
-.pay-tab { flex:1;padding:9px 8px;font-size:12px;font-weight:600;cursor:pointer;border:none;background:none;color:var(--text-4);font-family:inherit;transition:all 0.15s;border-right:1px solid var(--border);white-space:nowrap;text-align:center; }
-.pay-tab:last-child { border-right:none; }
-.pay-tab:hover { color:var(--text);background:var(--bg4); }
-.pay-tab.active { background:var(--accent);color:white;font-weight:700; }
-.pay-tab-content { display:flex;flex-direction:column;gap:12px;width:100%; }
-.upi-app-row { display:grid;grid-template-columns:1fr 1fr;gap:8px; }
-.upi-app-btn { display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 10px;border-radius:var(--r-md);font-size:12.5px;font-weight:600;text-decoration:none;border:1px solid var(--border);background:var(--bg3);color:var(--text);transition:all 0.15s; }
-.upi-app-btn:hover { transform:translateY(-1px);border-color:var(--accent); }
-.upi-divider { display:flex;align-items:center;gap:10px;color:var(--text-4);font-size:11px; }
-.upi-divider::before,.upi-divider::after { content:'';flex:1;height:1px;background:var(--border); }
-.upi-qr-section { display:flex;flex-direction:column;align-items:center;gap:8px; }
-.upi-qr-wrap { background:white;padding:10px;border-radius:10px; }
-.upi-qr-label { font-size:11px;color:var(--text-4); }
-.upi-id-row { display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-md);padding:9px 12px; }
-.upi-id-label { font-size:9.5px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-4);flex-shrink:0; }
-.upi-id-value { font-size:12.5px;font-weight:600;color:var(--accent);font-family:monospace;flex:1;word-break:break-all; }
-.upi-id-copy { font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text-4);cursor:pointer;transition:all 0.15s;font-family:inherit; }
-.upi-id-copy:hover { border-color:var(--accent);color:var(--accent); }
-.upi-details-row { display:flex;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden; }
-.upi-detail { flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 8px;border-right:1px solid var(--border); }
-.upi-detail:last-child { border-right:none; }
-.upi-detail-label { font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-4);margin-bottom:3px; }
-.upi-detail-value { font-size:12px;font-weight:700;color:var(--text); }
-.paypal-btn { display:inline-flex;align-items:center;justify-content:center;padding:12px 28px;background:#0070ba;color:white;border-radius:var(--r-md);font-size:14px;font-weight:700;text-decoration:none;width:100%;transition:opacity 0.15s; }
-.paypal-btn:hover { opacity:0.88; }
-.bank-section { display:flex;flex-direction:column;gap:10px; }
-.bank-header { font-size:14px;font-weight:700;color:var(--text); }
-.bank-details { background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden; }
-.bank-row { display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--border);gap:10px; }
-.bank-row:last-child { border-bottom:none; }
-.bank-label { font-size:10px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:var(--text-4);flex-shrink:0;min-width:100px; }
-.bank-value { font-size:12.5px;font-weight:600;color:var(--text);text-align:right;display:flex;align-items:center;gap:8px; }
-.bank-mono { font-family:monospace; }
-.pay-amount-selector { background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-md);padding:14px 16px;display:flex;flex-direction:column;gap:10px; }
-.pay-amount-label { font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--text-4); }
-.pay-amount-presets { display:flex;gap:6px;flex-wrap:wrap; }
-.pay-preset { padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--bg);color:var(--text-4);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s; }
-.pay-preset:hover { border-color:var(--accent);color:var(--accent); }
-.pay-preset.active { background:var(--accent);color:white;border-color:var(--accent); }
-.pay-custom-row { display:flex;align-items:center;background:var(--bg);border:1px solid var(--accent);border-radius:var(--r-md);overflow:hidden; }
-.pay-custom-currency { padding:9px 12px;font-size:14px;font-weight:700;color:var(--accent);background:rgba(59,130,246,0.08);border-right:1px solid var(--border);flex-shrink:0; }
-.pay-custom-input { flex:1;border:none;background:transparent;padding:9px 12px;font-size:15px;font-weight:600;color:var(--text);font-family:inherit;outline:none;width:100%; }
-
-/* ── Responsive ── */
-@media (max-width: 900px) {
-  .v2-learn-sidebar {
-    position: fixed;
-    top: var(--nav-h);
-    left: 0;
-    bottom: 0;
-    height: calc(100vh - var(--nav-h));
-    transform: translateX(-105%);
-    transition: transform 0.25s ease;
-    z-index: 500;
-    box-shadow: 4px 0 24px rgba(0,0,0,0.5);
-  }
-  .v2-learn-sidebar.drawer-open { transform: translateX(0); }
-  .sidebar-toggle-btn { display: flex !important; }
-  .learn-layout { height: auto; overflow: visible; }
-  .v2-learn-main { overflow: visible; }
-}
-@media (max-width: 768px) {
-  .v2-lesson-wrap, .v2-lab-wrap, .v2-labs-home, .v2-course-intro { padding: 20px 16px 60px; }
-  .v2-lesson-title { font-size: 22px; }
-  .v2-feature-grid { grid-template-columns: 1fr; }
-  .v2-axiom-banner { flex-direction: column; }
-  .v2-axiom-cta { width: 100%; text-align: center; }
-  .v2-ask-row { flex-direction: column; }
-  .v2-ask-btn { width: 100%; }
-  .v2-support-strip { flex-direction: column; align-items: stretch; }
-  .v2-support-div { width: 100%; height: 1px; align-self: auto; }
-}
-
-/* ── Coming soon ── */
-.v2-coming-soon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 180px);
-  padding: 48px 32px;
-  text-align: center;
-  gap: 18px;
-}
-.v2-coming-icon { font-size: 40px; }
-.v2-coming-title { font-size: 24px; font-weight: 800; color: var(--text); letter-spacing: -0.4px; line-height: 1.2; max-width: 380px; }
-.v2-coming-sub { font-size: 14px; color: var(--text-4); max-width: 380px; line-height: 1.75; }
-</style>
-<script src="../js/courses-data.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"/>
 </head>
 <body>
+<script src="/v2/nav-v2.js"></script>
+<script src="../js/courses-data.js"></script>
 
-<!-- ═══════ TOPNAV ═══════ -->
-<nav class="v2-topnav">
-  <a class="v2-nav-brand" href="index.html">
-    <div class="v2-nav-logo">RR</div>
-    <div>
-      <div class="v2-nav-brand-name">RR Skillverse</div>
-      <div class="v2-nav-brand-sub">by Raushan Ranjan · MCT</div>
+<!-- ── LEARN LAYOUT ─────────────────────────────────────────── -->
+<div class="v2-learn-layout" id="learnLayout">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="v2-learn-sidebar" id="learnSidebar">
+    <div class="v2-sidebar-header">
+      <div class="v2-sidebar-course-title" id="sidebarTitle">Select a Course</div>
+      <div class="v2-sidebar-progress">
+        <div class="v2-sidebar-progress-bar">
+          <div class="v2-sidebar-progress-fill" id="progressFill" style="width:0%"></div>
+        </div>
+        <div class="v2-sidebar-progress-text" id="progressText">0 / 0 lessons</div>
+      </div>
     </div>
-  </a>
-  <div class="v2-nav-links" id="navLinks">
-    <a href="index.html" class="v2-nav-link">Home</a>
-    <a href="courses.html" class="v2-nav-link">Courses</a>
-    <a href="learn.html" class="v2-nav-link active">Learn</a>
-    <a href="profile.html" class="v2-nav-link">About</a>
-  </div>
-  <div class="v2-nav-right">
-    <a href="../ai-agent.html" class="v2-nav-cta">⚡ Axiom AI</a>
-  </div>
-  <button class="v2-nav-hamburger" id="navHamburger" onclick="toggleDrawer()" aria-label="Menu">☰</button>
-</nav>
-<div class="v2-nav-drawer" id="navDrawer">
-  <a href="index.html" class="v2-drawer-link">Home</a>
-  <a href="courses.html" class="v2-drawer-link">Courses</a>
-  <a href="learn.html" class="v2-drawer-link active">Learn</a>
-  <a href="profile.html" class="v2-drawer-link">About</a>
-  <a href="../ai-agent.html" class="v2-drawer-link" style="color:var(--accent)">⚡ Axiom AI</a>
+    <div class="v2-sidebar-search">
+      <input id="sidebarSearch" type="text" placeholder="Search lessons…" oninput="filterSidebarLessons(this.value)"/>
+    </div>
+    <nav class="v2-sidebar-toc" id="tocLessons"></nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="v2-learn-main" id="learnMain">
+
+    <!-- Breadcrumb -->
+    <div class="v2-learn-breadcrumb" id="learnBreadcrumb" style="display:none">
+      <a href="#" onclick="goHome();return false">Course Home</a>
+      <span class="v2-bc-sep">›</span>
+      <span id="bcPhase"></span>
+      <span class="v2-bc-sep">›</span>
+      <span id="bcLesson" class="v2-bc-current"></span>
+    </div>
+
+    <!-- Course Home (intro) -->
+    <div id="courseHome" class="v2-course-home"></div>
+
+    <!-- Lesson View -->
+    <div id="lessonView" style="display:none">
+      <div id="lessonInner" class="v2-lesson-content"></div>
+    </div>
+
+  </main>
+
+  <!-- RIGHT PANEL -->
+  <aside class="v2-right-panel" id="rightPanel">
+    <div class="v2-right-panel-section">
+      <div class="v2-right-panel-title">On this page</div>
+      <ul class="v2-right-panel-toc" id="rightPanelToc">
+        <li><span style="color:var(--ink-4);font-size:12px">Select a lesson to begin</span></li>
+      </ul>
+    </div>
+    <div class="v2-right-panel-section v2-right-panel-axiom">
+      <button class="v2-btn-primary" style="width:100%;justify-content:center" onclick="focusAskDoubt()">
+        🤖 Ask Axiom
+      </button>
+      <p style="font-size:11px;color:var(--ink-3);margin-top:6px;text-align:center">AI tutor trained on Raushan's materials</p>
+    </div>
+    <div class="v2-right-panel-section">
+      <div class="v2-right-panel-title">Lesson Navigation</div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="v2-btn-outline" style="flex:1;justify-content:center;padding:8px" id="prevBtn" onclick="go(-1)" disabled>← Prev</button>
+        <button class="v2-btn-outline" style="flex:1;justify-content:center;padding:8px" id="nextBtn" onclick="go(1)" disabled>Next →</button>
+      </div>
+      <button class="v2-btn-ghost v2-done-btn" id="doneBtn" onclick="toggleDone()" style="width:100%;margin-top:8px;justify-content:center" disabled>Mark complete</button>
+    </div>
+    <div class="v2-right-panel-section">
+      <div class="v2-right-panel-title">Phase Progress</div>
+      <div id="phaseProgress"></div>
+    </div>
+  </aside>
+
 </div>
 
-<div class="learn-shell">
-
-  <!-- Breadcrumb bar -->
-  <div class="learn-breadcrumb-bar">
-    <a href="courses.html">← Library</a>
-    <span>›</span>
-    <span id="breadcrumb-course-name">Intelligent Enterprise Dev · .NET 8 &amp; Azure AI</span>
+<!-- ── PAYMENT MODAL ─────────────────────────────────────────── -->
+<div class="v2-modal-overlay" id="upiModalOverlay" onclick="closeUPIModal()"></div>
+<div class="v2-modal" id="upiModal">
+  <div class="v2-modal-header">
+    <div class="v2-modal-title" id="upiModalTitle">Support RR Skillverse</div>
+    <button class="v2-modal-close" onclick="closeUPIModal()">×</button>
   </div>
-
-  <!-- Mode segmented control -->
-  <div class="v2-mode-bar">
-    <div class="v2-mode-seg">
-      <button class="v2-mode-btn active" id="tab-lessons" onclick="switchMode('lessons')">Lessons</button>
-      <button class="v2-mode-btn" id="tab-labs" onclick="switchMode('labs')">Labs &amp; Projects</button>
+  <div class="v2-modal-body">
+    <div style="display:flex;gap:8px;margin-bottom:16px" id="payTabs">
+      <button class="v2-btn-primary" onclick="switchPayTab('upi',this)" id="tabUPI" style="flex:1;justify-content:center;padding:8px">🇮🇳 UPI</button>
+      <button class="v2-btn-outline" onclick="switchPayTab('paypal',this)" id="tabPaypal" style="flex:1;justify-content:center;padding:8px">🌍 PayPal</button>
     </div>
-    <span class="v2-mode-hint" id="mode-hint">54 lessons across 5 phases</span>
-  </div>
-
-  <!-- Sidebar backdrop (mobile) -->
-  <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeLearnSidebar()"></div>
-
-  <div class="learn-layout">
-
-    <!-- ═══ SIDEBAR ═══ -->
-    <nav class="v2-learn-sidebar" id="sidebar">
-      <div class="v2-sidebar-top">
-        <div class="v2-sidebar-progress-row">
-          <span class="v2-sidebar-prog-label">Progress</span>
-          <span class="v2-sidebar-prog-val" id="prog-tag">0 / 0</span>
-        </div>
-        <div class="v2-sidebar-prog-bar">
-          <div class="v2-sidebar-prog-fill" id="prog-fill" style="width:0%"></div>
-        </div>
-        <input class="v2-sidebar-search" type="text" id="search" placeholder="Search lessons…">
+    <div id="tab-upi" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap" id="upiPresets">
+        <button class="v2-btn-outline pay-preset active" onclick="selectUPIPreset(this,'11')" style="padding:6px 14px">₹11</button>
+        <button class="v2-btn-outline pay-preset" onclick="selectUPIPreset(this,'21')" style="padding:6px 14px">₹21</button>
+        <button class="v2-btn-outline pay-preset" onclick="selectUPIPreset(this,'51')" style="padding:6px 14px">₹51</button>
+        <button class="v2-btn-outline pay-preset" onclick="selectUPIPreset(this,'101')" style="padding:6px 14px">₹101</button>
+        <button class="v2-btn-outline pay-preset" onclick="selectUPIPreset(this,'custom')" style="padding:6px 14px">Custom</button>
       </div>
-      <div class="v2-toc-scroll" id="toc-lessons"></div>
-      <div class="v2-toc-scroll" id="toc-labs" style="display:none"></div>
-    </nav>
-
-    <!-- ═══ MAIN ═══ -->
-    <main class="v2-learn-main" id="main">
-
-      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" onclick="toggleLearnSidebar()">☰ Lessons &amp; Phases</button>
-
-      <!-- HOME / course intro -->
-      <div class="home-view" id="home"></div>
-
-      <!-- LABS HOME -->
-      <div class="home-view off v2-labs-home" id="labs-home">
-        <div class="v2-intro-eyebrow">Hands-on Practice · RR Skillverse</div>
-        <h1 class="v2-intro-title">Labs &amp;<br>Capstone Projects</h1>
-        <p class="v2-intro-desc">Apply what you learn immediately. Each lab ties directly to a learning phase. Capstones are full-scope builds — you deploy something real.</p>
-        <div class="v2-intro-meta">
-          <span class="v2-meta-pill">🧪 4 hands-on labs</span>
-          <span class="v2-meta-pill">🏗️ 3 capstone projects</span>
-          <span class="v2-meta-pill">🚀 Build from day one</span>
-        </div>
-        <button class="v2-intro-start-btn" onclick="startFirstLab()">Start Hands-on Lab →</button>
-        <div style="font-size:10px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-4);margin-bottom:0">Hands-on Labs</div>
-        <div class="v2-labs-list-panel" id="labs-list"></div>
-        <div style="font-size:10px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-4);margin-top:28px;margin-bottom:0">Capstone Projects</div>
-        <div class="v2-labs-list-panel" id="capstone-list"></div>
+      <div id="upiCustomRow" style="display:none;gap:8px;align-items:center">
+        <span>₹</span>
+        <input type="number" min="1" placeholder="Amount" oninput="onUPICustomAmount(this.value)" class="v2-filter-select" style="flex:1"/>
       </div>
-
-      <!-- LESSON VIEW -->
-      <div class="lesson-view" id="lesson-view">
-        <div class="v2-lesson-wrap">
-          <div class="v2-lesson-breadcrumb">
-            <span class="v2-bc-link" onclick="goHome()">Home</span>
-            <span>›</span>
-            <span id="bc-phase"></span>
-            <span>›</span>
-            <span id="bc-lesson"></span>
-          </div>
-          <div id="lesson-inner"></div>
-          <div class="v2-lesson-footer">
-            <button class="v2-btn-nav" id="btn-prev" onclick="go(-1)">← Previous</button>
-            <button class="v2-btn-done" id="btn-done" onclick="toggleDone()">Mark complete</button>
-            <button class="v2-btn-nav fwd" id="btn-next" onclick="go(1)">Next →</button>
-          </div>
-        </div>
+      <div style="background:var(--surface-2);border-radius:var(--r-md);padding:16px;text-align:center">
+        <div style="font-size:13px;color:var(--ink-3);margin-bottom:8px">UPI ID: <strong id="upiIdDisplay">8285862455@idfcfirst</strong></div>
+        <div id="upiQRWrap" style="display:flex;justify-content:center;margin:8px 0"></div>
+        <div style="font-size:14px;font-weight:700;color:var(--blue);margin-top:8px" id="upiAmountDisplay">₹21</div>
       </div>
-
-      <!-- LAB VIEW -->
-      <div class="lab-view" id="lab-view">
-        <div class="v2-lab-wrap">
-          <div class="v2-lesson-breadcrumb">
-            <span class="v2-bc-link" onclick="goHome()">Home</span>
-            <span>›</span>
-            <span id="bc-lab-phase"></span>
-            <span>›</span>
-            <span id="bc-lab-title"></span>
-          </div>
-          <div class="v2-phase-pill" id="lab-phase-tag"></div>
-          <h1 class="v2-lesson-title" id="lab-title"></h1>
-          <div class="v2-lesson-meta-row">
-            <span id="lab-meta-phase"></span>
-            <span>Hands-on Lab</span>
-            <span>RR Skillverse</span>
-          </div>
-          <div>
-            <div id="lab-loading" style="display:none">
-              <div class="lesson-generating">
-                <div class="lesson-gen-spinner"></div>
-                <span id="lab-loading-msg" class="lesson-gen-sub">Loading lab guide…</span>
-              </div>
-            </div>
-            <div id="lab-rendered"></div>
-          </div>
-          <div class="v2-lesson-footer">
-            <button class="v2-btn-nav" onclick="goHome()">← Back</button>
-            <button class="v2-btn-done" id="lab-done-btn" onclick="toggleLabDone()">Mark complete</button>
-            <button class="v2-btn-nav" id="lab-regen-btn" style="display:none" onclick="regenLab()">↺ Regenerate</button>
-          </div>
-        </div>
-      </div>
-
-    </main>
-  </div><!-- end .learn-layout -->
-</div><!-- end .learn-shell -->
-
-<!-- UPI Payment Modal -->
-<div class="upi-modal-overlay" id="upiModalOverlay" onclick="if(event.target===this)closeModal()">
-  <div class="upi-modal" id="upiModal">
-    <button class="upi-modal-close" onclick="closeModal()">✕</button>
-    <div class="upi-modal-header">
-      <div class="upi-modal-icon">☕</div>
-      <div class="upi-modal-title">Support this free library</div>
-      <div class="upi-modal-subtitle">All content is free. Your support keeps it growing.</div>
-    </div>
-    <div class="pay-tabs">
-      <button class="pay-tab active" id="tab-upi" onclick="switchPayTab('upi')">🇮🇳 UPI</button>
-      <button class="pay-tab" id="tab-paypal" onclick="switchPayTab('paypal')">🌍 PayPal</button>
-      <button class="pay-tab" id="tab-bank" onclick="switchPayTab('bank')">🏦 Bank</button>
-    </div>
-    <div class="pay-amount-selector">
-      <div class="pay-amount-label">Choose amount</div>
-      <div class="pay-amount-presets">
-        <button class="pay-preset" onclick="selectAmount(50)">₹50</button>
-        <button class="pay-preset active" onclick="selectAmount(100)">₹100</button>
-        <button class="pay-preset" onclick="selectAmount(200)">₹200</button>
-        <button class="pay-preset" onclick="selectAmount(500)">₹500</button>
-      </div>
-      <div class="pay-custom-row">
-        <div class="pay-custom-currency">₹</div>
-        <input class="pay-custom-input" type="number" id="customAmount" placeholder="Other amount" oninput="onCustomAmount(this.value)">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+        <a id="upiGpay" href="#" class="v2-btn-outline" style="padding:8px 16px">GPay</a>
+        <a id="upiPhonepe" href="#" class="v2-btn-outline" style="padding:8px 16px">PhonePe</a>
+        <a id="upiGeneric" href="#" class="v2-btn-primary" style="padding:8px 16px">Pay ₹<span id="upiAmount">21</span></a>
       </div>
     </div>
-    <div class="pay-tab-content" id="upi-content">
-      <div class="upi-app-row">
-        <a class="upi-app-btn" id="upiGpay" href="#" onclick="openUPI('gpay');return false;">📱 GPay</a>
-        <a class="upi-app-btn" id="upiPhonePe" href="#" onclick="openUPI('phonepe');return false;">💜 PhonePe</a>
-        <a class="upi-app-btn" id="upiPatm" href="#" onclick="openUPI('paytm');return false;">🔵 Paytm</a>
-        <a class="upi-app-btn" id="upiGeneric" href="#" onclick="openUPI('upi');return false;">📲 Any UPI</a>
+    <div id="tab-paypal" style="display:none;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap" id="paypalPresets">
+        <button class="v2-btn-outline pay-preset active" onclick="selectPayPalPreset(this,'3')" style="padding:6px 14px">$3</button>
+        <button class="v2-btn-outline pay-preset" onclick="selectPayPalPreset(this,'5')" style="padding:6px 14px">$5</button>
+        <button class="v2-btn-outline pay-preset" onclick="selectPayPalPreset(this,'10')" style="padding:6px 14px">$10</button>
+        <button class="v2-btn-outline pay-preset" onclick="selectPayPalPreset(this,'custom')" style="padding:6px 14px">Custom</button>
       </div>
-      <div class="upi-divider">or scan QR</div>
-      <div class="upi-qr-section">
-        <div class="upi-qr-wrap" id="upiQR"></div>
-        <div class="upi-qr-label">Scan with any UPI app</div>
+      <div id="paypalCustomRow" style="display:none;gap:8px;align-items:center">
+        <span>$</span>
+        <input type="number" min="1" placeholder="Amount" oninput="onPayPalCustomAmount(this.value)" class="v2-filter-select" style="flex:1"/>
       </div>
-      <div class="upi-id-row">
-        <span class="upi-id-label">UPI ID</span>
-        <span class="upi-id-value">raushanr1107@okaxis</span>
-        <button class="upi-id-copy" onclick="copyUPIId()">Copy</button>
-      </div>
-      <div class="upi-details-row">
-        <div class="upi-detail"><div class="upi-detail-label">Name</div><div class="upi-detail-value">Raushan Ranjan</div></div>
-        <div class="upi-detail"><div class="upi-detail-label">Purpose</div><div class="upi-detail-value">Education</div></div>
-      </div>
-    </div>
-    <div class="pay-tab-content" id="paypal-content" style="display:none">
-      <div class="paypal-section" style="display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center">
-        <a class="paypal-btn" href="https://paypal.me/RaushanRanjan" target="_blank" rel="noopener">💙 Pay with PayPal</a>
-        <div style="font-size:12px;color:var(--text-4)">International payments accepted. Any currency.</div>
-      </div>
-    </div>
-    <div class="pay-tab-content" id="bank-content" style="display:none">
-      <div class="bank-section">
-        <div class="bank-header">Bank Transfer</div>
-        <div class="bank-details">
-          <div class="bank-row"><span class="bank-label">Account Name</span><span class="bank-value">Raushan Ranjan</span></div>
-          <div class="bank-row"><span class="bank-label">Account No.</span><span class="bank-value bank-mono">Contact via email</span></div>
-          <div class="bank-row"><span class="bank-label">Contact</span><span class="bank-value">raushanr1107@gmail.com</span></div>
-        </div>
+      <div style="text-align:center;padding:16px">
+        <span id="paypalAmountDisplay" style="font-size:20px;font-weight:700;color:var(--blue)">$5</span>
+        <br/>
+        <a id="paypalLink" href="https://paypal.me/raushan1107/5" target="_blank" class="v2-btn-primary" style="margin-top:12px;display:inline-flex;padding:10px 24px">Pay via PayPal →</a>
       </div>
     </div>
   </div>
 </div>
-
-<!-- FAB -->
-<a href="../ai-agent.html" class="v2-fab" title="Ask Axiom AI">⚡</a>
 
 <script>
-// ── Nav drawer ──────────────────────────────────────────
-function toggleDrawer() {
-  const drawer = document.getElementById('navDrawer');
-  drawer.classList.toggle('open');
-}
-
-// ── Sidebar mobile ──────────────────────────────────────
-function toggleLearnSidebar() {
-  const sb = document.getElementById('sidebar');
-  const bd = document.getElementById('sidebarBackdrop');
-  sb.classList.toggle('drawer-open');
-  bd.classList.toggle('open');
-}
-function closeLearnSidebar() {
-  document.getElementById('sidebar').classList.remove('drawer-open');
-  document.getElementById('sidebarBackdrop').classList.remove('open');
-}
-
-// ── Load course data ────────────────────────────────────
+/* ── Course init ─────────────────────────────────────────── */
 const _courseId = new URLSearchParams(window.location.search).get('course') || 'default';
 
 function findCourseById(id) {
-  if (!id || typeof COURSE_CATALOG === 'undefined') return null;
-  const normalized = id.toLowerCase().replace(/[^a-z0-9]/g, '');
-  return Object.values(COURSE_CATALOG).find(c => {
-    const cNorm = (c.id || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    return cNorm === normalized;
-  }) || null;
+  if (typeof COURSE_CATALOG === 'undefined') return null;
+  if (COURSE_CATALOG[id]) return COURSE_CATALOG[id];
+  for (const key of Object.keys(COURSE_CATALOG)) {
+    const c = COURSE_CATALOG[key];
+    if ((c.id || key) === id || c.slug === id) return c;
+  }
+  return null;
 }
 
-const _courseData = (typeof COURSE_CATALOG !== 'undefined')
-  ? (findCourseById(_courseId) || null) : null;
+const _courseData = findCourseById(_courseId);
 
 const PHASES = _courseData
   ? _courseData.phases.map(ph => ({
-      id: ph.colorClass, label: ph.label, title: ph.title,
-      desc: ph.desc || '', colorClass: ph.colorClass,
-      dot: ph.dot, lessons: ph.lessons
+      id:    ph.colorClass,
+      label: ph.label,
+      title: ph.title,
+      lessons: ph.lessons
     }))
   : [];
 
@@ -1103,312 +173,290 @@ PHASES.forEach((ph, pi) => {
   });
 });
 
-let currentIdx = -1;
-let currentMode = 'lessons';
-let currentLabId = null;
-let ADMIN_SECRET = null;
+let currentIdx    = -1;
 let _currentLesson = null;
-let _currentCourse = null;
-const _courseStorageKey = 'rrskv_done_' + _courseId;
-let done = new Set(JSON.parse(localStorage.getItem(_courseStorageKey) || '[]'));
+let _currentCourse = _courseData;
+const _storageKey = 'rrskv_done_' + _courseId;
+let done = new Set(JSON.parse(localStorage.getItem(_storageKey) || '[]'));
 
-const LABS = (_courseData && _courseData.labs)
-  ? _courseData.labs : { handson: [], capstone: [] };
 const LOADING_MSGS = (_courseData && _courseData.loadingMessages)
-  ? _courseData.loadingMessages : ['Preparing your lesson…', 'Generating content…', 'Loading…'];
+  ? _courseData.loadingMessages
+  : ['Preparing your lesson…', 'Generating content…', 'Loading…'];
 
-// ── Breadcrumb ──────────────────────────────────────────
-(function updateBreadcrumb() {
-  const params = new URLSearchParams(window.location.search);
-  const courseId = params.get('course') || 'default';
-  const el = document.getElementById('breadcrumb-course-name');
-  if (!el) return;
-  const courseData = findCourseById(courseId);
-  if (courseData) {
-    el.textContent = courseData.subtitle || courseData.title;
-  } else if (!params.get('course')) {
-    el.textContent = 'Intelligent Enterprise Dev · .NET 8 & Azure AI';
-  } else {
-    el.textContent = courseId.toUpperCase().replace(/-/g, ' ');
-  }
-})();
-
-// ── View transitions ────────────────────────────────────
-function showLesson() {
-  document.getElementById('home').classList.add('off');
-  document.getElementById('labs-home').classList.add('off');
-  document.getElementById('lesson-view').classList.add('on');
-  document.getElementById('lab-view').classList.remove('on');
-}
-function showHome() {
-  document.getElementById('lesson-view').classList.remove('on');
-  document.getElementById('lab-view').classList.remove('on');
-  if (currentMode === 'labs') {
-    document.getElementById('labs-home').classList.remove('off');
-    document.getElementById('home').classList.add('off');
-  } else {
-    document.getElementById('home').classList.remove('off');
-    document.getElementById('labs-home').classList.add('off');
-  }
-}
-function showLab() {
-  document.getElementById('home').classList.add('off');
-  document.getElementById('labs-home').classList.add('off');
-  document.getElementById('lesson-view').classList.remove('on');
-  document.getElementById('lab-view').classList.add('on');
-}
-function showLabsHome() {
-  document.getElementById('lesson-view').classList.remove('on');
-  document.getElementById('lab-view').classList.remove('on');
-  document.getElementById('home').classList.add('off');
-  document.getElementById('labs-home').classList.remove('off');
-}
-function showLessonsHome() {
-  document.getElementById('lesson-view').classList.remove('on');
-  document.getElementById('lab-view').classList.remove('on');
-  document.getElementById('labs-home').classList.add('off');
-  document.getElementById('home').classList.remove('off');
+/* ── Page title ──────────────────────────────────────────── */
+if (_courseData) {
+  document.getElementById('pageTitle').textContent = _courseData.title + ' — RR Skillverse';
+  document.getElementById('sidebarTitle').textContent = _courseData.subtitle || _courseData.title;
 }
 
-// ── Mode switch ─────────────────────────────────────────
-function switchMode(mode) {
-  currentMode = mode;
-  document.getElementById('tab-lessons').classList.toggle('active', mode === 'lessons');
-  document.getElementById('tab-labs').classList.toggle('active', mode === 'labs');
-  document.getElementById('toc-lessons').style.display = mode === 'lessons' ? '' : 'none';
-  document.getElementById('toc-labs').style.display = mode === 'labs' ? '' : 'none';
-  if (mode === 'labs') showLabsHome();
-  else showLessonsHome();
-}
-
-// ── Build sidebar ───────────────────────────────────────
+/* ── Sidebar ─────────────────────────────────────────────── */
 function buildSidebar() {
-  const toc = document.getElementById('toc-lessons');
+  const toc = document.getElementById('tocLessons');
   toc.innerHTML = '';
   let gi = 0;
-  PHASES.forEach(ph => {
+  PHASES.forEach((ph, pi) => {
     const block = document.createElement('div');
-    block.className = 'v2-phase-block';
+    block.className = 'v2-sidebar-phase-block';
+    block.id = 'sidebar-phase-' + pi;
+
     const hdr = document.createElement('div');
-    hdr.className = 'v2-phase-label';
-    hdr.innerHTML = `<span class="v2-phase-dot" style="background:${ph.dot||'var(--accent)'}"></span>${ph.label} · ${ph.title}`;
+    hdr.className = 'v2-sidebar-phase-header';
+    hdr.innerHTML = `
+      <span class="v2-sidebar-phase-dot v2-phase-dot-${ph.id}"></span>
+      <span class="v2-sidebar-phase-label">${ph.label}</span>
+      <span class="v2-sidebar-phase-title">${ph.title}</span>
+      <span class="v2-sidebar-phase-toggle">▾</span>`;
+    hdr.onclick = () => toggleSidebarPhase(pi);
     block.appendChild(hdr);
+
+    const list = document.createElement('div');
+    list.className = 'v2-sidebar-phase-lessons';
+    list.id = 'sidebar-lessons-' + pi;
+
     ph.lessons.forEach((title, li) => {
       const idx = gi++;
       const el = document.createElement('div');
-      el.className = 'v2-lesson-row' + (done.has(idx) ? ' done' : '');
+      el.className = 'v2-sidebar-lesson' + (done.has(idx) ? ' done' : '');
       el.id = 'tl-' + idx;
-      el.innerHTML = `<span class="v2-lesson-num">${String(li + 1).padStart(2, '0')}</span><span class="v2-lesson-title-text">${title}</span><span class="v2-lesson-check">✓</span>`;
-      el.onclick = () => { loadLesson(idx); if (window.innerWidth <= 900) closeLearnSidebar(); };
-      block.appendChild(el);
+      el.innerHTML = `
+        <span class="v2-sidebar-lesson-num">${String(li + 1).padStart(2, '0')}</span>
+        <span class="v2-sidebar-lesson-title">${title}</span>
+        <span class="v2-sidebar-lesson-check">✓</span>`;
+      el.onclick = () => loadLesson(idx);
+      list.appendChild(el);
     });
+
+    block.appendChild(list);
     toc.appendChild(block);
   });
+
+  updateProgress();
+  buildPhaseProgress();
 }
 
-// ── Course intro page ───────────────────────────────────
-function buildCourseIntroPage() {
-  const home = document.getElementById('home');
-  if (!home || !_courseData) return;
-  const course = _courseData;
-  let gIdx = 0;
-  const phasesHTML = (course.phases || []).map((phase, i) => {
-    const lessonItems = (phase.lessons || []).map((lt, j) => {
-      const idx = gIdx++;
-      return `<div class="v2-cur-lesson-item" onclick="loadLesson(${idx})"><span class="v2-cur-lesson-num">${String(j+1).padStart(2,'0')}</span><span class="v2-cur-lesson-title">${lt}</span><span class="v2-cur-lesson-time">~8 min</span></div>`;
-    }).join('');
-    return `<div class="v2-cur-phase">
-      <div class="v2-cur-ph-header" onclick="togglePhase(${i})">
-        <div class="v2-cur-ph-left"><span class="v2-cur-ph-num">${phase.label}</span><span class="v2-cur-ph-title">${phase.title}</span></div>
-        <div class="v2-cur-ph-right"><span class="v2-cur-ph-count">${(phase.lessons||[]).length} lessons</span><span class="v2-cur-ph-chev" id="phase-chev-${i}">▸</span></div>
+function toggleSidebarPhase(pi) {
+  const list = document.getElementById('sidebar-lessons-' + pi);
+  const hdr  = document.querySelector('#sidebar-phase-' + pi + ' .v2-sidebar-phase-header');
+  if (!list) return;
+  const open = list.style.display !== 'none' && list.style.display !== '';
+  list.style.display = open ? 'none' : 'block';
+  const toggle = hdr.querySelector('.v2-sidebar-phase-toggle');
+  if (toggle) toggle.textContent = open ? '▸' : '▾';
+}
+
+function filterSidebarLessons(q) {
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('.v2-sidebar-lesson').forEach(el => {
+    el.style.display = !q || el.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+  if (q) {
+    document.querySelectorAll('.v2-sidebar-phase-lessons').forEach(el => el.style.display = 'block');
+  }
+}
+
+/* ── Progress ────────────────────────────────────────────── */
+function updateProgress() {
+  const fill  = document.getElementById('progressFill');
+  const text  = document.getElementById('progressText');
+  const total = ALL.length;
+  const pct   = total ? Math.round((done.size / total) * 100) : 0;
+  if (fill) fill.style.width = pct + '%';
+  if (text) text.textContent = done.size + ' / ' + total + ' lessons';
+}
+
+function buildPhaseProgress() {
+  const el = document.getElementById('phaseProgress');
+  if (!el) return;
+  let gi = 0;
+  el.innerHTML = PHASES.map((ph, pi) => {
+    const start = gi;
+    gi += ph.lessons.length;
+    const phDone = [...done].filter(i => i >= start && i < gi).length;
+    const pct = ph.lessons.length ? Math.round((phDone / ph.lessons.length) * 100) : 0;
+    return `<div class="v2-phase-progress-item">
+      <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px">
+        <span style="font-weight:500;color:var(--ink-2)">${ph.label}</span>
+        <span style="color:var(--ink-3)">${phDone}/${ph.lessons.length}</span>
       </div>
-      <div class="v2-cur-ph-lessons" id="phase-body-${i}" style="display:none">${lessonItems}</div>
+      <div style="height:3px;background:var(--surface-3);border-radius:2px">
+        <div style="height:3px;background:var(--blue);border-radius:2px;width:${pct}%;transition:width 0.3s"></div>
+      </div>
     </div>`;
   }).join('');
-  const totalLessons = ALL.length;
-  const numPhases = (course.phases || []).length;
-  home.innerHTML = `<div class="v2-course-intro">
-    <div class="v2-intro-eyebrow">${course.category || 'Course'}</div>
-    <h1 class="v2-intro-title">${course.title}</h1>
-    <p class="v2-intro-desc">${course.description || ''}</p>
-    <div class="v2-intro-meta">
-      <span class="v2-meta-pill">📚 ${totalLessons} lessons</span>
-      <span class="v2-meta-pill">🗂️ ${numPhases} phases</span>
-      <span class="v2-meta-pill">🎯 ${course.level || 'Intermediate'}</span>
-      <span class="v2-meta-pill ai">🤖 Axiom AI included</span>
-    </div>
-    <button class="v2-intro-start-btn" onclick="startFirstLesson()">Start Learning →</button>
-    <div class="v2-feature-grid">
-      <div class="v2-feature-card"><div class="v2-fc-icon">🤖</div><div class="v2-fc-title">Axiom AI Tutor</div><div class="v2-fc-desc">Ask any doubt mid-lesson. Get instant answers in Raushan's teaching style.</div></div>
-      <div class="v2-feature-card"><div class="v2-fc-icon">📝</div><div class="v2-fc-title">AI-Generated Notes</div><div class="v2-fc-desc">Every lesson generated fresh using Azure GPT-4o — simplified, practical, enterprise-grade.</div></div>
-      <div class="v2-feature-card"><div class="v2-fc-icon">🧪</div><div class="v2-fc-title">Hands-on Labs</div><div class="v2-fc-desc">Real exercises with Azure, Power BI, and .NET. Build while you learn.</div></div>
-    </div>
-    <div class="v2-curriculum">
-      <div class="v2-cur-header">Course Curriculum</div>
-      ${phasesHTML}
-    </div>
-  </div>`;
 }
 
-function startFirstLesson() { loadLesson(0); }
-function togglePhase(index) {
-  const body = document.getElementById('phase-body-' + index);
-  const chev = document.getElementById('phase-chev-' + index);
-  if (!body) return;
-  const open = body.style.display === 'block';
-  body.style.display = open ? 'none' : 'block';
-  if (chev) chev.textContent = open ? '▸' : '▾';
-}
-
-// ── Progress ────────────────────────────────────────────
-function updateProgress() {
-  const el = document.getElementById('prog-tag');
-  const fill = document.getElementById('prog-fill');
-  if (el) el.textContent = done.size + ' / ' + ALL.length;
-  if (fill && ALL.length > 0) fill.style.width = (done.size / ALL.length * 100) + '%';
-}
 function saveDone() {
-  localStorage.setItem(_courseStorageKey, JSON.stringify([...done]));
+  localStorage.setItem(_storageKey, JSON.stringify([...done]));
   updateProgress();
+  buildPhaseProgress();
 }
 
-// ── Navigation ──────────────────────────────────────────
-function goHome() {
-  if (currentMode === 'labs') showLabsHome(); else showLessonsHome();
-}
-function goFirst() { loadLesson(0); }
+/* ── Navigation ──────────────────────────────────────────── */
 function go(dir) {
   const n = currentIdx + dir;
   if (n >= 0 && n < ALL.length) loadLesson(n);
 }
+
+function goHome() {
+  document.getElementById('lessonView').style.display = 'none';
+  document.getElementById('courseHome').style.display = 'block';
+  document.getElementById('learnBreadcrumb').style.display = 'none';
+  document.getElementById('rightPanelToc').innerHTML = '<li><span style="color:var(--ink-4);font-size:12px">Select a lesson to begin</span></li>';
+}
+
 function toggleDone() {
   if (currentIdx < 0) return;
-  const btn = document.getElementById('btn-done');
+  const btn = document.getElementById('doneBtn');
   if (done.has(currentIdx)) {
     done.delete(currentIdx);
-    btn.innerHTML = 'Mark complete';
-    btn.classList.remove('on');
+    btn.textContent = 'Mark complete';
+    btn.classList.remove('v2-done-active');
     document.getElementById('tl-' + currentIdx)?.classList.remove('done');
   } else {
     done.add(currentIdx);
-    btn.innerHTML = '<span class="check-char">✓</span> Done';
-    btn.classList.add('on');
+    btn.textContent = '✓ Completed';
+    btn.classList.add('v2-done-active');
     document.getElementById('tl-' + currentIdx)?.classList.add('done');
   }
   saveDone();
 }
-function toggleLabDone() {
-  const btn = document.getElementById('lab-done-btn');
-  btn.classList.toggle('on');
-  btn.textContent = btn.classList.contains('on') ? '✓ Done' : 'Mark complete';
-}
 
-// ── Load lesson ─────────────────────────────────────────
+/* ── Lesson loading ──────────────────────────────────────── */
 function loadLesson(idx) {
   currentIdx = idx;
-  const lesson = ALL[idx], ph = lesson.phase;
+  const lesson = ALL[idx];
+  if (!lesson) return;
   _currentLesson = lesson;
-  _currentCourse = _courseData;
+  const ph = lesson.phase;
 
-  showLesson();
+  // Show lesson view
+  document.getElementById('courseHome').style.display = 'none';
+  document.getElementById('lessonView').style.display = 'block';
 
-  document.getElementById('bc-phase').textContent  = ph.label + ' · ' + ph.title;
-  document.getElementById('bc-lesson').textContent = lesson.title;
+  // Breadcrumb
+  const bc = document.getElementById('learnBreadcrumb');
+  bc.style.display = 'flex';
+  document.getElementById('bcPhase').textContent = ph.label + ' · ' + ph.title;
+  document.getElementById('bcLesson').textContent = lesson.title;
 
-  document.getElementById('lesson-inner').innerHTML = `
-    <div class="v2-phase-pill">${ph.label} · ${ph.title}</div>
+  // Navigation buttons
+  document.getElementById('prevBtn').disabled = idx === 0;
+  document.getElementById('nextBtn').disabled = idx === ALL.length - 1;
+  document.getElementById('doneBtn').disabled = false;
+
+  const db = document.getElementById('doneBtn');
+  if (done.has(idx)) { db.textContent = '✓ Completed'; db.classList.add('v2-done-active'); }
+  else               { db.textContent = 'Mark complete'; db.classList.remove('v2-done-active'); }
+
+  // Active sidebar item
+  document.querySelectorAll('.v2-sidebar-lesson').forEach(el => el.classList.remove('active'));
+  const active = document.getElementById('tl-' + idx);
+  if (active) { active.classList.add('active'); active.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+
+  // Ensure phase is open
+  const phaseList = document.getElementById('sidebar-lessons-' + lesson.phaseIdx);
+  if (phaseList) phaseList.style.display = 'block';
+
+  // Inject lesson template
+  document.getElementById('lessonInner').innerHTML = buildLessonTemplate(lesson, ph);
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Right panel headings (will update after content loads)
+  document.getElementById('rightPanelToc').innerHTML = '<li><span style="color:var(--ink-4);font-size:12px">Loading…</span></li>';
+
+  // Load AI content
+  loadLessonContent(lesson);
+}
+
+function buildLessonTemplate(lesson, ph) {
+  return `
+    <div class="v2-lesson-phase-pill v2-phase-pill-${ph.id}">${ph.label} · ${ph.title}</div>
     <h1 class="v2-lesson-title">${lesson.title}</h1>
-    <div class="v2-lesson-meta-row">
+    <div class="v2-lesson-meta">
       <span>~8 min read</span>
       <span>·</span>
       <span>RR Simplified · Azure GPT-4o</span>
+      <span>·</span>
+      <span>MCT Verified</span>
     </div>
 
-    <div class="v2-axiom-banner">
-      <div class="v2-axiom-left">
-        <div class="v2-axiom-icon">🤖</div>
+    <div class="v2-axiom-promo">
+      <div class="v2-axiom-promo-left">
+        <div class="v2-axiom-promo-icon">🤖</div>
         <div>
-          <div class="v2-axiom-title">Ask Axiom — Your AI Tutor</div>
-          <div class="v2-axiom-sub">Got a doubt about this lesson? Ask Axiom, trained on Raushan's courses. Get instant context-aware answers.</div>
+          <div class="v2-axiom-promo-title">Ask Axiom — Your AI Tutor</div>
+          <div class="v2-axiom-promo-sub">Got a doubt about this lesson? Get instant, context-aware answers.</div>
         </div>
       </div>
-      <button class="v2-axiom-cta" onclick="focusAskDoubt()">Ask a Question →</button>
+      <button class="v2-btn-primary" onclick="focusAskDoubt()" style="white-space:nowrap;padding:8px 16px;font-size:13px">Ask a Question →</button>
     </div>
 
-    <div class="v2-lesson-body lesson-rendered" id="lessonContent">
-      <div class="lesson-generating">
-        <div class="lesson-gen-spinner"></div>
-        <div class="lesson-gen-title">Generating with AI...</div>
-        <div class="lesson-gen-sub">Axiom is compiling this lesson using Azure GPT-4o</div>
+    <div class="v2-lesson-body" id="lessonContent">
+      <div class="v2-lesson-generating">
+        <div class="v2-lesson-spinner"></div>
+        <div style="font-weight:600;color:var(--ink-2);margin-bottom:4px">Generating with AI…</div>
+        <div style="font-size:13px;color:var(--ink-3)" id="genMsg">Axiom is compiling this lesson using Azure GPT-4o</div>
       </div>
     </div>
 
-    <div class="v2-verified-bar">
-      <div class="v2-verified-left">
-        <span class="v2-verified-badge">✅ MCT Verified</span>
-        <span class="v2-verified-text">Content verified by Raushan Ranjan, Microsoft Certified Trainer with 10+ years enterprise training experience.</span>
+    <div class="v2-lesson-verified">
+      <span class="v2-verified-badge">✅ MCT Verified</span>
+      <span style="font-size:12px;color:var(--ink-3)">Content verified by Raushan Ranjan, Microsoft Certified Trainer</span>
+    </div>
+
+    <div class="v2-ask-doubt-section" id="askDoubtSection">
+      <div class="v2-ask-doubt-header">
+        <div style="font-weight:600;font-size:15px;color:var(--ink)">💬 Ask a Doubt</div>
+        <div style="font-size:12px;color:var(--ink-3)">Powered by Axiom AI — trained on Raushan's enterprise course materials</div>
       </div>
-      <img src="https://rrskillverse.in/images/raushanranjan.jpg" onerror="this.style.display='none'" class="v2-verified-avatar" alt="Raushan Ranjan MCT"/>
-    </div>
-
-    <div class="v2-ask-section" id="askDoubtSection">
-      <div class="v2-ask-title">💬 Ask a Doubt</div>
-      <div class="v2-ask-sub">Powered by Axiom AI — trained on Raushan's enterprise course materials</div>
-      <div class="v2-ask-row">
-        <input type="text" id="lessonDoubtInput" class="v2-ask-input" placeholder="Type your question about this topic..." onkeydown="if(event.key==='Enter')submitDoubt()"/>
-        <button class="v2-ask-btn" onclick="submitDoubt()">Ask →</button>
+      <div class="v2-ask-doubt-input-row">
+        <input type="text" id="lessonDoubtInput" class="v2-ask-doubt-input" placeholder="Type your question about this topic…" onkeydown="if(event.key==='Enter')submitDoubt()"/>
+        <button class="v2-btn-primary" onclick="submitDoubt()">Ask →</button>
       </div>
-      <div class="v2-ask-response" id="lessonDoubtResponse" style="display:none"></div>
+      <div class="v2-ask-doubt-response" id="lessonDoubtResponse" style="display:none"></div>
     </div>
 
-    <div class="v2-support-strip">
-      <button class="v2-support-item" onclick="openSupportModal('upi')">☕ Support</button>
-      <div class="v2-support-div"></div>
-      <button class="v2-support-item" onclick="scrollToComments()">💬 Comment</button>
-      <div class="v2-support-div"></div>
-      <a class="v2-support-item" href="mailto:raushanr1107@gmail.com">✉️ Write to Raushan</a>
+    <div class="v2-lesson-footer-strip">
+      <button class="v2-lesson-footer-item" onclick="openSupportModal()">☕ Support</button>
+      <div class="v2-lesson-footer-div"></div>
+      <a class="v2-lesson-footer-item" href="mailto:raushanr1107@gmail.com">✉️ Write to Raushan</a>
     </div>
 
-    <div class="v2-comments-section" id="lessonComments">
-      <div class="v2-comments-title">💬 Discussion</div>
-      <div class="v2-comments-sub">Ask questions, share your experience, or help others. Sign in with GitHub to comment.</div>
+    <section class="v2-comments-section" id="lessonComments">
+      <div style="font-weight:600;font-size:16px;margin-bottom:6px">💬 Discussion</div>
+      <div style="font-size:13px;color:var(--ink-3);margin-bottom:16px">Ask questions, share your experience, or help others. Sign in with GitHub to comment.</div>
       <div id="lessonGiscusContainer"></div>
-    </div>
+    </section>
   `;
-
-  const db = document.getElementById('btn-done');
-  if (done.has(idx)) {
-    db.innerHTML = '<span class="check-char">✓</span> Done';
-    db.className = 'v2-btn-done on';
-  } else {
-    db.innerHTML = 'Mark complete';
-    db.className = 'v2-btn-done';
-  }
-
-  document.getElementById('btn-prev').disabled = idx === 0;
-  document.getElementById('btn-next').disabled = idx === ALL.length - 1;
-
-  document.querySelectorAll('.v2-lesson-row').forEach(el => el.classList.remove('active'));
-  const a = document.getElementById('tl-' + idx);
-  if (a) { a.classList.add('active'); a.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  loadLessonContent(lesson, _courseData);
-  loadLessonGiscus(lesson.title);
 }
 
-// ── Lesson content loading ──────────────────────────────
-async function loadLessonContent(lesson, course) {
+/* ── AI content loading ──────────────────────────────────── */
+let loadingInterval = null;
+
+async function loadLessonContent(lesson) {
   const contentEl = document.getElementById('lessonContent');
   if (!contentEl) return;
+
   if (lesson.content && lesson.content.trim().length > 50) {
     contentEl.innerHTML = transformCallouts(lesson.content);
     attachContentHandlers(contentEl);
+    updateRightPanelToc(contentEl);
     return;
   }
-  contentEl.innerHTML = `<div class="lesson-generating"><div class="lesson-gen-spinner"></div><div class="lesson-gen-title">Generating lesson with AI...</div><div class="lesson-gen-sub">Axiom is compiling this lesson using Azure GPT-4o · Usually takes 5–10 seconds</div></div>`;
+
+  // Cycle loading messages
+  let msgIdx = 0;
+  const genMsg = document.getElementById('genMsg');
+  if (loadingInterval) clearInterval(loadingInterval);
+  loadingInterval = setInterval(() => {
+    if (genMsg) genMsg.textContent = LOADING_MSGS[msgIdx % LOADING_MSGS.length];
+    msgIdx++;
+  }, 2200);
+
   try {
-    const response = await fetch('/api/lesson', {
+    const res = await fetch('/api/lesson', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1416,20 +464,32 @@ async function loadLessonContent(lesson, course) {
         phaseLabel:  lesson.phase.label,
         phaseTitle:  lesson.phase.title,
         courseId:    _courseId || 'default',
-        courseTitle: course ? course.title : 'Intelligent Enterprise Development with .NET 8 & Azure AI'
+        courseTitle: _courseData ? _courseData.title : 'Intelligent Enterprise Development'
       })
     });
-    if (!response.ok) throw new Error('API ' + response.status);
-    const data = await response.json();
+
+    clearInterval(loadingInterval);
+    if (!res.ok) throw new Error('API ' + res.status);
+
+    const data = await res.json();
     if (data.content) {
       contentEl.innerHTML = transformCallouts(data.content);
       attachContentHandlers(contentEl);
-    } else throw new Error('No content in response');
+      updateRightPanelToc(contentEl);
+    } else {
+      throw new Error('No content');
+    }
   } catch (err) {
-    console.error('Lesson load error:', err);
-    const errMsg = err.message.includes('401') || err.message.includes('403') ? 'Authentication error — please sign in.' :
-      err.message.includes('429') ? 'Too many requests — please wait a moment.' : 'Check your internet connection and try again.';
-    contentEl.innerHTML = `<div class="lesson-error"><div class="lesson-error-icon">⚠️</div><div class="lesson-error-title">Could not load this lesson</div><div class="lesson-error-sub">${errMsg}</div><button class="lesson-error-retry" onclick="retryLesson()">↺ Try Again</button></div>`;
+    clearInterval(loadingInterval);
+    const msg = err.message.includes('429') ? 'Too many requests — please wait and try again.'
+      : err.message.includes('401') ? 'Authentication error — please sign in.'
+      : 'Check your connection and try again.';
+    contentEl.innerHTML = `<div class="v2-lesson-error">
+      <div style="font-size:24px;margin-bottom:12px">⚠️</div>
+      <div style="font-weight:600;margin-bottom:6px">Could not load this lesson</div>
+      <div style="font-size:13px;color:var(--ink-3);margin-bottom:16px">${msg}</div>
+      <button class="v2-btn-primary" onclick="loadLessonContent(_currentLesson)">↺ Try Again</button>
+    </div>`;
   }
 }
 
@@ -1437,15 +497,16 @@ function attachContentHandlers(el) {
   el.querySelectorAll('pre code').forEach(block => {
     hljs.highlightElement(block);
     const pre = block.closest('pre');
-    if (!pre.querySelector('.code-header')) {
+    if (!pre.querySelector('.v2-code-header')) {
       const hdr = document.createElement('div');
-      hdr.className = 'code-header';
-      hdr.innerHTML = '<span class="code-lang">C# · Example</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>';
+      hdr.className = 'v2-code-header';
+      hdr.innerHTML = '<span class="v2-code-lang">C# · Example</span><button onclick="copyCode(this)">Copy</button>';
       pre.insertBefore(hdr, pre.firstChild);
     }
   });
+
   el.querySelectorAll('.quiz-opt').forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
       const block = this.closest('.quiz-block');
       block.querySelectorAll('.quiz-opt').forEach(b => b.classList.add('reveal'));
       const fb = block.querySelector('.quiz-fb');
@@ -1463,13 +524,11 @@ function attachContentHandlers(el) {
   });
 }
 
-function retryLesson() { if (_currentLesson) loadLessonContent(_currentLesson, _currentCourse); }
-
 function transformCallouts(html) {
   return html
-    .replace(/<analogy>([\s\S]*?)<\/analogy>/g, '<div class="callout analogy"><div class="callout-label">Analogy</div><p>$1</p></div>')
-    .replace(/<tip>([\s\S]*?)<\/tip>/g, '<div class="callout tip"><div class="callout-label">Trainer Tip</div><p>$1</p></div>')
-    .replace(/<warn>([\s\S]*?)<\/warn>/g, '<div class="callout warn"><div class="callout-label">Watch Out</div><p>$1</p></div>');
+    .replace(/<analogy>([\s\S]*?)<\/analogy>/g, '<div class="v2-callout v2-callout-analogy"><div class="v2-callout-label">Analogy</div><p>$1</p></div>')
+    .replace(/<tip>([\s\S]*?)<\/tip>/g,         '<div class="v2-callout v2-callout-tip"><div class="v2-callout-label">Trainer Tip</div><p>$1</p></div>')
+    .replace(/<warn>([\s\S]*?)<\/warn>/g,        '<div class="v2-callout v2-callout-warn"><div class="v2-callout-label">Watch Out</div><p>$1</p></div>');
 }
 
 function copyCode(btn) {
@@ -1480,301 +539,220 @@ function copyCode(btn) {
   });
 }
 
-function focusAskDoubt() {
-  const el = document.getElementById('lessonDoubtInput');
-  if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => el.focus(), 300); }
-}
-function scrollToComments() {
-  const el = document.getElementById('lessonComments');
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
+function updateRightPanelToc(contentEl) {
+  const headings = contentEl.querySelectorAll('h2, h3');
+  const toc = document.getElementById('rightPanelToc');
+  if (!toc) return;
+  if (!headings.length) { toc.innerHTML = '<li><span style="color:var(--ink-4);font-size:12px">No headings found</span></li>'; return; }
+  toc.innerHTML = [...headings].map((h, i) => {
+    const id = 'h-' + i;
+    h.id = id;
+    const indent = h.tagName === 'H3' ? 'margin-left:12px;' : '';
+    return `<li><a href="#${id}" style="${indent}font-size:12px;color:var(--ink-3);display:block;padding:2px 0;transition:color 0.15s" onmouseover="this.style.color='var(--blue)'" onmouseout="this.style.color='var(--ink-3)'">${h.textContent}</a></li>`;
+  }).join('');
 }
 
-// ── Submit doubt ────────────────────────────────────────
+/* ── Doubt submission ────────────────────────────────────── */
+function focusAskDoubt() {
+  const input = document.getElementById('lessonDoubtInput');
+  if (input) { input.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => input.focus(), 400); }
+}
+
 async function submitDoubt() {
   const input = document.getElementById('lessonDoubtInput');
-  const respEl = document.getElementById('lessonDoubtResponse');
-  if (!input || !input.value.trim()) return;
+  const responseEl = document.getElementById('lessonDoubtResponse');
+  if (!input || !responseEl) return;
   const q = input.value.trim();
-  respEl.style.display = 'block';
-  respEl.innerHTML = '<div class="doubt-loading">Axiom is thinking…</div>';
+  if (!q) return;
+
+  responseEl.style.display = 'block';
+  responseEl.innerHTML = '<div style="padding:12px;color:var(--ink-3);font-size:13px">🤖 Axiom is thinking…</div>';
+
   try {
-    const res = await fetch('/api/ask', {
+    const res = await fetch('/api/doubt', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        question: q,
+        question:    q,
         lessonTitle: _currentLesson ? _currentLesson.title : '',
-        courseId: _courseId
+        courseId:    _courseId || 'default',
+        courseTitle: _currentCourse ? _currentCourse.title : ''
       })
     });
     const data = await res.json();
-    if (data.answer) {
-      respEl.innerHTML = `<div class="doubt-answer-label">Axiom AI</div><div class="doubt-answer-text">${data.answer}</div>`;
-    } else throw new Error('No answer');
-  } catch(e) {
-    respEl.innerHTML = '<div class="doubt-error">Could not get an answer — please try again.</div>';
+    responseEl.innerHTML = `<div class="v2-doubt-response">${data.answer || data.reply || 'No answer received.'}</div>`;
+  } catch (err) {
+    responseEl.innerHTML = `<div style="padding:12px;color:var(--ink-3);font-size:13px">Could not reach Axiom — please check your connection.</div>`;
   }
 }
 
-// ── Giscus comments ─────────────────────────────────────
-function loadLessonGiscus(lessonTitle) {
-  const container = document.getElementById('lessonGiscusContainer');
-  if (!container) return;
-  container.innerHTML = '<div class="giscus-loading">Loading discussion…</div>';
-  const script = document.createElement('script');
-  script.src = 'https://giscus.app/client.js';
-  script.dataset.repo = 'raushanranjan/rrskillverse';
-  script.dataset.repoId = 'R_kgDON1234';
-  script.dataset.category = 'Lessons';
-  script.dataset.categoryId = 'DIC_kwDON1234';
-  script.dataset.mapping = 'specific';
-  script.dataset.term = lessonTitle;
-  script.dataset.theme = 'dark';
-  script.dataset.reactionsEnabled = '1';
-  script.dataset.emitMetadata = '0';
-  script.crossOrigin = 'anonymous';
-  script.async = true;
-  container.innerHTML = '';
-  container.appendChild(script);
+/* ── Course intro page ───────────────────────────────────── */
+function buildCourseIntroPage() {
+  const home = document.getElementById('courseHome');
+  if (!home) return;
+
+  if (!_courseData) {
+    home.innerHTML = `<div style="padding:48px 32px;text-align:center">
+      <div style="font-size:48px;margin-bottom:16px">🚧</div>
+      <h2 style="margin-bottom:8px">Course Not Found</h2>
+      <p style="color:var(--ink-3);margin-bottom:20px">The course "<code>${_courseId}</code>" is not available yet.</p>
+      <a href="/v2/courses.html" class="v2-btn-primary">← Browse All Courses</a>
+    </div>`;
+    return;
+  }
+
+  const course = _courseData;
+  const totalLessons = ALL.length;
+  let gIdx = 0;
+
+  const phasesHTML = (course.phases || []).map((ph, i) => {
+    const items = (ph.lessons || []).map((title, j) => {
+      const idx = gIdx++;
+      return `<div class="v2-cip-lesson" onclick="loadLesson(${idx})">
+        <span class="v2-cip-num">${String(j+1).padStart(2,'0')}</span>
+        <span class="v2-cip-title">${title}</span>
+        <span class="v2-cip-time">~8 min</span>
+      </div>`;
+    }).join('');
+    return `<div class="v2-cip-phase">
+      <div class="v2-cip-phase-header" onclick="toggleIntroPhase(${i})">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="v2-phase-dot-${ph.colorClass}" style="width:10px;height:10px;border-radius:50%;background:var(--dot-${ph.colorClass},var(--blue));flex-shrink:0;display:inline-block"></span>
+          <span style="font-weight:600;color:var(--ink)">${ph.label}</span>
+          <span style="color:var(--ink-3)">${ph.title}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:12px;color:var(--ink-4)">${(ph.lessons||[]).length} lessons</span>
+          <span class="v2-cip-chev" id="cip-chev-${i}">▸</span>
+        </div>
+      </div>
+      <div class="v2-cip-lessons" id="cip-lessons-${i}" style="display:none">${items}</div>
+    </div>`;
+  }).join('');
+
+  home.innerHTML = `
+    <div class="v2-course-intro">
+      <div class="v2-course-intro-header">
+        <a href="/v2/courses.html" class="v2-course-intro-back">← Back to Library</a>
+        <div class="v2-course-intro-category">${course.category || 'Course'}</div>
+        <h1 class="v2-course-intro-title">${course.title}</h1>
+        <p class="v2-course-intro-desc">${course.description || ''}</p>
+        <div class="v2-course-intro-pills">
+          <span class="v2-cim-pill">📚 ${totalLessons} lessons</span>
+          <span class="v2-cim-pill">🗂️ ${(course.phases||[]).length} phases</span>
+          <span class="v2-cim-pill">🤖 Axiom AI included</span>
+          <span class="v2-live-badge">LIVE</span>
+        </div>
+        <button class="v2-btn-primary" onclick="loadLesson(0)" style="padding:12px 28px;font-size:15px;margin-top:8px">Start Learning →</button>
+      </div>
+      <div class="v2-course-features">
+        <div class="v2-feature-card"><div class="v2-feature-icon">🤖</div><div class="v2-feature-title">Axiom AI Tutor</div><div class="v2-feature-desc">Ask any doubt mid-lesson. Instant answers in Raushan's teaching style.</div></div>
+        <div class="v2-feature-card"><div class="v2-feature-icon">📝</div><div class="v2-feature-title">AI-Generated Notes</div><div class="v2-feature-desc">Every lesson generated fresh with Azure GPT-4o — simplified, practical, enterprise-grade.</div></div>
+        <div class="v2-feature-card"><div class="v2-feature-icon">🧪</div><div class="v2-feature-title">Hands-on Labs</div><div class="v2-feature-desc">Real exercises with Azure, Power BI, and .NET. Build while you learn.</div></div>
+      </div>
+      <div class="v2-course-curriculum">
+        <div class="v2-curriculum-title">Course Curriculum</div>
+        ${phasesHTML}
+      </div>
+    </div>`;
 }
 
-// ── Labs sidebar ────────────────────────────────────────
-function buildLabsSidebar() {
-  const toc = document.getElementById('toc-labs');
-  if (!toc) return;
-  toc.innerHTML = '';
-  const allLabs = [...LABS.handson, ...LABS.capstone];
-  if (!allLabs.length) { toc.innerHTML = '<div style="padding:20px 12px;font-size:12px;color:var(--text-4)">No labs available</div>'; return; }
-  if (LABS.handson.length) {
-    const hdr = document.createElement('div');
-    hdr.className = 'v2-phase-label';
-    hdr.textContent = 'Hands-on Labs';
-    toc.appendChild(hdr);
-    LABS.handson.forEach(lab => {
-      const el = document.createElement('div');
-      el.className = 'v2-lesson-row';
-      el.innerHTML = `<span class="v2-lesson-num" style="color:var(--accent)">${lab.id}</span><span class="v2-lesson-title-text">${lab.title}</span>`;
-      el.onclick = () => { loadLab(lab.id); if (window.innerWidth <= 900) closeLearnSidebar(); };
-      toc.appendChild(el);
-    });
-  }
-  if (LABS.capstone.length) {
-    const hdr = document.createElement('div');
-    hdr.className = 'v2-phase-label';
-    hdr.textContent = 'Capstone Projects';
-    toc.appendChild(hdr);
-    LABS.capstone.forEach(lab => {
-      const el = document.createElement('div');
-      el.className = 'v2-lesson-row';
-      el.innerHTML = `<span class="v2-lesson-num" style="color:#c75c1a">${lab.id}</span><span class="v2-lesson-title-text">${lab.title}</span>`;
-      el.onclick = () => { loadLab(lab.id); if (window.innerWidth <= 900) closeLearnSidebar(); };
-      toc.appendChild(el);
-    });
-  }
+function toggleIntroPhase(i) {
+  const body = document.getElementById('cip-lessons-' + i);
+  const chev = document.getElementById('cip-chev-' + i);
+  if (!body) return;
+  const open = body.style.display === 'block';
+  body.style.display = open ? 'none' : 'block';
+  if (chev) chev.textContent = open ? '▸' : '▾';
 }
 
-// ── Labs home list ──────────────────────────────────────
-function buildLabsHomeList() {
-  const handsEl = document.getElementById('labs-list');
-  const capEl = document.getElementById('capstone-list');
-  if (handsEl) {
-    if (!LABS.handson.length) { handsEl.innerHTML = '<div style="padding:18px;font-size:13px;color:var(--text-4)">No labs yet</div>'; }
-    else {
-      handsEl.innerHTML = LABS.handson.map(lab => `
-        <div class="v2-lab-item" onclick="loadLab('${lab.id}')">
-          <div class="v2-lab-left">
-            <span class="v2-lab-num">${lab.id}</span>
-            <span class="v2-lab-title">${lab.title}</span>
-          </div>
-          <div class="v2-lab-right">
-            <span class="v2-lab-level v2-lab-level-${(lab.level||'beginner').slice(0,3)}">${lab.level||'Beginner'}</span>
-            <span class="v2-lab-time">${lab.time||'~60 min'}</span>
-            <span class="v2-lab-arrow">→</span>
-          </div>
-        </div>`).join('');
-    }
-  }
-  if (capEl) {
-    if (!LABS.capstone.length) { capEl.innerHTML = '<div style="padding:18px;font-size:13px;color:var(--text-4)">No capstones yet</div>'; }
-    else {
-      capEl.innerHTML = LABS.capstone.map(lab => `
-        <div class="v2-lab-item" onclick="loadLab('${lab.id}')">
-          <div class="v2-lab-left">
-            <span class="v2-lab-num v2-lab-capstone-num">${lab.id}</span>
-            <span class="v2-lab-title">${lab.title}</span>
-          </div>
-          <div class="v2-lab-right">
-            <span class="v2-lab-level v2-lab-level-adv">Capstone</span>
-            <span class="v2-lab-time">${lab.time||'~3 hrs'}</span>
-            <span class="v2-lab-arrow">→</span>
-          </div>
-        </div>`).join('');
-    }
-  }
+/* ── Payment functions ───────────────────────────────────── */
+const UPI_ID   = '8285862455@idfcfirst';
+const UPI_NAME = 'Raushan Ranjan';
+const PAYPAL_BASE = 'https://paypal.me/raushan1107';
+let _upiAmount = '21', _paypalAmount = '5';
+
+function buildUPILink(amount, note) {
+  return 'upi://pay?' + new URLSearchParams({pa:UPI_ID,pn:UPI_NAME,am:String(amount),cu:'INR',tn:note||'RR Skillverse Support'}).toString();
 }
 
-function startFirstLab() {
-  const first = LABS.handson[0] || LABS.capstone[0];
-  if (first) loadLab(first.id);
-}
-function getAllLabs() { return [...LABS.handson, ...LABS.capstone]; }
-
-// ── Load lab ────────────────────────────────────────────
-async function loadLab(labId) {
-  currentLabId = labId;
-  const allLabs = getAllLabs();
-  const lab = allLabs.find(l => l.id === labId);
-  if (!lab) return;
-  showLab();
-  document.getElementById('bc-lab-phase').textContent = lab.phase || 'Lab';
-  document.getElementById('bc-lab-title').textContent  = lab.title;
-  document.getElementById('lab-phase-tag').textContent = lab.phase || 'Hands-on Lab';
-  document.getElementById('lab-title').textContent     = lab.title;
-  document.getElementById('lab-meta-phase').textContent = lab.phase || '';
-  const loadingEl = document.getElementById('lab-loading');
-  const renderedEl = document.getElementById('lab-rendered');
-  renderedEl.innerHTML = '';
-  loadingEl.style.display = 'flex';
-  const msgEl = document.getElementById('lab-loading-msg');
-  msgEl.textContent = 'Loading lab guide…';
-  try {
-    const res = await fetch('/api/lab/' + labId);
-    const data = await res.json();
-    loadingEl.style.display = 'none';
-    if (data.content) {
-      renderedEl.innerHTML = transformCallouts(data.content);
-      attachContentHandlers(renderedEl);
-    } else renderedEl.innerHTML = `<div class="lesson-error"><div class="lesson-error-icon">🔬</div><div class="lesson-error-title">Lab guide not available yet</div><div class="lesson-error-sub">This lab is being prepared. Check back soon.</div></div>`;
-  } catch(e) {
-    loadingEl.style.display = 'none';
-    renderedEl.innerHTML = `<div class="lesson-error"><div class="lesson-error-icon">⚠️</div><div class="lesson-error-title">Could not load lab</div><div class="lesson-error-sub">Check your connection and try again.</div><button class="lesson-error-retry" onclick="loadLab('${labId}')">↺ Retry</button></div>`;
-  }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function selectUPIPreset(btn, val) {
+  document.querySelectorAll('#upiPresets .pay-preset').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cr = document.getElementById('upiCustomRow');
+  if (val === 'custom') { if (cr) cr.style.display = 'flex'; return; }
+  if (cr) cr.style.display = 'none';
+  setUPIAmount(val);
 }
 
-function regenLab() { if (currentLabId) loadLab(currentLabId); }
+function onUPICustomAmount(v) { if (v && parseFloat(v) > 0) setUPIAmount(v); }
 
-// ── Sidebar search ──────────────────────────────────────
-document.getElementById('search').addEventListener('input', function() {
-  const q = this.value.toLowerCase().trim();
-  document.querySelectorAll('.v2-lesson-row').forEach(el => {
-    el.style.display = !q || el.textContent.toLowerCase().includes(q) ? '' : 'none';
+function setUPIAmount(amount) {
+  _upiAmount = String(amount);
+  const d = document.getElementById('upiAmountDisplay');
+  const a = document.getElementById('upiAmount');
+  if (d) d.textContent = '₹' + amount;
+  if (a) a.textContent = amount;
+  const link = buildUPILink(amount, 'RR Skillverse Support');
+  ['upiGpay','upiPhonepe','upiGeneric'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.href = link;
   });
-});
-
-// ── Admin mode ──────────────────────────────────────────
-function checkAdminMode() {
-  const params = new URLSearchParams(window.location.search);
-  const secret = params.get('admin');
-  if (secret) ADMIN_SECRET = secret;
 }
 
-// ── Payment modal ───────────────────────────────────────
-let _selectedAmount = 100;
-function openSupportModal(tab) {
+function selectPayPalPreset(btn, val) {
+  document.querySelectorAll('#paypalPresets .pay-preset').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cr = document.getElementById('paypalCustomRow');
+  if (val === 'custom') { if (cr) cr.style.display = 'flex'; return; }
+  if (cr) cr.style.display = 'none';
+  setPayPalAmount(val);
+}
+
+function onPayPalCustomAmount(v) { if (v && parseFloat(v) > 0) setPayPalAmount(v); }
+
+function setPayPalAmount(amount) {
+  _paypalAmount = String(amount);
+  const d = document.getElementById('paypalAmountDisplay');
+  const l = document.getElementById('paypalLink');
+  if (d) d.textContent = '$' + amount;
+  if (l) { l.href = PAYPAL_BASE + '/' + amount; l.textContent = 'Pay $' + amount + ' via PayPal →'; }
+}
+
+function switchPayTab(tab, btn) {
+  document.querySelectorAll('#payTabs button').forEach(b => b.className = 'v2-btn-outline');
+  btn.className = 'v2-btn-primary';
+  document.getElementById('tab-upi').style.display    = tab === 'upi'    ? 'flex' : 'none';
+  document.getElementById('tab-paypal').style.display = tab === 'paypal' ? 'flex' : 'none';
+}
+
+function openSupportModal() {
   document.getElementById('upiModalOverlay').classList.add('open');
   document.getElementById('upiModal').classList.add('open');
-  switchPayTab(tab || 'upi');
-  generateQR(_selectedAmount);
+  document.body.style.overflow = 'hidden';
+  setUPIAmount(_upiAmount);
 }
-function closeModal() {
+
+function closeUPIModal() {
   document.getElementById('upiModalOverlay').classList.remove('open');
   document.getElementById('upiModal').classList.remove('open');
-}
-function switchPayTab(tab) {
-  ['upi', 'paypal', 'bank'].forEach(t => {
-    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
-    document.getElementById(t + '-content').style.display = t === tab ? '' : 'none';
-  });
-}
-function selectAmount(amt) {
-  _selectedAmount = amt;
-  document.querySelectorAll('.pay-preset').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById('customAmount').value = '';
-  generateQR(amt);
-}
-function onCustomAmount(val) {
-  document.querySelectorAll('.pay-preset').forEach(b => b.classList.remove('active'));
-  if (val) generateQR(parseInt(val) || 0);
-}
-function generateQR(amount) {
-  const el = document.getElementById('upiQR');
-  if (!el) return;
-  el.innerHTML = '';
-  const upiUrl = `upi://pay?pa=raushanr1107@okaxis&pn=Raushan+Ranjan&am=${amount}&cu=INR&tn=Support+RR+Skillverse`;
-  try {
-    if (typeof QRCode !== 'undefined') {
-      new QRCode(el, { text: upiUrl, width: 160, height: 160, colorDark: '#000', colorLight: '#fff', correctLevel: QRCode.CorrectLevel.M });
-    }
-  } catch(e) {}
-}
-function openUPI(app) {
-  const amt = _selectedAmount;
-  const upiId = 'raushanr1107@okaxis';
-  const upiUrl = `upi://pay?pa=${upiId}&pn=Raushan+Ranjan&am=${amt}&cu=INR&tn=Support+RR+Skillverse`;
-  window.open(upiUrl, '_blank');
-}
-function copyUPIId() {
-  navigator.clipboard.writeText('raushanr1107@okaxis').then(() => {
-    const btn = document.querySelector('.upi-id-copy');
-    if (btn) { btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy', 1600); }
-  });
+  document.body.style.overflow = '';
 }
 
-// ── Coming soon (unknown course) ────────────────────────
-function buildComingSoonHTML(courseId) {
-  const label = courseId.toUpperCase().replace(/-/g, ' ');
-  return `<div class="v2-coming-soon">
-    <div class="v2-coming-icon">🚧</div>
-    <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-4);font-family:var(--mono)">${label}</div>
-    <div class="v2-coming-title">This course is being prepared for you</div>
-    <p class="v2-coming-sub">Structured lessons, code examples, and hands-on labs are in development for this track. Come back soon.</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
-      <a href="courses.html" class="btn-v2-primary">Browse Live Courses →</a>
-      <a href="courses.html" class="btn-v2-ghost">← Back to Library</a>
-    </div>
-  </div>`;
-}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeUPIModal(); });
 
-// ── Init ────────────────────────────────────────────────
-try {
-  (function routeCourse() {
-    const params = new URLSearchParams(window.location.search);
-    const courseId = params.get('course');
-    if (!courseId) return;
-    if (findCourseById(courseId)) return;
-    document.getElementById('main').innerHTML = buildComingSoonHTML(courseId);
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) sidebar.style.display = 'none';
-    const modeBar = document.querySelector('.v2-mode-bar');
-    if (modeBar) modeBar.style.display = 'none';
-    throw new Error('COURSE_NOT_FOUND:' + courseId);
-  })();
+/* ── Init ────────────────────────────────────────────────── */
+buildSidebar();
+buildCourseIntroPage();
+setUPIAmount('21');
+setPayPalAmount('5');
 
-  const _p = new URLSearchParams(window.location.search);
-  if (_p.get('mode') === 'labs') {
-    window._deepLinkMode = 'labs';
-    window._deepLinkLab  = _p.get('lab') || null;
+// Check URL for direct lesson param
+(function () {
+  const lesson = parseInt(new URLSearchParams(window.location.search).get('lesson'));
+  if (!isNaN(lesson) && lesson >= 0 && lesson < ALL.length) {
+    loadLesson(lesson);
   }
-
-  buildSidebar();
-  buildCourseIntroPage();
-  buildLabsSidebar();
-  buildLabsHomeList();
-  updateProgress();
-  checkAdminMode();
-
-  const _modeHint = document.getElementById('mode-hint');
-  if (_modeHint) _modeHint.textContent = ALL.length + ' lessons across ' + PHASES.length + ' phases';
-
-  if (window._deepLinkMode === 'labs') {
-    switchMode('labs');
-    if (window._deepLinkLab) setTimeout(() => loadLab(window._deepLinkLab), 150);
-  }
-} catch(e) {
-  if (!e.message?.startsWith('COURSE_NOT_FOUND')) console.error('Init error:', e);
-}
+})();
 </script>
 </body>
 </html>

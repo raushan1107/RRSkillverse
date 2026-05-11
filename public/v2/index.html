@@ -3,427 +3,447 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>RR Skillverse — Learn from a Microsoft Certified Trainer</title>
-<meta name="description" content="RR Skillverse v2 — Premium learning platform by MCT Raushan Ranjan. Master Azure, Blazor, Power BI and AI. 3200+ professionals trained across 25+ countries."/>
-<meta property="og:title" content="RR Skillverse — Learn from a Microsoft Certified Trainer"/>
-<meta property="og:description" content="Your complete tech learning platform by MCT Raushan Ranjan. Azure · Power Platform · .NET · AI."/>
+<title>RR Skillverse — Azure, .NET & AI Training</title>
+<meta name="description" content="RR Skillverse by MCT Raushan Ranjan. Master Azure, Blazor, Power BI, Power Platform, and AI. 3200+ professionals trained across 25+ countries."/>
+<meta property="og:title" content="RR Skillverse — Learn Azure, .NET, AI & Power Platform"/>
+<meta property="og:description" content="Your complete tech learning platform by MCT Raushan Ranjan."/>
 <meta property="og:image" content="https://rrskillverse.in/images/og-thumbnail.svg"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<link rel="icon" type="image/svg+xml" href="../images/favicon.svg"/>
-<link rel="apple-touch-icon" href="../images/favicon.svg"/>
-<link rel="stylesheet" href="../css/main.css"/>
-<link rel="stylesheet" href="v2.css"/>
-<style>
-/* ── Testimonial scroll ── */
-.v2-testi-scroll-section { position: relative; overflow: hidden; }
-.v2-testi-fade-l,.v2-testi-fade-r { position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none; }
-.v2-testi-fade-l { left:0;background:linear-gradient(to right,var(--bg),transparent); }
-.v2-testi-fade-r { right:0;background:linear-gradient(to left,var(--bg),transparent); }
-.v2-testi-row { overflow:hidden; }
-.v2-testi-track { display:flex;gap:14px;width:max-content;animation:v2testiScroll 55s linear infinite; }
-.v2-testi-track:hover { animation-play-state:paused; }
-.v2-testi-reverse { animation-direction:reverse;animation-duration:65s; }
-@keyframes v2testiScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-/* ── Stars ── */
-.v2-testi-stars { color:#f59e0b;font-size:11px;letter-spacing:1.5px; }
-.v2-testi-text { font-size:12px;color:var(--text-3);line-height:1.72;font-style:italic;flex:1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden; }
-.v2-testi-person { display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--border); }
-.v2-testi-av { width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--accent-2),var(--accent));display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:white;flex-shrink:0; }
-.v2-testi-name { font-size:11px;font-weight:700;color:var(--text);line-height:1.2; }
-.v2-testi-loc { font-size:9px;color:var(--text-4);margin-top:1px; }
-.v2-testi-tag { margin-left:auto;font-size:8.5px;font-weight:700;padding:2px 7px;border-radius:20px;background:var(--accent-glow);color:var(--accent);border:1px solid rgba(59,130,246,0.2);white-space:nowrap;flex-shrink:0; }
-/* ── Domain grid ── */
-.v2-domain-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:16px; }
-/* ── YT cards ── */
-.v2-yt-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:16px; }
-.v2-yt-card { background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:row;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s;min-height:110px; }
-.v2-yt-card:hover { border-color:rgba(255,68,68,.3);transform:translateY(-2px);box-shadow:var(--shadow-md); }
-.v2-yt-thumb { width:160px;flex-shrink:0;position:relative;background:var(--bg3);overflow:hidden; }
-.v2-yt-thumb img { width:100%;height:100%;object-fit:cover;transition:transform .35s; }
-.v2-yt-card:hover .v2-yt-thumb img { transform:scale(1.05); }
-.v2-yt-thumb-fb { width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;background:linear-gradient(135deg,var(--bg4),var(--bg3)); }
-.v2-yt-play { position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background .2s; }
-.v2-yt-card:hover .v2-yt-play { background:rgba(0,0,0,.4); }
-.v2-yt-playbtn { width:36px;height:36px;border-radius:50%;background:rgba(255,0,0,.9);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.7);transition:opacity .2s,transform .2s; }
-.v2-yt-card:hover .v2-yt-playbtn { opacity:1;transform:scale(1); }
-.v2-yt-body { padding:16px;flex:1;display:flex;flex-direction:column;gap:5px;justify-content:center; }
-.v2-yt-cat { font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,68,68,.8); }
-.v2-yt-title { font-size:13.5px;font-weight:700;color:var(--text);line-height:1.3; }
-.v2-yt-desc { font-size:11px;color:var(--text-3);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden; }
-.v2-yt-links { display:flex;flex-wrap:wrap;gap:5px;margin-top:6px; }
-.v2-yt-link { display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:5px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:10px;font-weight:600;color:var(--text-3);text-decoration:none;transition:all .15s;white-space:nowrap; }
-.v2-yt-link:hover { background:rgba(255,68,68,.1);border-color:rgba(255,68,68,.25);color:#ff6b6b; }
-@media(max-width:900px) { .v2-domain-grid{grid-template-columns:1fr;} .v2-yt-grid{grid-template-columns:1fr;} .v2-testi-fade-l,.v2-testi-fade-r{width:40px;} }
-@media(max-width:600px) { .v2-yt-card{flex-direction:column;} .v2-yt-thumb{width:100%;height:150px;} }
-</style>
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
+<link rel="stylesheet" href="/v2/v2.css"/>
 </head>
 <body>
-<!-- ── V2 TOPNAV ── -->
-<nav class="v2-topnav" id="v2topnav">
-  <a href="index.html" class="v2-nav-brand">
-    <div class="v2-nav-logo">RR</div>
-    <div class="v2-nav-brand-text">
-      <div class="v2-nav-brand-name">RR Skillverse</div>
-      <div class="v2-nav-brand-sub">Learning Platform</div>
-    </div>
-  </a>
-  <ul class="v2-nav-items">
-    <li><a href="index.html" class="v2-nav-link active">Home</a></li>
-    <li><a href="courses.html" class="v2-nav-link">🎓 AI Academy</a></li>
-    <li><a href="../blog.html" class="v2-nav-link">📝 Blogs</a></li>
-    <li><a href="../labs.html" class="v2-nav-link">🧪 Labs</a></li>
-    <li><a href="profile.html" class="v2-nav-link">About Us</a></li>
-    <li><a href="../ai-agent.html" class="v2-nav-link">⚡ AI Agent</a></li>
-  </ul>
-  <div class="v2-nav-right">
-    <div class="v2-nav-live-pill">
-      <div class="v2-nav-live-dot"></div>
-      LIVE
-    </div>
-    <a href="profile.html" class="v2-nav-avatar" title="Raushan Ranjan">
-      <img src="../images/raushanranjan.jpg" alt="RR"
-           onerror="this.style.display='none';this.parentElement.textContent='RR'"/>
-    </a>
-  </div>
-  <button class="v2-nav-hamburger" id="v2Hamburger" aria-label="Menu">☰</button>
-</nav>
-<div class="v2-nav-drawer" id="v2Drawer">
-  <a href="index.html">🏠 Home</a>
-  <a href="courses.html">🎓 AI Academy</a>
-  <a href="../blog.html">📝 Blogs</a>
-  <a href="../labs.html">🧪 Hands-on Labs</a>
-  <a href="profile.html">👤 About Us</a>
-  <a href="../ai-agent.html">💬 AI Agent</a>
-</div>
+<script src="/v2/nav-v2.js"></script>
 
-<div class="v2-page-body">
-
-<!-- ═══════════════════ HERO ═════════════════════════════ -->
+<!-- ── HERO ─────────────────────────────────────────────────── -->
 <section class="v2-hero">
-  <div class="v2-hero-left">
-    <div class="v2-hero-eyebrow">
-      <div class="v2-hero-eyebrow-dot">✦</div>
-      MCT Raushan Ranjan · 3200+ Trained Globally
-    </div>
-    <h1 class="v2-hero-h1">
-      Learn from a<br><em>Microsoft Certified Trainer</em>
-    </h1>
-    <p class="v2-hero-sub">
-      Azure · Power Platform · .NET 8 · Blazor · AI. Real enterprise skills from someone who's trained 3200+ professionals across 25+ countries.
-    </p>
-    <div class="v2-hero-cta-row">
-      <a href="courses.html" class="btn-v2-primary">Browse 47 Courses →</a>
-      <a href="../ai-agent.html" class="btn-v2-ghost">⚡ Ask Axiom AI</a>
-    </div>
-    <div class="v2-hero-stats">
-      <div class="hstat">
-        <span class="hstat-num">3200+</span>
-        <span class="hstat-label">Trained</span>
+  <div class="v2-hero-inner">
+    <div class="v2-hero-content">
+      <div class="v2-hero-eyebrow">
+        <span class="v2-live-dot"></span>
+        MCT Certified · 3200+ Professionals Trained
       </div>
-      <div class="hstat-div"></div>
-      <div class="hstat">
-        <span class="hstat-num">47</span>
-        <span class="hstat-label">Courses</span>
+      <h1 class="v2-hero-title">
+        Master <span class="v2-hero-accent">Azure, .NET</span><br>
+        & AI — Job-Ready Skills
+      </h1>
+      <p class="v2-hero-sub">
+        Taught by Microsoft Certified Trainer Raushan Ranjan with 12+ years of enterprise experience.
+        Real projects. Real outcomes. Globally recognised certification paths.
+      </p>
+      <div class="v2-hero-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input id="heroSearch" type="text" placeholder="Search courses — Azure, Power BI, Blazor, AI…" autocomplete="off"/>
+        <button onclick="doHeroSearch()" class="v2-btn-primary" style="white-space:nowrap">Search</button>
       </div>
-      <div class="hstat-div"></div>
-      <div class="hstat">
-        <span class="hstat-num">25+</span>
-        <span class="hstat-label">Countries</span>
-      </div>
-      <div class="hstat-div"></div>
-      <div class="hstat">
-        <span class="hstat-num">★ 4.9</span>
-        <span class="hstat-label">Rated</span>
+      <div class="v2-hero-tags">
+        <a href="/v2/courses.html?cat=azure" class="v2-tag">Azure</a>
+        <a href="/v2/courses.html?cat=power" class="v2-tag">Power BI</a>
+        <a href="/v2/courses.html?cat=dotnet" class="v2-tag">.NET / Blazor</a>
+        <a href="/v2/courses.html?cat=copilot" class="v2-tag">Copilot Studio</a>
+        <a href="/v2/courses.html?cat=data" class="v2-tag">Data Analytics</a>
       </div>
     </div>
-  </div>
-  <div class="v2-hero-right">
-    <div class="hero-preview-card">
-      <div class="preview-badge">● LIVE NOW</div>
-      <div class="preview-course">Intelligent Enterprise Dev · .NET 8 &amp; Azure AI</div>
-      <div class="preview-lesson">Phase 3 · Lesson 7 — Dependency Injection in Blazor</div>
-      <div class="preview-progress">
-        <div class="preview-prog-bar" style="width:62%"></div>
-      </div>
-      <div class="preview-stats">62% complete · 3 phases done · 2 remaining</div>
-      <div class="preview-instructor">
-        <div class="preview-av">
-          <img src="../images/raushanranjan.jpg" alt="RR"
-               onerror="this.style.display='none';this.parentElement.textContent='RR'"/>
+    <div class="v2-hero-card">
+      <div class="v2-instructor-card">
+        <div class="v2-instructor-photo">
+          <img src="/images/raushan.jpg" alt="Raushan Ranjan" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="v2-instructor-initials" style="display:none">RR</div>
         </div>
-        <div>
-          <div class="preview-name">Raushan Ranjan</div>
-          <div class="preview-cred">MCT · Koenig Solutions</div>
+        <div class="v2-instructor-info">
+          <div class="v2-instructor-name">Raushan Ranjan</div>
+          <div class="v2-instructor-role">Microsoft Certified Trainer (MCT)</div>
+          <div class="v2-instructor-badges">
+            <span class="v2-badge-blue">Azure</span>
+            <span class="v2-badge-blue">.NET</span>
+            <span class="v2-badge-blue">Power Platform</span>
+          </div>
+          <div class="v2-instructor-stats">
+            <div><strong>3200+</strong><span>Students</span></div>
+            <div><strong>25+</strong><span>Countries</span></div>
+            <div><strong>12+</strong><span>Years Exp.</span></div>
+          </div>
         </div>
-        <div class="preview-mct-badge">MCT ✓</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ MARQUEE ══════════════════════════ -->
-<div class="v2-marquee-band">
-  <div class="v2-marquee-track" id="v2marqTrack"></div>
+<!-- ── STATS BAR ─────────────────────────────────────────────── -->
+<div class="v2-stats-bar">
+  <div class="v2-stats-inner">
+    <div class="v2-stat-item">
+      <span class="v2-stat-num">3200+</span>
+      <span class="v2-stat-label">Professionals Trained</span>
+    </div>
+    <div class="v2-stat-div"></div>
+    <div class="v2-stat-item">
+      <span class="v2-stat-num">25+</span>
+      <span class="v2-stat-label">Countries</span>
+    </div>
+    <div class="v2-stat-div"></div>
+    <div class="v2-stat-item">
+      <span class="v2-stat-num">40+</span>
+      <span class="v2-stat-label">Courses Available</span>
+    </div>
+    <div class="v2-stat-div"></div>
+    <div class="v2-stat-item">
+      <span class="v2-stat-num">5★</span>
+      <span class="v2-stat-label">Average Rating</span>
+    </div>
+    <div class="v2-stat-div"></div>
+    <div class="v2-stat-item">
+      <span class="v2-stat-num">MCT</span>
+      <span class="v2-stat-label">Microsoft Certified</span>
+    </div>
+  </div>
 </div>
 
-<!-- ═══════════════════ DOMAIN CARDS ════════════════════ -->
+<!-- ── MARQUEE ───────────────────────────────────────────────── -->
+<div class="v2-marquee-band">
+  <div class="v2-marquee-track" id="marqTrack"></div>
+</div>
+
+<!-- ── FEATURED COURSE ──────────────────────────────────────── -->
 <section class="v2-section">
-  <div class="v2-section-heading">
-    <div class="v2-section-eyebrow">What We Offer</div>
-    <h2 class="v2-section-title">Everything you need to <em>master</em> modern tech</h2>
-    <p class="v2-section-sub">Curated learning paths built from real enterprise experience — not just tutorials</p>
-  </div>
-  <div class="v2-domain-grid" id="domainGrid">
-    <a href="courses.html?cat=azure" class="v2-domain-card" style="--card-hover-border:#3b82f6">
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="v2-domain-card-icon">☁️</span>
-        <span class="v2-domain-card-count">8 courses</span>
+  <div class="v2-section-inner">
+    <div class="v2-section-heading">
+      <div class="v2-eyebrow">Featured Learning Path</div>
+      <h2 class="v2-section-title">Flagship Course</h2>
+      <p class="v2-section-sub">From zero C# to production-grade Azure AI apps — one structured path.</p>
+    </div>
+    <div class="v2-featured-card">
+      <div class="v2-featured-main">
+        <div class="v2-featured-tag">
+          <span class="v2-live-badge">LIVE</span>
+          <span style="margin-left:8px;font-size:12px;color:var(--ink-3);">5 Phases · 54 Lessons · Zero to Azure AI</span>
+        </div>
+        <h3 class="v2-featured-title">Intelligent Enterprise Development<br>with .NET 8 & Azure AI</h3>
+        <p class="v2-featured-desc">
+          A zero-to-production learning path. Start with zero C# knowledge, build solid fundamentals,
+          progress through OOP and EF Core, build real Blazor applications, then power them with Azure AI.
+        </p>
+        <div class="v2-featured-meta">
+          <span>54 lessons</span>
+          <span>5 phases</span>
+          <span>Live cohort</span>
+          <span>Certificate included</span>
+        </div>
+        <div class="v2-featured-actions">
+          <a href="/v2/learn.html" class="v2-btn-primary">Start Learning</a>
+          <a href="/v2/courses.html" class="v2-btn-outline">View All Courses</a>
+        </div>
       </div>
-      <div class="v2-domain-card-title">Azure &amp; Cloud</div>
-      <div class="v2-domain-card-tags">
-        <span class="v2-domain-card-tag">AZ-204</span>
-        <span class="v2-domain-card-tag">AZ-305</span>
-        <span class="v2-domain-card-tag">Azure AI</span>
-        <span class="v2-domain-card-tag">Integration</span>
+      <div class="v2-featured-phases">
+        <div class="v2-phases-label">Course Roadmap</div>
+        <div class="v2-phase-item v2-p1">
+          <div class="v2-phase-dot"></div>
+          <div>
+            <div class="v2-phase-name">Phase 1 — C# Foundations</div>
+            <div class="v2-phase-count">11 lessons</div>
+          </div>
+        </div>
+        <div class="v2-phase-item v2-p2">
+          <div class="v2-phase-dot"></div>
+          <div>
+            <div class="v2-phase-name">Phase 2 — OOP · The Blazor Way</div>
+            <div class="v2-phase-count">11 lessons</div>
+          </div>
+        </div>
+        <div class="v2-phase-item v2-p3">
+          <div class="v2-phase-dot"></div>
+          <div>
+            <div class="v2-phase-name">Phase 3 — Data Access with EF Core</div>
+            <div class="v2-phase-count">8 lessons</div>
+          </div>
+        </div>
+        <div class="v2-phase-item v2-p4">
+          <div class="v2-phase-dot"></div>
+          <div>
+            <div class="v2-phase-name">Phase 4 — Blazor with .NET 8</div>
+            <div class="v2-phase-count">14 lessons</div>
+          </div>
+        </div>
+        <div class="v2-phase-item v2-p5">
+          <div class="v2-phase-dot"></div>
+          <div>
+            <div class="v2-phase-name">Phase 5 — Azure AI Integration</div>
+            <div class="v2-phase-count">10 lessons</div>
+          </div>
+        </div>
       </div>
-      <div class="v2-domain-card-link">→ 8 courses</div>
-    </a>
-    <a href="courses.html?cat=power" class="v2-domain-card" style="--card-hover-border:#f59e0b">
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="v2-domain-card-icon">⚡</span>
-        <span class="v2-domain-card-count">13 courses</span>
-      </div>
-      <div class="v2-domain-card-title">Power Platform</div>
-      <div class="v2-domain-card-tags">
-        <span class="v2-domain-card-tag">PL-300 Power BI</span>
-        <span class="v2-domain-card-tag">Power Apps</span>
-        <span class="v2-domain-card-tag">Power Automate</span>
-      </div>
-      <div class="v2-domain-card-link">→ 13 courses</div>
-    </a>
-    <a href="courses.html?cat=copilot" class="v2-domain-card" style="--card-hover-border:#a855f7">
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="v2-domain-card-icon">🤖</span>
-        <span class="v2-domain-card-count">4 courses</span>
-      </div>
-      <div class="v2-domain-card-title">AI &amp; Copilot</div>
-      <div class="v2-domain-card-tags">
-        <span class="v2-domain-card-tag">Copilot Studio</span>
-        <span class="v2-domain-card-tag">M365 Agents</span>
-        <span class="v2-domain-card-tag">Azure AI</span>
-      </div>
-      <div class="v2-domain-card-link">→ 4 courses</div>
-    </a>
-    <a href="courses.html?cat=dotnet" class="v2-domain-card" style="--card-hover-border:#14b8a6">
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="v2-domain-card-icon">🔷</span>
-        <span class="v2-domain-card-count">11 courses</span>
-      </div>
-      <div class="v2-domain-card-title">.NET &amp; Blazor</div>
-      <div class="v2-domain-card-tags">
-        <span class="v2-domain-card-tag">C# / .NET 8</span>
-        <span class="v2-domain-card-tag">Blazor</span>
-        <span class="v2-domain-card-tag">ASP.NET Core</span>
-      </div>
-      <div class="v2-domain-card-link">→ 11 courses</div>
-    </a>
-    <a href="courses.html?cat=data" class="v2-domain-card" style="--card-hover-border:#22c55e">
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="v2-domain-card-icon">📊</span>
-        <span class="v2-domain-card-count">3 courses</span>
-      </div>
-      <div class="v2-domain-card-title">Data &amp; Analytics</div>
-      <div class="v2-domain-card-tags">
-        <span class="v2-domain-card-tag">MS-900</span>
-        <span class="v2-domain-card-tag">CompTIA Data+</span>
-        <span class="v2-domain-card-tag">M365 Security</span>
-      </div>
-      <div class="v2-domain-card-link">→ 3 courses</div>
-    </a>
-    <a href="courses.html?cat=other" class="v2-domain-card" style="--card-hover-border:#71717a">
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="v2-domain-card-icon">🏗️</span>
-        <span class="v2-domain-card-count">8 courses</span>
-      </div>
-      <div class="v2-domain-card-title">More &amp; Others</div>
-      <div class="v2-domain-card-tags">
-        <span class="v2-domain-card-tag">Qt/QML</span>
-        <span class="v2-domain-card-tag">OpenGL</span>
-        <span class="v2-domain-card-tag">Cisco QoS</span>
-        <span class="v2-domain-card-tag">GH-300</span>
-      </div>
-      <div class="v2-domain-card-link">→ 8 courses</div>
-    </a>
+    </div>
   </div>
 </section>
 
-<!-- ═══════════════════ YOUTUBE ══════════════════════════ -->
+<!-- ── DOMAIN CARDS ─────────────────────────────────────────── -->
 <section class="v2-section v2-section-alt">
-  <div class="v2-section-heading">
-    <div class="v2-section-eyebrow" style="color:#ff4444">YouTube</div>
-    <h2 class="v2-section-title">Free learning, <em style="color:#ff4444">on YouTube</em></h2>
-    <p class="v2-section-sub">300+ free videos across Power BI, .NET, Python, Data Analytics, Networking and more. No signup required.</p>
+  <div class="v2-section-inner">
+    <div class="v2-section-heading">
+      <div class="v2-eyebrow">Course Domains</div>
+      <h2 class="v2-section-title">What You Can Learn</h2>
+      <p class="v2-section-sub">Six specialised domains, 40+ courses, real enterprise skills.</p>
+    </div>
+    <div class="v2-domain-grid">
+      <a href="/v2/courses.html?cat=azure" class="v2-domain-card">
+        <div class="v2-domain-icon" style="background:#eff6ff;color:#0078d4">☁</div>
+        <div class="v2-domain-name">Microsoft Azure</div>
+        <div class="v2-domain-desc">AZ-204, AZ-305, AZ-900, Azure Integration</div>
+        <div class="v2-domain-count">8 courses</div>
+      </a>
+      <a href="/v2/courses.html?cat=power" class="v2-domain-card">
+        <div class="v2-domain-icon" style="background:#fef3c7;color:#b45309">📊</div>
+        <div class="v2-domain-name">Power Platform</div>
+        <div class="v2-domain-desc">PL-300, PL-400, Power Apps, Power Automate</div>
+        <div class="v2-domain-count">12 courses</div>
+      </a>
+      <a href="/v2/courses.html?cat=copilot" class="v2-domain-card">
+        <div class="v2-domain-icon" style="background:#f0fdf4;color:#16a34a">🤖</div>
+        <div class="v2-domain-name">Copilot Studio</div>
+        <div class="v2-domain-desc">PL-7008, AI Agents, Autonomous Agents</div>
+        <div class="v2-domain-count">4 courses</div>
+      </a>
+      <a href="/v2/courses.html?cat=dotnet" class="v2-domain-card">
+        <div class="v2-domain-icon" style="background:#fdf4ff;color:#7c3aed">⚡</div>
+        <div class="v2-domain-name">.NET & Blazor</div>
+        <div class="v2-domain-desc">ASP.NET Core, Blazor, C#, Clean Architecture</div>
+        <div class="v2-domain-count">8 courses</div>
+      </a>
+      <a href="/v2/courses.html?cat=data" class="v2-domain-card">
+        <div class="v2-domain-icon" style="background:#fff7ed;color:#ea580c">📈</div>
+        <div class="v2-domain-name">Data & Analytics</div>
+        <div class="v2-domain-desc">MS-900, CompTIA Data+, M365 Security</div>
+        <div class="v2-domain-count">6 courses</div>
+      </a>
+      <a href="/v2/courses.html?cat=other" class="v2-domain-card">
+        <div class="v2-domain-icon" style="background:#f8fafc;color:#334155">🛠</div>
+        <div class="v2-domain-name">Specialised Tech</div>
+        <div class="v2-domain-desc">OpenGL/Vulkan, Qt/QML, Advanced C++</div>
+        <div class="v2-domain-count">10 courses</div>
+      </a>
+    </div>
   </div>
-  <div class="v2-yt-grid" id="v2ytGrid"></div>
 </section>
 
-<!-- ═══════════════════ TESTIMONIALS ═════════════════════ -->
+<!-- ── VALUE PROPOSITIONS ────────────────────────────────────── -->
 <section class="v2-section">
-  <div class="v2-section-heading">
-    <div class="v2-section-eyebrow">What My Students Say</div>
-    <h2 class="v2-section-title">Trusted by learners in <em>25+ countries</em></h2>
-    <p class="v2-section-sub">From enterprise teams in Saudi Arabia to developers in Australia — real feedback from 500+ training sessions.</p>
-    <div class="v2-cred-number" style="margin-top:20px">
-      <span>500+</span> training sessions ·
-      <span>★★★★★</span> consistently rated ·
-      <span>25+</span> countries
+  <div class="v2-section-inner">
+    <div class="v2-section-heading">
+      <div class="v2-eyebrow">Why RR Skillverse</div>
+      <h2 class="v2-section-title">The RR Difference</h2>
     </div>
-  </div>
-  <div class="v2-testi-scroll-section">
-    <div class="v2-testi-fade-l"></div>
-    <div class="v2-testi-fade-r"></div>
-    <div class="v2-testi-row">
-      <div class="v2-testi-track" id="v2testiRow1"></div>
-    </div>
-    <div class="v2-testi-row" style="margin-top:14px">
-      <div class="v2-testi-track v2-testi-reverse" id="v2testiRow2"></div>
+    <div class="v2-value-grid">
+      <div class="v2-value-card">
+        <div class="v2-value-icon">🎯</div>
+        <div class="v2-value-title">Why Before How</div>
+        <p class="v2-value-desc">Every concept is explained with first-principles reasoning. You understand the "why" before you write a single line of code.</p>
+      </div>
+      <div class="v2-value-card">
+        <div class="v2-value-icon">🏭</div>
+        <div class="v2-value-title">Enterprise Experience</div>
+        <p class="v2-value-desc">12+ years of real-world Microsoft stack experience. Patterns and practices that production systems actually use — not textbook theory.</p>
+      </div>
+      <div class="v2-value-card">
+        <div class="v2-value-icon">🌍</div>
+        <div class="v2-value-title">Global Community</div>
+        <p class="v2-value-desc">Join 3200+ professionals across 25+ countries who've built skills and advanced their careers through Raushan's courses.</p>
+      </div>
+      <div class="v2-value-card">
+        <div class="v2-value-icon">📜</div>
+        <div class="v2-value-title">Certification Ready</div>
+        <p class="v2-value-desc">Courses align with Microsoft certification exams. AZ-204, AZ-305, PL-300, PL-400 — study with someone who has trained for these exams professionally.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ CTA ══════════════════════════════ -->
-<section class="v2-cta-section">
-  <div class="v2-cta-title">Ready to start your<br><em>learning journey?</em></div>
-  <p class="v2-cta-sub">Join thousands of professionals who've grown with RR Skillverse</p>
-  <div class="v2-cta-btns">
-    <a href="courses.html" class="btn-v2-primary">Browse All Courses →</a>
-    <a href="../ai-agent.html" class="btn-v2-ghost">Chat with AI Agent</a>
-    <a href="profile.html" class="btn-v2-ghost">Meet the Trainer</a>
+<!-- ── TESTIMONIALS ──────────────────────────────────────────── -->
+<section class="v2-section v2-section-alt">
+  <div class="v2-section-inner">
+    <div class="v2-section-heading">
+      <div class="v2-eyebrow">Student Reviews</div>
+      <h2 class="v2-section-title">What Professionals Say</h2>
+      <p class="v2-section-sub">Real reviews from real professionals across 25+ countries.</p>
+    </div>
+    <div class="v2-testi-scroll-wrap">
+      <div class="v2-testi-row v2-testi-row-1" id="testiRow1"></div>
+      <div class="v2-testi-row v2-testi-row-2" id="testiRow2"></div>
+    </div>
   </div>
 </section>
 
-<!-- ═══════════════════ FOOTER ════════════════════════════ -->
+<!-- ── AXIOM BANNER ──────────────────────────────────────────── -->
+<section class="v2-axiom-banner">
+  <div class="v2-axiom-inner">
+    <div class="v2-axiom-text">
+      <div class="v2-axiom-tag">AI Learning Assistant</div>
+      <h2 class="v2-axiom-title">Meet Axiom — Your AI Study Partner</h2>
+      <p class="v2-axiom-sub">Ask questions, get explanations, debug code — all in the context of your current lesson. Powered by Azure OpenAI.</p>
+    </div>
+    <div class="v2-axiom-action">
+      <a href="/v2/learn.html" class="v2-btn-primary" style="font-size:15px;padding:12px 28px;">Try Axiom in a Lesson</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────────── -->
 <footer class="v2-footer">
-  <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-    <a href="index.html" class="v2-footer-brand">
-      <div class="v2-footer-mark">RR</div>
-      <div class="v2-footer-name">RR Skillverse</div>
-    </a>
-    <span class="v2-footer-copy">© 2026 · MCT Raushan Ranjan · Noida, India</span>
+  <div class="v2-footer-inner">
+    <div class="v2-footer-brand">
+      <div class="v2-footer-logo">RR Skillverse</div>
+      <p class="v2-footer-tagline">Professional Microsoft technology training by MCT Raushan Ranjan.</p>
+      <div class="v2-footer-social">
+        <a href="https://linkedin.com/in/raushan-ranjan" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+        <a href="https://github.com/raushan-ranjan" target="_blank" rel="noopener" aria-label="GitHub">gh</a>
+      </div>
+    </div>
+    <div class="v2-footer-links">
+      <div class="v2-footer-col">
+        <div class="v2-footer-col-title">Learn</div>
+        <a href="/v2/courses.html?cat=azure">Azure Courses</a>
+        <a href="/v2/courses.html?cat=power">Power Platform</a>
+        <a href="/v2/courses.html?cat=dotnet">.NET &amp; Blazor</a>
+        <a href="/v2/courses.html?cat=copilot">Copilot Studio</a>
+      </div>
+      <div class="v2-footer-col">
+        <div class="v2-footer-col-title">Platform</div>
+        <a href="/v2/index.html">Home</a>
+        <a href="/v2/courses.html">All Courses</a>
+        <a href="/v2/learn.html">Learn</a>
+        <a href="/v2/profile.html">Instructor</a>
+      </div>
+      <div class="v2-footer-col">
+        <div class="v2-footer-col-title">Contact</div>
+        <a href="mailto:raushan@rrskillverse.in">raushan@rrskillverse.in</a>
+        <a href="https://rrskillverse.in" target="_blank">rrskillverse.in</a>
+      </div>
+    </div>
   </div>
-  <nav class="v2-footer-nav">
-    <a href="courses.html" class="v2-footer-link">Courses</a>
-    <a href="../blog.html" class="v2-footer-link">Blog</a>
-    <a href="../labs.html" class="v2-footer-link">Labs</a>
-    <a href="profile.html" class="v2-footer-link">About</a>
-    <a href="../ai-agent.html" class="v2-footer-link">AI Agent</a>
-    <a href="https://www.linkedin.com/in/raushan-ranjan-mct" target="_blank" rel="noopener" class="v2-footer-link">LinkedIn</a>
-    <a href="https://youtube.com/@rrskillverse" target="_blank" rel="noopener" class="v2-footer-link">YouTube</a>
-  </nav>
+  <div class="v2-footer-bottom">
+    <span>© 2025 RR Skillverse. All rights reserved.</span>
+    <span>Built with ❤️ by MCT Raushan Ranjan</span>
+  </div>
 </footer>
 
-</div><!-- /v2-page-body -->
-
-<!-- FAB -->
-<a href="../ai-agent.html" class="v2-fab" title="Ask Axiom AI">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-  </svg>
-</a>
-
 <script>
-/* ── Hamburger ── */
-(function() {
-  const btn = document.getElementById('v2Hamburger');
-  const drawer = document.getElementById('v2Drawer');
-  btn.addEventListener('click', () => {
-    const open = drawer.classList.toggle('open');
-    btn.textContent = open ? '✕' : '☰';
-  });
-  document.addEventListener('click', e => {
-    if (drawer.classList.contains('open') && !drawer.contains(e.target) && !btn.contains(e.target)) {
-      drawer.classList.remove('open'); btn.textContent = '☰';
-    }
-  });
+/* ── Data ──────────────────────────────────────────────── */
+const MARQUEE = ['Azure Developer AZ-204','Power BI PL-300','MCT Certified','Power Platform Developer','CCNA · Cisco','ASP.NET Core Blazor','APIGEE API Management','TensorFlow · ML','3200+ Professionals Trained','Qt / QML Embedded','Copilot Studio','System Design','Python Programming','Data Analytics','Azure AI Services'];
+
+const ALL_T = [
+  {n:'Robert Ifeonu Ph.D.',loc:'Nigeria',tag:'Co-pilot Training',t:'One of the most insightful and engaging learning experiences I\'ve had — his technical competence and ability to create an impactful learning environment was remarkable.'},
+  {n:'Kenthia Roberts',loc:'United States',tag:'Teaching Quality',t:'Instructor Raushan was very knowledgeable and patient. He went above and beyond to create additional supplemental material and a personable, safe environment to ask questions.'},
+  {n:'Khalid Almasi',loc:'Saudi Arabia',tag:'Training',t:'Your mastery of the course materials and ability to convey complex concepts were outstanding. You have truly excelled as a trainer, and your efforts have significantly impacted my learning experience.'},
+  {n:'Vijay Divakar',loc:'UK',tag:'Power BI Data Analyst',t:'The trainer was extremely knowledgeable and engaging. The hands-on examples helped reinforce the concepts. I feel confident in my ability to use Power BI now.'},
+  {n:'Alexander Komissarov',loc:'Netherlands',tag:'Customized Learning',t:'Raushan was able to adjust his base course to the needs of my organization/job profile. The fact the tutor goes the extra mile for the customer is very much appreciated.'},
+  {n:'William Lyimo',loc:'Tanzania',tag:'Exceptional Training',t:'Qubits quizzes, lab practicals, and real-world examples helped reinforce learning. Your enthusiasm was infectious. Thank you for an exceptional training experience.'},
+  {n:'Sara Alhindl',loc:'Saudi Arabia',tag:'.NET Course',t:'Your ability to simplify complex concepts and unwavering support were instrumental in my understanding. Your contagious enthusiasm created a positive and engaging learning environment.'},
+  {n:'Awais Khurshed',loc:'Saudi Arabia',tag:'Practical Examples',t:'Raushan is an exceptional trainer — passionate, knowledgeable, and able to explain complex concepts in an easy-to-understand way. One of the most engaging learning experiences I\'ve had.'},
+  {n:'Andy Bishop',loc:'UK',tag:'Experienced Trainer',t:'Raushan described big ideas in a modular fashion; starting with basic level understanding and building with increasing complexity — he is clearly a talented and experienced trainer.'},
+  {n:'Gloria G Bussungu',loc:'Tanzania',tag:'Teaching Technique',t:'He explains concepts before diving into "how". His unique teaching technique and use of quizzes made everything easier to grasp. He should keep his spirit up.'},
+  {n:'Martina Alinda',loc:'Software Engineer',tag:'Blazor Training',t:'I attended Raushan\'s ASP.NET Blazor Training and was truly impressed. His expertise and engaging teaching style made complex concepts accessible and enjoyable.'},
+  {n:'Shikha Chaudhary',loc:'India',tag:'Cloud Engineer',t:'Raushan is always on top of things, finds solutions before anyone else does. A confident speaker and wonderful storyteller/teacher — highly recommended.'},
+  {n:'Mayol Abraham Mach Garang',loc:'Rwanda',tag:'Professional & Relatable',t:'With all my heart, I can testify to his professionalism by the way he made his presentation with relatable illustrations. Raushan is very good at his job.'},
+  {n:'Binta Saidy',loc:'Gambia',tag:'Power BI',t:'He is patient and professional, very helpful in answering all our questions. He has really built my confidence in Power BI and taken my knowledge to an excellent level.'},
+  {n:'Michael Pope',loc:'UK',tag:'Customized Course',t:'Raushan explained the content clearly relating course topics to use cases that are easy to understand. He was able to tweak the course to better suit our interests.'},
+  {n:'Richard Dale',loc:'United States',tag:'Knowledgeable Instructor',t:'Very knowledgeable instructor. Raushan covered a lot of material, but made sure everyone understood the information before moving forward with additional topics.'},
+  {n:'Sam Stephens',loc:'United States',tag:'Coding & Debugging',t:'Raushan did a great job breaking everything down to fundamental components. This was also obvious in his continuous support in debugging labs issues with attendees.'},
+  {n:'Anusha Raghavendra',loc:'UK',tag:'QT/QML Associate',t:'The course was well structured with seamless integration of hands-on examples with theoretical concepts. Raushan was knowledgeable, clear and responsive. Highly recommended!'},
+  {n:'Priya Sharma',loc:'India',tag:'Training',t:'Excellent pace and use of time. Well delivered, good subject knowledge. Training has already been put into practice.'},
+  {n:'Joaquin Serrano Torres',loc:'Spain',tag:'Simplified Concepts',t:'The trainer went the extra mile to simplify complex concepts, making them easy to understand. Priority and empathy are extraordinary.'},
+  {n:'Kanaani Abukhadra',loc:'Saudi Arabia',tag:'Dedicated Teacher',t:'A dedicated teacher. Very knowledgeable, clear, and motivated. Ties concepts and theories together well. I would be glad to take another course with him.'},
+  {n:'Charles Irving Angeles',loc:'UAE',tag:'Power BI Advanced',t:'I wanted to thank Mr. Raushan for the excellent Power BI Advanced training. His teaching style, along with the structure of the course, really helped me grasp the concepts.'},
+  {n:'Feras Bin Hussain',loc:'Saudi Arabia',tag:'Inspiring Instructor',t:'Your dedication and ability to convey complex concepts were outstanding. You have truly excelled as a trainer, and your efforts have significantly impacted my learning experience.'},
+  {n:'Hasen Alhussaini',loc:'Saudi Arabia',tag:'Apigee API Platform',t:'Your expertise and clear explanations on Apigee and API security best practices were truly inspiring. Thank you for making complex concepts easy to understand and engaging.'},
+  {n:'Seth Dahar',loc:'United States',tag:'Applicable Training',t:'Excellent training sessions. I really appreciate that you diverged the training to topics that were applicable and needed for our use.'},
+  {n:'Teera Jason',loc:'United States',tag:'Power BI Data Analyst',t:'Raushan was thorough and detail-oriented, beginning with foundational Power BI concepts and progressively building toward more advanced functions.'},
+  {n:'Ravi Kumar',loc:'India',tag:'Engaging & Communicative',t:'Very enthusiastic, excellent communicating skill, very engaging.'},
+  {n:'Mallareddy Annireddy',loc:'India',tag:'Cloud Applications',t:'Very good training from Raushan, very useful to grow cloud applications. The way of explanation with examples was very nice. Thanks for your support Raushan.'},
+  {n:'Salome Kabodiba',loc:'South Africa',tag:'Inspiring Sessions',t:'Your sessions are not just informative, but also inspiring. Thank you for your hard work and commitment. Keep up the amazing work, you\'re making a significant impact.'},
+  {n:'David Kamara',loc:'Tanzania',tag:'Interactive',t:'Trainer is interactive and friendly. It helps us to understand better. Keep up the good work Mr Raushan.'},
+  {n:'Aji Kumba Saine',loc:'Gambia',tag:'Informative & Visual',t:'The course was very informative and well structured. The Trainer was able to explain the concepts easily with the help of visuals and demonstrations.'},
+  {n:'Simarjit Bains',loc:'India',tag:'C# Training',t:'He helped make many concepts crystal clear in such a short span of time. I am sure I am way more knowledgeable in C# with his help.'},
+  {n:'Manju',loc:'India',tag:'Azure/Cloud',t:'Raushan has very good knowledge on coding, Azure & other cloud technologies. He explains concepts clearly and follows up to make sure you understood thoroughly.'},
+  {n:'Julia Kim',loc:'United States',tag:'Great Instructor',t:'Raushan Ranjan was a great instructor. He was very knowledgeable about the material, patient with troubleshooting, and covered all topics thoroughly.'},
+  {n:'Nina Biggs',loc:'United States',tag:'Patient',t:'How thorough he was and patient.'},
+  {n:'Conner Caprio',loc:'United States',tag:'Course Delivery',t:'They did a fantastic job getting through so much material in one week. Lots to unpack in such a short time.'},
+  {n:'Gaurav Menon',loc:'United States',tag:'Simplifying Concepts',t:'Great work Raushan, keep going, you are doing wonders simplifying concepts.'},
+  {n:'Amey Chitale',loc:'India',tag:'Engaging Session',t:'Very interesting session. Recap at start of every session was very helpful. Supporting video addition was an excellent way to understand topics.'},
+  {n:'Winfred Thongana',loc:'Uganda',tag:'Informative Training',t:'The training was informative and enjoyable. I can\'t thank you enough for your hard work and enthusiasm.'},
+  {n:'Martha Alinda',loc:'Uganda',tag:'Passion & Expertise',t:'Your passion and expertise inspired us, making a significant impact on our learning journey. We are truly grateful for your dedication and guidance.'},
+  {n:'Nawaf Abdulaziz Alsaif',loc:'Saudi Arabia',tag:'Focused Training',t:'The trainer is great, he concentrates on the most important topics and answers all the trainees\' questions.'},
+  {n:'Hamad Alaskar',loc:'Saudi Arabia',tag:'Clear Delivery',t:'He was a great trainer and the way he delivered the course was clear and smooth, providing good examples.'},
+  {n:'Rajesh Sahu',loc:'India',tag:'Doubt Resolution',t:'He has very good and deep understanding of the topics, always ready to help you solve your doubts.'},
+  {n:'Karin Ford',loc:'United States',tag:'Knowledge & Examples',t:'The trainer demonstrated a high level of knowledge and expertise, providing clear explanations and insightful examples that enhanced the overall learning experience.'},
+  {n:'Khalid Ebrahim Al-Jaber',loc:'Qatar',tag:'Perfect & Informative',t:'Mr. Raushan Ranjan is perfect. He is very kind and informative. He gives information step-by-step and makes sure all participants understand.'},
+  {n:'Travis Hollinghead',loc:'United States',tag:'Talented & Technical',t:'Raushan is a very talented, dedicated, and technical trainer in his description and instruction of this course material.'},
+  {n:'Abhishek Pal',loc:'India',tag:'Engaging Trainer',t:'Great knowledge, made us feel like a friend. Jokes and fun added to learning. Explained real-life examples. His chit-chat in between lectures kept us from getting bored.'},
+  {n:'Varun Gupta',loc:'India',tag:'Simplified Learning',t:'Concepts were taught very well and got to learn new things. I really enjoyed the way of his teaching and simplifying the concepts.'},
+  {n:'Sarosh Engineer',loc:'India',tag:'Interactive & Engaging',t:'Good way of explaining concepts, taking time to clear participant doubts & keeping session interactive & interesting.'},
+  {n:'Pradip Pal',loc:'United Arab Emirates',tag:'Power Platform',t:'Very professional and friendly way of delivering the training. Excellent experience overall.'},
+  {n:'Nicola Galasso',loc:'United Arab Emirates',tag:'Power Platform',t:'Excellent training. Well structured and clearly delivered.'},
+  {n:'Jason Yu',loc:'United Arab Emirates',tag:'Power Platform',t:'Effective training — enjoyed the last 3 days. Raushan is a very personable and affable person, this translated into a good personality that came through during discussion of topics.'},
+  {n:'Khawla Mohamed Alkhoori',loc:'United Arab Emirates',tag:'Power Platform',t:'Would recommend Raushan to anyone looking for Microsoft related training. Course content was highlighted on Day 1 and a brief recap was given at the beginning of each session.'},
+  {n:'Mariam Mohamed Almheiri',loc:'United Arab Emirates',tag:'Power Platform',t:'It was clear, understandable, and easy to understand. Great delivery throughout.'},
+  {n:'Saeeda Al Suwaidi',loc:'United Arab Emirates',tag:'Microsoft Tools',t:'The trainer was very helpful throughout the session and demonstrated a strong understanding of Microsoft tools. He effectively linked the content to real-time, practical examples relevant to our day-to-day work.'},
+  {n:'Khaled Al Kahil',loc:'United Arab Emirates',tag:'Microsoft Tools',t:'Raushan is very knowledgeable and quite flexible in his approach to training. He cleared some important concepts in my mind. I want to thank him.'},
+  {n:'Kgopotso Mchunu',loc:'South Africa',tag:'Training Excellence',t:'Very good. I believe he is excellent at training someone who has no background in the topic. The room felt safe for me to ask questions where I did not understand.'},
+  {n:'Daniel Henke',loc:'Germany',tag:'ASP.NET Blazor',t:'The training sessions with Raushan were very good and I learned very much.'},
+  {n:'Alexander Leer',loc:'Germany',tag:'ASP.NET Blazor',t:'The lessons are well-structured and based on solid subject knowledge. The trainer clearly has a firm grasp of the subject matter and conveys the content in a way that is easy to understand and practical.'},
+  {n:'Hamam Faisal Al Dheeb Ba Omar',loc:'Oman',tag:'Training Quality',t:'Great approach and easy to understand. Big thanks to Raushan — supportive and well prepared.'},
+  {n:'Malik Ali Salim Al Siyabi',loc:'Oman',tag:'Training Quality',t:'Great approach and easy to understand. Big thanks to Raushan.'},
+  {n:'Iliyasu Aliyu',loc:'Nigeria',tag:'Structured Delivery',t:'Trainer had solid knowledge of the subject and delivered the content clearly. The training was informative and structured properly.'},
+  {n:'Omolaja Adebola Olaniyi',loc:'Nigeria',tag:'Structured Delivery',t:'Exceptional. He delivers his lectures with passion. You can tell he enjoys doing this.'},
+  {n:'Elena Muatocuene',loc:'Germany',tag:'ASP.NET Blazor',t:'The trainer, Raushan Ranjan, provided us with expert guidance throughout the entire course. He was always friendly, open to questions and explained complex topics in an understandable way.'},
+  {n:'Bhavesh Parikh',loc:'India',tag:'Copilot Studio',t:'I would rate the trainer very highly for his ability to deliver the subject effectively. The sessions were well-structured, engaging, and easy to follow, even when covering complex aspects of Copilot Studio.'},
+  {n:'Nikolaus Engelbrecht',loc:'South Africa',tag:'Communication Skills',t:'Very good communication skills making it easy to grasp the content of the course. Provides meaningful examples to create a better understanding. Raushan is very knowledgeable in the topic.'},
+  {n:'Von Beaty',loc:'United States',tag:'OpenGL & Vulkan',t:'Raushan Ranjan was able to provide the OpenGL and Vulkan concepts at both the high level and cleared up how the specifics worked.'},
+  {n:'Jose Cahue',loc:'United States',tag:'OpenGL & Vulkan',t:'Raushan, you made me understand why before showing how. You never let confusion slide — you would trace through errors until the lesson was clear. One of the best tutors I have had.'},
+  {n:'Joel Tan',loc:'Singapore',tag:'Friendly & Thorough',t:'Great, helpful and friendly. Willing to go through each part to great detail.'},
+  {n:'Marcelo Furukawa',loc:'Australia',tag:'Attentive Trainer',t:'Raushan was excellent — he was really attentive with my progress and answered all my questions.'},
+  {n:'Prajakta Petkar',loc:'India',tag:'AZ-204',t:'I just wanted to take a moment to thank you sincerely for the AZ-204 training. Your way of teaching is truly something special — everything is so clear, structured, and easy to follow.'},
+];
+
+/* ── Marquee ──────────────────────────────────────────── */
+(function () {
+  const mt = document.getElementById('marqTrack');
+  if (!mt) return;
+  const h = MARQUEE.map(t => `<span class="v2-marquee-item">${t}<span class="v2-marquee-sep">·</span></span>`).join('');
+  mt.innerHTML = h + h;
 })();
 
-/* ── Domain card hover border ── */
-document.querySelectorAll('.v2-domain-card').forEach(card => {
-  const hoverColor = card.style.getPropertyValue('--card-hover-border');
-  card.addEventListener('mouseenter', () => { card.style.borderColor = hoverColor; });
-  card.addEventListener('mouseleave', () => { card.style.borderColor = ''; });
+/* ── Testimonials ─────────────────────────────────────── */
+function buildTestiCard(t) {
+  const ini = t.n.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  return `<div class="v2-testi-card">
+    <div class="v2-testi-stars">★★★★★</div>
+    <p class="v2-testi-text">${t.t}</p>
+    <div class="v2-testi-person">
+      <div class="v2-testi-av">${ini}</div>
+      <div class="v2-testi-meta">
+        <div class="v2-testi-name">${t.n}</div>
+        <div class="v2-testi-loc">${t.loc}</div>
+      </div>
+      <div class="v2-testi-tag">${t.tag}</div>
+    </div>
+  </div>`;
+}
+
+(function () {
+  const shuffled = [...ALL_T].sort(() => Math.random() - 0.5);
+  const half = Math.ceil(shuffled.length / 2);
+  const r1 = document.getElementById('testiRow1');
+  const r2 = document.getElementById('testiRow2');
+  if (r1) { const h = shuffled.slice(0, half).map(buildTestiCard).join(''); r1.innerHTML = h + h; }
+  if (r2) { const h = shuffled.slice(half).map(buildTestiCard).join(''); r2.innerHTML = h + h; }
+})();
+
+/* ── Hero search ──────────────────────────────────────── */
+function doHeroSearch() {
+  const q = document.getElementById('heroSearch').value.trim();
+  if (q) window.location.href = '/v2/courses.html?q=' + encodeURIComponent(q);
+}
+document.getElementById('heroSearch').addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') doHeroSearch();
 });
-
-/* ── Marquee ── */
-const MARQUEE = ['Azure Developer AZ-204','Power BI PL-300','MCT Certified','Power Platform Developer','ASP.NET Core Blazor','APIGEE API Management','3200+ Professionals Trained','Copilot Studio','Python Programming','Data Analytics','Azure AI Services','EF Core & .NET 8','GitHub Copilot','Cisco QoS'];
-const mt = document.getElementById('v2marqTrack');
-if (mt) {
-  const items = [...MARQUEE, ...MARQUEE].map(t =>
-    `<span class="v2-marquee-item">${t}</span><span class="v2-marquee-sep">◆</span>`
-  ).join('');
-  mt.innerHTML = items;
-}
-
-/* ── YouTube grid ── */
-const YT_ITEMS = [
-  { cat:'Power BI', title:'PL-300 Complete Course', desc:'Full Power BI course covering DAX, data modeling, reports and PL-300 certification prep.', img:'../images/YT-PowerBI.jpg', links:[{label:'Full Playlist',url:'https://youtube.com/@rrskillverse'}] },
-  { cat:'Data Analytics', title:'Data Analytics with Python', desc:'Real-world data analysis using Python, Pandas, NumPy and Matplotlib.', img:'../images/YT-DataAnalytics.jpg', links:[{label:'Watch Playlist',url:'https://youtube.com/@rrskillverse'}] },
-  { cat:'Software Engineering', title:'Software Engineering Fundamentals', desc:'SDLC, design patterns, system design, and professional coding practices.', img:'../images/YT-SoftwareEng.jpg', links:[{label:'Watch Playlist',url:'https://youtube.com/@rrskillverse'}] },
-  { cat:'Networking', title:'Computer Networks for Beginners', desc:'TCP/IP, DNS, HTTP, subnetting — everything a developer should know about networking.', img:'../images/YT-ComputerNetworks.jpg', links:[{label:'Watch Playlist',url:'https://youtube.com/@rrskillverse'}] },
-  { cat:'Project Management', title:'Software Project Management', desc:'Agile, Scrum, sprint planning, and real project management techniques for software teams.', img:'../images/YT-SoftwarePM.jpg', links:[{label:'Watch Playlist',url:'https://youtube.com/@rrskillverse'}] },
-  { cat:'Shorts', title:'Tech Tips & Shorts', desc:'Quick 60-second tech tips, Azure tricks, and Power BI shortcuts for busy professionals.', img:'../images/YT-Shorts.jpg', links:[{label:'Watch Shorts',url:'https://youtube.com/@rrskillverse'}] }
-];
-const yg = document.getElementById('v2ytGrid');
-if (yg) {
-  yg.innerHTML = YT_ITEMS.slice(0,4).map(v => `
-    <a href="${v.links[0].url}" target="_blank" rel="noopener" class="v2-yt-card">
-      <div class="v2-yt-thumb">
-        ${v.img ? `<img src="${v.img}" alt="${v.title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'v2-yt-thumb-fb\\'>▶️</div>'"/>` : `<div class="v2-yt-thumb-fb">▶️</div>`}
-        <div class="v2-yt-play"><div class="v2-yt-playbtn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-        </div></div>
-      </div>
-      <div class="v2-yt-body">
-        <div class="v2-yt-cat">${v.cat}</div>
-        <div class="v2-yt-title">${v.title}</div>
-        <div class="v2-yt-desc">${v.desc}</div>
-        <div class="v2-yt-links">${v.links.map(l=>`<a href="${l.url}" target="_blank" class="v2-yt-link" onclick="event.stopPropagation()">▶ ${l.label}</a>`).join('')}</div>
-      </div>
-    </a>`).join('');
-}
-
-/* ── Testimonials ── */
-const TESTI = [
-  { stars:'★★★★★', text:'Raushan\'s teaching style is unmatched. Complex Azure concepts become crystal clear. Best MCT I\'ve worked with.', name:'Ahmed Al-Rashidi', loc:'Saudi Arabia', tag:'AZ-204', av:'AA' },
-  { stars:'★★★★★', text:'The Power BI course was phenomenal. DAX finally clicked for me after Raushan\'s analogies. My whole team thanks him.', name:'Priya Sharma', loc:'India', tag:'PL-300', av:'PS' },
-  { stars:'★★★★★', text:'Completed the .NET 8 & Blazor track. The lab exercises are spot on — real enterprise patterns, not toy examples.', name:'James O\'Brien', loc:'Australia', tag:'.NET 8', av:'JO' },
-  { stars:'★★★★★', text:'Excellent Copilot Studio training. Raushan explains WHY before HOW — exactly what I needed to build enterprise agents.', name:'Fatima Al-Hassan', loc:'UAE', tag:'Copilot', av:'FA' },
-  { stars:'★★★★★', text:'The PL-300 exam prep was incredible. Passed on first attempt. Raushan\'s notes are better than official docs.', name:'Carlos Mendoza', loc:'Mexico', tag:'PL-300 ✓', av:'CM' },
-  { stars:'★★★★★', text:'AZ-204 training with real-world examples. The APIM and Service Bus labs were gold. Highly recommend!', name:'Yuki Tanaka', loc:'Japan', tag:'AZ-204', av:'YT' },
-  { stars:'★★★★★', text:'5 stars! Blazor concepts were confusing until Raushan broke them down. Now I build Blazor apps with confidence.', name:'Sophie Müller', loc:'Germany', tag:'Blazor', av:'SM' },
-  { stars:'★★★★★', text:'The AI-powered lesson format is brilliant. It\'s like having Raushan available 24/7 to answer questions.', name:'Raj Patel', loc:'UK', tag:'AI Learning', av:'RP' },
-  { stars:'★★★★★', text:'EF Core lessons with Code-First migrations explained perfectly. The repository pattern section is a masterclass.', name:'Anna Kowalski', loc:'Poland', tag:'.NET 8', av:'AK' },
-  { stars:'★★★★★', text:'Power Automate flows for our enterprise processes — Raushan taught us patterns we still use daily. Brilliant trainer.', name:'Ibrahim Al-Sayed', loc:'Egypt', tag:'Power Platform', av:'IA' },
-  { stars:'★★★★★', text:'GitHub Copilot training was practical and focused. Raushan doesn\'t waste time — every minute is valuable.', name:'Chen Wei', loc:'Singapore', tag:'GH-300', av:'CW' },
-  { stars:'★★★★★', text:'Incredible depth on Azure Key Vault and Managed Identities. Zero-trust security patterns I can apply immediately.', name:'Maria Santos', loc:'Brazil', tag:'AZ-204', av:'MS' }
-];
-function renderTestiRow(id, items) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const doubled = [...items, ...items];
-  el.innerHTML = doubled.map(t => `
-    <div class="v2-testi-card">
-      <div class="v2-testi-stars">${t.stars}</div>
-      <div class="v2-testi-text">"${t.text}"</div>
-      <div class="v2-testi-person">
-        <div class="v2-testi-av">${t.av}</div>
-        <div><div class="v2-testi-name">${t.name}</div><div class="v2-testi-loc">${t.loc}</div></div>
-        <div class="v2-testi-tag">${t.tag}</div>
-      </div>
-    </div>`).join('');
-}
-renderTestiRow('v2testiRow1', TESTI.slice(0, 6));
-renderTestiRow('v2testiRow2', TESTI.slice(6));
 </script>
 </body>
 </html>
