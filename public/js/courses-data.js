@@ -6,12 +6,12 @@ const COURSE_CATALOG = {
     title: 'Intelligent Enterprise Development with .NET 8 & Azure AI',
     subtitle: 'Intelligent Enterprise Dev · .NET 8 & Azure AI',
     description: 'A zero-to-production learning path. Start with zero C# knowledge, build solid fundamentals, then develop real Blazor applications powered by Azure AI.',
-    stats: ['46 lessons', '4 phases', 'Zero to Azure AI'],
+    stats: ['54 lessons', '5 phases', 'Zero to Azure AI'],
     loadingMessages: [
-      'Writing the code example…',
-      'Generating lesson content…',
-      'Compiling concepts…',
-      'Preparing your lesson…'
+      'Thinking like Raushan — why before how…',
+      'Brewing the code example…',
+      'Raushan is compiling concepts for you…',
+      'Almost there — Raushan-style deep dive loading…'
     ],
     labStyle: 'code',
     phases: [
@@ -28,7 +28,8 @@ const COURSE_CATALOG = {
           'Functions in C#',
           'String Handling in C#',
           'User Input and Output in C#',
-          'Type Casting in C#'
+          'Type Casting in C#',
+          'File Handling in C#'
         ]
       },
       {
@@ -49,8 +50,22 @@ const COURSE_CATALOG = {
         ]
       },
       {
-        label: 'Phase 3', title: 'Blazor with .NET 8',
-        colorClass: 'p3', dot: '#c75c1a',
+        label: 'Phase 3', title: 'Data Access with EF Core',
+        colorClass: 'p3', dot: '#b5860d',
+        lessons: [
+          'Why EF Core? ORM Concepts and Architecture',
+          'Setting Up EF Core in a .NET 8 Project',
+          'DbContext and DbSet — The Core Abstractions',
+          'Code-First Migrations',
+          'Defining Entities and Relationships',
+          'Querying with LINQ and EF Core',
+          'CRUD Operations with EF Core',
+          'Repository Pattern with EF Core'
+        ]
+      },
+      {
+        label: 'Phase 4', title: 'Blazor with .NET 8',
+        colorClass: 'p4', dot: '#c75c1a',
         lessons: [
           'What is Blazor? Server vs WebAssembly vs Auto',
           'Setting Up a .NET 8 Blazor Project',
@@ -69,8 +84,8 @@ const COURSE_CATALOG = {
         ]
       },
       {
-        label: 'Phase 4', title: 'Azure AI Integration',
-        colorClass: 'p4', dot: '#1c5bde',
+        label: 'Phase 5', title: 'Azure AI Integration',
+        colorClass: 'p5', dot: '#1c5bde',
         lessons: [
           'Introduction to Azure AI Services',
           'Azure OpenAI Service — Key Concepts',
@@ -91,7 +106,7 @@ const COURSE_CATALOG = {
         {
           id: 'lab-01', code: 'Lab 01',
           title: 'Hello Blazor — Your First Component',
-          phase: 'Phase 3 — Blazor with .NET 8',
+          phase: 'Phase 4 — Blazor with .NET 8',
           duration: '45 min', difficulty: 'Beginner',
           objective: 'Create a .NET 8 Blazor project from scratch, build your first component with data binding, and run it in the browser.',
           prereqs: ['Basic Structure of a C# Program', 'Variables in C#', 'Functions in C#'],
@@ -110,8 +125,18 @@ const COURSE_CATALOG = {
         },
         {
           id: 'lab-03', code: 'Lab 03',
+          title: 'Build a Data Layer with EF Core',
+          phase: 'Phase 3 — Data Access with EF Core',
+          duration: '75 min', difficulty: 'Intermediate',
+          objective: 'Create a DbContext, define entity models, run Code-First migrations against SQLite, and implement a Repository pattern used by a Blazor page.',
+          prereqs: ['DbContext and DbSet', 'Code-First Migrations', 'CRUD Operations with EF Core', 'Repository Pattern with EF Core'],
+          deliverable: 'A Blazor app backed by a SQLite database — full CRUD via EF Core repository.',
+          tags: ['EF Core', 'SQLite', 'Repository', 'Migrations', 'CRUD']
+        },
+        {
+          id: 'lab-04', code: 'Lab 04',
           title: 'Forms, Validation and API Calls',
-          phase: 'Phase 3 — Blazor with .NET 8',
+          phase: 'Phase 4 — Blazor with .NET 8',
           duration: '75 min', difficulty: 'Intermediate',
           objective: 'Build a Blazor form with full validation, submit to a .NET 8 minimal API, and display the response.',
           prereqs: ['Forms and Validation in Blazor', 'Calling REST APIs from Blazor', 'Exception Handling in C#'],
@@ -119,9 +144,9 @@ const COURSE_CATALOG = {
           tags: ['Forms', 'Validation', 'HttpClient', 'Minimal API']
         },
         {
-          id: 'lab-04', code: 'Lab 04',
+          id: 'lab-05', code: 'Lab 05',
           title: 'Connect Azure OpenAI to Blazor',
-          phase: 'Phase 4 — Azure AI Integration',
+          phase: 'Phase 5 — Azure AI Integration',
           duration: '90 min', difficulty: 'Advanced',
           objective: 'Wire Blazor to Azure OpenAI GPT-4o — build a chat interface with streaming responses.',
           prereqs: ['Azure OpenAI Service — Key Concepts', 'Building an AI Chat UI in Blazor'],
@@ -133,20 +158,20 @@ const COURSE_CATALOG = {
         {
           id: 'cap-01', code: 'Capstone 1',
           title: 'Blazor Task Manager',
-          phase: 'Phases 1–3',
+          phase: 'Phases 1–4',
           duration: '3–4 hours', difficulty: 'Intermediate',
-          objective: 'Build a full-featured task management app in Blazor — CRUD, state management, and component hierarchy.',
-          prereqs: ['Complete Phase 1', 'Complete Phase 2', 'Complete Phase 3 (Labs 1–3)'],
-          deliverable: 'A deployable Blazor WebAssembly app with task lists, filters, and local persistence.',
-          tags: ['Blazor', 'CRUD', 'State', 'Full App']
+          objective: 'Build a full-featured task management app in Blazor — CRUD, EF Core persistence, state management, and component hierarchy.',
+          prereqs: ['Complete Phase 1', 'Complete Phase 2', 'Complete Phase 3', 'Complete Phase 4 (Labs 1–4)'],
+          deliverable: 'A deployable Blazor WebAssembly app with task lists, filters, and EF Core SQLite persistence.',
+          tags: ['Blazor', 'CRUD', 'EF Core', 'State', 'Full App']
         },
         {
           id: 'cap-02', code: 'Capstone 2',
           title: 'AI-Powered Knowledge Base',
-          phase: 'Phases 3–4',
+          phase: 'Phases 4–5',
           duration: '4–5 hours', difficulty: 'Advanced',
           objective: 'Build a searchable knowledge base with Azure AI Search and GPT-4o RAG.',
-          prereqs: ['Complete Phase 3', 'Complete Lab 04', 'Azure AI Search'],
+          prereqs: ['Complete Phase 4', 'Complete Lab 05', 'Azure AI Search'],
           deliverable: 'A Blazor app where documents are indexed and GPT-4o answers questions with citations.',
           tags: ['RAG', 'Azure AI Search', 'GPT-4o', 'Documents']
         },
@@ -155,10 +180,10 @@ const COURSE_CATALOG = {
           title: 'Intelligent Enterprise Application',
           phase: 'All Phases',
           duration: '6–8 hours', difficulty: 'Advanced',
-          objective: 'Build and deploy a production-grade Blazor app with Azure OpenAI, authentication, and CI/CD.',
-          prereqs: ['Complete all 4 Phases', 'Complete Capstones 1 and 2'],
+          objective: 'Build and deploy a production-grade Blazor app with EF Core, Azure OpenAI, authentication, and CI/CD.',
+          prereqs: ['Complete all 5 Phases', 'Complete Capstones 1 and 2'],
           deliverable: 'A live URL on Azure App Service — a fully deployed AI-powered enterprise Blazor app.',
-          tags: ['Enterprise', 'Auth', 'Azure', 'CI/CD', 'Production']
+          tags: ['Enterprise', 'Auth', 'Azure', 'CI/CD', 'Production', 'EF Core']
         }
       ]
     }
@@ -172,10 +197,10 @@ const COURSE_CATALOG = {
     description: 'Build cloud-native solutions on Azure — Functions, Cosmos DB, Blob Storage, API Management, and secure enterprise deployments.',
     stats: ['40+ lessons', '5 phases', 'Developer → Certified'],
     loadingMessages: [
-      'Provisioning the Azure example…',
-      'Generating lesson content…',
-      'Deploying concepts to your brain…',
-      'Preparing your lesson…'
+      'Raushan is provisioning the Azure example…',
+      'Deploying concepts — Raushan-style…',
+      'Thinking like a cloud architect…',
+      'Preparing your lesson with MCT precision…'
     ],
     labStyle: 'code',
     phases: [
@@ -320,10 +345,10 @@ const COURSE_CATALOG = {
     description: 'Complete Power BI from data connection to enterprise deployment — DAX, data modeling, reports, dashboards, and the PL-300 certification.',
     stats: ['45+ lessons', '5 phases', 'Analyst → Certified'],
     loadingMessages: [
-      'Building the Power BI walkthrough…',
-      'Preparing your lesson…',
-      'Generating visual examples…',
-      'Loading Power BI concepts…'
+      'Raushan is building the Power BI walkthrough…',
+      'DAX is being computed, Raushan-style…',
+      'Slicing data the way Raushan taught us…',
+      'Visualising insights — MCT approved…'
     ],
     labStyle: 'gui',
     phases: [
@@ -461,11 +486,11 @@ const COURSE_CATALOG = {
     }
   },
 
-  // ── Fallback loading messages for courses without their own ─
+  // ── Fallback loading messages ───────────────────────────────
   defaultLoadingMessages: [
-    'Preparing your lesson…',
-    'Generating content…',
-    'Loading…'
+    'Raushan is preparing your lesson…',
+    'Loading with MCT precision…',
+    'Almost ready…'
   ]
 
 };
