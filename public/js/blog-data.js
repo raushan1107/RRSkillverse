@@ -4745,7 +4745,521 @@ DIVIDE(
 
 </div>
   `
-}
+},
+
+  {
+    id: 'blazor-dotnet8-architecture-guide',
+    title: 'Blazor Web App (.NET 8) — Architecture, Folder Structure & How Client, Server and Shared Work Together',
+    category: 'dotnet',
+    topic: 'blazor',
+    tags: ['Blazor', '.NET 8', 'Architecture', 'Client Server Shared', 'Folder Structure', 'Component Lifecycle', 'Render Modes', 'EF Core', 'WebAssembly', 'Beginners'],
+    published: '2026-05-12',
+    updated: '2026-05-12',
+    readTime: '12 min',
+    excerpt: 'Building a Blazor Web App in .NET 8 creates three projects — Server, Client, and Shared. Most developers stumble on what goes where and why. This guide explains the full architecture, every folder and file, the request lifecycle from browser to database, and the golden rules for keeping your project clean and maintainable.',
+    featured: false,
+    content: `
+<div class="blog-story">
+
+  <p class="blog-intro-quote">"Three projects. Dozens of folders. Which file goes where — and why does it even matter?"</p>
+
+  <p>When you create a <strong>Blazor Web App</strong> in Visual Studio 2022 with .NET 8, the template generates
+  three separate projects. This surprises most developers who are used to a single project. This guide explains
+  the architecture clearly — what each project does, what goes inside it, how they talk to each other, and the
+  rules that keep everything clean.</p>
+
+  <!-- ══════════════════════════════════
+       SECTION 1 — THE THREE PROJECTS
+  ══════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🏗️ The Three Projects — One Sentence Each</h2>
+    <p>Every Blazor Web App solution contains exactly three projects. Think of them as three rooms in a building,
+    each with a specific purpose:</p>
+
+    <div class="blog-transform-grid">
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🖥️</span>
+        <div>
+          <div class="blog-transform-name">Server — SkillverseApp</div>
+          <div class="blog-transform-desc">The back room. Runs on your machine or Azure. Owns the
+          database connection, EF Core, API endpoints, and the startup configuration in Program.cs.
+          This is the host — it starts everything.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🌐</span>
+        <div>
+          <div class="blog-transform-name">Client — SkillverseApp.Client</div>
+          <div class="blog-transform-desc">The shop floor. Contains all .razor components and pages
+          that the user sees. In Auto render mode, this eventually runs in the browser as WebAssembly.
+          In Server mode, it streams from the server via SignalR.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">📦</span>
+        <div>
+          <div class="blog-transform-name">Shared — SkillverseApp.Shared</div>
+          <div class="blog-transform-desc">The shared vocabulary. A plain C# class library referenced
+          by BOTH Server and Client. Contains models, DTOs, interfaces, and validation logic. No EF Core,
+          no Blazor, no ASP.NET — just pure C#.</div>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="blog-quote">
+      "The Shared project is like the contract both sides sign. If Server and Client both know
+      what a CourseDto looks like, they can exchange it over HTTP without ever misunderstanding each other."
+    </blockquote>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 2 — FOLDER STRUCTURE
+  ══════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>📁 Complete Folder Structure — Every File Explained</h2>
+    <p>Here is what your solution looks like after creation, with a plain explanation of every file and folder:</p>
+
+    <div class="blog-steps-pipeline">
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">Solution</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">SkillverseApp.sln</div>
+          <div class="blog-pipeline-desc">The top-level container Visual Studio opens. Lists all three projects
+          and their relationships. Never edit this by hand.</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin:16px 0 8px;font-size:13px;font-weight:600;color:var(--text)">🖥️ Server Project — SkillverseApp/</p>
+    <div class="blog-comparison-table">
+      <div class="blog-table-header">
+        <div class="blog-table-cell blog-table-feature">File / Folder</div>
+        <div class="blog-table-cell">What Goes Here</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Program.cs</div>
+        <div class="blog-table-cell">Entry point. Register all services: DbContext, Repositories, Auth, CORS, Blazor pipeline. This is the single most important file in the project.</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">appsettings.json</div>
+        <div class="blog-table-cell">Connection strings, API keys, logging levels. Never commit real secrets — use User Secrets locally and environment variables in production.</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Data/AppDbContext.cs</div>
+        <div class="blog-table-cell">Your EF Core DbContext. Registered in Program.cs via AddDbContext. Contains DbSet properties — one per entity table. Only the Server touches the database directly.</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Repositories/</div>
+        <div class="blog-table-cell">ICourseRepository, EmployeeRepository etc. Registered in Program.cs as Scoped. Injected into controllers or server components. Hides EF Core from the rest of the app.</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Controllers/</div>
+        <div class="blog-table-cell">Minimal API endpoints or Web API controllers. The Client calls these via HttpClient. Example: GET /api/courses returns List&lt;CourseDto&gt; (from Shared).</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">wwwroot/</div>
+        <div class="blog-table-cell">Static files served by the server: app.css, favicon, images. The Client also has its own wwwroot for WASM-side assets.</div>
+      </div>
+    </div>
+
+    <p style="margin:16px 0 8px;font-size:13px;font-weight:600;color:var(--text)">🌐 Client Project — SkillverseApp.Client/</p>
+    <div class="blog-comparison-table">
+      <div class="blog-table-header">
+        <div class="blog-table-cell blog-table-feature">File / Folder</div>
+        <div class="blog-table-cell">What Goes Here</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Program.cs</div>
+        <div class="blog-table-cell">Client-side entry point. Registers client-only services: HttpClient base address, client state management. Much lighter than the server Program.cs.</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Pages/</div>
+        <div class="blog-table-cell">Routable pages. Each .razor file with @page "/route" is a page mapped to a URL. Examples: Home.razor, CourseList.razor, CourseDetail.razor.</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Components/</div>
+        <div class="blog-table-cell">Reusable non-routable components: CourseCard.razor, NavMenu.razor, LoadingSpinner.razor. Used inside pages with &lt;CourseCard Course="@course" /&gt;. No @page directive.</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Layout/MainLayout.razor</div>
+        <div class="blog-table-cell">The shell of the app. Contains the sidebar or top nav and the @Body placeholder where page content renders. Every page renders inside this unless overridden.</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">App.razor</div>
+        <div class="blog-table-cell">The root of the component tree. Contains the Router that maps URLs to pages. You rarely edit this file.</div>
+      </div>
+    </div>
+
+    <p style="margin:16px 0 8px;font-size:13px;font-weight:600;color:var(--text)">📦 Shared Project — SkillverseApp.Shared/</p>
+    <div class="blog-comparison-table">
+      <div class="blog-table-header">
+        <div class="blog-table-cell blog-table-feature">File / Folder</div>
+        <div class="blog-table-cell">What Goes Here</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Models/ (DTOs)</div>
+        <div class="blog-table-cell">CourseDto.cs, EmployeeDto.cs — plain C# classes that travel as JSON over HTTP. Server maps EF entities to these. Client deserialises them and binds to the UI.</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Interfaces/</div>
+        <div class="blog-table-cell">ICourseRepository, IEmailService etc. Defined here so both projects agree on the contract. Server implements them. Client can mock them in tests.</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Validation/</div>
+        <div class="blog-table-cell">DataAnnotations or FluentValidation rules on DTOs. Because these classes live in Shared, the same validation runs on both client (instant feedback) and server (authoritative check) automatically.</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Enums &amp; Constants</div>
+        <div class="blog-table-cell">CourseLevel.cs, UserRole.cs, AppConstants.cs — shared across both projects so neither duplicates them.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 3 — REQUEST LIFECYCLE
+  ══════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-info">
+    <h2>🔄 The Request Lifecycle — What Happens When a User Opens a Page</h2>
+    <p>When a user navigates to <strong>/courses</strong> in the browser, here is the exact sequence of events:</p>
+
+    <div class="blog-steps-pipeline">
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">1</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">User navigates to /courses</div>
+          <div class="blog-pipeline-desc">Browser sends a request. The Blazor Router in App.razor matches
+          the URL to CourseList.razor (because it has @page "/courses").</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">2</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">OnInitializedAsync fires</div>
+          <div class="blog-pipeline-desc">The component's lifecycle method runs. It calls:
+          <code>courses = await Http.GetFromJsonAsync&lt;List&lt;CourseDto&gt;&gt;("/api/courses");</code>
+          HttpClient is injected — it points to the Server project.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">3</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">API Controller on Server receives GET /api/courses</div>
+          <div class="blog-pipeline-desc">CoursesController calls the injected ICourseRepository.GetAllAsync().
+          The repository queries the database via EF Core and returns a List&lt;Course&gt; (the full entity).</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">4</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Controller maps Entity → DTO</div>
+          <div class="blog-pipeline-desc">The controller converts the EF Core Course entity to CourseDto
+          (from the Shared project). Only the fields the UI needs are included. Returns JSON.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">5</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">Client deserialises JSON → CourseDto list</div>
+          <div class="blog-pipeline-desc">The Client project's HttpClient receives the JSON response and
+          deserialises it using the same CourseDto class from the Shared project. Same class,
+          both sides — no mismatch possible.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step blog-pipeline-step-done">
+        <div class="blog-pipeline-num blog-pipeline-num-done">6</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">StateHasChanged — component re-renders</div>
+          <div class="blog-pipeline-desc">The courses list is now populated. Blazor detects the state change
+          and re-renders the component. The user sees the course list. Total round trip: typically under 100ms
+          on a local machine.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 4 — RENDER MODES
+  ══════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>⚙️ Render Modes — The .NET 8 Superpower</h2>
+    <p>In .NET 8, Blazor lets you choose the render mode <strong>per component or per page</strong>.
+    This is the biggest change from previous Blazor versions. You are not locked into one mode for the
+    whole application.</p>
+
+    <div class="blog-comparison-table">
+      <div class="blog-table-header">
+        <div class="blog-table-cell blog-table-feature">Mode</div>
+        <div class="blog-table-cell">How It Works</div>
+        <div class="blog-table-cell">Best For</div>
+        <div class="blog-table-cell">How to Set</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">Static SSR</div>
+        <div class="blog-table-cell">Rendered on server, sent as static HTML. No interactivity.</div>
+        <div class="blog-table-cell">Read-only content pages, marketing pages</div>
+        <div class="blog-table-cell">Default — no attribute needed</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">InteractiveServer</div>
+        <div class="blog-table-cell">Runs on server, streams UI updates to browser via SignalR. Full .NET access.</div>
+        <div class="blog-table-cell">Most pages — fastest to first render, full server access</div>
+        <div class="blog-table-cell">@rendermode InteractiveServer</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature">InteractiveWebAssembly</div>
+        <div class="blog-table-cell">Compiled to WASM, runs in browser. No server round-trips after load.</div>
+        <div class="blog-table-cell">Offline-capable tools, low-latency interactive UIs</div>
+        <div class="blog-table-cell">@rendermode InteractiveWebAssembly</div>
+      </div>
+      <div class="blog-table-row">
+        <div class="blog-table-cell blog-table-feature blog-table-best">InteractiveAuto ✅</div>
+        <div class="blog-table-cell">Starts as Server mode (instant first render), downloads WASM in background, switches to WebAssembly on next visit.</div>
+        <div class="blog-table-cell">Best default for most apps</div>
+        <div class="blog-table-cell">@rendermode InteractiveAuto</div>
+      </div>
+    </div>
+
+    <div class="blog-fact-pill blog-fact-pill-green">
+      <span class="blog-fact-label">💡 Render Mode Placement</span>
+      You set render mode in two places: globally in App.razor (applies to all pages), or per-page/per-component
+      using the @rendermode directive at the top of a .razor file. Per-component overrides the global setting.
+      This means you can have a static marketing homepage and a fully interactive dashboard in the same app.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 5 — EF CORE & SHARED DTO
+  ══════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-spark">
+    <h2>🗄️ EF Core Entity vs Shared DTO — The Most Important Distinction</h2>
+    <p>This is the concept that trips up every developer new to Blazor Web App architecture.
+    You have two different representations of "a course" — and confusing them causes bugs.</p>
+
+    <div class="blog-fd-compare">
+      <div class="blog-fd-col">
+        <div class="blog-fd-header blog-fd-header-fact">EF Core Entity (Server only)</div>
+        <ul class="blog-fd-list">
+          <li>Lives in the <strong>Server</strong> project (or in Server/Data/)</li>
+          <li>Has navigation properties: <code>public List&lt;Enrollment&gt; Enrollments { get; set; }</code></li>
+          <li>Has EF Core annotations: <code>[Required]</code>, <code>[MaxLength]</code>, <code>[Column]</code></li>
+          <li>Never sent over the wire — EF Core would serialise circular references and crash</li>
+          <li>Maps directly to a database table</li>
+        </ul>
+      </div>
+      <div class="blog-fd-col">
+        <div class="blog-fd-header blog-fd-header-dim">DTO (Shared project)</div>
+        <ul class="blog-fd-list">
+          <li>Lives in the <strong>Shared</strong> project</li>
+          <li>No navigation properties — flat, simple structure</li>
+          <li>Only the fields the UI actually needs — nothing extra</li>
+          <li>Travels safely as JSON over HTTP between Server and Client</li>
+          <li>Used for API responses AND for form binding in the Client</li>
+        </ul>
+      </div>
+    </div>
+
+    <blockquote class="blog-quote">
+      "The EF Core entity is the full internal representation — like an employee file with every detail.
+      The DTO is what you hand to the employee at the front desk — only what they need to see."
+    </blockquote>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 6 — GOLDEN RULES
+  ══════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-info">
+    <h2>⚖️ The Golden Rules — What Goes Where</h2>
+    <p>Use this as a quick reference whenever you are not sure where a new file belongs:</p>
+
+    <div class="blog-transform-grid">
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🗄️</span>
+        <div>
+          <div class="blog-transform-name">Does it touch the database? → Server</div>
+          <div class="blog-transform-desc">DbContext, EF Core migrations, Repositories, and connection strings
+          all go in the Server project. The Client runs in the browser (WASM) — there is no SQL Server in a browser.
+          The Client calls an HTTP API. The Server talks to the database.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🖱️</span>
+        <div>
+          <div class="blog-transform-name">Is it something the user sees? → Client</div>
+          <div class="blog-transform-desc">.razor pages with @page, reusable components, layouts, App.razor,
+          client-side state services — all go in the Client project. If it renders in the browser, it belongs here.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🤝</span>
+        <div>
+          <div class="blog-transform-name">Does both Client and Server need it? → Shared</div>
+          <div class="blog-transform-desc">DTOs that travel as JSON, repository interfaces, validation rules,
+          enums, and constants all go in Shared. If duplicating it in both projects would be a smell, it belongs here.</div>
+        </div>
+      </div>
+      <div class="blog-transform-item">
+        <span class="blog-transform-icon">🚫</span>
+        <div>
+          <div class="blog-transform-name">Never put these in Shared</div>
+          <div class="blog-transform-desc">No EF Core. No Microsoft.AspNetCore. No Blazor-specific code.
+          Shared is a plain class library. If you add a package reference to EF Core in Shared, you have broken
+          the architecture — the Client will try to compile EF Core into WebAssembly, which fails.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 7 — HOW PROJECTS REFERENCE EACH OTHER
+  ══════════════════════════════════ -->
+
+  <div class="blog-callout blog-callout-problem">
+    <h2>🔗 Project References — How They Wire Together</h2>
+    <p>The reference graph is deliberately one-directional. Understanding why prevents circular dependency errors:</p>
+
+    <div class="blog-steps-pipeline">
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">Server</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">References → Shared AND hosts → Client</div>
+          <div class="blog-pipeline-desc">Server references Shared to use DTOs and interfaces. Server also
+          references Client because it is the host that serves the Client project's compiled output to the browser.
+          This is configured automatically by the Blazor Web App template.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step">
+        <div class="blog-pipeline-num">Client</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">References → Shared ONLY</div>
+          <div class="blog-pipeline-desc">Client references Shared for DTOs, interfaces, and validation rules.
+          Client does NOT reference Server. The Client has no knowledge of EF Core, the database, or any
+          server-only code. The connection is only via HTTP.</div>
+        </div>
+      </div>
+      <div class="blog-pipeline-connector">↓</div>
+      <div class="blog-pipeline-step blog-pipeline-step-done">
+        <div class="blog-pipeline-num blog-pipeline-num-done">Shared</div>
+        <div class="blog-pipeline-content">
+          <div class="blog-pipeline-title">References → Nothing</div>
+          <div class="blog-pipeline-desc">Shared references no other project in the solution. It is a pure
+          class library with no dependencies on Server or Client. This is what makes it safe to reference
+          from both. If Shared references Server, you get a circular dependency and the build fails.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-fact-pill">
+      <span class="blog-fact-label">📌 In .csproj Terms</span>
+      In Server.csproj you see two ProjectReference entries: one to Shared and one to Client.
+      In Client.csproj you see one ProjectReference: to Shared only.
+      In Shared.csproj you see zero ProjectReference entries. That asymmetry is intentional and correct.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 8 — COMMON MISTAKES
+  ══════════════════════════════════ -->
+
+  <div class="blog-summary">
+    <h2>⚠️ The Five Most Common Architecture Mistakes</h2>
+    <ul style="padding-left:18px;margin-top:10px">
+      <li style="margin-bottom:9px">
+        <strong>Putting DbContext in the Client project.</strong>
+        The Client compiles to WebAssembly — there is no SQL Server in a browser. DbContext, EF Core,
+        and anything database-related must live in the Server project only.
+      </li>
+      <li style="margin-bottom:9px">
+        <strong>Sending EF Core entities directly over the API instead of DTOs.</strong>
+        EF Core entities have navigation properties that create circular references. JSON serialisation
+        will either throw a StackOverflowException or produce enormous, incorrect output.
+        Always map to a DTO before returning from a controller.
+      </li>
+      <li style="margin-bottom:9px">
+        <strong>Adding EF Core as a NuGet package to the Shared project.</strong>
+        This forces the Client to include EF Core in its WebAssembly compilation — which either fails
+        outright or produces a bloated WASM bundle. Shared must stay dependency-free.
+      </li>
+      <li style="margin-bottom:9px">
+        <strong>Calling the database directly from a Blazor component.</strong>
+        Even in InteractiveServer mode where you could technically inject AppDbContext into a component,
+        this bypasses your repository layer, makes testing impossible, and mixes concerns. Always go:
+        Component → Service/Repository → DbContext.
+      </li>
+      <li style="margin-bottom:9px">
+        <strong>Forgetting to set the render mode when interactivity is needed.</strong>
+        In .NET 8, pages default to Static SSR. A button's @onclick handler will silently do nothing
+        unless you add @rendermode InteractiveServer or InteractiveAuto to the page or component.
+        This is the number one "my button doesn't work" question in Blazor.
+      </li>
+    </ul>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 9 — EXERCISE
+  ══════════════════════════════════ -->
+
+  <div class="blog-exercise">
+    <h2>🧠 Hands-On — Create Your First Blazor Web App and Explore the Structure</h2>
+    <p>Follow these steps to create a project, explore the structure, and verify your understanding
+    before adding any features:</p>
+    <ol class="blog-exercise-steps">
+      <li>
+        <strong>Create the project in Visual Studio 2022</strong><br/>
+        File → New → Project → Search "Blazor Web App" → Select it (C#, .NET) → Name: SkillverseApp →
+        Framework: .NET 8.0 → Authentication: None → Interactive render mode: Auto → Interactivity location:
+        Per page/component → Click Create.
+      </li>
+      <li>
+        <strong>Explore Solution Explorer</strong><br/>
+        Expand all three projects. Verify you see SkillverseApp (Server), SkillverseApp.Client, and
+        SkillverseApp.Shared. Open each Program.cs and note how different they are — Server is long,
+        Client is short.
+      </li>
+      <li>
+        <strong>Verify project references</strong><br/>
+        Right-click each project → Properties → look at "Project references" (or open each .csproj).
+        Confirm: Server references Client + Shared. Client references Shared only. Shared references nothing.
+      </li>
+      <li>
+        <strong>Trace a page from URL to component</strong><br/>
+        Open SkillverseApp.Client → Pages → Weather.razor. Find the @page directive at the top. Run the app
+        (F5). Navigate to /weather. Confirm the component renders. Add a Console.WriteLine in OnInitializedAsync
+        and check whether it appears in the browser console or the VS Output window. Which tells you which
+        render mode is active?
+      </li>
+      <li>
+        <strong>Add your first DTO to Shared</strong><br/>
+        In SkillverseApp.Shared, add a Models folder. Create CourseDto.cs with Id (int), Title (string),
+        Level (string), Price (decimal). Build the solution. Confirm both Server and Client can see the class
+        without any additional reference.
+      </li>
+    </ol>
+  </div>
+
+  <div class="blog-next-chapter">
+    <span class="blog-next-label">What Comes Next</span>
+    <span class="blog-next-title">
+      The next article covers building your first full-stack Blazor feature end-to-end:
+      EF Core entity → Repository → API Controller → HttpClient → Blazor page → bound UI.
+      Every layer connected, every file in its right place.
+    </span>
+  </div>
+
+</div>
+    `
+  }
 
 ];
 
