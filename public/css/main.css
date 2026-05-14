@@ -877,3 +877,90 @@ button { font-family: var(--font); cursor: pointer; }
   border-color: var(--accent);
   color: var(--accent);
 }
+
+/* ── Exam Practice Nav Dropdown ─────────────────────── */
+.nav-exam-item {
+  position: relative;
+}
+.nav-exam-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  width: 290px;
+  background: var(--bg2);
+  border: 1px solid var(--border-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sh3);
+  padding: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s, transform 0.18s;
+  z-index: 500;
+}
+.nav-exam-dropdown.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+@media (hover: hover) {
+  .nav-exam-item:hover .nav-exam-dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .nav-exam-item:hover .nav-chevron {
+    transform: rotate(180deg);
+  }
+}
+.ned-header {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 6px 10px 8px;
+}
+.ned-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+a.ned-item:hover { background: var(--bg3); }
+.ned-locked { opacity: 0.45; cursor: default; }
+.ned-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  font-family: var(--mono);
+  letter-spacing: 0.3px;
+}
+.ned-badge-blue { background: rgba(26,86,219,0.2); color: #60a5fa; border: 1px solid rgba(26,86,219,0.2); }
+.ned-badge-gray { background: var(--bg3); color: var(--text-dim); border: 1px solid var(--border); }
+.ned-info { flex: 1; min-width: 0; }
+.ned-title { font-size: 12px; font-weight: 500; color: var(--text); }
+.ned-meta  { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.ned-soon  { font-style: italic; color: var(--text-dim); }
+.ned-new-tag {
+  font-size: 9px;
+  font-weight: 700;
+  background: rgba(63,185,80,0.18);
+  color: var(--success);
+  padding: 2px 6px;
+  border-radius: 10px;
+  letter-spacing: 0.2px;
+  flex-shrink: 0;
+}
+button.nav-dropdown-trigger.active {
+  background: var(--brand-glow);
+  color: var(--accent);
+  border: 1px solid rgba(26,86,219,0.2);
+}

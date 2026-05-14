@@ -18,7 +18,20 @@
       "PowerShell(git *)",
       "Bash(Get-Content \"C:\\\\Users\\\\raush\\\\Downloads\\\\rr-skillverse\\\\public\\\\js\\\\blog-data.js\")",
       "Bash(Measure-Object -Line)",
-      "PowerShell(Get-Content *)"
+      "PowerShell(Get-Content *)",
+      "Bash(Select-String -Path \"public\\\\js\\\\blog-data.js\" -Pattern \"^\\\\];\")",
+      "Bash(Select-Object -Last 1)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\raush\\\\Downloads\\\\rr-skillverse\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(npm install *)",
+      "Bash(Get-Content \"C:\\\\Users\\\\raush\\\\Downloads\\\\rr-skillverse\\\\Pdfs\\\\pl300-extracted.txt\")",
+      "PowerShell(\\(Get-Content \"C:\\\\Users\\\\raush\\\\Downloads\\\\rr-skillverse\\\\Pdfs\\\\pl300-extracted.txt\" | Measure-Object -Line\\).Lines)",
+      "PowerShell(node \"C:\\\\Users\\\\raush\\\\Downloads\\\\rr-skillverse\\\\parse-pl300.js\" 2>&1)",
+      "Bash(node scripts/filter-pl300-exhibit.js)",
+      "Bash(node -e \"const q = require\\('./public/js/pl300-questions.js'\\); console.log\\('Total:', q.length, '| Free:', q.filter\\(x=>!x.isPremium\\).length, '| Premium:', q.filter\\(x=>x.isPremium\\).length, '| First id:', q[0].id, '| Last id:', q[q.length-1].id\\);\" --prefix \"cd C:\\\\\\\\Users\\\\\\\\raush\\\\\\\\Downloads\\\\\\\\rr-skillverse &&\")",
+      "Bash(node -e \"const q = require\\('./public/js/pl300-questions.js'\\); console.log\\('Total:', q.length, '| Free:', q.filter\\(x=>!x.isPremium\\).length, '| Premium:', q.filter\\(x=>x.isPremium\\).length, '| First id:', q[0].id, '| Last id:', q[q.length-1].id\\);\")",
+      "PowerShell(\\(Get-Item \"C:\\\\Users\\\\raush\\\\Downloads\\\\rr-skillverse\\\\public\\\\js\\\\pl300-questions.js\"\\).Length; \\(Get-Content \"C:\\\\Users\\\\raush\\\\Downloads\\\\rr-skillverse\\\\public\\\\js\\\\pl300-questions.js\" -TotalCount 10\\))",
+      "PowerShell($lines = \\(Get-Content \"C:\\\\Users\\\\raush\\\\Downloads\\\\rr-skillverse\\\\public\\\\pl-300-practice.html\"\\).Count; Write-Host \"Total lines: $lines\")"
     ]
   }
 }

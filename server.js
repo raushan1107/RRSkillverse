@@ -402,6 +402,47 @@ app.post('/api/doubt', doubtLimiter, async (req, res) => {
   }
 });
 
+// ── POST /api/exam-chat — Axiom AI tutor for exam practice ──
+const examChatLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 40,
+  message: { error: 'Too many requests. Please wait a few minutes.' },
+});
+
+app.post('/api/exam-chat', examChatLimiter, async (req, res) => {
+  const { messages, questionContext } = req.body;
+
+  if (!messages || !Array.isArray(messages) || messages.length === 0) {
+    return res.status(400).json({ error: 'Missing messages.' });
+  }
+
+  const safeMessages = messages.slice(-10).map(m => ({
+    role: m.role === 'user' ? 'user' : 'assistant',
+    content: String(m.content).slice(0, 800),
+  }));
+
+  const contextNote = questionContext
+    ? `\n\nThe learner is currently studying this exam question:\n${String(questionContext).slice(0, 700)}`
+    : '';
+
+  const systemPrompt = `You are Axiom, the AI learning assistant for RR Skillverse — a professional Microsoft certification training platform by Raushan Ranjan (MCT, Microsoft Certified Trainer with 11+ years experience and 3200+ professionals trained).
+
+You help learners prepare for the Microsoft PL-300 Power BI Data Analyst certification exam. Be warm, concise, and use real-world analogies. Focus on Power BI, DAX, Power Query, and data modeling concepts.${contextNote}
+
+Keep responses under 200 words. Use plain language. End with an encouraging note when appropriate.`;
+
+  try {
+    const content = await callAzure([
+      { role: 'system', content: systemPrompt },
+      ...safeMessages,
+    ], 600);
+    res.json({ content });
+  } catch (err) {
+    console.error('Exam chat error:', err.message);
+    res.status(502).json({ error: err.message });
+  }
+});
+
 // ── Lab generation rate limiter ───────────────────────────
 const labGenLimiter = rateLimit({
   windowMs: 10 * 60 * 1000,
